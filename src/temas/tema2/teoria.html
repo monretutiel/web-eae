@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tema 2: Instrumentación y Conexionado. Multímetro, valores CA, osciloscopio, tacómetro y cámara termográfica.">
+  <title>Tema 2 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' },
+      startup: { typeset: true }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema2/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="tema-layout">
+
+      <!-- Contenido principal -->
+      <div>
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+            <li class="breadcrumb__item"><a href="./index.html">Tema 2</a></li>
+            <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+          </ol>
+        </nav>
+
+        <h1 style="font-size:var(--text-2xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+          Instrumentación y Conexionado
+        </h1>
+        <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+          Tema 2 · 5 secciones · Multímetro, osciloscopio, tacómetro y cámara termográfica
+        </p>
+
+        <div class="content">
+
+          <!-- ========================================
+               1. MULTÍMETRO
+               ======================================== -->
+          <h2 id="multimetro">1. Multímetro</h2>
+
+          <p>Un multímetro es un instrumento que aúna en un mismo dispositivo varias funciones: <strong>voltímetro</strong> (mide tensión), <strong>amperímetro</strong> (mide corriente), <strong>óhmetro</strong> (mide resistencia) y continuidad. Algunos modelos incluyen además medida de capacidad, temperatura y comprobación de transistores.</p>
+
+          <p>Los multímetros digitales tienen distintas <strong>escalas de medida</strong> que afectan a la resolución. Hay que tener en cuenta si la magnitud a medir es en <strong>CC (continua)</strong> o <strong>CA (alterna)</strong>.</p>
+
+          <h3>Reglas de uso</h3>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Regla</th><th>Por qué</th></tr></thead>
+              <tbody>
+                <tr><td>Usar puntas entre <strong>COM</strong> y la entrada correspondiente</td><td>Cada entrada tiene su función y límite de corriente</td></tr>
+                <tr><td>Seleccionar la magnitud <strong>antes</strong> de conectar</td><td>Evita daños al instrumento por rango incorrecto</td></tr>
+                <tr><td>Empezar por la <strong>escala mayor</strong> e ir reduciendo</td><td>Si la escala es menor que el valor, el instrumento puede dañarse</td></tr>
+                <tr><td>En CC respetar la <strong>polaridad</strong></td><td>La lectura negativa indica polaridad invertida</td></tr>
+                <tr><td>Continuidad <strong>NUNCA</strong> con el circuito bajo tensión</td><td>Daña el instrumento y da lecturas erróneas</td></tr>
+                <tr><td><strong>No tocar</strong> las puntas con los dedos</td><td>El cuerpo queda en paralelo y altera la medida</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Cómo conectar cada función</h3>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Función</th><th>Conexión</th><th>R interna</th><th>Por qué</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Voltímetro</strong></td>
+                  <td>En <strong>PARALELO</strong> con el elemento</td>
+                  <td>Muy <strong>alta</strong></td>
+                  <td>No altera la corriente del circuito</td>
+                </tr>
+                <tr>
+                  <td><strong>Amperímetro</strong></td>
+                  <td>En <strong>SERIE</strong> (abrir el circuito)</td>
+                  <td>Muy <strong>baja</strong></td>
+                  <td>No provoca caída de tensión significativa</td>
+                </tr>
+                <tr>
+                  <td><strong>Óhmetro</strong></td>
+                  <td>En <strong>PARALELO</strong>, circuito <strong>sin tensión</strong></td>
+                  <td>Usa batería interna</td>
+                  <td>La tensión externa daña el instrumento</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SVG conexión voltímetro vs amperímetro -->
+          <figure class="circuit-diagram">
+            <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;" aria-label="Conexión voltímetro en paralelo y amperímetro en serie">
+              <!-- Circuito izquierdo: voltímetro en paralelo -->
+              <!-- Fuente -->
+              <rect x="20" y="60" width="30" height="60" rx="3" fill="#fff" stroke="#1a3a5c" stroke-width="2"/>
+              <text x="35" y="85" text-anchor="middle" font-size="10" fill="#1a3a5c" font-weight="bold">V</text>
+              <text x="35" y="98" text-anchor="middle" font-size="9" fill="#2980b9">+</text>
+              <text x="35" y="113" text-anchor="middle" font-size="9" fill="#c0392b">−</text>
+              <line x1="35" y1="60" x2="35" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="35" y1="120" x2="35" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Conductor superior -->
+              <line x1="35" y1="40" x2="200" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Conductor inferior -->
+              <line x1="35" y1="140" x2="200" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="200" y1="40" x2="200" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R -->
+              <rect x="90" y="28" width="50" height="24" rx="3" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="115" y="44" text-anchor="middle" font-size="11" fill="#1a3a5c" font-weight="bold">R</text>
+              <!-- Voltímetro en paralelo -->
+              <line x1="115" y1="28" x2="115" y2="8" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="115" y1="8" x2="175" y2="8" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="175" y1="8" x2="175" y2="52" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="115" y1="52" x2="115" y2="52" stroke="#27ae60" stroke-width="1.5"/>
+              <rect x="130" y="52" width="30" height="20" rx="10" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
+              <text x="145" y="65" text-anchor="middle" font-size="10" fill="#27ae60" font-weight="bold">V</text>
+              <text x="115" y="170" text-anchor="middle" font-size="11" fill="#27ae60">Voltímetro en PARALELO</text>
+
+              <!-- Circuito derecho: amperímetro en serie -->
+              <!-- Fuente -->
+              <rect x="290" y="60" width="30" height="60" rx="3" fill="#fff" stroke="#1a3a5c" stroke-width="2"/>
+              <text x="305" y="85" text-anchor="middle" font-size="10" fill="#1a3a5c" font-weight="bold">V</text>
+              <text x="305" y="98" text-anchor="middle" font-size="9" fill="#2980b9">+</text>
+              <text x="305" y="113" text-anchor="middle" font-size="9" fill="#c0392b">−</text>
+              <line x1="305" y1="60" x2="305" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="305" y1="120" x2="305" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Conductor superior con amperímetro en serie -->
+              <line x1="305" y1="40" x2="350" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <rect x="350" y="30" width="30" height="20" rx="10" fill="#fde8e8" stroke="#c0392b" stroke-width="2"/>
+              <text x="365" y="43" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="bold">A</text>
+              <line x1="380" y1="40" x2="420" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R -->
+              <rect x="420" y="28" width="50" height="24" rx="3" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="445" y="44" text-anchor="middle" font-size="11" fill="#1a3a5c" font-weight="bold">R</text>
+              <line x1="470" y1="40" x2="490" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="490" y1="40" x2="490" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Conductor inferior -->
+              <line x1="305" y1="140" x2="490" y2="140" stroke="#1a3a5c" stroke-width="2"/>
+              <text x="395" y="170" text-anchor="middle" font-size="11" fill="#c0392b">Amperímetro en SERIE</text>
+            </svg>
+            <figcaption>Izquierda: voltímetro en paralelo con R (verde). Derecha: amperímetro en serie cortando el conductor (rojo).</figcaption>
+          </figure>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Amperímetro en paralelo = cortocircuito:</strong> Su resistencia interna es casi cero. Si lo conectas en paralelo con cualquier elemento, toda la corriente pasará por él y se destruirá el instrumento (y posiblemente el circuito).
+            </div>
+          </div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Óhmetro con tensión:</strong> Nunca midas resistencia con el circuito energizado. El óhmetro usa su propia batería interna; la tensión externa lo dañará y dará lecturas erróneas.
+            </div>
+          </div>
+
+          <!-- ========================================
+               2. QUÉ MIDE EL MULTÍMETRO
+               ======================================== -->
+          <h2 id="valores-ca">2. ¿Qué nos mide el multímetro?</h2>
+
+          <p>En señales de corriente alterna (CA), el multímetro muestra el <strong>valor eficaz (RMS)</strong>. Para entender qué significa, es necesario conocer los distintos valores de una señal alterna:</p>
+
+          <!-- SVG onda sinusoidal etiquetada -->
+          <figure class="circuit-diagram">
+            <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;" aria-label="Onda sinusoidal con valores Vp, Vpp, Vef, Vm, Vinst y periodo">
+              <!-- Ejes -->
+              <line x1="40" y1="110" x2="470" y2="110" stroke="#6c7a89" stroke-width="1.5"/>
+              <line x1="40" y1="10"  x2="40"  y2="210" stroke="#6c7a89" stroke-width="1.5"/>
+              <text x="475" y="114" font-size="11" fill="#6c7a89">t</text>
+              <text x="32"  y="14"  font-size="11" fill="#6c7a89">V</text>
+              <!-- Eje 0 -->
+              <text x="28" y="114" font-size="10" fill="#6c7a89" text-anchor="end">0</text>
+              <!-- Onda senoidal (1 ciclo completo) -->
+              <path d="M 60 110 C 85 110 95 20 120 20 C 145 20 155 110 180 110 C 205 110 215 200 240 200 C 265 200 275 110 300 110 C 325 110 335 20 360 20 C 385 20 395 110 420 110" fill="none" stroke="#1a3a5c" stroke-width="2.5"/>
+              <!-- Vp -->
+              <line x1="120" y1="20" x2="120" y2="110" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <text x="125" y="65" font-size="12" fill="#e74c3c" font-weight="bold">Vp</text>
+              <!-- Vpp -->
+              <line x1="240" y1="20" x2="240" y2="200" stroke="#8e44ad" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <text x="244" y="108" font-size="11" fill="#8e44ad" font-weight="bold">Vpp</text>
+              <!-- Vef (≈ 0.707 Vp) -->
+              <line x1="40" y1="46" x2="420" y2="46" stroke="#27ae60" stroke-width="1" stroke-dasharray="8,4"/>
+              <text x="425" y="50" font-size="11" fill="#27ae60" font-weight="bold">Vef</text>
+              <!-- Vm -->
+              <line x1="40" y1="65" x2="420" y2="65" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,4"/>
+              <text x="425" y="69" font-size="11" fill="#e67e22" font-weight="bold">Vm</text>
+              <!-- Vinst (punto) -->
+              <circle cx="160" cy="65" r="5" fill="#2980b9"/>
+              <line x1="160" y1="65" x2="160" y2="110" stroke="#2980b9" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <text x="163" y="90" font-size="11" fill="#2980b9" font-weight="bold">Vinst</text>
+              <!-- Periodo -->
+              <line x1="60"  y1="195" x2="300" y2="195" stroke="#6c7a89" stroke-width="1.5" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+              <text x="180" y="212" text-anchor="middle" font-size="12" fill="#6c7a89" font-weight="bold">Periodo (T)</text>
+            </svg>
+            <figcaption>Parámetros de una señal sinusoidal: Vp (pico), Vpp (pico a pico), Vef (eficaz), Vm (medio) y Vinst (instantáneo).</figcaption>
+          </figure>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead>
+                <tr><th>Valor</th><th>Símbolo</th><th>Definición</th><th>Fórmula</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Valor de pico</td><td class="font-mono">Vp (Vmax)</td>
+                  <td>Máximo valor de la señal</td><td>—</td>
+                </tr>
+                <tr>
+                  <td>Valor pico a pico</td><td class="font-mono">Vpp</td>
+                  <td>Diferencia entre máximo y mínimo</td><td class="font-mono">Vpp = 2 · Vp</td>
+                </tr>
+                <tr>
+                  <td>Valor eficaz (RMS)</td><td class="font-mono">Vef / Vrms</td>
+                  <td>Equivalencia CA comportándose como CC</td>
+                  <td>\( V_{RMS} = \dfrac{V_p}{\sqrt{2}} \)</td>
+                </tr>
+                <tr>
+                  <td>Valor medio</td><td class="font-mono">Vm</td>
+                  <td>Promedio; en CA pura sin CC = 0</td>
+                  <td>\( V_m = \dfrac{V_a - V_b}{2} \)</td>
+                </tr>
+                <tr>
+                  <td>Valor instantáneo</td><td class="font-mono">Vinst</td>
+                  <td>Potencial en un instante concreto</td>
+                  <td>\( V(t) = V_p \cdot \sin(\omega t) \)</td>
+                </tr>
+                <tr>
+                  <td>Periodo</td><td class="font-mono">T</td>
+                  <td>Tiempo de un ciclo completo</td>
+                  <td>\( T = \dfrac{2\pi}{\omega} \)</td>
+                </tr>
+                <tr>
+                  <td>Frecuencia</td><td class="font-mono">f</td>
+                  <td>Ciclos por segundo</td>
+                  <td>\( f = \dfrac{1}{T} \)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo: red eléctrica española (230 V eficaces, 50 Hz)
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Datos:</strong> Vef = 230 V, f = 50 Hz</p>
+              <p>Valor de pico: \( V_p = V_{ef} \times \sqrt{2} = 230 \times 1{,}414 = \mathbf{325 \text{ V}} \)</p>
+              <p>Valor pico a pico: \( V_{pp} = 2 \times 325 = \mathbf{650 \text{ V}} \)</p>
+              <p>Periodo: \( T = 1/f = 1/50 = \mathbf{20 \text{ ms}} \)</p>
+              <p>ω: \( \omega = 2\pi f = 2\pi \times 50 = \mathbf{314 \text{ rad/s}} \)</p>
+            </div>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>El multímetro solo da un número:</strong> muestra el valor eficaz (RMS). No permite ver si la señal tiene distorsión, picos transitorios o componente de continua. Para eso se necesita el osciloscopio.
+            </div>
+          </div>
+
+          <!-- ========================================
+               3. OSCILOSCOPIO
+               ======================================== -->
+          <h2 id="osciloscopio">3. Osciloscopio</h2>
+
+          <p>El osciloscopio es un instrumento de <strong>monitorización y medida</strong> que permite <em>ver</em> el comportamiento de las señales eléctricas en el tiempo: su forma, amplitud, frecuencia y posibles anomalías.</p>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Control</th><th>Ajusta</th><th>Cómo leer</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>VOLT/DIV</strong> (vertical)</td>
+                  <td>Voltios por división</td>
+                  <td>Amplitud = nº divisiones × VOLT/DIV</td>
+                </tr>
+                <tr>
+                  <td><strong>TIME/DIV</strong> (horizontal)</td>
+                  <td>Tiempo por división</td>
+                  <td>Periodo T = nº divisiones × TIME/DIV</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Hay <strong>10 divisiones</strong> en cada eje, por lo que el valor por división es el ajuste ÷ 10. En un osciloscopio real se usan cursores para medir con precisión.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Valor eficaz desde el osciloscopio</div>
+            <div class="formula-card__equation">\[ V_{RMS} = \dfrac{V_p}{\sqrt{2}} \approx \dfrac{V_p}{1{,}414} \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>\(V_p\)</dt><dd>Valor de pico leído en pantalla</dd></div>
+              <div class="formula-card__var"><dt>\(V_{RMS}\)</dt><dd>Valor que mediría un multímetro</dd></div>
+            </dl>
+          </div>
+
+          <!-- 3.1 Condensadores -->
+          <h3 id="condensadores">3.1 Condensadores — curva de carga y descarga</h3>
+
+          <p>El osciloscopio permite observar cómo se carga y descarga un condensador. La velocidad de carga depende de la <strong>constante de tiempo τ</strong>:</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Constante de tiempo RC</div>
+            <div class="formula-card__equation">\[ \tau = R \cdot C \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>τ</dt><dd>Constante de tiempo (segundos)</dd></div>
+              <div class="formula-card__var"><dt>R</dt><dd>Resistencia (Ω)</dd></div>
+              <div class="formula-card__var"><dt>C</dt><dd>Capacidad (F)</dd></div>
+            </dl>
+          </div>
+
+          <p>El condensador alcanza aproximadamente el <strong>100% de carga en 5τ</strong>.</p>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>R</th><th>C</th><th>τ</th><th>Tiempo carga total (5τ)</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono">10 kΩ</td><td class="font-mono">100 nF</td><td class="font-mono">1 ms</td><td class="font-mono">5 ms</td></tr>
+                <tr><td class="font-mono">100 kΩ</td><td class="font-mono">100 nF</td><td class="font-mono">10 ms</td><td class="font-mono">50 ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Práctica de aula:</strong> Monta el circuito RC con R=10kΩ y C=100nF. Con el osciloscopio y señal cuadrada a 10 Hz, mide el tiempo de carga con los cursores. Este contenido se amplía en el Tema 6 (Componentes Capacitivos).
+            </div>
+          </div>
+
+          <!-- 3.2 Parámetros técnicos -->
+          <h3 id="parametros-osciloscopio">3.2 Parámetros técnicos del osciloscopio</h3>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Parámetro</th><th>Valor mínimo recomendado</th><th>Qué significa</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tasa de muestreo</strong></td>
+                  <td>≥ 2 × frecuencia de la señal</td>
+                  <td>Teorema de Nyquist: si muestreo = 2f, reconstruyes la señal sin pérdida</td>
+                </tr>
+                <tr>
+                  <td><strong>Ancho de banda</strong></td>
+                  <td>≥ 100 MHz</td>
+                  <td>Rango de frecuencias que el osciloscopio puede medir correctamente</td>
+                </tr>
+                <tr>
+                  <td><strong>Memoria</strong></td>
+                  <td>≥ 1 Mpunto</td>
+                  <td>Más memoria → captura más tiempo con mejor resolución</td>
+                </tr>
+                <tr>
+                  <td><strong>Resolución vertical</strong></td>
+                  <td>≥ 2⁸ bits (256 niveles)</td>
+                  <td>Más bits → mejor detalle en el eje vertical</td>
+                </tr>
+                <tr>
+                  <td><strong>Canales</strong></td>
+                  <td>2 o 4</td>
+                  <td>Permite comparar varias señales simultáneamente</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ========================================
+               4. TACÓMETRO
+               ======================================== -->
+          <h2 id="tacometro">4. Tacómetro</h2>
+
+          <p>El <strong>tacómetro</strong> (o cuentavueltas) mide la velocidad de rotación de un eje en <strong>RPM</strong> (revoluciones por minuto). Es imprescindible en el mantenimiento de motores eléctricos.</p>
+
+          <p>Una velocidad anormal indica un problema:</p>
+          <ul style="margin:var(--space-2) 0 var(--space-3) 1.5rem;">
+            <li><strong>Velocidad baja:</strong> posible sobrecarga → par resistente alto → corriente elevada → riesgo de avería del motor</li>
+            <li><strong>Velocidad alta:</strong> posible variación de la frecuencia de red o, en motores CC, efecto de embalamiento</li>
+          </ul>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Velocidad sincrónica de un motor</div>
+            <div class="formula-card__equation">\[ n_s = \dfrac{120 \times f}{2p} \times (1 - s) \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>\(n_s\)</dt><dd>Velocidad de rotación (RPM)</dd></div>
+              <div class="formula-card__var"><dt>f</dt><dd>Frecuencia de red (Hz)</dd></div>
+              <div class="formula-card__var"><dt>2p</dt><dd>Número de polos del motor</dd></div>
+              <div class="formula-card__var"><dt>s</dt><dd>Deslizamiento (adimensional, 0–1)</dd></div>
+            </dl>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead>
+                <tr><th>Nº de polos</th><th>RPM síncronas a 60 Hz</th><th>RPM síncronas a 50 Hz (red española)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>2</td><td class="font-mono">3 600</td><td class="font-mono">3 000</td></tr>
+                <tr><td>4</td><td class="font-mono">1 800</td><td class="font-mono">1 500</td></tr>
+                <tr><td>6</td><td class="font-mono">1 200</td><td class="font-mono">1 000</td></tr>
+                <tr><td>8</td><td class="font-mono">900</td><td class="font-mono">750</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo: motor de 4 polos a 50 Hz con deslizamiento s = 0,05
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Datos:</strong> 2p = 4, f = 50 Hz, s = 0,05</p>
+              <p>\( n_s = \dfrac{120 \times 50}{4} \times (1 - 0{,}05) = \dfrac{6000}{4} \times 0{,}95 = 1500 \times 0{,}95 = \mathbf{1425 \text{ RPM}} \)</p>
+              <p style="color:var(--color-text-muted);">La velocidad sincrónica sería 1 500 RPM, pero el deslizamiento real de un motor asíncrono la reduce un 5%.</p>
+            </div>
+          </div>
+
+          <!-- ========================================
+               5. CÁMARA TERMOGRÁFICA
+               ======================================== -->
+          <h2 id="termografia">5. Cámara termográfica</h2>
+
+          <p>Una cámara termográfica es un dispositivo de <strong>detección infrarroja</strong> que convierte la radiación térmica en una imagen en escala de colores:</p>
+          <ul style="margin:var(--space-2) 0 var(--space-3) 1.5rem;">
+            <li>Tonos <strong>azules</strong> → zonas frías</li>
+            <li>Tonos <strong>rojos/blancos</strong> → zonas calientes</li>
+          </ul>
+
+          <h3>Aplicación en mantenimiento eléctrico</h3>
+          <p>Permite detectar <strong>puntos calientes</strong> de forma rápida y sin contacto, originados por:</p>
+          <ul style="margin:var(--space-2) 0 var(--space-3) 1.5rem;">
+            <li>Mala conexión (contacto con alta resistencia → más calor por Efecto Joule)</li>
+            <li>Elemento en mal estado (fusible degradado, contactor desgastado…)</li>
+            <li>Sobrecarga en un conductor o dispositivo</li>
+          </ul>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Principio físico:</strong> Efecto Joule — la corriente genera calor proporcional a I²·R. Cuanto mayor es la densidad de corriente por una sección conductora, más calor irradia.
+            </div>
+          </div>
+
+          <h3>Aplicación en instalaciones fotovoltaicas</h3>
+          <p>Las células dañadas o ensombrecidas actúan como resistencias internas que generan calor indeseable (<strong>"punto caliente"</strong>). Este calor puede dañar el encapsulado EVA y la lámina TPT del panel. Los diodos de derivación limitan este efecto, pero si están defectuosos, el problema se agrava.</p>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>En mantenimiento preventivo:</strong> la cámara termográfica es especialmente valiosa porque permite inspeccionar cuadros eléctricos, motores y paneles solares <em>sin detener la instalación</em> y sin contacto físico.
+            </div>
+          </div>
+
+        </div><!-- /content -->
+
+        <!-- Navegación anterior/siguiente -->
+        <div class="nav-paginas">
+          <a href="./index.html" class="btn btn--ghost">← Portada del tema</a>
+          <div style="display:flex; gap:var(--space-3);">
+            <a href="./ejercicios.html" class="btn btn--ghost">Ejercicios →</a>
+            <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+          </div>
+        </div>
+
+      </div><!-- /contenido principal -->
+
+      <!-- Sidebar TOC -->
+      <aside class="tema-layout__sidebar">
+        <nav class="toc" aria-label="Tabla de contenidos">
+          <div class="toc__title">En esta página</div>
+          <ul class="toc__list">
+            <li><a href="#multimetro"              class="toc__link">1. Multímetro</a></li>
+            <li><a href="#valores-ca"              class="toc__link">2. Valores CA</a></li>
+            <li><a href="#osciloscopio"            class="toc__link">3. Osciloscopio</a></li>
+            <li><a href="#condensadores"           class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Carga RC</a></li>
+            <li><a href="#parametros-osciloscopio" class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Parámetros técnicos</a></li>
+            <li><a href="#tacometro"               class="toc__link">4. Tacómetro</a></li>
+            <li><a href="#termografia"             class="toc__link">5. Cámara termográfica</a></li>
+          </ul>
+          <div style="margin-top:var(--space-4); padding-top:var(--space-3); border-top:1px solid var(--color-border);">
+            <a href="./ejercicios.html" class="btn btn--ghost btn--sm" style="width:100%; justify-content:center;">✏️ Ejercicios</a>
+            <a href="./quiz.html" class="btn btn--secondary btn--sm" style="width:100%; justify-content:center; margin-top:var(--space-2);">✅ Quiz</a>
+          </div>
+        </nav>
+      </aside>
+
+    </div><!-- /tema-layout -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

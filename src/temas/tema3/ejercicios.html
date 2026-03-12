@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 3: identificación fusibles, magnetotérmico, diferencial, relé térmico y guardamotor.">
+  <title>Tema 3 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema3/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 3</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Protecciones Eléctricas
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        8 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong> para comprobar.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- Ejercicio 1 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Identificar un fusible por su código</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tienes un fusible marcado como <strong>aM 25 A</strong>. Indica: a) ¿qué tipo de uso tiene? b) ¿para qué aplicación está diseñado? c) ¿protege frente a sobrecargas?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>a) La letra <strong>a</strong> = fusible de <strong>acompañamiento</strong>: solo actúa frente a cortocircuitos; la protección frente a sobrecargas la asume otro dispositivo (normalmente el contactor o el relé térmico).</p>
+            <p>b) La letra <strong>M</strong> = aplicación para <strong>motores eléctricos</strong>. Está diseñado para soportar los picos de corriente de arranque (hasta 5-8 veces In) sin fundir.</p>
+            <p>c) <strong>No</strong>. Al ser tipo "a" (acompañamiento), no protege frente a sobrecargas. Se necesita un relé térmico o guardamotor adicional para esa función.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Leer la etiqueta de un magnetotérmico</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un magnetotérmico lleva marcado: <strong>2P · 16 A · curva C · 10 kA</strong>. Explica cada dato y calcula el rango de corriente para el que el disparo magnético actúa instantáneamente.</p>
+            <hr style="border:none; border-top:1px solid var(--space-3); margin:var(--space-3) 0; border-color:var(--color-border);">
+            <p><strong>2P:</strong> bipolar — corta dos conductores (fase y neutro).</p>
+            <p><strong>16 A:</strong> calibre de la protección — a partir de 16 A actúa la protección térmica (bimetal).</p>
+            <p><strong>Curva C:</strong> el disparo magnético actúa entre <strong>5 × In y 10 × In</strong>, es decir, entre 5 × 16 = <strong>80 A</strong> y 10 × 16 = <strong>160 A</strong>. Para corrientes de cortocircuito superiores a 160 A el disparo es inmediato.</p>
+            <p><strong>10 kA:</strong> poder de corte — sus contactos aguantan corrientes de cortocircuito de hasta <strong>10 000 A</strong> sin soldarse ni destruirse.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — Seleccionar la curva de disparo correcta</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Indica qué curva de disparo (B, C o D) elegirías para cada instalación y justifica la respuesta:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>Circuito de iluminación LED de una oficina</li>
+              <li>Tomas de corriente de uso general</li>
+              <li>Motor de gran potencia con arrancador estrella-triángulo</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li><strong>Curva B</strong> — Las cargas resistivas (LED) no producen picos de arranque significativos. La curva B (disparo entre 3 y 5 × In) proporciona una protección más sensible y rápida.</li>
+              <li><strong>Curva C</strong> — Es la más versátil para uso general. Tolera pequeños picos de arranque (motores pequeños, equipos electrónicos) sin disparar falsamente.</li>
+              <li><strong>Curva D</strong> — Los motores grandes generan picos de arranque de hasta 10-15 veces la corriente nominal. La curva D (disparo entre 10 y 20 × In) evita disparos falsos durante el arranque.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Seleccionar el tipo de diferencial</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Indica qué tipo de diferencial (AC, A, F o B) es obligatorio o más adecuado para:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>Circuito de enchufes domésticos estándar</li>
+              <li>Punto de recarga de vehículo eléctrico modo 2 (carga lenta, monofásico)</li>
+              <li>Instalación fotovoltaica con inversor</li>
+              <li>Ascensor con variador de velocidad trifásico</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li><strong>Clase AC</strong> — Cargas domésticas convencionales que no deforman la onda de 50 Hz.</li>
+              <li><strong>Clase A</strong> — Obligatorio por normativa. El cargador genera corriente continua pulsante que el tipo AC no detectaría correctamente.</li>
+              <li><strong>Clase A</strong> — El inversor del sistema FV genera componente continua en la corriente de fuga.</li>
+              <li><strong>Clase B</strong> — El variador trifásico genera corrientes de fuga continuas lisas y cargas trifásicas que solo el tipo B detecta completamente.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Calcular la sensibilidad del diferencial necesaria</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tienes dos circuitos: uno de enchufes de baño y otro que alimenta un cuadro secundario industrial. Indica qué sensibilidad (10 mA, 30 mA o 300 mA) elegirías para cada uno y por qué.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Enchufes de baño:</strong> <strong>30 mA</strong> — Protección personal. En locales húmedos la resistencia del cuerpo es menor y el peligro mayor. El REBT exige diferencial de 30 mA en baños y duchas.</p>
+            <p><strong>Cuadro secundario industrial:</strong> <strong>300 mA</strong> — Protección de la instalación (no personal). Con 300 mA de sensibilidad se toleran pequeñas corrientes de fuga de los equipos industriales sin disparos falsos, pero se protege frente a fallos graves.</p>
+            <p style="color:var(--color-text-muted);">Nota: Si hubiera personas en el cuadro industrial, se elegiría 30 mA también.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Regulación del relé térmico</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un motor trifásico tiene los siguientes datos de placa: 400 V / 2,2 kW / cosφ = 0,85 / η = 0,90. Calcula la corriente nominal y el valor al que debes regular el relé térmico.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>La corriente nominal de un motor trifásico se calcula como:</p>
+            <p style="font-family:monospace; background:var(--color-surface); padding:var(--space-2) var(--space-3); border-radius:var(--radius-sm); margin:var(--space-2) 0;">
+              I<sub>N</sub> = P / (√3 × V × cosφ × η) = 2 200 / (1,732 × 400 × 0,85 × 0,90)
+            </p>
+            <p style="font-family:monospace; background:var(--color-surface); padding:var(--space-2) var(--space-3); border-radius:var(--radius-sm); margin:var(--space-2) 0;">
+              I<sub>N</sub> = 2 200 / 529,8 = <strong>4,15 A</strong>
+            </p>
+            <p>El relé térmico se regula a <strong>4,15 A</strong> (o al valor inmediatamente superior disponible en el selector, p.ej. 4,5 A). Si el relé tiene rango 4–6,3 A, se coloca el selector en ~4,15 A.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Diferencia relé térmico vs guardamotor</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En un taller hay dos instalaciones: (A) motor de ventilación con arranque directo, maniobrado por un contactor KM1 desde un cuadro de automatismos; (B) motor de compresor que se arranca a mano y no necesita maniobra a distancia. ¿Qué protección de motor elegirías para cada uno? Justifica.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Instalación A (ventilación, maniobra remota):</strong> <strong>Relé térmico</strong>. Al estar gestionado por un contactor, el relé térmico se instala a continuación y sus contactos auxiliares NC (95-96) desconectan la bobina del contactor. El circuito de mando puede incluir pilotos de señalización y pulsadores remotos.</p>
+            <p><strong>Instalación B (compresor, arranque manual):</strong> <strong>Guardamotor</strong>. Al no necesitar maniobra remota, el guardamotor actúa directamente: abre el circuito de fuerza, dispone de botón ON/OFF en el propio dispositivo y proporciona protección magnetotérmica completa en un solo elemento, simplificando la instalación.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Toma de tierra y diferencial conjuntos</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Explica por qué la toma de tierra sola no garantiza la protección personal y qué papel cumple el diferencial en combinación con ella.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Toma de tierra sola:</strong> Cuando una carcasa metálica se pone en tensión por un defecto de aislamiento, la toma de tierra proporciona un camino alternativo de baja impedancia para la corriente. Sin embargo, <em>no corta la alimentación</em>: la tensión en la carcasa sigue presente mientras dure el defecto. Si una persona toca la carcasa y tierra, la corriente se divide entre ambos caminos, y si la resistencia de tierra es alta, la parte que pasa por el cuerpo puede ser peligrosa.</p>
+            <p><strong>Diferencial + tierra:</strong> La toma de tierra garantiza que haya corriente de fuga suficiente para que el diferencial la detecte y <strong>dispare cortando la alimentación</strong> en menos de 40 ms (con I∆n = 30 mA). La combinación de ambos es lo que garantiza la protección real: tierra crea el camino de fuga → diferencial lo detecta y corta la tensión.</p>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <div class="nav-paginas">
+        <a href="./teoria.html" class="btn btn--ghost">← Teoría</a>
+        <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

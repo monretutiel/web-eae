@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teoría Tema 7 — Motores Eléctricos | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema7/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper page-wrapper--with-toc">
+
+      <!-- TOC lateral -->
+      <nav class="toc" aria-label="Índice de contenidos">
+        <p class="toc__title">En esta página</p>
+        <ol class="toc__list">
+          <li class="toc__item"><a href="#sec1" class="toc__link">1. Principios generales</a></li>
+          <li class="toc__item"><a href="#sec2" class="toc__link">2. Motores de corriente continua</a>
+            <ol class="toc__sublist">
+              <li class="toc__item"><a href="#sec2-1" class="toc__link">2.1 Excitación independiente</a></li>
+              <li class="toc__item"><a href="#sec2-2" class="toc__link">2.2 Excitación serie</a></li>
+              <li class="toc__item"><a href="#sec2-3" class="toc__link">2.3 Shunt (derivación)</a></li>
+              <li class="toc__item"><a href="#sec2-4" class="toc__link">2.4 Compound (mixto)</a></li>
+              <li class="toc__item"><a href="#sec2-5" class="toc__link">2.5 Brushless</a></li>
+              <li class="toc__item"><a href="#sec2-6" class="toc__link">2.6 Paso a paso</a></li>
+              <li class="toc__item"><a href="#sec2-7" class="toc__link">2.7 Servomotor</a></li>
+            </ol>
+          </li>
+          <li class="toc__item"><a href="#sec3" class="toc__link">3. Motores CA trifásicos</a>
+            <ol class="toc__sublist">
+              <li class="toc__item"><a href="#sec3-1" class="toc__link">3.1 Síncrono trifásico</a></li>
+              <li class="toc__item"><a href="#sec3-2" class="toc__link">3.2 Asíncrono trifásico</a></li>
+            </ol>
+          </li>
+          <li class="toc__item"><a href="#sec4" class="toc__link">4. Motores CA monofásicos</a>
+            <ol class="toc__sublist">
+              <li class="toc__item"><a href="#sec4-1" class="toc__link">4.1 Síncrono monofásico</a></li>
+              <li class="toc__item"><a href="#sec4-2" class="toc__link">4.2 Asíncrono monofásico</a></li>
+            </ol>
+          </li>
+          <li class="toc__item"><a href="#sec5" class="toc__link">5. Dahlander</a></li>
+          <li class="toc__item"><a href="#sec6" class="toc__link">6. Motor universal</a></li>
+          <li class="toc__item"><a href="#sec7" class="toc__link">7. Resumen y clasificación</a></li>
+        </ol>
+      </nav>
+
+      <!-- Contenido principal -->
+      <div class="content">
+
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+            <li class="breadcrumb__item"><a href="./index.html">Tema 7</a></li>
+            <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+          </ol>
+        </nav>
+
+        <h1 style="font-size:var(--text-2xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Tema 7 — Motores Eléctricos</h1>
+        <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-6);">
+          Un motor eléctrico transforma energía eléctrica en energía mecánica mediante la interacción entre campos magnéticos. Son los actuadores eléctricos más importantes de la industria.
+        </p>
+
+        <!-- ==================== SECCIÓN 1 ==================== -->
+        <section id="sec1">
+          <h2 class="section-title">1. Principios generales</h2>
+
+          <p>Un <strong>motor eléctrico</strong> convierte energía eléctrica en trabajo mecánico. La carga mecánica que debe mover impone una resistencia al giro denominada <strong>par resistivo</strong> o par de carga. Para que el motor arranque y gire, el <strong>par motor</strong> debe superar al par resistivo.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__title">Par motor — Potencia mecánica</div>
+            <div class="formula-card__body">
+              $$M = \frac{P_{mec}}{\omega} = \frac{P_{mec} \cdot 60}{2\pi \cdot n}$$
+              <p>Donde: $M$ = par [N·m] · $P_{mec}$ = potencia mecánica [W] · $\omega$ = velocidad angular [rad/s] · $n$ = velocidad [rpm]</p>
+            </div>
+          </div>
+
+          <div class="formula-card">
+            <div class="formula-card__title">Rendimiento del motor</div>
+            <div class="formula-card__body">
+              $$\eta = \frac{P_{mec}}{P_{elec}} \times 100 \, \%$$
+              <p>Las pérdidas incluyen: calor en los devanados (efecto Joule), pérdidas en el hierro (histéresis + Foucault) y rozamiento mecánico.</p>
+            </div>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              Un motor de 1 kW con η = 90 % consume $P_{elec} = 1000 / 0{,}90 ≈ 1111\,\text{W}$ de la red. El 10 % restante se pierde en calor.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SECCIÓN 2 ==================== -->
+        <section id="sec2">
+          <h2 class="section-title">2. Motores de corriente continua (CC)</h2>
+
+          <p>Los motores CC convierten energía eléctrica de corriente continua en movimiento. Su estructura básica incluye:</p>
+          <ul style="margin:var(--space-3) 0 var(--space-3) var(--space-4); display:flex; flex-direction:column; gap:var(--space-1); font-size:var(--text-sm);">
+            <li><strong>Estátor:</strong> imanes permanentes o devanados de campo que crean el campo magnético fijo.</li>
+            <li><strong>Rotor (inducido):</strong> bobinas de cobre que giran dentro del campo.</li>
+            <li><strong>Colector de delgas:</strong> anillo segmentado que rectifica la corriente en el rotor.</li>
+            <li><strong>Escobillas:</strong> contactos deslizantes que llevan la corriente al colector.</li>
+          </ul>
+
+          <p>Según cómo se conectan los devanados de campo (excitación) respecto al inducido (rotor) existen varios tipos.</p>
+
+          <!-- 2.1 -->
+          <h3 id="sec2-1" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.1 Excitación independiente</h3>
+          <p>El devanado de campo del estátor se alimenta desde una <strong>fuente separada e independiente</strong> de la que alimenta el rotor. Permite controlar la velocidad de forma precisa ajustando la tensión del campo o del inducido de forma independiente. Se usa en aplicaciones de control fino de velocidad (laminadoras, tracción eléctrica de precisión).</p>
+
+          <!-- 2.2 -->
+          <h3 id="sec2-2" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.2 Excitación serie</h3>
+          <p>El devanado de campo se conecta <strong>en serie</strong> con el inducido: toda la corriente del motor pasa por el campo. Esto provoca que el par de arranque sea muy elevado (útil en tracción: trenes, grúas). Sin embargo, tiene un inconveniente grave:</p>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Peligro de embalamiento:</strong> si el motor serie se pone en marcha <strong>sin carga</strong>, la velocidad crece sin límite («embalamiento»). Nunca se debe arrancar en vacío.
+            </div>
+          </div>
+
+          <!-- 2.3 -->
+          <h3 id="sec2-3" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.3 Shunt (derivación / paralelo)</h3>
+          <p>El devanado de campo se conecta <strong>en paralelo</strong> con el inducido, ambos a la misma tensión de red. El campo es prácticamente constante, por lo que la velocidad varía muy poco con la carga. Se usa en aplicaciones que requieren <strong>velocidad aproximadamente constante</strong> (ventiladores, bombas, tornos).</p>
+
+          <!-- 2.4 -->
+          <h3 id="sec2-4" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.4 Compound (mixto)</h3>
+          <p>Combina un devanado en paralelo y otro en serie con el inducido. Obtiene lo mejor de ambos tipos: <strong>alto par de arranque</strong> (parte serie) sin riesgo de embalamiento (parte shunt). Ideal para cargas de impacto (prensas, compresores, elevadores).</p>
+
+          <!-- 2.5 -->
+          <h3 id="sec2-5" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.5 Motor Brushless (sin escobillas)</h3>
+          <p>Los <strong>imanes permanentes</strong> se colocan en el rotor y los devanados están en el estátor. No hay colector ni escobillas: la commutación la realiza un <strong>controlador electrónico</strong> externo (inversor). Ventajas: sin mantenimiento de escobillas, alta eficiencia, larga vida. Se usa en drones, vehículos eléctricos, herramientas eléctricas de gama alta.</p>
+
+          <!-- 2.6 -->
+          <h3 id="sec2-6" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.6 Motor paso a paso (stepper)</h3>
+          <p>Gira un <strong>ángulo fijo y preciso</strong> por cada pulso eléctrico recibido. No necesita encoder de posición: el número de pasos equivale directamente a la posición angular. Resoluciones típicas: 24, 96 o 200 pasos por vuelta (15°, 3,75° o 1,8° por paso). Se usa en impresoras 3D, CNC, robots cartesianos. Desventaja: si se le exige demasiado par, puede «perder pasos» y perder la referencia de posición.</p>
+
+          <!-- 2.7 -->
+          <h3 id="sec2-7" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">2.7 Servomotor</h3>
+          <p>Motor CC (o brushless) equipado con un <strong>encoder o resolver</strong> de posición y un controlador electrónico en lazo cerrado. El controlador compara la posición real con la posición de consigna y corrige el error. Ofrece control preciso de posición, velocidad y par. Es el estándar en robótica industrial, ejes CNC y automatización de alta precisión.</p>
+        </section>
+
+        <!-- ==================== SECCIÓN 3 ==================== -->
+        <section id="sec3">
+          <h2 class="section-title">3. Motores CA trifásicos</h2>
+
+          <p>Los motores de corriente alterna trifásica se clasifican en <strong>síncronos</strong> (el rotor gira exactamente a la velocidad del campo magnético giratorio) y <strong>asíncronos</strong> (el rotor va ligeramente más lento que el campo — existe deslizamiento).</p>
+
+          <div class="formula-card">
+            <div class="formula-card__title">Velocidad sincrónica</div>
+            <div class="formula-card__body">
+              $$n_s = \frac{60 \cdot f}{p}$$
+              <p>$n_s$ = velocidad síncrona [rpm] · $f$ = frecuencia de red [Hz] · $p$ = número de <strong>pares</strong> de polos</p>
+              <p style="margin-top:var(--space-2);">Ejemplos a 50 Hz: 1 par de polos → 3000 rpm · 2 pares → 1500 rpm · 3 pares → 1000 rpm · 4 pares → 750 rpm</p>
+            </div>
+          </div>
+
+          <!-- 3.1 -->
+          <h3 id="sec3-1" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">3.1 Motor trifásico síncrono</h3>
+          <p>El rotor gira exactamente a $n_s$ y lleva imanes permanentes o un devanado de excitación de CC. Ventajas: velocidad estrictamente constante, puede trabajar con factor de potencia unitario o incluso capacitivo (sobreexcitado) actuando como generador de reactiva. Desventajas: no tiene par de arranque propio, necesita arranque auxiliar. Se usa en grandes grupos generadores y en motores de alta potencia donde la velocidad constante es crítica.</p>
+
+          <!-- 3.2 -->
+          <h3 id="sec3-2" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">3.2 Motor trifásico asíncrono (de inducción)</h3>
+          <p>Es el <strong>motor más utilizado en la industria</strong>. El campo magnético giratorio del estátor induce corrientes en el rotor (principio transformador), creando el par. El rotor siempre gira un poco más lento que el campo: esta diferencia se llama <strong>deslizamiento</strong>.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__title">Deslizamiento</div>
+            <div class="formula-card__body">
+              $$s = \frac{n_s - n}{n_s} \times 100 \, \%$$
+              <p>En carga nominal, $s$ suele ser 2–8 %. Si $s=0$, no hay par. Si $s=100\%$, el motor está parado.</p>
+            </div>
+          </div>
+
+          <p style="margin-top:var(--space-3);">Existen dos variantes según el tipo de rotor:</p>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Característica</th><th>Jaula de ardilla</th><th>Anillos rozantes (rotor bobinado)</th></tr></thead>
+              <tbody>
+                <tr><td>Rotor</td><td>Barras de aluminio/cobre en cortocircuito</td><td>Devanado trifásico accesible por anillos</td></tr>
+                <tr><td>Mantenimiento</td><td>Muy bajo (robusto, sin contactos)</td><td>Mayor (escobillas + anillos)</td></tr>
+                <tr><td>Arranque</td><td>Corriente alta (5–8 × In), par moderado</td><td>Con reóstatos externos: corriente reducida, par alto</td></tr>
+                <tr><td>Aplicaciones</td><td>Bombas, ventiladores, compresores</td><td>Elevadores, grúas, molinos (cargas de impacto)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================== SECCIÓN 4 ==================== -->
+        <section id="sec4">
+          <h2 class="section-title">4. Motores CA monofásicos</h2>
+
+          <p>Con una sola fase no se genera campo giratorio — el campo es oscilante (suma de dos campos giratorios opuestos). Por eso los motores monofásicos necesitan un <strong>mecanismo de arranque</strong> para crear el desequilibrio inicial. Una vez en marcha, continúan girando solos.</p>
+
+          <!-- 4.1 -->
+          <h3 id="sec4-1" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">4.1 Síncronos monofásicos</h3>
+          <p>Existen dos subtipos:</p>
+          <ul style="margin:var(--space-2) 0 var(--space-3) var(--space-4); display:flex; flex-direction:column; gap:var(--space-2); font-size:var(--text-sm);">
+            <li><strong>De histéresis:</strong> el rotor es una pieza de material magnético de alta retentividad. Al magnetizarse, sigue al campo del estátor por el fenómeno de histéresis. Baja potencia, arranque suave y silencioso. Se usa en relojes eléctricos, equipos de audio.</li>
+            <li><strong>De reluctancia:</strong> el rotor es laminado con ranuras que crean diferente reluctancia según la posición. Sin devanados en el rotor → sin pérdidas en el cobre del rotor. No tiene par de arranque propio, necesita controlador externo. Alta eficiencia una vez en régimen.</li>
+          </ul>
+
+          <!-- 4.2 -->
+          <h3 id="sec4-2" style="font-size:var(--text-base); color:var(--color-primary); margin:var(--space-5) 0 var(--space-2);">4.2 Asíncronos monofásicos</h3>
+          <p>Son los más comunes en electrodomésticos y pequeña maquinaria. Variedades:</p>
+
+          <details class="collapsible">
+            <summary class="collapsible__trigger">Fase partida con condensador de arranque</summary>
+            <div class="collapsible__body">
+              <p>Lleva dos devanados en el estátor: <strong>devanado principal</strong> y <strong>devanado auxiliar</strong> (con condensador en serie). El condensador crea un desfase de ~90° entre ambas corrientes, simulando un campo giratorio para arrancar. Cuando el motor alcanza el <strong>60–80 % de la velocidad nominal</strong>, un <strong>interruptor centrífugo</strong> desconecta el devanado auxiliar y el motor continúa con el principal.</p>
+              <p style="margin-top:var(--space-2);">Algunas versiones mantienen un <strong>condensador de trabajo</strong> permanente (además del de arranque) para mejorar el factor de potencia en régimen. Se usa en lavadoras, compresores de climatización, bombas domésticas.</p>
+            </div>
+          </details>
+
+          <details class="collapsible" style="margin-top:var(--space-2);">
+            <summary class="collapsible__trigger">Polos sombreados</summary>
+            <div class="collapsible__body">
+              <p>Motor monofásico de muy baja potencia. El núcleo ferromagnético del estátor tiene un único devanado; sobre él se colocan <strong>espiras de sombra</strong> (anillos de cobre cortocircuitados) en una parte de cada polo. Las espiras de sombra inducen corrientes que crean un campo magnético retardado respecto al principal, dando lugar a un campo casi giratorio que arrastra al rotor.</p>
+              <p style="margin-top:var(--space-2);">Ventajas: muy barato, robusto, sin condensador ni interruptor. Desventajas: bajo par, baja eficiencia, sentido de giro fijo. Se usa en ventiladores de baño, ventiladores de ordenador y pequeños electrodomésticos.</p>
+            </div>
+          </details>
+
+          <details class="collapsible" style="margin-top:var(--space-2);">
+            <summary class="collapsible__trigger">Motor trifásico alimentado como monofásico</summary>
+            <div class="collapsible__body">
+              <p>Es posible hacer funcionar un motor trifásico con una sola fase conectando un <strong>condensador en paralelo</strong> con una de las fases o el neutro. El condensador crea una «fase fantasma» con el desfase necesario. Regla práctica: se recomiendan <strong>70 µF por cada kW</strong> para un motor de 230 V / 50 Hz.</p>
+              <p style="margin-top:var(--space-2);">El rendimiento y el par de arranque son menores que en funcionamiento trifásico normal. Se aplica en talleres o entornos domésticos donde solo se dispone de suministro monofásico y se quiere usar un motor trifásico pequeño.</p>
+              <div class="alert alert--note" style="margin-top:var(--space-2);">
+                <span class="alert__icon">📌</span>
+                <div class="alert__content">La inversión del sentido de giro se consigue cambiando el condensador al otro lado del circuito (entre una fase diferente y el neutro).</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- ==================== SECCIÓN 5 ==================== -->
+        <section id="sec5">
+          <h2 class="section-title">5. Motores con bobinados separados — Dahlander</h2>
+
+          <p>Estos motores se construyen con devanados diseñados para admitir <strong>varias configuraciones de conexión</strong> que cambian el número de polos y, por tanto, la velocidad sincrónica. El tipo más común es la <strong>conexión Dahlander</strong>:</p>
+
+          <ul style="margin:var(--space-3) 0 var(--space-3) var(--space-4); display:flex; flex-direction:column; gap:var(--space-2); font-size:var(--text-sm);">
+            <li><strong>Baja velocidad:</strong> las bobinas se conectan en triángulo (Δ) con 4 polos → velocidad media (p. ej. 1500 rpm a 50 Hz).</li>
+            <li><strong>Alta velocidad:</strong> las mismas bobinas se reconfiguan en doble estrella (YY) con 2 polos → el doble de velocidad (p. ej. 3000 rpm a 50 Hz).</li>
+          </ul>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              La relación de velocidades siempre es 2:1. Son habituales en máquinas-herramienta (torno con dos velocidades de corte), ventiladores industriales y bombas de caudal variable.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SECCIÓN 6 ==================== -->
+        <section id="sec6">
+          <h2 class="section-title">6. Motor universal (CC/CA)</h2>
+
+          <p>El motor universal puede funcionar tanto con <strong>corriente alterna como con corriente continua</strong>. Estructuralmente es un motor CC serie, pero está diseñado especialmente para tolerar la alimentación CA: los materiales del núcleo minimizan las pérdidas por histéresis y corrientes de Foucault que destruirían un motor CC convencional en CA.</p>
+
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Característica</th><th>Motor universal</th></tr></thead>
+              <tbody>
+                <tr><td>Velocidad máxima</td><td>Puede superar 10.000 rpm</td></tr>
+                <tr><td>Par de arranque</td><td>Muy alto (excitación serie)</td></tr>
+                <tr><td>Mantenimiento</td><td>Alto (escobillas + colector)</td></tr>
+                <tr><td>Ruido</td><td>Elevado</td></tr>
+                <tr><td>Alimentación</td><td>CA o CC (versatilidad total)</td></tr>
+                <tr><td>Aplicaciones</td><td>Taladros portátiles, aspiradoras, batidoras, sierras circulares</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================== SECCIÓN 7 ==================== -->
+        <section id="sec7">
+          <h2 class="section-title">7. Resumen y clasificación</h2>
+
+          <p>La siguiente tabla recoge los tipos de motores eléctricos más importantes con sus características clave para la selección industrial:</p>
+
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tipo de motor</th>
+                  <th>Alimentación</th>
+                  <th>Par arranque</th>
+                  <th>Control velocidad</th>
+                  <th>Aplicación típica</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>CC excitación independiente</td><td>CC</td><td>Medio</td><td>Muy preciso</td><td>Laminadoras, tracción</td></tr>
+                <tr><td>CC serie</td><td>CC</td><td>Muy alto</td><td>Variable (no en vacío)</td><td>Trenes, grúas (tracción)</td></tr>
+                <tr><td>CC shunt / derivación</td><td>CC</td><td>Medio</td><td>Velocidad estable</td><td>Ventiladores, tornos</td></tr>
+                <tr><td>CC compound</td><td>CC</td><td>Alto</td><td>Bueno</td><td>Prensas, elevadores</td></tr>
+                <tr><td>Brushless</td><td>CC (inversor)</td><td>Alto</td><td>Electrónico preciso</td><td>Drones, VE, herramientas</td></tr>
+                <tr><td>Paso a paso</td><td>CC (pulsado)</td><td>Medio</td><td>Posicional exacto</td><td>CNC, impresoras 3D</td></tr>
+                <tr><td>Servomotor</td><td>CC/CA</td><td>Alto</td><td>Lazo cerrado</td><td>Robótica, ejes CNC</td></tr>
+                <tr><td>Trifásico síncrono</td><td>CA 3F</td><td>Necesita aux.</td><td>Constante (= ns)</td><td>Grandes generadores</td></tr>
+                <tr><td>Trifásico asíncrono (jaula)</td><td>CA 3F</td><td>Medio-alto</td><td>Por variador (VFD)</td><td>Bombas, compresores</td></tr>
+                <tr><td>Trifásico asíncrono (anillos)</td><td>CA 3F</td><td>Alto (con reóstato)</td><td>Variable</td><td>Grúas, molinos</td></tr>
+                <tr><td>Monofásico (condensador)</td><td>CA 1F</td><td>Medio</td><td>Limitado</td><td>Lavadoras, bombas dom.</td></tr>
+                <tr><td>Monofásico (polos sombreados)</td><td>CA 1F</td><td>Bajo</td><td>No</td><td>Ventiladores pequeños</td></tr>
+                <tr><td>Dahlander</td><td>CA 3F</td><td>Medio</td><td>2 velocidades fijas</td><td>Máquinas-herramienta</td></tr>
+                <tr><td>Universal</td><td>CA o CC</td><td>Alto</td><td>Variable (serie)</td><td>Taladros, aspiradoras</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert alert--note" style="margin-top:var(--space-4);">
+            <span class="alert__icon">📌</span>
+            <div class="alert__content">
+              <strong>Partes de un motor trifásico asíncrono:</strong> cubierta frontal · caja de conexiones · estator · placa de identificación · cubierta trasera · rodamientos · rotor · flecha (eje) · carcasa · base de fijación · ventilador de refrigeración.
+            </div>
+          </div>
+        </section>
+
+        <!-- Navegación entre páginas -->
+        <div class="nav-paginas">
+          <a href="./index.html"      class="btn btn--ghost">← Tema 7</a>
+          <a href="./ejercicios.html" class="btn btn--primary">Ejercicios →</a>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

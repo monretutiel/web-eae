@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 2: conexión multímetro, valores CA, osciloscopio, τ=RC y velocidad de motor.">
+  <title>Tema 2 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema2/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 2</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Instrumentación y Conexionado
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        8 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong> para comprobar.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- Ejercicio 1 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Conexión voltímetro</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En un circuito serie con R1 = 100 Ω y R2 = 200 Ω alimentado a 12 V, quieres medir la tensión en R2. Describe cómo conectas el multímetro y qué lectura esperas.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Conexión:</strong> Voltímetro en <strong>paralelo</strong> con R2, respetando la polaridad (+ al extremo de mayor potencial).</p>
+            <p><strong>Lectura esperada:</strong> \( V_{R2} = 12 \times \dfrac{200}{300} = \mathbf{8 \text{ V}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Conexión amperímetro</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En el mismo circuito anterior (R1=100 Ω, R2=200 Ω, V=12 V), quieres medir la corriente total. ¿Cómo lo haces?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Conexión:</strong> Hay que <strong>abrir el circuito</strong> e insertar el amperímetro en <strong>serie</strong>. Por ejemplo, cortar el conductor entre la fuente y R1 e insertar el multímetro en modo A.</p>
+            <p><strong>Lectura esperada:</strong> \( I = \dfrac{12}{300} = \mathbf{40 \text{ mA}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — Calcular Vef de la red española</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> La red eléctrica española tiene un valor de pico Vp = 325 V. Calcula el valor eficaz (Vef) que marcará el multímetro.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( V_{ef} = \dfrac{V_p}{\sqrt{2}} = \dfrac{325}{1{,}414} = \mathbf{229{,}9 \approx 230 \text{ V}} \)</p>
+            <p style="color:var(--color-text-muted);">El multímetro siempre mide el valor eficaz en CA. Por eso la red de 325 V de pico se denomina "red de 230 V".</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Calcular Vp y Vpp desde Vef</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un multímetro mide 230 V en CA. Calcula el valor de pico y el valor pico a pico de esa señal.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( V_p = V_{ef} \times \sqrt{2} = 230 \times 1{,}414 = \mathbf{325 \text{ V}} \)</p>
+            <p>\( V_{pp} = 2 \times V_p = 2 \times 325 = \mathbf{650 \text{ V}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Valor instantáneo y periodo</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una señal sinusoidal tiene Vp = 325 V y f = 50 Hz. Calcula: a) el periodo, b) ω, c) el valor instantáneo a t = 2,5 ms.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>a) \( T = 1/f = 1/50 = \mathbf{20 \text{ ms}} \)</p>
+            <p>b) \( \omega = 2\pi f = 2\pi \times 50 = \mathbf{314 \text{ rad/s}} \)</p>
+            <p>c) \( V(t) = 325 \cdot \sin(314 \times 0{,}0025) = 325 \cdot \sin(0{,}785) = 325 \times 0{,}707 = \mathbf{229{,}9 \text{ V}} \)</p>
+            <p style="color:var(--color-text-muted);">A t = T/8 = 2,5 ms, la señal sinusoidal vale exactamente Vef.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Lectura en osciloscopio</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En un osciloscopio con ajuste VOLT/DIV = 2 V y TIME/DIV = 5 ms, la onda ocupa 4 divisiones de amplitud y 4 divisiones de periodo. Calcula Vp y f.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Amplitud (Vp):</strong> \( V_p = 4 \text{ div} \times 2 \text{ V/div} = \mathbf{8 \text{ V}} \)</p>
+            <p><strong>Periodo:</strong> \( T = 4 \text{ div} \times 5 \text{ ms/div} = 20 \text{ ms} \)</p>
+            <p><strong>Frecuencia:</strong> \( f = 1/T = 1/0{,}02 = \mathbf{50 \text{ Hz}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Constante de tiempo RC</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Calcula la constante de tiempo τ para R = 10 kΩ y C = 100 nF. ¿En cuánto tiempo se carga el condensador al 100%?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( \tau = R \times C = 10{,}000 \times 100 \times 10^{-9} = \mathbf{1 \text{ ms}} \)</p>
+            <p>Carga al 100% ≈ 5τ = 5 × 1 ms = <strong>5 ms</strong></p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Velocidad de motor con tacómetro</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un motor asíncrono de <strong>4 polos</strong> conectado a la red española (50 Hz) tiene un deslizamiento s = 0,04. Calcula su velocidad de rotación.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( n_s = \dfrac{120 \times f}{2p} \times (1 - s) = \dfrac{120 \times 50}{4} \times (1 - 0{,}04) \)</p>
+            <p>\( n_s = 1500 \times 0{,}96 = \mathbf{1440 \text{ RPM}} \)</p>
+            <p style="color:var(--color-text-muted);">La velocidad sincrónica ideal sería 1500 RPM, pero el deslizamiento del 4% la reduce a 1440 RPM. Si el tacómetro marcara mucho menos (p.ej. 1200 RPM), indicaría una posible sobrecarga del motor.</p>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <div class="nav-paginas">
+        <a href="./teoria.html" class="btn btn--ghost">← Teoría</a>
+        <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

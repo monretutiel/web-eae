@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Resistencias Serie/Paralelo | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .calc-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      max-width: 560px;
+    }
+    .calc-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+    .calc-field label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .calc-field .field-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+    .calc-field input[type="number"] {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      background: var(--color-bg);
+      color: var(--color-text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .calc-field input[type="number"]:focus {
+      border-color: var(--color-primary);
+    }
+    .calc-field .unit {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      min-width: 2.5rem;
+    }
+    .calc-field .field-hint {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    .calc-selector {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+    .calc-selector button {
+      padding: var(--space-2) var(--space-3);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .calc-selector button.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .calc-result {
+      background: var(--color-primary-dark);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-top: var(--space-3);
+      text-align: center;
+    }
+    .calc-result .result-label {
+      font-size: var(--text-xs);
+      opacity: .75;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .calc-result .result-value {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin: var(--space-1) 0;
+    }
+    .calc-result .result-formula {
+      font-size: var(--text-xs);
+      opacity: .7;
+    }
+    .calc-error {
+      color: var(--color-error, #e53e3e);
+      font-size: var(--text-sm);
+      margin-top: var(--space-2);
+    }
+    .resistor-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+      margin-bottom: var(--space-2);
+    }
+    .resistor-row span.r-label {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-primary);
+      min-width: 2.5rem;
+    }
+    .resistor-row input {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      background: var(--color-bg);
+      color: var(--color-text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .resistor-row input:focus { border-color: var(--color-primary); }
+    .resistor-row .unit { font-size: var(--text-sm); color: var(--color-text-muted); min-width: 1.8rem; }
+    .resistor-row .del-btn {
+      padding: 2px 8px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: none;
+      cursor: pointer;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .resistor-row .del-btn:hover { background: #fdf0ef; color: #c53030; border-color: #c53030; }
+    .voltage-drops-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin-top: var(--space-3);
+    }
+    .voltage-drops-table th {
+      background: var(--color-primary);
+      color: #fff;
+      padding: var(--space-2) var(--space-3);
+      text-align: left;
+    }
+    .voltage-drops-table td {
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .voltage-drops-table tr:nth-child(even) td { background: var(--color-surface-alt); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html" class="nav-main__link nav-main__link--active">Calculadoras</a></li>
+      <li><a href="../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Calculadoras</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Resistencias Serie/Paralelo</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        🔗 Calculadora — Resistencias Serie y Paralelo
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+        Añade las resistencias del circuito, elige el modo y obtén la resistencia equivalente al instante.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start;">
+
+        <!-- Calculadora -->
+        <div class="calc-card">
+
+          <p style="font-weight:700; margin-bottom:var(--space-3);">Tipo de circuito</p>
+          <div class="calc-selector">
+            <button id="btn-serie" class="active" onclick="setCircuitMode('serie')">Serie</button>
+            <button id="btn-paralelo" onclick="setCircuitMode('paralelo')">Paralelo</button>
+          </div>
+
+          <div id="resistors-container">
+            <!-- Las filas se generan por JS -->
+          </div>
+
+          <button onclick="addResistor()" style="margin-bottom:var(--space-3); padding:var(--space-2) var(--space-3); border:2px dashed var(--color-primary); border-radius:var(--radius-sm); background:none; color:var(--color-primary); font-size:var(--text-sm); font-weight:700; cursor:pointer; width:100%;">
+            + Añadir resistencia
+          </button>
+
+          <!-- Tensión fuente (sólo serie) -->
+          <div id="vs-block" class="calc-field" style="border-top:1px solid var(--color-border); padding-top:var(--space-3);">
+            <label for="inp-vs">Tensión de fuente Vs (opcional)</label>
+            <div class="field-row">
+              <input type="number" id="inp-vs" placeholder="Ej: 12" min="0" step="any" oninput="calculate()">
+              <span class="unit">V</span>
+            </div>
+            <span class="field-hint">Si introduces Vs, se muestran las caídas de tensión y corriente.</span>
+          </div>
+
+          <div id="result-box" class="calc-result" style="display:none;">
+            <p class="result-label" id="result-label">Resistencia equivalente</p>
+            <p class="result-value" id="result-value">—</p>
+            <p class="result-formula" id="result-formula"></p>
+          </div>
+
+          <div id="current-box" style="display:none; margin-top:var(--space-3); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:var(--space-1);">Corriente total</p>
+            <p style="font-size:var(--text-lg); font-weight:700;" id="current-value">—</p>
+            <p style="font-size:var(--text-xs); color:var(--color-text-muted);">I = Vs / Req</p>
+          </div>
+
+          <div id="drops-block" style="display:none; margin-top:var(--space-3);">
+            <p style="font-size:var(--text-sm); font-weight:700; margin-bottom:var(--space-2);">Caídas de tensión (modo serie)</p>
+            <div class="table-responsive">
+              <table class="voltage-drops-table">
+                <thead>
+                  <tr>
+                    <th>Resistencia</th>
+                    <th>Valor</th>
+                    <th>Caída V</th>
+                    <th>% de Vs</th>
+                  </tr>
+                </thead>
+                <tbody id="drops-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <p id="calc-error" class="calc-error" style="display:none;"></p>
+
+          <button onclick="clearAll()" style="margin-top:var(--space-4); width:100%; padding:var(--space-2); background:none; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm); color:var(--color-text-muted);">
+            Limpiar
+          </button>
+        </div>
+
+        <!-- Panel explicativo + SVG -->
+        <div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4); margin-bottom:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);" id="diagram-title">Circuito en serie</p>
+            <div style="text-align:center;">
+              <svg id="circuit-svg" viewBox="0 0 320 160" width="100%" aria-label="Diagrama de circuito">
+                <!-- Serie por defecto -->
+                <g id="serie-diagram">
+                  <!-- Wire left -->
+                  <line x1="10" y1="80" x2="50" y2="80" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- Battery -->
+                  <line x1="50" y1="60" x2="50" y2="100" stroke="var(--color-primary-dark)" stroke-width="3"/>
+                  <line x1="60" y1="68" x2="60" y2="92" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <text x="34" y="55" font-size="10" fill="var(--color-primary-dark)" font-weight="700">Vs</text>
+                  <!-- Wire battery to R1 -->
+                  <line x1="60" y1="80" x2="90" y2="80" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- R1 box -->
+                  <rect x="90" y="68" width="50" height="24" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+                  <text id="svg-r1" x="115" y="83" text-anchor="middle" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R1</text>
+                  <!-- Wire R1 to R2 -->
+                  <line x1="140" y1="80" x2="170" y2="80" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- R2 box -->
+                  <rect x="170" y="68" width="50" height="24" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+                  <text id="svg-r2" x="195" y="83" text-anchor="middle" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R2</text>
+                  <!-- Wire right return -->
+                  <line x1="220" y1="80" x2="310" y2="80" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <line x1="310" y1="80" x2="310" y2="130" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <line x1="10" y1="130" x2="310" y2="130" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <line x1="10" y1="80" x2="10" y2="130" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- Arrow I -->
+                  <line x1="255" y1="130" x2="265" y2="130" stroke="var(--color-primary)" stroke-width="2"/>
+                  <polygon points="265,126 271,130 265,134" fill="var(--color-primary)"/>
+                  <text x="240" y="147" font-size="9" fill="var(--color-primary-dark)">I →</text>
+                  <!-- Labels below resistors -->
+                  <text id="svg-v1" x="115" y="108" text-anchor="middle" font-size="9" fill="var(--color-text-muted)">V1</text>
+                  <text id="svg-v2" x="195" y="108" text-anchor="middle" font-size="9" fill="var(--color-text-muted)">V2</text>
+                </g>
+                <!-- Paralelo -->
+                <g id="paralelo-diagram" display="none">
+                  <!-- Battery -->
+                  <line x1="20" y1="40" x2="20" y2="120" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <line x1="20" y1="40" x2="300" y2="40" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <line x1="20" y1="120" x2="300" y2="120" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- Battery symbol -->
+                  <line x1="8" y1="72" x2="8" y2="88" stroke="var(--color-primary-dark)" stroke-width="3"/>
+                  <line x1="14" y1="65" x2="14" y2="95" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <text x="22" y="83" font-size="10" fill="var(--color-primary-dark)" font-weight="700">Vs</text>
+                  <!-- R1 branch -->
+                  <line x1="100" y1="40" x2="100" y2="55" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <rect x="84" y="55" width="32" height="50" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+                  <text x="100" y="83" text-anchor="middle" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R1</text>
+                  <line x1="100" y1="105" x2="100" y2="120" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <!-- R2 branch -->
+                  <line x1="200" y1="40" x2="200" y2="55" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <rect x="184" y="55" width="32" height="50" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+                  <text x="200" y="83" text-anchor="middle" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R2</text>
+                  <line x1="200" y1="105" x2="200" y2="120" stroke="var(--color-primary-dark)" stroke-width="2"/>
+                  <text x="28" y="30" font-size="9" fill="var(--color-primary-dark)">Vs →</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size:var(--text-xs); text-align:center; color:var(--color-text-muted); margin-top:var(--space-2);" id="diagram-note">
+              Diagrama ilustrativo (muestra R1 y R2)
+            </p>
+          </div>
+
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Fórmulas</p>
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm);">
+              <tbody>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">Serie: Req = R1 + R2 + ...</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Suma directa</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">Paralelo: 1/Req = 1/R1 + 1/R2 + ...</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Suma de conductancias</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">I = Vs / Req</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Ley de Ohm</td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">Vi = I · Ri (serie)</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Caída de tensión</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ejemplos rápidos -->
+      <div style="margin-top:var(--space-5);">
+        <h2 class="section-title">Ejemplos rápidos</h2>
+        <div style="display:flex; gap:var(--space-2); flex-wrap:wrap;">
+          <button class="btn btn--ghost btn--sm" onclick="loadExample([100,200,300],'serie',12)">Serie: 100+200+300 Ω, Vs=12V</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExample([1000,2000],'paralelo',null)">Paralelo: 1kΩ || 2kΩ</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExample([470,470,470],'paralelo',null)">3×470Ω paralelo</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExample([10,20,30,40],'serie',24)">4 resistencias serie, Vs=24V</button>
+        </div>
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./ohm.html" class="btn btn--ghost">← Calc 1: Ley de Ohm</a>
+        <a href="./divisor.html" class="btn btn--primary">Calc 3: Divisor de tensión →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    let circuitMode = 'serie';
+    let resistorCount = 0;
+    const resistors = []; // {id, value}
+
+    function fmt(n) {
+      if (n === undefined || isNaN(n)) return '—';
+      if (Math.abs(n) >= 100) return n.toFixed(2);
+      if (Math.abs(n) >= 1)   return n.toFixed(3);
+      return n.toFixed(4);
+    }
+
+    function fmtR(r) {
+      if (r >= 1e6) return fmt(r/1e6) + ' MΩ';
+      if (r >= 1000) return fmt(r/1000) + ' kΩ';
+      return fmt(r) + ' Ω';
+    }
+
+    function fmtI(i) {
+      if (i < 0.001) return fmt(i*1e6) + ' µA';
+      if (i < 1) return fmt(i*1000) + ' mA';
+      return fmt(i) + ' A';
+    }
+
+    function setCircuitMode(mode) {
+      circuitMode = mode;
+      document.getElementById('btn-serie').classList.toggle('active', mode === 'serie');
+      document.getElementById('btn-paralelo').classList.toggle('active', mode === 'paralelo');
+      document.getElementById('vs-block').style.display = mode === 'serie' ? '' : 'none';
+      document.getElementById('diagram-title').textContent = mode === 'serie' ? 'Circuito en serie' : 'Circuito en paralelo';
+      document.getElementById('serie-diagram').setAttribute('display', mode === 'serie' ? '' : 'none');
+      document.getElementById('paralelo-diagram').setAttribute('display', mode === 'paralelo' ? '' : 'none');
+      calculate();
+    }
+
+    function addResistor(value) {
+      resistorCount++;
+      const id = resistorCount;
+      const container = document.getElementById('resistors-container');
+      const div = document.createElement('div');
+      div.className = 'resistor-row';
+      div.id = 'row-' + id;
+      div.innerHTML = `
+        <span class="r-label">R${id}</span>
+        <input type="number" id="r-inp-${id}" placeholder="Ej: 100" min="0" step="any" oninput="calculate()" value="${value !== undefined ? value : ''}">
+        <span class="unit">Ω</span>
+        ${id > 2 ? `<button class="del-btn" onclick="removeResistor(${id})">✕</button>` : ''}
+      `;
+      container.appendChild(div);
+      if (value !== undefined) calculate();
+    }
+
+    function removeResistor(id) {
+      const el = document.getElementById('row-' + id);
+      if (el) el.remove();
+      calculate();
+    }
+
+    function getResistorValues() {
+      const rows = document.querySelectorAll('.resistor-row');
+      const vals = [];
+      rows.forEach(row => {
+        const inp = row.querySelector('input');
+        if (inp) {
+          const v = parseFloat(inp.value);
+          if (!isNaN(v) && v > 0) vals.push({ el: inp, val: v, label: row.querySelector('.r-label').textContent });
+        }
+      });
+      return vals;
+    }
+
+    function calculate() {
+      const errEl = document.getElementById('calc-error');
+      errEl.style.display = 'none';
+      document.getElementById('drops-block').style.display = 'none';
+      document.getElementById('current-box').style.display = 'none';
+
+      const vals = getResistorValues();
+      if (vals.length === 0) {
+        document.getElementById('result-box').style.display = 'none';
+        return;
+      }
+
+      try {
+        let req;
+        if (circuitMode === 'serie') {
+          req = vals.reduce((sum, r) => sum + r.val, 0);
+        } else {
+          const invSum = vals.reduce((sum, r) => sum + 1/r.val, 0);
+          req = 1 / invSum;
+        }
+
+        document.getElementById('result-box').style.display = 'block';
+        document.getElementById('result-label').textContent = 'Resistencia equivalente Req';
+        document.getElementById('result-value').textContent = fmtR(req);
+        const formula = circuitMode === 'serie'
+          ? 'Req = ' + vals.map(r => fmtR(r.val)).join(' + ')
+          : '1/Req = ' + vals.map(r => '1/' + fmtR(r.val)).join(' + ');
+        document.getElementById('result-formula').textContent = formula;
+
+        // Si hay Vs (solo serie)
+        const vs = parseFloat(document.getElementById('inp-vs') ? document.getElementById('inp-vs').value : '');
+        if (circuitMode === 'serie' && !isNaN(vs) && vs > 0 && req > 0) {
+          const I = vs / req;
+          document.getElementById('current-box').style.display = 'block';
+          document.getElementById('current-value').textContent = fmtI(I);
+
+          // Tabla de caídas
+          const tbody = document.getElementById('drops-tbody');
+          tbody.innerHTML = '';
+          vals.forEach(r => {
+            const vdrop = I * r.val;
+            const pct = (vdrop / vs * 100).toFixed(1);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${r.label}</td><td>${fmtR(r.val)}</td><td>${fmt(vdrop)} V</td><td>${pct}%</td>`;
+            tbody.appendChild(tr);
+          });
+          document.getElementById('drops-block').style.display = 'block';
+        }
+
+        // Update SVG labels
+        updateSVG(vals);
+
+      } catch(e) {
+        errEl.textContent = e.message;
+        errEl.style.display = 'block';
+      }
+    }
+
+    function updateSVG(vals) {
+      const r1el = document.getElementById('svg-r1');
+      const r2el = document.getElementById('svg-r2');
+      const v1el = document.getElementById('svg-v1');
+      const v2el = document.getElementById('svg-v2');
+      if (r1el && vals[0]) r1el.textContent = vals[0].label + ' = ' + fmtR(vals[0].val);
+      if (r2el && vals[1]) r2el.textContent = vals[1].label + ' = ' + fmtR(vals[1].val);
+      // Caídas si hay Vs serie
+      const vs = parseFloat(document.getElementById('inp-vs').value);
+      if (circuitMode === 'serie' && !isNaN(vs) && vs > 0) {
+        const req = vals.reduce((s, r) => s + r.val, 0);
+        const I = vs / req;
+        if (v1el && vals[0]) v1el.textContent = 'V1=' + fmt(I * vals[0].val) + 'V';
+        if (v2el && vals[1]) v2el.textContent = 'V2=' + fmt(I * vals[1].val) + 'V';
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('resistors-container').innerHTML = '';
+      resistorCount = 0;
+      document.getElementById('inp-vs').value = '';
+      document.getElementById('result-box').style.display = 'none';
+      document.getElementById('current-box').style.display = 'none';
+      document.getElementById('drops-block').style.display = 'none';
+      document.getElementById('calc-error').style.display = 'none';
+      addResistor();
+      addResistor();
+    }
+
+    function loadExample(values, mode, vs) {
+      document.getElementById('resistors-container').innerHTML = '';
+      resistorCount = 0;
+      setCircuitMode(mode);
+      values.forEach(v => addResistor(v));
+      if (vs !== null && document.getElementById('inp-vs')) {
+        document.getElementById('inp-vs').value = vs;
+      }
+      calculate();
+    }
+
+    // Inicializar con 2 resistencias
+    addResistor();
+    addResistor();
+  </script>
+
+</body>
+</html>

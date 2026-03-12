@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador RL — Circuito Inductivo | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <style>
+    .sim-canvas{background:#0f172a;border-radius:12px;display:block;width:100%}
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4)}
+    .ctrl-row{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)}
+    .ctrl-row label{font-size:var(--text-sm);font-weight:600;min-width:4rem}
+    .ctrl-row input[type="range"]{flex:1;accent-color:var(--color-primary)}
+    .ctrl-row input[type="number"]{width:70px;padding:var(--space-1) var(--space-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-sm);background:var(--color-bg);color:var(--color-text)}
+    .ctrl-row .unit{font-size:var(--text-xs);color:var(--color-text-muted);min-width:2.5rem}
+    .mode-btn{padding:var(--space-2) var(--space-4);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-weight:600;cursor:pointer;font-size:var(--text-sm);transition:all .2s}
+    .mode-btn.active{border-color:var(--color-primary);background:var(--color-primary);color:#fff}
+    .stat-box{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2);margin-top:var(--space-3)}
+    .stat-cell{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-2);text-align:center}
+    .stat-cell small{display:block;font-size:10px;opacity:.65;text-transform:uppercase}
+    .stat-cell strong{font-size:var(--text-base);display:block;margin-top:2px}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Simuladores</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Circuito RL</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">🔵 Simulador — Circuito RL (resistencia + bobina)</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        La bobina se opone al cambio de corriente. Observa cómo i(t) crece lentamente y VL disminuye según τ = L/R.
+      </p>
+
+      <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);">
+        <button class="mode-btn active" id="btn-play" onclick="togglePlay()">▶ Play</button>
+        <button class="mode-btn" onclick="resetSim()">↺ Reset</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:var(--space-4);align-items:start;">
+
+        <!-- Controles -->
+        <div>
+          <div class="calc-card" style="margin-bottom:var(--space-3);">
+            <div class="ctrl-row"><label>R</label><input type="range" id="sl-r" min="1" max="1000" value="100" oninput="sync('r',this.value)"><input type="number" id="inp-r" value="100" oninput="sync('r',this.value)"><span class="unit">Ω</span></div>
+            <div class="ctrl-row"><label>L</label><input type="range" id="sl-l" min="1" max="2000" value="500" oninput="sync('l',this.value)"><input type="number" id="inp-l" value="500" oninput="sync('l',this.value)"><span class="unit">mH</span></div>
+            <div class="ctrl-row"><label>Vs</label><input type="range" id="sl-vs" min="1" max="50" value="12" oninput="sync('vs',this.value)"><input type="number" id="inp-vs" value="12" oninput="sync('vs',this.value)"><span class="unit">V</span></div>
+          </div>
+
+          <canvas id="circ" width="260" height="180" class="sim-canvas"></canvas>
+
+          <div class="stat-box">
+            <div class="stat-cell"><small>τ = L/R</small><strong id="st-tau">—</strong></div>
+            <div class="stat-cell"><small>I final</small><strong id="st-ifin">—</strong></div>
+            <div class="stat-cell"><small>i ahora</small><strong id="st-i">—</strong></div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="calc-card">
+          <p style="font-weight:700;margin-bottom:var(--space-2);font-size:var(--text-sm);">Corriente i(t) y tensión VL(t)</p>
+          <canvas id="rl-chart" style="width:100%;max-height:300px;"></canvas>
+          <div style="display:flex;gap:var(--space-3);margin-top:var(--space-2);font-size:var(--text-xs);">
+            <span style="color:#3b82f6;">■ i(t) [A]</span>
+            <span style="color:#8b5cf6;">■ VL(t) [V]</span>
+            <span style="color:#ef4444;">-- τ</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="alert alert--tip" style="margin-top:var(--space-4);">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Analogía:</strong> la bobina actúa como una «inercia eléctrica» — igual que un volante que no puede acelerar ni frenar instantáneamente, la bobina impide cambios bruscos de corriente.
+        </div>
+      </div>
+
+      <div class="nav-paginas">
+        <a href="./rc.html"      class="btn btn--ghost">← Sim RC</a>
+        <a href="./fasores.html" class="btn btn--primary">Sim Fasores →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    let playing=false, simT=0, chart=null;
+    let R=100, L=0.5, Vs=12;
+    let tau, Ifin, dots=[], lastTime=0;
+    const circ=document.getElementById('circ');
+    const cctx=circ.getContext('2d');
+
+    function sync(id,v){
+      document.getElementById('sl-'+id).value=v;
+      document.getElementById('inp-'+id).value=v;
+      if(id==='r') R=parseFloat(v);
+      if(id==='l') L=parseFloat(v)/1000;
+      if(id==='vs') Vs=parseFloat(v);
+      updateTau(); buildChart();
+    }
+    function togglePlay(){ playing=!playing; document.getElementById('btn-play').textContent=playing?'⏸ Pause':'▶ Play'; }
+    function resetSim(){ simT=0; playing=false; document.getElementById('btn-play').textContent='▶ Play'; }
+
+    function updateTau(){
+      tau=L/R; Ifin=Vs/R;
+      const unit=tau<1?(tau*1000).toFixed(0)+' ms':tau.toFixed(3)+' s';
+      document.getElementById('st-tau').textContent=unit;
+      document.getElementById('st-ifin').textContent=Ifin<0.1?(Ifin*1000).toFixed(1)+' mA':Ifin.toFixed(3)+' A';
+    }
+
+    function it(t){ return Ifin*(1-Math.exp(-t/tau)); }
+    function vlt(t){ return Vs*Math.exp(-t/tau); }
+
+    function buildChart(){
+      const pts=120, tMax=6*tau;
+      const labels=[], iData=[], vlData=[], tauData=[];
+      const unit=tau<1?'ms':'s', scale=tau<1?1000:1;
+      for(let k=0;k<=pts;k++){
+        const t=tMax*k/pts;
+        labels.push((t*scale).toFixed(3));
+        iData.push(+it(t).toFixed(5));
+        vlData.push(+vlt(t).toFixed(4));
+      }
+      const tauX=+(tau*scale).toFixed(3);
+      tauData.push({x:tauX,y:0},{x:tauX,y:Vs});
+      if(chart) chart.destroy();
+      chart=new Chart(document.getElementById('rl-chart'),{
+        type:'line',
+        data:{labels,datasets:[
+          {label:'i(t) [A]', data:iData, borderColor:'#3b82f6', borderWidth:2, pointRadius:0, tension:.4, fill:false, yAxisID:'y'},
+          {label:'VL(t) [V]',data:vlData,borderColor:'#8b5cf6',borderWidth:2,pointRadius:0,tension:.4,fill:false,yAxisID:'y2'},
+          {label:'τ',data:tauData,borderColor:'#ef4444',borderWidth:1.5,borderDash:[6,4],pointRadius:0,parsing:{xAxisKey:'x',yAxisKey:'y'},fill:false,yAxisID:'y2'}
+        ]},
+        options:{responsive:true,
+          plugins:{legend:{labels:{font:{size:11}}},tooltip:{mode:'index',intersect:false}},
+          scales:{
+            x:{title:{display:true,text:`Tiempo (${unit})`},grid:{color:'#1e293b'}},
+            y:{title:{display:true,text:'Corriente (A)'},position:'left',min:0,max:Ifin*1.1,grid:{color:'#1e293b'}},
+            y2:{title:{display:true,text:'Tensión (V)'},position:'right',min:0,max:Vs*1.05,grid:{drawOnChartArea:false}}
+          }
+        }
+      });
+    }
+
+    // Circuit drawing
+    const CW=260,CH=180;
+    function drawCircuit(){
+      const I=it(simT), VL=vlt(simT);
+      cctx.clearRect(0,0,CW,CH);
+
+      // Wires
+      cctx.strokeStyle='#06b6d4'; cctx.lineWidth=2;
+      cctx.beginPath(); cctx.moveTo(45,30); cctx.lineTo(180,30); cctx.stroke();
+      cctx.beginPath(); cctx.moveTo(45,100); cctx.lineTo(80,100); cctx.stroke();
+      cctx.beginPath(); cctx.moveTo(45,30); cctx.lineTo(45,60); cctx.stroke();
+      cctx.beginPath(); cctx.moveTo(45,75); cctx.lineTo(45,100); cctx.stroke();
+
+      // Battery
+      cctx.strokeStyle='#ef4444'; cctx.lineWidth=3;
+      cctx.beginPath(); cctx.moveTo(33,60); cctx.lineTo(57,60); cctx.stroke();
+      cctx.strokeStyle='#64748b'; cctx.lineWidth=1.5;
+      cctx.beginPath(); cctx.moveTo(38,75); cctx.lineTo(52,75); cctx.stroke();
+      cctx.fillStyle='#ef4444'; cctx.font='bold 11px sans-serif'; cctx.textAlign='center';
+      cctx.fillText(`${Vs}V`,45,22);
+
+      // Resistor
+      const rx=80,ry=100,rw=50,peaks=4,seg=rw/peaks;
+      cctx.strokeStyle='#f59e0b'; cctx.lineWidth=2.5;
+      cctx.beginPath(); cctx.moveTo(rx,ry);
+      for(let i=0;i<peaks;i++){
+        cctx.lineTo(rx+seg*(i+0.25),ry-(i%2===0?10:-10));
+        cctx.lineTo(rx+seg*(i+0.75),ry-(i%2===0?-10:10));
+      }
+      cctx.lineTo(rx+rw,ry); cctx.stroke();
+      cctx.fillStyle='#f59e0b'; cctx.font='10px sans-serif'; cctx.textAlign='center';
+      cctx.fillText(`R=${R}Ω`,rx+rw/2,ry-16);
+
+      // Wire between R and L
+      cctx.strokeStyle='#06b6d4'; cctx.lineWidth=2;
+      cctx.beginPath(); cctx.moveTo(rx+rw,ry); cctx.lineTo(120,ry); cctx.stroke();
+
+      // Inductor (bumps)
+      const lx=120,ly=100,ln=5,lw=60,lseg=lw/ln;
+      cctx.strokeStyle='#8b5cf6'; cctx.lineWidth=2.5; cctx.fillStyle='none';
+      cctx.beginPath(); cctx.moveTo(lx,ly);
+      for(let i=0;i<ln;i++) cctx.arc(lx+lseg*(i+0.5),ly,lseg/2,Math.PI,0,false);
+      cctx.stroke();
+      cctx.fillStyle='#8b5cf6'; cctx.font='10px sans-serif'; cctx.textAlign='center';
+      cctx.fillText(`L=${(L*1000).toFixed(0)}mH`,lx+lw/2,ly-16);
+      cctx.fillStyle='#94a3b8'; cctx.font='9px sans-serif';
+      cctx.fillText(`VL=${VL.toFixed(1)}V`,lx+lw/2,ly+18);
+
+      // Right wire back
+      cctx.strokeStyle='#06b6d4'; cctx.lineWidth=2;
+      cctx.beginPath(); cctx.moveTo(lx+lw,ly); cctx.lineTo(180,ly); cctx.lineTo(180,30); cctx.stroke();
+
+      // Current label
+      const fmtI=I<0.01?(I*1000).toFixed(2)+' mA':I.toFixed(3)+' A';
+      cctx.fillStyle='#67e8f9'; cctx.font='bold 10px sans-serif'; cctx.textAlign='center';
+      cctx.fillText(`i = ${fmtI}`,113,CH-10);
+
+      // Dots
+      const speed=Math.max(0.001, I/Ifin*0.06);
+      dots.forEach(d=>{
+        d.t=(d.t+speed*0.016+1)%1;
+        let p;
+        if(d.t<0.3){const f=d.t/0.3;p={x:45+f*(180-45),y:30};}
+        else if(d.t<0.45){const f=(d.t-0.3)/0.15;p={x:180,y:30+f*(ly-30)};}
+        else if(d.t<0.75){const f=(d.t-0.45)/0.3;p={x:180-f*(180-lx-lw),y:ly};}
+        else if(d.t<0.88){const f=(d.t-0.75)/0.13;p={x:lx-f*(lx-rx-rw),y:ly};}
+        else{const f=(d.t-0.88)/0.12;p={x:rx-f*(rx-45),y:ry};}
+        cctx.beginPath();cctx.arc(p.x,p.y,3.5,0,Math.PI*2);
+        cctx.fillStyle=`rgba(103,232,249,${0.3+I/Ifin*0.7})`;cctx.fill();
+      });
+    }
+
+    function animLoop(ts){
+      if(playing){ simT+=0.016; if(simT>6*tau){simT=6*tau;playing=false;document.getElementById('btn-play').textContent='▶ Play';} }
+      document.getElementById('st-i').textContent = (it(simT)<0.01?(it(simT)*1000).toFixed(2)+' mA':it(simT).toFixed(3)+' A');
+      drawCircuit();
+      requestAnimationFrame(animLoop);
+    }
+
+    function init(){
+      dots=[{t:0},{t:0.33},{t:0.66}];
+      updateTau(); buildChart();
+      requestAnimationFrame(animLoop);
+    }
+    init();
+  </script>
+
+</body>
+</html>

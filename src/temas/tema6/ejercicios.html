@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 6: capacitancia, carga RC, energía almacenada y asociaciones de condensadores.">
+  <title>Tema 6 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema6/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 6</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Componentes Capacitivos
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        8 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong> para comprobar.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- Ejercicio 1 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Capacitancia a partir de carga y tensión</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un condensador se carga con una tensión de \(V = 50\ \text{V}\) y almacena una carga de \(Q = 250\ \mu\text{C}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la capacitancia del condensador.</li>
+              <li>¿Cuánta carga almacenaría el mismo condensador si la tensión fuera de 120 V?</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              C = \frac{Q}{V} = \frac{250 \times 10^{-6}}{50} = \mathbf{5\ \mu\text{F}}
+            \]
+            \[
+              Q' = C \cdot V' = 5 \times 10^{-6} \times 120 = \mathbf{600\ \mu\text{C}}
+            \]
+            <p style="font-size:var(--text-sm);">Al doblar y algo más la tensión (50 → 120 V), la carga aumenta proporcionalmente: de 250 µC a 600 µC. La relación C = Q/V es lineal para un condensador ideal.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Condensador de placas paralelas: cálculo de capacitancia</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un condensador de placas paralelas tiene una superficie de armaduras \(S = 100\ \text{cm}^2\), una separación entre placas \(d = 0{,}5\ \text{mm}\) y un dieléctrico de poliéster con permitividad relativa \(\varepsilon_r = 3{,}2\).</p>
+            <p>Calcula la capacitancia. Dato: \(\varepsilon_0 = 8{,}85 \times 10^{-12}\ \text{F/m}\).</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            <p>Convertir unidades: \(S = 100\ \text{cm}^2 = 100 \times 10^{-4}\ \text{m}^2 = 10^{-2}\ \text{m}^2\) y \(d = 0{,}5\ \text{mm} = 5 \times 10^{-4}\ \text{m}\)</p>
+            \[
+              \varepsilon = \varepsilon_0 \cdot \varepsilon_r = 8{,}85 \times 10^{-12} \times 3{,}2 = 28{,}32 \times 10^{-12}\ \text{F/m}
+            \]
+            \[
+              C = \frac{\varepsilon \cdot S}{d}
+                = \frac{28{,}32 \times 10^{-12} \times 10^{-2}}{5 \times 10^{-4}}
+                = \frac{28{,}32 \times 10^{-14}}{5 \times 10^{-4}}
+                = 5{,}66 \times 10^{-11}\ \text{F}
+                \approx \mathbf{56{,}6\ \text{nF}}
+            \]
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — Constante de tiempo τ y carga al 63,2 %</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un circuito RC tiene \(R = 47\ \text{k}\Omega\) y \(C = 10\ \mu\text{F}\). La fuente de alimentación es de \(V_{cc} = 12\ \text{V}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la constante de tiempo τ.</li>
+              <li>¿A qué tensión habrá llegado el condensador tras un tiempo igual a τ?</li>
+              <li>¿Cuánto tarda el condensador en cargarse completamente (prácticamente al 100 %)?</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              \tau = R \cdot C = 47 \times 10^3 \times 10 \times 10^{-6} = \mathbf{0{,}47\ \text{s}}
+            \]
+            <p>Tras \(t = \tau\), la tensión ha alcanzado el <strong>63,2 %</strong> de la tensión final:</p>
+            \[
+              V(\tau) = V_{cc} \times 0{,}632 = 12 \times 0{,}632 \approx \mathbf{7{,}58\ \text{V}}
+            \]
+            <p>El condensador está prácticamente cargado al 100 % tras <strong>5τ</strong>:</p>
+            \[
+              t_{100\%} \approx 5\tau = 5 \times 0{,}47 = \mathbf{2{,}35\ \text{s}}
+            \]
+          </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Tensión y corriente en un instante dado durante la carga RC</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un condensador de \(C = 100\ \mu\text{F}\) se carga a través de \(R = 10\ \text{k}\Omega\) desde una fuente de \(V_{cc} = 24\ \text{V}\). Calcula la tensión en el condensador y la corriente en el circuito <strong>en el instante</strong> \(t = 1\ \text{s}\).</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              \tau = R \cdot C = 10 \times 10^3 \times 100 \times 10^{-6} = 1\ \text{s}
+            \]
+            <p>Por tanto \(t = 1\ \text{s} = 1\tau\).</p>
+            \[
+              V(t) = V_{cc}\left(1 - e^{-t/\tau}\right) = 24\left(1 - e^{-1}\right) = 24 \times 0{,}632 \approx \mathbf{15{,}2\ \text{V}}
+            \]
+            \[
+              I(t) = \frac{V_{cc}}{R} \cdot e^{-t/\tau} = \frac{24}{10\,000} \times e^{-1} = 2{,}4 \times 10^{-3} \times 0{,}368 \approx \mathbf{0{,}883\ \text{mA}}
+            \]
+            <p style="font-size:var(--text-sm);">Comprobación: la corriente inicial (t=0) sería 24/10000 = 2,4 mA; a t=τ ya ha caído al 36,8 % de ese valor.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Energía almacenada en un condensador</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un condensador electrolítico de \(C = 4700\ \mu\text{F}\) está cargado a \(V = 400\ \text{V}\) en la etapa de filtrado de una fuente de alimentación.</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la energía almacenada.</li>
+              <li>¿Qué ocurriría si este condensador se descargara bruscamente a través de una resistencia de 1 Ω? Calcula la corriente de pico.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              W = \frac{1}{2} C V^2
+                = \frac{1}{2} \times 4700 \times 10^{-6} \times 400^2
+                = \frac{1}{2} \times 4700 \times 10^{-6} \times 160\,000
+                = \mathbf{376\ \text{J}}
+            \]
+            <p>Corriente de pico en el instante inicial de la descarga:</p>
+            \[
+              I_{pico} = \frac{V}{R} = \frac{400}{1} = \mathbf{400\ \text{A}}
+            \]
+            <div class="alert alert--danger" style="margin-top:var(--space-2);">
+              <span class="alert__icon">🚨</span>
+              <div class="alert__content">376 J y 400 A son valores que pueden causar quemaduras graves y daños materiales serios. Los condensadores de potencia deben descargarse siempre a través de una resistencia de descarga adecuada antes de manipularlos.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Condensadores en serie</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tres condensadores de \(C_1 = 10\ \mu\text{F}\), \(C_2 = 20\ \mu\text{F}\) y \(C_3 = 30\ \mu\text{F}\) se conectan en serie a una tensión de \(V_T = 60\ \text{V}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la capacitancia equivalente \(C_T\).</li>
+              <li>Calcula la carga almacenada.</li>
+              <li>Calcula la tensión en cada condensador y verifica que suman \(V_T\).</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              \frac{1}{C_T} = \frac{1}{10} + \frac{1}{20} + \frac{1}{30}
+                            = \frac{6 + 3 + 2}{60}
+                            = \frac{11}{60}
+              \quad\Rightarrow\quad C_T = \frac{60}{11} \approx \mathbf{5{,}45\ \mu\text{F}}
+            \]
+            <p>En serie todos tienen la misma carga:</p>
+            \[
+              Q_T = C_T \cdot V_T = 5{,}45 \times 10^{-6} \times 60 \approx \mathbf{327\ \mu\text{C}}
+            \]
+            \[
+              V_{C1} = \frac{Q}{C_1} = \frac{327}{10} = \mathbf{32{,}7\ \text{V}} \qquad
+              V_{C2} = \frac{327}{20} = \mathbf{16{,}4\ \text{V}} \qquad
+              V_{C3} = \frac{327}{30} = \mathbf{10{,}9\ \text{V}}
+            \]
+            <p>Verificación: \(32{,}7 + 16{,}4 + 10{,}9 = 60\ \text{V}\ \checkmark\)</p>
+            <p style="font-size:var(--text-sm);">El condensador más pequeño (C₁ = 10 µF) soporta la mayor tensión (32,7 V). Esto es importante al diseñar: el condensador más pequeño debe aguantar la tensión máxima.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Condensadores en paralelo</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tres condensadores de \(C_1 = 10\ \mu\text{F}\), \(C_2 = 22\ \mu\text{F}\) y \(C_3 = 47\ \mu\text{F}\) se conectan en paralelo a \(V = 16\ \text{V}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la capacitancia equivalente.</li>
+              <li>Calcula la carga total almacenada y la carga en cada condensador.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              C_T = C_1 + C_2 + C_3 = 10 + 22 + 47 = \mathbf{79\ \mu\text{F}}
+            \]
+            \[
+              Q_T = C_T \cdot V = 79 \times 10^{-6} \times 16 = \mathbf{1264\ \mu\text{C}}
+            \]
+            <p>En paralelo todos tienen la misma tensión (16 V):</p>
+            \[
+              Q_1 = 10 \times 16 = 160\ \mu\text{C} \qquad
+              Q_2 = 22 \times 16 = 352\ \mu\text{C} \qquad
+              Q_3 = 47 \times 16 = 752\ \mu\text{C}
+            \]
+            <p>Verificación: \(160 + 352 + 752 = 1264\ \mu\text{C}\ \checkmark\)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Asociación mixta serie-paralelo</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Se tienen cuatro condensadores: \(C_1 = 6\ \mu\text{F}\), \(C_2 = 3\ \mu\text{F}\), \(C_3 = 4\ \mu\text{F}\) y \(C_4 = 4\ \mu\text{F}\). La conexión es:</p>
+            <ul style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>C₁ y C₂ en serie → forman el grupo A</li>
+              <li>C₃ y C₄ en paralelo → forman el grupo B</li>
+              <li>El grupo A y el grupo B se conectan en serie</li>
+            </ul>
+            <p>Calcula la capacitancia equivalente total \(C_T\).</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución paso a paso:</strong></p>
+            <p><strong>Grupo A</strong> (C₁ y C₂ en serie):</p>
+            \[
+              C_A = \frac{C_1 \cdot C_2}{C_1 + C_2} = \frac{6 \times 3}{6 + 3} = \frac{18}{9} = 2\ \mu\text{F}
+            \]
+            <p><strong>Grupo B</strong> (C₃ y C₄ en paralelo):</p>
+            \[
+              C_B = C_3 + C_4 = 4 + 4 = 8\ \mu\text{F}
+            \]
+            <p><strong>Total</strong> (grupo A y grupo B en serie):</p>
+            \[
+              C_T = \frac{C_A \cdot C_B}{C_A + C_B} = \frac{2 \times 8}{2 + 8} = \frac{16}{10} = \mathbf{1{,}6\ \mu\text{F}}
+            \]
+          </div>
+        </div>
+
+      </div><!-- .content -->
+
+      <!-- Navegación inferior -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:var(--space-6); padding-top:var(--space-4); border-top:1px solid var(--color-border);">
+        <a href="./teoria.html" class="btn btn--secondary btn--sm">← Teoría</a>
+        <a href="./quiz.html"   class="btn btn--primary btn--sm">Quiz →</a>
+      </div>
+
+    </div><!-- .page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

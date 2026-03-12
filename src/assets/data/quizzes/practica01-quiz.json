@@ -1,0 +1,42 @@
+[
+  {
+    "id": "p1q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "En el circuito serie de la práctica (R1=100Ω, R2=220Ω, R3=330Ω, V=9V), ¿cuál es la resistencia equivalente?",
+    "options": ["100 Ω", "330 Ω", "650 Ω", "216,7 Ω"],
+    "correct": 2,
+    "explanation": "En serie: Req = R1 + R2 + R3 = 100 + 220 + 330 = 650 Ω."
+  },
+  {
+    "id": "p1q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cómo se conecta el amperímetro para medir la corriente total del circuito?",
+    "options": [
+      "En paralelo con R1",
+      "En serie con el circuito, abriendo un punto del conductor",
+      "En paralelo con la fuente de alimentación",
+      "Da igual cómo se conecte"
+    ],
+    "correct": 1,
+    "explanation": "El amperímetro siempre se conecta en SERIE. Hay que abrir el circuito e insertar el amperímetro para que toda la corriente pase por él."
+  },
+  {
+    "id": "p1q3",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "En un circuito serie, la suma de las tensiones en cada resistencia es igual a la tensión total de la fuente.",
+    "correct": true,
+    "explanation": "VERDADERO. Es la 2ª Ley de Kirchhoff (ley de tensiones): la suma de tensiones en un bucle cerrado es cero, lo que implica que V_total = V_R1 + V_R2 + V_R3."
+  },
+  {
+    "id": "p1q4",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Con R_eq = 650 Ω y V = 9 V, ¿cuál es la corriente que circula por el circuito?",
+    "options": ["6,5 mA", "13,85 mA", "58,5 mA", "9 mA"],
+    "correct": 1,
+    "explanation": "I = V / R_eq = 9 / 650 = 0,01385 A = 13,85 mA. Todos los componentes del serie tienen la misma corriente."
+  }
+]

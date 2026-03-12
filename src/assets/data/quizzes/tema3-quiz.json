@@ -1,0 +1,116 @@
+[
+  {
+    "id": "t3q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cuál es la diferencia entre un fusible tipo 'g' y uno tipo 'a'?",
+    "options": [
+      "El tipo 'g' es de uso general y protege frente a sobrecarga y cortocircuito; el tipo 'a' solo frente a cortocircuito",
+      "El tipo 'a' es más rápido que el tipo 'g' en todos los casos",
+      "El tipo 'g' es para motores y el tipo 'a' para líneas",
+      "No hay diferencia, son denominaciones sinónimas"
+    ],
+    "correct": 0,
+    "explanation": "La primera letra identifica el uso: 'g' (general) protege frente a sobrecarga Y cortocircuito; 'a' (acompañamiento) solo protege frente a cortocircuito —la sobrecarga la gestiona otro dispositivo, como el relé térmico—."
+  },
+  {
+    "id": "t3q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué fusible es el adecuado para proteger un motor eléctrico frente a cortocircuitos tolerando los picos de arranque?",
+    "options": ["gI 16 A", "aM 25 A", "gG 10 A", "gR 6 A"],
+    "correct": 1,
+    "explanation": "El fusible 'aM' (acompañamiento + motores) está diseñado para soportar los picos de arranque del motor (5-8 × In) sin fundir, actuando solo ante cortocircuitos. El relé térmico o guardamotor se encarga de la protección frente a sobrecargas."
+  },
+  {
+    "id": "t3q3",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "Un magnetotérmico con curva C de 20 A, ¿a partir de qué corriente dispara el mecanismo magnético de forma instantánea?",
+    "options": ["Entre 20 A y 40 A", "Entre 60 A y 100 A", "Entre 100 A y 200 A", "Exactamente a 20 A"],
+    "correct": 2,
+    "explanation": "La curva C tiene disparo magnético entre 5 × In y 10 × In. Para un calibre de 20 A: 5 × 20 = 100 A mínimo y 10 × 20 = 200 A máximo. Dentro de ese rango el disparo es prácticamente instantáneo."
+  },
+  {
+    "id": "t3q4",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "El mecanismo térmico del magnetotérmico protege frente a cortocircuitos instantáneos.",
+    "correct": false,
+    "explanation": "FALSO. El mecanismo TÉRMICO (bimetal) protege frente a SOBRECARGAS mantenidas en el tiempo. Es el mecanismo MAGNÉTICO (electroimán) el que actúa de forma instantánea ante un cortocircuito."
+  },
+  {
+    "id": "t3q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué tipo de diferencial es obligatorio en una instalación de recarga de vehículos eléctricos (modo 2, carga lenta monofásica)?",
+    "options": ["Tipo AC", "Tipo A", "Tipo S", "Tipo B"],
+    "correct": 1,
+    "explanation": "El cargador de VE genera corriente continua pulsante que el diferencial tipo AC no detecta correctamente. La normativa exige como mínimo un diferencial tipo A en puntos de recarga monofásicos (modo 1 y 2)."
+  },
+  {
+    "id": "t3q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Cuál es la sensibilidad estándar de un diferencial para protección personal contra electrocución?",
+    "options": ["10 mA", "30 mA", "100 mA", "300 mA"],
+    "correct": 1,
+    "explanation": "La sensibilidad de 30 mA es el estándar para protección personal. Con 30 mA circulando durante menos de 40 ms, la probabilidad de fibrilación ventricular es muy baja. Los diferenciales de 300 mA solo protegen la instalación, no a las personas."
+  },
+  {
+    "id": "t3q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué hace el contacto auxiliar NC (95-96) del relé térmico cuando este dispara?",
+    "options": [
+      "Se cierra, encendiendo el piloto de avería",
+      "Se abre, cortando la alimentación de la bobina del contactor y parando el motor",
+      "Desconecta directamente el circuito de fuerza del motor",
+      "Envía una señal al PLC para registrar el fallo"
+    ],
+    "correct": 1,
+    "explanation": "El contacto NC (Normalmente Cerrado, bornes 95-96) está en serie con la bobina del contactor. Al disparar el relé, ese contacto se ABRE → la bobina del contactor KM1 queda sin alimentación → KM1 abre sus contactos principales → el motor se detiene."
+  },
+  {
+    "id": "t3q8",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Cuál es la principal diferencia de instalación entre el relé térmico y el guardamotor?",
+    "options": [
+      "El relé térmico se instala antes del contactor; el guardamotor después",
+      "El guardamotor se instala aguas arriba (antes del contactor); el relé térmico entre el contactor y el motor",
+      "Ambos se instalan en el mismo punto; solo difiere el fabricante",
+      "El guardamotor no puede instalarse en carril DIN"
+    ],
+    "correct": 1,
+    "explanation": "El guardamotor se sitúa aguas arriba (antes del contactor) porque abre directamente el circuito de fuerza con sus propios contactos. El relé térmico se instala entre el contactor y el motor, y actúa indirectamente a través de sus contactos auxiliares sobre la bobina del contactor."
+  },
+  {
+    "id": "t3q9",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "¿Qué tipo de sobretensión provoca la rotura del conductor de neutro de la red?",
+    "options": [
+      "Sobretensión transitoria por descarga atmosférica",
+      "Sobretensión permanente por descompensación de fases",
+      "Sobretensión transitoria por conmutación de cargas inductivas",
+      "Ninguna; la rotura del neutro no genera sobretensión"
+    ],
+    "correct": 1,
+    "explanation": "La rotura del neutro produce una descompensación de las cargas entre fases: algunas fases pueden alcanzar tensiones muy superiores a 230 V de forma mantenida (sobretensión PERMANENTE). El limitador de sobretensión permanente protege contra esto cortando o derivando la tensión en exceso."
+  },
+  {
+    "id": "t3q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un diferencial tipo S (selectivo) se instala aguas arriba de otros diferenciales. ¿Cuál es su función específica?",
+    "options": [
+      "Detectar corrientes de fuga continuas que los otros diferenciales no ven",
+      "Aumentar la sensibilidad de la instalación a 10 mA",
+      "Introducir un retardo al disparo para lograr selectividad vertical: solo dispara el diferencial más cercano al fallo",
+      "Reconectar automáticamente el circuito tras un disparo"
+    ],
+    "correct": 2,
+    "explanation": "El diferencial tipo S (selectivo) introduce un retardo regulable en su disparo. Si hay un fallo en un circuito secundario, el diferencial más cercano (sin retardo) dispara primero, dejando el resto de la instalación operativa. El tipo S solo actúa si el diferencial inferior falla o no llega a disparar (selectividad vertical)."
+  }
+]

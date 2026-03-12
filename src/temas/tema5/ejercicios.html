@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 5: inductancias, reactancias, circuitos RLC y transformadores.">
+  <title>Tema 5 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema5/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 5</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Componentes Inductivos
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        8 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong> para comprobar.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- EJERCICIO 1 — Ley de Coulomb            -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Ley de Coulomb: fuerza entre cargas</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Dos cargas puntuales \(q_1 = 2\ \mu\text{C}\) y \(q_2 = 5\ \mu\text{C}\) están separadas una distancia \(d = 0{,}3\ \text{m}\) en el vacío.</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la fuerza que se ejercen mutuamente.</li>
+              <li>Indica si es atractiva o repulsiva y justifica por qué.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            <p>Aplicamos la Ley de Coulomb:</p>
+            \[
+              F = K \cdot \frac{q_1 \cdot q_2}{d^2}
+                = 9\times10^9 \cdot \frac{2\times10^{-6} \cdot 5\times10^{-6}}{(0{,}3)^2}
+                = 9\times10^9 \cdot \frac{10^{-11}}{0{,}09}
+                = \frac{9\times10^{-2}}{0{,}09} = 1\ \text{N}
+            \]
+            <p>La fuerza es de <strong>1 N</strong>. Como ambas cargas son <strong>positivas</strong> (mismo signo), la fuerza es <strong>repulsiva</strong>: cada carga empuja a la otra en sentido contrario.</p>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EJERCICIO 2 — Campo magnético en bobina     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Campo magnético en una bobina con núcleo</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una bobina tiene \(N = 200\) espiras arrolladas sobre un núcleo de hierro de permeabilidad relativa \(\mu_r = 1000\), longitud \(l = 20\ \text{cm}\) y sección \(S = 4\ \text{cm}^2\). La corriente que circula es \(I = 0{,}5\ \text{A}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la densidad de flujo magnético \(B\) en el núcleo.</li>
+              <li>Calcula el flujo magnético total \(\Phi\).</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            <p>Permeabilidad del núcleo: \(\mu = \mu_r \cdot \mu_0 = 1000 \times 4\pi\times10^{-7} = 4\pi\times10^{-4}\ \text{H/m}\)</p>
+            \[
+              B = \frac{\mu \cdot N \cdot I}{l}
+                = \frac{4\pi\times10^{-4} \times 200 \times 0{,}5}{0{,}2}
+                = \frac{4\pi\times10^{-4} \times 100}{0{,}2}
+                = \frac{4\pi\times10^{-2}}{0{,}2}
+                = 4\pi\times10^{-1}
+                \approx \mathbf{1{,}257\ \text{T}}
+            \]
+            \[
+              \Phi = B \cdot S = 1{,}257 \times 4\times10^{-4} \approx \mathbf{5{,}03\times10^{-4}\ \text{Wb}}
+            \]
+            <p>El núcleo ferromagnético multiplica el campo por \(\mu_r = 1000\) respecto al mismo solenoide en el aire, de ahí el elevado valor de \(B\).</p>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- EJERCICIO 3 — Ley de Faraday                  -->
+        <!-- ══════════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — F.e.m. inducida: Ley de Faraday</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> El flujo magnético que atraviesa una bobina de \(N = 150\) espiras varía de \(\Phi_1 = 0{,}02\ \text{Wb}\) a \(\Phi_2 = 0{,}08\ \text{Wb}\) en un tiempo \(\Delta t = 0{,}01\ \text{s}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la f.e.m. inducida.</li>
+              <li>¿Qué indica el signo negativo en la fórmula de Faraday?</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              e = N \cdot \frac{\Delta\Phi}{\Delta t}
+                = 150 \cdot \frac{0{,}08 - 0{,}02}{0{,}01}
+                = 150 \times \frac{0{,}06}{0{,}01}
+                = 150 \times 6
+                = \mathbf{900\ \text{V}}
+            \]
+            <p>La f.e.m. inducida es de <strong>900 V</strong>. El signo negativo de la fórmula completa (\(e = -N \cdot \Delta\Phi/\Delta t\)) indica la <strong>Ley de Lenz</strong>: la corriente inducida genera un flujo que se opone a la variación que la ha producido.</p>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EJERCICIO 4 — Autoinducción                -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Autoinducción: f.e.m. y energía almacenada</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una bobina tiene una inductancia \(L = 250\ \text{mH}\). La corriente que la atraviesa varía uniformemente de \(0\ \text{A}\) a \(8\ \text{A}\) en \(\Delta t = 0{,}04\ \text{s}\).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la f.e.m. de autoinducción durante la variación.</li>
+              <li>Calcula la energía almacenada en el campo magnético cuando \(I = 8\ \text{A}\).</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              e_{auto} = L \cdot \frac{\Delta I}{\Delta t}
+                       = 0{,}250 \times \frac{8}{0{,}04}
+                       = 0{,}250 \times 200
+                       = \mathbf{50\ \text{V}}
+            \]
+            \[
+              W = \frac{1}{2} \cdot L \cdot I^2
+                = \frac{1}{2} \times 0{,}250 \times 8^2
+                = \frac{1}{2} \times 0{,}250 \times 64
+                = \mathbf{8\ \text{J}}
+            \]
+            <p>La bobina opone 50 V a la variación de corriente. Esa oposición no disipa energía sino que la almacena en el campo magnético — exactamente igual que un condensador la almacena en el campo eléctrico.</p>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- EJERCICIO 5 — Reactancias XL y XC           -->
+        <!-- ════════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Reactancias inductiva y capacitiva</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En una red de \(f = 50\ \text{Hz}\) se tienen los siguientes componentes:</p>
+            <ul style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Bobina: \(L = 100\ \text{mH}\)</li>
+              <li>Condensador: \(C = 47\ \mu\text{F}\)</li>
+            </ul>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la reactancia inductiva \(X_L\) a 50 Hz.</li>
+              <li>Calcula la reactancia capacitiva \(X_C\) a 50 Hz.</li>
+              <li>Calcula la frecuencia de resonancia \(f_0\) para estos valores de L y C.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              X_L = 2\pi f L = 2\pi \times 50 \times 0{,}1 = \mathbf{31{,}4\ \Omega}
+            \]
+            \[
+              X_C = \frac{1}{2\pi f C}
+                  = \frac{1}{2\pi \times 50 \times 47\times10^{-6}}
+                  = \frac{1}{0{,}01477}
+                  \approx \mathbf{67{,}7\ \Omega}
+            \]
+            \[
+              f_0 = \frac{1}{2\pi\sqrt{LC}}
+                  = \frac{1}{2\pi\sqrt{0{,}1 \times 47\times10^{-6}}}
+                  = \frac{1}{2\pi\sqrt{4{,}7\times10^{-6}}}
+                  = \frac{1}{2\pi \times 2{,}168\times10^{-3}}
+                  \approx \mathbf{73{,}4\ \text{Hz}}
+            \]
+            <p>A 50 Hz el componente predominante es el capacitivo (\(X_C > X_L\)). Por encima de 73,4 Hz el circuito se vuelve inductivo.</p>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- EJERCICIO 6 — Circuito RL serie         -->
+        <!-- ════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Circuito RL serie: impedancia, corriente y tensiones</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un circuito RL serie está conectado a \(V = 230\ \text{V}\) a \(50\ \text{Hz}\). Sus valores son \(R = 30\ \Omega\) y \(L = 100\ \text{mH}\).</p>
+            <p>Calcula: \(X_L\), \(Z\), \(I\), \(V_R\), \(V_L\), el ángulo de desfase \(\varphi\) y el factor de potencia \(\cos\varphi\).</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm);">
+              <thead>
+                <tr style="background:var(--color-surface);">
+                  <th style="padding:var(--space-2); text-align:left;">Variable</th>
+                  <th style="padding:var(--space-2); text-align:left;">Cálculo</th>
+                  <th style="padding:var(--space-2); text-align:left;">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:var(--space-2);">\(X_L\)</td>
+                  <td style="padding:var(--space-2);">\(2\pi \times 50 \times 0{,}1\)</td>
+                  <td style="padding:var(--space-2);"><strong>31,4 Ω</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">\(Z\)</td>
+                  <td style="padding:var(--space-2);">\(\sqrt{30^2 + 31{,}4^2} = \sqrt{900 + 986}\)</td>
+                  <td style="padding:var(--space-2);"><strong>43,4 Ω</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">\(I\)</td>
+                  <td style="padding:var(--space-2);">\(230 / 43{,}4\)</td>
+                  <td style="padding:var(--space-2);"><strong>5,30 A</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">\(V_R\)</td>
+                  <td style="padding:var(--space-2);">\(5{,}30 \times 30\)</td>
+                  <td style="padding:var(--space-2);"><strong>159 V</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">\(V_L\)</td>
+                  <td style="padding:var(--space-2);">\(5{,}30 \times 31{,}4\)</td>
+                  <td style="padding:var(--space-2);"><strong>166 V</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">Verificación</td>
+                  <td style="padding:var(--space-2);">\(\sqrt{159^2 + 166^2} = \sqrt{25281+27556}\)</td>
+                  <td style="padding:var(--space-2);"><strong>≈ 230 V ✓</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">\(\cos\varphi\)</td>
+                  <td style="padding:var(--space-2);">\(R/Z = 30/43{,}4\)</td>
+                  <td style="padding:var(--space-2);"><strong>0,691 → φ ≈ 46°</strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top:var(--space-2); font-size:var(--text-sm);">La corriente se <strong>retrasa</strong> 46° respecto a la tensión (comportamiento inductivo). Las tensiones \(V_R\) y \(V_L\) no se pueden sumar directamente — hay que hacerlo vectorialmente.</p>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- EJERCICIO 7 — Circuito RLC serie con potencias -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Circuito RLC serie: potencia activa, reactiva y aparente</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un circuito RLC serie tiene \(R = 40\ \Omega\), \(X_L = 70\ \Omega\) y \(X_C = 30\ \Omega\). La tensión aplicada es \(V = 200\ \text{V}\).</p>
+            <p>Calcula: \(Z\), \(I\), \(\cos\varphi\), \(P\), \(Q\) y \(S\). Indica si el circuito es inductivo o capacitivo.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              Z = \sqrt{R^2 + (X_L - X_C)^2}
+                = \sqrt{40^2 + (70 - 30)^2}
+                = \sqrt{1600 + 1600}
+                = \sqrt{3200}
+                \approx \mathbf{56{,}6\ \Omega}
+            \]
+            \[
+              I = \frac{V}{Z} = \frac{200}{56{,}6} \approx \mathbf{3{,}53\ \text{A}}
+            \]
+            \[
+              \cos\varphi = \frac{R}{Z} = \frac{40}{56{,}6} \approx \mathbf{0{,}707} \quad (\varphi = 45°)
+            \]
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm); margin-top:var(--space-2);">
+              <thead>
+                <tr style="background:var(--color-surface);">
+                  <th style="padding:var(--space-2);">Potencia</th>
+                  <th style="padding:var(--space-2);">Fórmula</th>
+                  <th style="padding:var(--space-2);">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:var(--space-2);">Activa \(P\)</td>
+                  <td style="padding:var(--space-2);">\(V \cdot I \cdot \cos\varphi = 200 \times 3{,}53 \times 0{,}707\)</td>
+                  <td style="padding:var(--space-2);"><strong>≈ 499 W</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">Reactiva \(Q\)</td>
+                  <td style="padding:var(--space-2);">\(V \cdot I \cdot \sin\varphi = 200 \times 3{,}53 \times 0{,}707\)</td>
+                  <td style="padding:var(--space-2);"><strong>≈ 499 VAr (inductiva)</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);">Aparente \(S\)</td>
+                  <td style="padding:var(--space-2);">\(V \cdot I = 200 \times 3{,}53\)</td>
+                  <td style="padding:var(--space-2);"><strong>≈ 706 VA</strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top:var(--space-2); font-size:var(--text-sm);">El circuito es <strong>inductivo</strong> porque \(X_L > X_C\). Para corregir el factor de potencia habría que añadir más capacidad en paralelo.</p>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════ -->
+        <!-- EJERCICIO 8 — Transformador            -->
+        <!-- ══════════════════════════════════════ -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Transformador ideal: relación de transformación y potencia</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un transformador monofásico ideal tiene \(N_1 = 1200\) espiras y \(N_2 = 80\) espiras. Se alimenta con \(V_1 = 230\ \text{V}\) y el secundario alimenta una carga resistiva de \(R = 2\ \Omega\) (\(\cos\varphi = 1\)).</p>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Calcula la relación de transformación \(a\).</li>
+              <li>Calcula la tensión en el secundario \(V_2\).</li>
+              <li>Calcula la corriente en el secundario \(I_2\) y en el primario \(I_1\).</li>
+              <li>Verifica que la potencia se conserva (transformador ideal).</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Solución:</strong></p>
+            \[
+              a = \frac{N_1}{N_2} = \frac{1200}{80} = \mathbf{15}
+              \quad\Rightarrow\quad \text{transformador reductor}
+            \]
+            \[
+              V_2 = \frac{V_1}{a} = \frac{230}{15} \approx \mathbf{15{,}3\ \text{V}}
+            \]
+            \[
+              I_2 = \frac{V_2}{R} = \frac{15{,}3}{2} \approx \mathbf{7{,}65\ \text{A}}
+            \]
+            \[
+              I_1 = \frac{I_2}{a} = \frac{7{,}65}{15} \approx \mathbf{0{,}51\ \text{A}}
+            \]
+            <p><strong>Verificación de potencia:</strong></p>
+            \[
+              P_{salida} = V_2 \cdot I_2 = 15{,}3 \times 7{,}65 \approx 117\ \text{W}
+            \]
+            \[
+              P_{entrada} = V_1 \cdot I_1 = 230 \times 0{,}51 \approx 117\ \text{W} \checkmark
+            \]
+            <p style="font-size:var(--text-sm);">En el transformador ideal \(\eta = 100\%\): toda la potencia del primario llega al secundario. En uno real habría pérdidas en el hierro (P<sub>Fe</sub>) y en el cobre (P<sub>Cu</sub>) que reducirían el rendimiento.</p>
+          </div>
+        </div>
+
+      </div><!-- .content -->
+
+      <!-- Navegación inferior -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:var(--space-6); padding-top:var(--space-4); border-top:1px solid var(--color-border);">
+        <a href="./teoria.html"  class="btn btn--secondary btn--sm">← Teoría</a>
+        <a href="./quiz.html"    class="btn btn--primary btn--sm">Quiz →</a>
+      </div>
+
+    </div><!-- .page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

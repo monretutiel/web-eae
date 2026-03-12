@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recursos de EAE: hoja de fórmulas imprimible, glosario de términos eléctricos y resumen de normativa REBT.">
+  <title>Recursos | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    /* ── Recurso cards ── */
+    .recurso-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .recurso-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .recurso-card__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .recurso-card__title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+    }
+    .recurso-card__subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .recurso-card__body {
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+    }
+    .recurso-card__actions {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── Formulario imprimible ── */
+    .formulas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+    }
+    .formula-group {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+    }
+    .formula-group__title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+    .formula-group__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .formula-group__list li {
+      font-family: var(--font-mono, monospace);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      padding: 2px 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+    .formula-group__list li:last-child { border-bottom: none; }
+
+    /* ── Glosario ── */
+    .glosario-search {
+      width: 100%;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-3);
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+    .glosario-search:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 1px;
+    }
+    .glosario-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .glosario-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      transition: background 0.15s;
+    }
+    .glosario-item:hover { background: var(--color-primary-light); }
+    .glosario-item__term {
+      font-weight: 700;
+      color: var(--color-primary-dark);
+    }
+    .glosario-item__def {
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .glosario-item--hidden { display: none; }
+
+    /* ── REBT resumen ── */
+    .rebt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin-top: var(--space-2);
+    }
+    .rebt-table th {
+      background: var(--color-primary-dark);
+      color: #fff;
+      padding: var(--space-2) var(--space-3);
+      text-align: left;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .rebt-table td {
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .rebt-table tr:nth-child(even) td { background: var(--color-bg); }
+
+    @media print {
+      .nav-main, .breadcrumb, footer, .recurso-card__actions,
+      .glosario-search, .no-print { display: none !important; }
+      .page-wrapper { max-width: 100%; padding: 0; }
+      .formulas-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link nav-main__link--active">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Recursos</li>
+        </ol>
+      </nav>
+
+      <div style="margin-bottom:var(--space-5);">
+        <h1 style="font-size:var(--text-2xl); color:var(--color-primary-dark);">Recursos</h1>
+        <p style="color:var(--color-text-muted); margin-top:var(--space-2); max-width:65ch;">
+          Hoja de fórmulas imprimible, glosario de términos y resumen de la normativa REBT.
+          Material de apoyo para el estudio y la preparación de exámenes.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           RECURSO 1 — HOJA DE FÓRMULAS IMPRIMIBLE
+      ══════════════════════════════════════════════ -->
+      <h2 class="section-title">Hoja de Fórmulas</h2>
+
+      <div class="recurso-card">
+        <div class="recurso-card__header">
+          <div class="recurso-card__icon">📄</div>
+          <div>
+            <div class="recurso-card__title">Fórmulas Esenciales — Formulario Imprimible</div>
+            <div class="recurso-card__subtitle">Todas las fórmulas del módulo en una sola hoja. Optimizado para imprimir en A4.</div>
+          </div>
+        </div>
+
+        <div class="recurso-card__body">
+          <div class="formulas-grid">
+
+            <div class="formula-group">
+              <div class="formula-group__title">Ley de Ohm — Tema 1</div>
+              <ul class="formula-group__list">
+                <li>V = R · I</li>
+                <li>I = V / R</li>
+                <li>R = V / I</li>
+                <li>P = V · I = I² · R = V² / R</li>
+              </ul>
+            </div>
+
+            <div class="formula-group">
+              <div class="formula-group__title">Resistencias — Tema 1</div>
+              <ul class="formula-group__list">
+                <li>Serie: R_eq = R₁ + R₂ + … + Rₙ</li>
+                <li>Paralelo: 1/R_eq = 1/R₁ + 1/R₂ + …</li>
+                <li>2 en paralelo: R_eq = (R₁·R₂)/(R₁+R₂)</li>
+                <li>Divisor: V_out = V·R₂/(R₁+R₂)</li>
+              </ul>
+            </div>
+
+            <div class="formula-group">
+              <div class="formula-group__title">Corriente Alterna — Tema 2</div>
+              <ul class="formula-group__list">
+                <li>V_ef = V_p / √2 ≈ 0,707 · V_p</li>
+                <li>V_p = V_ef · √2 ≈ 1,414 · V_ef</li>
+                <li>V_pp = 2 · V_p</li>
+                <li>f = 1/T &nbsp;|&nbsp; T = 1/f</li>
+                <li>τ = R · C &nbsp;(constante RC)</li>
+              </ul>
+            </div>
+
+            <div class="formula-group">
+              <div class="formula-group__title">Potencia — Temas 1–5</div>
+              <ul class="formula-group__list">
+                <li>P = V · I · cos φ &nbsp;(activa, W)</li>
+                <li>Q = V · I · sin φ &nbsp;(reactiva, VAR)</li>
+                <li>S = V · I &nbsp;(aparente, VA)</li>
+                <li>cos φ = P / S &nbsp;(factor de potencia)</li>
+                <li>S² = P² + Q²</li>
+              </ul>
+            </div>
+
+            <div class="formula-group">
+              <div class="formula-group__title">Transformador — Tema 5</div>
+              <ul class="formula-group__list">
+                <li>a = V₁/V₂ = N₁/N₂ = I₂/I₁</li>
+                <li>V₂ = V₁ · N₂/N₁</li>
+                <li>I₂ = I₁ · N₁/N₂</li>
+                <li>S₁ = S₂ (ideal) → V₁·I₁ = V₂·I₂</li>
+                <li>η = P_útil / P_total · 100 (%)</li>
+              </ul>
+            </div>
+
+            <div class="formula-group">
+              <div class="formula-group__title">Motor Asíncrono — Tema 7</div>
+              <ul class="formula-group__list">
+                <li>n_s = (60 · f) / p &nbsp;(rpm)</li>
+                <li>s = (n_s − n) / n_s</li>
+                <li>n = n_s · (1 − s)</li>
+                <li>P_mecánica = P_electr · (1 − s)</li>
+                <li>I_n = P / (√3 · V · cos φ · η)</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="recurso-card__actions">
+          <button class="btn btn--primary" onclick="window.print()">🖨️ Imprimir hoja</button>
+          <span style="font-size:var(--text-xs); color:var(--color-text-muted); align-self:center;">
+            Ctrl + P para imprimir directamente
+          </span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           RECURSO 2 — GLOSARIO DE TÉRMINOS
+      ══════════════════════════════════════════════ -->
+      <h2 class="section-title" style="margin-top:var(--space-6);">Glosario de Términos</h2>
+
+      <div class="recurso-card">
+        <div class="recurso-card__header">
+          <div class="recurso-card__icon">📖</div>
+          <div>
+            <div class="recurso-card__title">Glosario de Electrotecnia y Automatismos</div>
+            <div class="recurso-card__subtitle">Definiciones de los términos más importantes del módulo. Busca por palabra clave.</div>
+          </div>
+        </div>
+
+        <div class="recurso-card__body">
+          <input
+            type="search"
+            class="glosario-search no-print"
+            placeholder="Buscar término..."
+            id="glosarioSearch"
+            aria-label="Buscar en el glosario"
+          >
+          <div class="glosario-list" id="glosarioList" role="list">
+
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Amperio (A)</span>
+              <span class="glosario-item__def">Unidad SI de intensidad de corriente eléctrica. 1 A = 1 C/s (un culombio de carga por segundo).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Bobina / Inductor</span>
+              <span class="glosario-item__def">Componente que almacena energía en campo magnético. Se opone a cambios bruscos de corriente. Unidad: Henrio (H).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Capacitor / Condensador</span>
+              <span class="glosario-item__def">Componente que almacena energía en campo eléctrico. Se opone a cambios bruscos de tensión. Unidad: Faradio (F).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Contactor</span>
+              <span class="glosario-item__def">Interruptor electromagnético de maniobra frecuente. Dispone de contactos de fuerza (1-2, 3-4, 5-6) y auxiliares (13-14 NA, 21-22 NC). Se controla desde la bobina A1-A2.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Corriente alterna (CA)</span>
+              <span class="glosario-item__def">Corriente eléctrica que cambia de sentido periódicamente. En España: 230 V / 50 Hz (monofásica), 400 V / 50 Hz (trifásica).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Corriente continua (CC)</span>
+              <span class="glosario-item__def">Corriente que fluye siempre en el mismo sentido. Típica en baterías y fuentes de alimentación reguladas.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Deslizamiento (s)</span>
+              <span class="glosario-item__def">Diferencia relativa entre la velocidad sincrónica y la velocidad real del rotor: s = (ns − n) / ns. En vacío ≈ 0; en carga nominal ≈ 0,03–0,07.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Diferencial (ID)</span>
+              <span class="glosario-item__def">Dispositivo de protección contra corrientes de fuga a tierra y contactos indirectos. Corta cuando detecta diferencia entre corriente de entrada y salida. Sensibilidad habitual: 30 mA.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Divisor de tensión</span>
+              <span class="glosario-item__def">Circuito formado por dos resistencias en serie que divide la tensión de entrada. V_out = V_in · R₂/(R₁+R₂).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Enclavamiento</span>
+              <span class="glosario-item__def">Circuito de seguridad que impide que dos elementos funcionen simultáneamente. Se realiza con el contacto NC (21-22) de cada contactor en la bobina del otro.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Factor de potencia (cos φ)</span>
+              <span class="glosario-item__def">Relación entre potencia activa (P) y aparente (S). Varía entre 0 y 1. Un cos φ bajo indica alto consumo reactivo y baja eficiencia energética.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Frecuencia (f)</span>
+              <span class="glosario-item__def">Número de ciclos completos por segundo de una señal alterna. Unidad: Hertzio (Hz). En Europa: 50 Hz.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Fusible</span>
+              <span class="glosario-item__def">Elemento de protección contra sobreintensidades basado en la fusión de un filamento conductor. No se puede rearmar; hay que sustituirlo. Código de colores IEC: negro (1A) → rojo (3,15A) → gris (10A) → azul (25A).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Guardamotor</span>
+              <span class="glosario-item__def">Interruptor automático compacto diseñado específicamente para proteger motores. Combina protección térmica y magnética. No necesita fusibles adicionales.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Impedancia (Z)</span>
+              <span class="glosario-item__def">Oposición total al flujo de corriente alterna. Combina resistencia (R) y reactancia (X): Z = √(R² + X²). Unidad: Ohmio (Ω).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Intensidad nominal (I_n)</span>
+              <span class="glosario-item__def">Corriente de trabajo del motor a plena carga en las condiciones de placa. Se usa para ajustar la protección térmica.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Kirchhoff — Ley de corrientes</span>
+              <span class="glosario-item__def">La suma de corrientes que entran en un nodo es igual a la suma de corrientes que salen: ΣI_entrada = ΣI_salida.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Kirchhoff — Ley de tensiones</span>
+              <span class="glosario-item__def">La suma algebraica de tensiones en un bucle cerrado es cero: ΣV = 0. Equivale a decir que la tensión de la fuente = suma de tensiones en cargas.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Ley de Ohm</span>
+              <span class="glosario-item__def">V = R · I. La tensión entre dos puntos es igual al producto de la resistencia por la intensidad que circula. Fundamental para CC; aplica con impedancias en CA.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Magnetotérmico (PIA)</span>
+              <span class="glosario-item__def">Pequeño Interruptor Automático. Protege contra sobrecargas (térmico) y cortocircuitos (magnético). Curvas de disparo: B (3–5×In), C (5–10×In), D (10–20×In).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">NPN / PNP</span>
+              <span class="glosario-item__def">Tipos de salida de sensores. NPN: la salida conecta a 0V (negativo) al activarse. PNP: la salida conecta a +24V (positivo) al activarse. El hilo BN=+, BU=−, BK=señal.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Potencia activa (P)</span>
+              <span class="glosario-item__def">Energía real consumida por segundo que realiza trabajo útil (calor, movimiento, luz). Unidad: Vatio (W). P = V · I · cos φ.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Potencia aparente (S)</span>
+              <span class="glosario-item__def">Potencia total suministrada por la fuente, incluyendo la parte reactiva. Unidad: Voltamperio (VA). S = V · I.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Potencia reactiva (Q)</span>
+              <span class="glosario-item__def">Energía intercambiada con condensadores e inductancias que no realiza trabajo útil. Unidad: VAR. Q = V · I · sin φ.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Relé térmico</span>
+              <span class="glosario-item__def">Dispositivo de protección contra sobrecargas en motores. Actúa por calentamiento de una lámina bimetálica. Bornes de señalización: 95-96 (NC) y 97-98 (NA).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Resistencia (R)</span>
+              <span class="glosario-item__def">Oposición que opone un conductor al paso de la corriente eléctrica. Unidad: Ohmio (Ω). Disipa energía en forma de calor (efecto Joule).</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Tensión eficaz (V_ef / V_rms)</span>
+              <span class="glosario-item__def">Valor de tensión alterna equivalente a una tensión continua que produce el mismo efecto calorífico. V_ef = V_p / √2 ≈ 0,707 · V_p. Los voltímetros CA miden este valor.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Transformador</span>
+              <span class="glosario-item__def">Máquina estática que transfiere energía eléctrica entre dos circuitos mediante inducción electromagnética, cambiando los niveles de tensión e intensidad. Relación: V₁/V₂ = N₁/N₂.</span>
+            </div>
+            <div class="glosario-item" role="listitem">
+              <span class="glosario-item__term">Velocidad sincrónica (ns)</span>
+              <span class="glosario-item__def">Velocidad de giro del campo magnético en el estátor del motor. ns = (60 · f) / p, donde p = número de pares de polos.</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="recurso-card__actions no-print">
+          <span id="glosarioCuenta" style="font-size:var(--text-xs); color:var(--color-text-muted); align-self:center;">
+            28 términos
+          </span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           RECURSO 3 — RESUMEN REBT
+      ══════════════════════════════════════════════ -->
+      <h2 class="section-title" style="margin-top:var(--space-6);">Resumen REBT</h2>
+
+      <div class="recurso-card">
+        <div class="recurso-card__header">
+          <div class="recurso-card__icon">📋</div>
+          <div>
+            <div class="recurso-card__title">Reglamento Electrotécnico para Baja Tensión — ITC clave</div>
+            <div class="recurso-card__subtitle">Resumen de las instrucciones técnicas complementarias más relevantes del módulo EAE.</div>
+          </div>
+        </div>
+
+        <div class="recurso-card__body">
+
+          <div class="alert alert--tip" style="margin-bottom:var(--space-3);">
+            <span class="alert__icon">ℹ️</span>
+            <div class="alert__content">
+              El REBT (RD 842/2002) es la normativa española que regula las instalaciones eléctricas de baja tensión (≤ 1000 V CA / ≤ 1500 V CC). Cada ITC desarrolla un aspecto específico.
+            </div>
+          </div>
+
+          <table class="rebt-table">
+            <thead>
+              <tr>
+                <th style="width:120px;">ITC</th>
+                <th>Título</th>
+                <th>Puntos clave para el módulo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ITC-BT-01</strong></td>
+                <td>Terminología</td>
+                <td>Define los términos oficiales: BT (≤ 1000 V CA), MT (1–36 kV), AT (&gt; 36 kV). Base del lenguaje técnico normalizado.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-10</strong></td>
+                <td>Previsión de cargas</td>
+                <td>Establece cómo calcular la potencia mínima a prever en un edificio (electrificación básica: 5750 W; elevada: 9200 W).</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-17</strong></td>
+                <td>Dispositivos gral. de mando y protección</td>
+                <td>Regula la composición del Cuadro de Mando y Protección (CGP, contador, IGA, ID, PIAs). El IGA debe ser 40 A para electrificación básica.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-19</strong></td>
+                <td>Instalaciones interiores</td>
+                <td>Secciones mínimas de conductores según uso: 1,5 mm² (alumbrado), 2,5 mm² (tomas), 6 mm² (cocina/horno), 10 mm² (aire acondicionado &gt; 3450 W).</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-20</strong></td>
+                <td>Tubos protectores</td>
+                <td>Tipos de tubo según instalación: empotrado (corrugado flexible), superficial (rígido), en falso techo. Diámetros normalizados: 16, 20, 25, 32 mm.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-22</strong></td>
+                <td>Protección contra sobreintensidades</td>
+                <td>Todo circuito debe protegerse contra sobrecargas y cortocircuitos. La intensidad de fusión I₂ ≤ 1,45 · Iz (capacidad del conductor).</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-23</strong></td>
+                <td>Protección contra sobretensiones</td>
+                <td>Clasificación: transitorias (rayo, maniobras) y permanentes (rotura de neutro). Dispositivos: varistores (MOV) para transitorias, relé de sobretensión para permanentes.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-24</strong></td>
+                <td>Protección contra contactos</td>
+                <td>Contacto directo (con partes activas): alejamiento, barreras, aislamiento. Contacto indirecto (masas): diferencial ≤ 30 mA + toma de tierra.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-25</strong></td>
+                <td>Instalaciones interiores de viviendas</td>
+                <td>Circuitos vivienda: C1 alumbrado (10A), C2 tomas uso general (16A), C3 cocina (25A), C4 lavadora/lavavajillas/termo (20A), C5 tomas baño/cocina (16A). Secciones y protecciones normalizadas.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-43</strong></td>
+                <td>Instalación de receptores. Motores</td>
+                <td>Los motores deben protegerse contra sobrecargas (relé térmico ajustado a In) y cortocircuitos (fusibles o PIA curva D/MA). La protección térmica debe actuar antes que dañe el bobinado.</td>
+              </tr>
+              <tr>
+                <td><strong>ITC-BT-47</strong></td>
+                <td>Instalación de receptores. Motores trifásicos</td>
+                <td>La sección del cable de un motor debe calcularse para In + 25% de margen. En arranque estrella-triángulo la corriente de arranque se reduce a un tercio del arranque directo.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top:var(--space-4); font-size:var(--text-base); color:var(--color-primary-dark);">Tensiones de referencia en España</h3>
+          <table class="rebt-table" style="margin-top:var(--space-2);">
+            <thead>
+              <tr>
+                <th>Sistema</th>
+                <th>Tensión nominal</th>
+                <th>Frecuencia</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monofásico</td>
+                <td>230 V</td>
+                <td>50 Hz</td>
+                <td>Viviendas, alumbrado, pequeños receptores</td>
+              </tr>
+              <tr>
+                <td>Trifásico</td>
+                <td>400 V (fase-fase) / 230 V (fase-neutro)</td>
+                <td>50 Hz</td>
+                <td>Industria, motores, grandes cargas</td>
+              </tr>
+              <tr>
+                <td>Control / Maniobra</td>
+                <td>24 V CC</td>
+                <td>—</td>
+                <td>PLCs, sensores, autómatas, circuitos de mando seguros</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="recurso-card__actions no-print">
+          <button class="btn btn--primary" onclick="window.print()">🖨️ Imprimir resumen</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+
+  <script>
+    /* ── Glosario: filtrado en tiempo real ── */
+    const searchInput = document.getElementById('glosarioSearch');
+    const items       = document.querySelectorAll('#glosarioList .glosario-item');
+    const cuenta      = document.getElementById('glosarioCuenta');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      let visible = 0;
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        item.classList.toggle('glosario-item--hidden', !match);
+        if (match) visible++;
+      });
+      cuenta.textContent = q
+        ? `${visible} resultado${visible !== 1 ? 's' : ''}`
+        : `${items.length} términos`;
+    });
+  </script>
+
+</body>
+</html>

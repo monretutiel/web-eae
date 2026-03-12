@@ -1,0 +1,106 @@
+[
+  {
+    "id": "t2q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cómo se conecta el voltímetro para medir la tensión en una resistencia?",
+    "options": ["En serie con la resistencia", "En paralelo con la resistencia", "En serie con la fuente", "No importa cómo se conecte"],
+    "correct": 1,
+    "explanation": "El voltímetro siempre se conecta en PARALELO con el elemento que se quiere medir. Su alta resistencia interna garantiza que casi no modifica el circuito."
+  },
+  {
+    "id": "t2q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué ocurre si conectas el amperímetro en paralelo con una resistencia?",
+    "options": [
+      "Mide correctamente la corriente",
+      "Provoca un cortocircuito y puede destruirse",
+      "Mide la tensión en vez de la corriente",
+      "No pasa nada, el amperímetro está protegido"
+    ],
+    "correct": 1,
+    "explanation": "El amperímetro tiene una resistencia interna muy baja. Conectado en paralelo, crea un camino de muy baja resistencia: prácticamente un cortocircuito. Se destruye el instrumento y puede dañar el circuito."
+  },
+  {
+    "id": "t2q3",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "La función de continuidad del multímetro se puede usar con el circuito bajo tensión.",
+    "correct": false,
+    "explanation": "FALSO. La continuidad (y la medida de resistencia) SIEMPRE deben hacerse con el circuito sin tensión. El óhmetro usa su propia batería interna; la tensión externa lo dañaría y daría lecturas erróneas."
+  },
+  {
+    "id": "t2q4",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "La red eléctrica española tiene Vp = 325 V. ¿Qué valor marcará el multímetro en CA?",
+    "options": ["325 V", "460 V", "230 V", "162,5 V"],
+    "correct": 2,
+    "explanation": "El multímetro mide el valor eficaz (RMS). Vef = Vp / √2 = 325 / 1,414 ≈ 230 V. Por eso la red se llama 'de 230 V' aunque su pico sea de 325 V."
+  },
+  {
+    "id": "t2q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Cuál es el valor pico a pico (Vpp) de una señal de 230 V eficaces?",
+    "options": ["230 V", "325 V", "460 V", "650 V"],
+    "correct": 3,
+    "explanation": "Vp = 230 × √2 = 325 V. Vpp = 2 × Vp = 2 × 325 = 650 V. El valor pico a pico es el doble del valor de pico."
+  },
+  {
+    "id": "t2q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "En un osciloscopio con TIME/DIV = 10 ms, una onda completa ocupa 4 divisiones. ¿Cuál es su frecuencia?",
+    "options": ["40 Hz", "25 Hz", "10 Hz", "4 Hz"],
+    "correct": 1,
+    "explanation": "T = 4 div × 10 ms/div = 40 ms = 0,04 s. f = 1/T = 1/0,04 = 25 Hz."
+  },
+  {
+    "id": "t2q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Para un circuito RC con R = 22 kΩ y C = 100 nF, ¿cuánto tarda en cargarse el condensador al 100%?",
+    "options": ["0,22 ms", "2,2 ms", "11 ms", "22 ms"],
+    "correct": 2,
+    "explanation": "τ = R × C = 22 000 × 100 × 10⁻⁹ = 2,2 ms. Carga al 100% ≈ 5τ = 5 × 2,2 ms = 11 ms."
+  },
+  {
+    "id": "t2q8",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un motor de 6 polos conectado a 50 Hz tiene un deslizamiento del 5%. ¿Cuál es su velocidad aproximada?",
+    "options": ["1 000 RPM", "950 RPM", "750 RPM", "1 500 RPM"],
+    "correct": 1,
+    "explanation": "ns = (120 × 50) / 6 × (1 − 0,05) = 1 000 × 0,95 = 950 RPM. La velocidad sincrónica sería 1 000 RPM, pero el deslizamiento la reduce un 5%."
+  },
+  {
+    "id": "t2q9",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Para qué se usa principalmente la cámara termográfica en mantenimiento eléctrico?",
+    "options": [
+      "Para medir la tensión en conductores de alta tensión",
+      "Para detectar puntos calientes sin contacto físico",
+      "Para comprobar la continuidad de circuitos",
+      "Para medir la velocidad de rotación de motores"
+    ],
+    "correct": 1,
+    "explanation": "La cámara termográfica detecta la radiación infrarroja y la convierte en imagen de colores. Permite localizar puntos calientes (mala conexión, sobrecarga, elemento defectuoso) sin detener la instalación ni hacer contacto."
+  },
+  {
+    "id": "t2q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "El Teorema de Nyquist aplicado al osciloscopio indica que la tasa de muestreo debe ser:",
+    "options": [
+      "Igual a la frecuencia de la señal",
+      "Al menos el doble de la frecuencia de la señal",
+      "Al menos 10 veces la frecuencia de la señal",
+      "No tiene relación con la frecuencia de la señal"
+    ],
+    "correct": 1,
+    "explanation": "El Teorema de Nyquist establece que para reconstruir fielmente una señal, la tasa de muestreo debe ser como mínimo el doble de la frecuencia máxima de la señal. Si la señal es de 50 MHz, el osciloscopio debe muestrear a ≥100 MSa/s."
+  }
+]

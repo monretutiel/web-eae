@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Resistencias — Serie y Paralelo | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .sim-canvas{background:#0f172a;border-radius:12px;display:block;width:100%;max-height:200px}
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4)}
+    .ctrl-row{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)}
+    .ctrl-row label{font-size:var(--text-sm);font-weight:600;min-width:3rem}
+    .ctrl-row input[type="number"]{flex:1;padding:var(--space-1) var(--space-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-sm);background:var(--color-bg);color:var(--color-text)}
+    .ctrl-row input[type="range"]{flex:1;accent-color:var(--color-primary)}
+    .ctrl-row .unit{font-size:var(--text-xs);color:var(--color-text-muted);min-width:2rem}
+    .mode-btn{padding:var(--space-2) var(--space-4);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-weight:600;cursor:pointer;font-size:var(--text-sm);transition:all .2s}
+    .mode-btn.active{border-color:var(--color-primary);background:var(--color-primary);color:#fff}
+    .res-row{display:flex;justify-content:space-between;align-items:center;padding:var(--space-2) 0;border-bottom:1px solid var(--color-border);font-size:var(--text-sm)}
+    .res-val{font-weight:700;color:var(--color-primary-dark)}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Simuladores</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Serie / Paralelo</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">🔌 Simulador — Resistencias en serie y paralelo</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        Modifica los valores y observa cómo fluye la corriente, las caídas de tensión y la potencia en tiempo real.
+      </p>
+
+      <!-- Selector modo -->
+      <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);">
+        <button class="mode-btn active" id="btn-serie"    onclick="setMode('serie')">Circuito SERIE</button>
+        <button class="mode-btn"        id="btn-paralelo" onclick="setMode('paralelo')">Circuito PARALELO</button>
+      </div>
+
+      <!-- Canvas -->
+      <canvas id="circuit" width="700" height="200" class="sim-canvas" style="margin-bottom:var(--space-4);"></canvas>
+
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:var(--space-4);align-items:start;">
+
+        <!-- Controles -->
+        <div class="calc-card">
+          <p style="font-weight:700;margin-bottom:var(--space-3);font-size:var(--text-sm);">Parámetros del circuito</p>
+          <div class="ctrl-row"><label>Vs</label><input type="range" id="sl-vs" min="1" max="50" value="12" oninput="syncSlider('vs',this.value)"><input type="number" id="inp-vs" value="12" min="1" max="50" step="1" oninput="syncInput('vs',this.value)"><span class="unit">V</span></div>
+          <div class="ctrl-row"><label>R1</label><input type="range" id="sl-r1" min="10" max="10000" value="1000" oninput="syncSlider('r1',this.value)"><input type="number" id="inp-r1" value="1000" min="1" max="100000" step="1" oninput="syncInput('r1',this.value)"><span class="unit">Ω</span></div>
+          <div class="ctrl-row"><label>R2</label><input type="range" id="sl-r2" min="10" max="10000" value="2000" oninput="syncSlider('r2',this.value)"><input type="number" id="inp-r2" value="2000" min="1" max="100000" step="1" oninput="syncInput('r2',this.value)"><span class="unit">Ω</span></div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="calc-card">
+          <p style="font-weight:700;margin-bottom:var(--space-3);font-size:var(--text-sm);">Resultados</p>
+          <div class="res-row"><span>Req</span>   <span class="res-val" id="res-req">—</span></div>
+          <div class="res-row"><span>I total</span><span class="res-val" id="res-it">—</span></div>
+          <div class="res-row"><span>V sobre R1</span><span class="res-val" id="res-vr1">—</span></div>
+          <div class="res-row"><span>V sobre R2</span><span class="res-val" id="res-vr2">—</span></div>
+          <div class="res-row"><span>I por R1</span><span class="res-val" id="res-ir1">—</span></div>
+          <div class="res-row"><span>I por R2</span><span class="res-val" id="res-ir2">—</span></div>
+          <div class="res-row" style="border-bottom:none;"><span>P total</span><span class="res-val" id="res-pt">—</span></div>
+        </div>
+
+      </div>
+
+      <div class="alert alert--tip" style="margin-top:var(--space-4);">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content" id="tip-text">En serie: la corriente es la misma en todas las resistencias. La tensión se reparte proporcionalmente a cada R.</div>
+      </div>
+
+      <div class="nav-paginas">
+        <a href="./index.html"  class="btn btn--ghost">← Simuladores</a>
+        <a href="./rc.html"     class="btn btn--primary">Sim RC →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    const canvas = document.getElementById('circuit');
+    const ctx    = canvas.getContext('2d');
+    let mode = 'serie';
+
+    // Dot animation state
+    let dots = [];
+    let animId = null;
+    let lastTime = 0;
+
+    // Current values
+    let Vs=12, R1=1000, R2=2000;
+
+    function initDots(n) {
+      dots = [];
+      for(let i=0;i<n;i++) dots.push({t: i/n, branch: 0});
+    }
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('btn-serie').classList.toggle('active', m==='serie');
+      document.getElementById('btn-paralelo').classList.toggle('active', m==='paralelo');
+      document.getElementById('tip-text').textContent = m==='serie'
+        ? 'En serie: la corriente es la misma en todas las resistencias. La tensión se reparte proporcionalmente a cada R.'
+        : 'En paralelo: la tensión es la misma en todos los componentes. La corriente se reparte inversamente proporcional a cada R.';
+      calculate();
+    }
+
+    function syncSlider(id, v) {
+      document.getElementById('inp-'+id).value = v;
+      readValues(); calculate();
+    }
+    function syncInput(id, v) {
+      document.getElementById('sl-'+id).value = v;
+      readValues(); calculate();
+    }
+    function readValues() {
+      Vs = parseFloat(document.getElementById('inp-vs').value)||12;
+      R1 = parseFloat(document.getElementById('inp-r1').value)||1000;
+      R2 = parseFloat(document.getElementById('inp-r2').value)||2000;
+    }
+
+    function fmtA(i) { return i<0.01 ? (i*1000).toFixed(2)+' mA' : i.toFixed(3)+' A'; }
+    function fmtR(r) { return r>=1000 ? (r/1000).toFixed(2)+' kΩ' : r.toFixed(1)+' Ω'; }
+    function fmtV(v) { return v.toFixed(3)+' V'; }
+    function fmtW(p) { return p<1 ? (p*1000).toFixed(2)+' mW' : p.toFixed(3)+' W'; }
+
+    function calculate() {
+      let Req, It, Vr1, Vr2, Ir1, Ir2;
+      if(mode==='serie'){
+        Req=R1+R2; It=Vs/Req; Vr1=It*R1; Vr2=It*R2; Ir1=It; Ir2=It;
+        initDots(5);
+      } else {
+        Req=1/(1/R1+1/R2); It=Vs/Req; Vr1=Vs; Vr2=Vs; Ir1=Vs/R1; Ir2=Vs/R2;
+        initDots(6);
+        dots[3].branch=1; dots[4].branch=1; dots[5].branch=1;
+      }
+      document.getElementById('res-req').textContent = fmtR(Req);
+      document.getElementById('res-it').textContent  = fmtA(It);
+      document.getElementById('res-vr1').textContent = fmtV(Vr1);
+      document.getElementById('res-vr2').textContent = fmtV(Vr2);
+      document.getElementById('res-ir1').textContent = fmtA(Ir1);
+      document.getElementById('res-ir2').textContent = fmtA(Ir2);
+      document.getElementById('res-pt').textContent  = fmtW(Vs*It);
+
+      // Store for animation
+      canvas._It=It; canvas._Ir1=Ir1; canvas._Ir2=Ir2;
+      if(!animId) animate(0);
+    }
+
+    // ─── Drawing ───────────────────────────────────────────────────
+    const W=700, H=200;
+
+    function drawWire(x1,y1,x2,y2){
+      ctx.strokeStyle='#06b6d4'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    }
+    function drawResistor(x1,y,x2,lbl){
+      const cx=(x1+x2)/2, len=x2-x1, w=len*0.6, bx=cx-w/2, peaks=6;
+      drawWire(x1,y,bx,y); drawWire(bx+w,y,x2,y);
+      ctx.strokeStyle='#f59e0b'; ctx.lineWidth=2.5; ctx.beginPath();
+      ctx.moveTo(bx,y);
+      const seg=w/peaks;
+      for(let i=0;i<peaks;i++){
+        ctx.lineTo(bx+seg*(i+0.25), y-(i%2===0?14:-14));
+        ctx.lineTo(bx+seg*(i+0.75), y-(i%2===0?-14:14));
+      }
+      ctx.lineTo(bx+w,y); ctx.stroke();
+      ctx.fillStyle='#f59e0b'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(lbl, cx, y-20);
+    }
+    function drawBattery(x,y1,y2,lbl){
+      const cy=(y1+y2)/2;
+      drawWire(x,y1,x,cy-12); drawWire(x,cy+12,x,y2);
+      ctx.strokeStyle='#ef4444'; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(x-12,cy-12); ctx.lineTo(x+12,cy-12); ctx.stroke();
+      ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.moveTo(x-7,cy+12); ctx.lineTo(x+7,cy+12); ctx.stroke();
+      ctx.fillStyle='#ef4444'; ctx.font='bold 10px sans-serif'; ctx.textAlign='left';
+      ctx.fillText('+',x+14,cy-8);
+      ctx.fillStyle='#94a3b8'; ctx.fillText('−',x+14,cy+16);
+      ctx.fillStyle='#f1f5f9'; ctx.textAlign='center'; ctx.font='bold 12px sans-serif';
+      ctx.fillText(lbl,x,y1-6);
+    }
+    function drawDot(x,y){
+      ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fillStyle='#67e8f9'; ctx.fill();
+    }
+    function drawLabel(x,y,txt,col='#f1f5f9'){
+      ctx.fillStyle=col; ctx.font='11px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(txt,x,y);
+    }
+
+    // Path interpolation
+    function lerp(a,b,t){ return {x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t}; }
+    function pointOnPath(path, t){
+      const total=path.reduce((acc,_,i)=>i===0?acc:acc+Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y),0);
+      let d=t*total, cum=0;
+      for(let i=1;i<path.length;i++){
+        const seg=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);
+        if(cum+seg>=d) return lerp(path[i-1],path[i],(d-cum)/seg);
+        cum+=seg;
+      }
+      return path[path.length-1];
+    }
+
+    function seriePath(){
+      return [{x:60,y:100},{x:110,y:100},{x:270,y:100},{x:320,y:100},{x:430,y:100},{x:480,y:100},
+              {x:640,y:100},{x:640,y:160},{x:60,y:160},{x:60,y:100}];
+    }
+    function paraleloBranch1(){
+      return [{x:60,y:40},{x:200,y:40},{x:360,y:40},{x:500,y:40},{x:640,y:40},
+              {x:640,y:160},{x:60,y:160},{x:60,y:40}];
+    }
+    function paraleloBranch2(){
+      return [{x:60,y:160},{x:60,y:120},{x:200,y:120},{x:360,y:120},{x:500,y:120},{x:640,y:120},
+              {x:640,y:40}];
+    }
+
+    function drawSerie(){
+      ctx.clearRect(0,0,W,H);
+      const It=canvas._It||0;
+      drawWire(60,100,110,100); drawWire(640,100,640,160); drawWire(60,160,640,160); drawWire(60,100,60,160);
+      drawResistor(110,100,320, `R1=${fmtR(R1)}  ${fmtV(It*R1)}`);
+      drawResistor(320,100,530, `R2=${fmtR(R2)}  ${fmtV(It*R2)}`);
+      drawWire(530,100,640,100);
+      drawBattery(60,40,165,`${Vs}V`);
+      // current direction arrow
+      ctx.fillStyle='#06b6d4'; ctx.beginPath(); ctx.moveTo(350,175); ctx.lineTo(360,175); ctx.lineTo(355,169); ctx.closePath(); ctx.fill();
+      drawLabel(350,185,`It = ${fmtA(It)}`,'#06b6d4');
+      const sp=seriePath();
+      dots.forEach(d=>{
+        const p=pointOnPath(sp,d.t);
+        drawDot(p.x,p.y);
+      });
+    }
+
+    function drawParalelo(){
+      ctx.clearRect(0,0,W,H);
+      const It=canvas._It||0,Ir1=canvas._Ir1||0,Ir2=canvas._Ir2||0;
+      // Top and bottom rails
+      drawWire(60,40,640,40); drawWire(60,160,640,160);
+      // Vertical connections
+      drawWire(200,40,200,160); drawWire(500,40,500,160);
+      // R1 and R2 vertical
+      drawResistor(60,100,200,`R1=${fmtR(R1)}  ${fmtA(Ir1)}`);
+      drawResistor(300,100,500,`R2=${fmtR(R2)}  ${fmtA(Ir2)}`);
+      drawBattery(60,40,160,`${Vs}V`);
+      drawLabel(350,20,`It = ${fmtA(It)}`,'#06b6d4');
+      const b1=paraleloBranch1(), b2=paraleloBranch2();
+      dots.forEach((d,i)=>{
+        const path=d.branch===0?b1:b2;
+        const p=pointOnPath(path,d.t);
+        drawDot(p.x,p.y);
+      });
+    }
+
+    function animate(ts){
+      const dt=(ts-lastTime)/1000; lastTime=ts;
+      const It=canvas._It||0;
+      const speed=Math.min(Math.max(It*0.5,0.002),0.08);
+      dots.forEach(d=>{ d.t=(d.t+speed*dt+1)%1; });
+      if(mode==='serie') drawSerie(); else drawParalelo();
+      animId=requestAnimationFrame(animate);
+    }
+
+    // Init
+    readValues(); calculate();
+  </script>
+
+</body>
+</html>

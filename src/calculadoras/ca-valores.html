@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Valores CA | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);max-width:540px}
+    .calc-field{display:flex;flex-direction:column;gap:var(--space-1);margin-bottom:var(--space-3)}
+    .calc-field label{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+    .calc-field .field-row{display:flex;gap:var(--space-2);align-items:center}
+    .calc-field input[type="number"]{flex:1;padding:var(--space-2) var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-base);background:var(--color-bg);color:var(--color-text);outline:none;transition:border-color .2s}
+    .calc-field input[type="number"]:focus{border-color:var(--color-primary)}
+    .calc-field input[type="number"]:disabled{background:var(--color-primary-dark);color:#fff;border-color:var(--color-primary);font-weight:700}
+    .calc-field .unit{font-size:var(--text-sm);color:var(--color-text-muted);min-width:2.5rem}
+    .calc-selector{display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4)}
+    .calc-selector button{padding:var(--space-2) var(--space-3);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-size:var(--text-sm);font-weight:600;cursor:pointer;transition:all .2s}
+    .calc-selector button.active{border-color:var(--color-primary);background:var(--color-primary);color:#fff}
+    .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2);margin-top:var(--space-3)}
+    .result-cell{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-3);text-align:center}
+    .result-cell .rc-label{font-size:var(--text-xs);opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+    .result-cell .rc-value{font-size:var(--text-xl);font-weight:700;margin:var(--space-1) 0}
+    .result-cell .rc-unit{font-size:var(--text-xs);opacity:.7}
+    .divider-line{border:none;border-top:1px solid var(--color-border);margin:var(--space-4) 0}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link nav-main__link--active">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Calculadoras</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Valores CA</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">〜 Calculadora — Valores de señal alterna</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+        Introduce uno de los valores de tensión o la frecuencia y obtén automáticamente todos los demás.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start; flex-wrap:wrap;">
+
+        <!-- Calculadora tensión -->
+        <div class="calc-card">
+          <p style="font-weight:700; margin-bottom:var(--space-3);">¿Qué valor conoces?</p>
+          <div class="calc-selector">
+            <button id="btn-vp"  class="active" onclick="setVMode('Vp')">V pico</button>
+            <button id="btn-vpp" onclick="setVMode('Vpp')">V pico-pico</button>
+            <button id="btn-vef" onclick="setVMode('Vef')">V eficaz (RMS)</button>
+          </div>
+
+          <div class="calc-field">
+            <label for="inp-vp">Tensión de pico (Vp)</label>
+            <div class="field-row">
+              <input type="number" id="inp-vp" placeholder="Ej: 325" min="0" step="any" oninput="calcV()">
+              <span class="unit">V</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-vpp">Tensión pico a pico (Vpp)</label>
+            <div class="field-row">
+              <input type="number" id="inp-vpp" placeholder="Ej: 650" min="0" step="any" oninput="calcV()">
+              <span class="unit">V</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-vef">Tensión eficaz / RMS (Vef)</label>
+            <div class="field-row">
+              <input type="number" id="inp-vef" placeholder="Ej: 230" min="0" step="any" oninput="calcV()">
+              <span class="unit">V</span>
+            </div>
+          </div>
+
+          <div id="v-results" style="display:none;">
+            <div class="result-grid">
+              <div class="result-cell"><p class="rc-label">V pico</p><p class="rc-value" id="res-vp">—</p><p class="rc-unit">V</p></div>
+              <div class="result-cell"><p class="rc-label">V pico-pico</p><p class="rc-value" id="res-vpp">—</p><p class="rc-unit">V</p></div>
+              <div class="result-cell"><p class="rc-label">V eficaz (RMS)</p><p class="rc-value" id="res-vef">—</p><p class="rc-unit">V</p></div>
+              <div class="result-cell"><p class="rc-label">V media semiciclo</p><p class="rc-value" id="res-vm">—</p><p class="rc-unit">V</p></div>
+            </div>
+          </div>
+
+          <button onclick="clearV()" style="margin-top:var(--space-4);width:100%;padding:var(--space-2);background:none;border:1px solid var(--color-border);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--text-sm);color:var(--color-text-muted);">Limpiar</button>
+
+          <hr class="divider-line">
+
+          <!-- Frecuencia / Período -->
+          <p style="font-weight:700; margin-bottom:var(--space-3);">Frecuencia ↔ Período</p>
+          <div class="calc-field">
+            <label for="inp-freq">Frecuencia (f)</label>
+            <div class="field-row">
+              <input type="number" id="inp-freq" placeholder="Ej: 50" min="0" step="any" oninput="calcFT('f')">
+              <span class="unit">Hz</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-period">Período (T)</label>
+            <div class="field-row">
+              <input type="number" id="inp-period" placeholder="Ej: 0.02" min="0" step="any" oninput="calcFT('T')">
+              <span class="unit">s</span>
+            </div>
+          </div>
+          <div id="ft-results" style="display:none;" class="result-grid">
+            <div class="result-cell"><p class="rc-label">Frecuencia</p><p class="rc-value" id="res-f">—</p><p class="rc-unit">Hz</p></div>
+            <div class="result-cell"><p class="rc-label">Período</p><p class="rc-value" id="res-t">—</p><p class="rc-unit">ms</p></div>
+          </div>
+        </div>
+
+        <!-- Panel explicativo -->
+        <div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Relaciones entre valores</p>
+            <svg viewBox="0 0 280 160" width="100%" aria-label="Onda sinusoidal con anotaciones">
+              <!-- Ejes -->
+              <line x1="20" y1="80" x2="265" y2="80" stroke="#64748b" stroke-width="1"/>
+              <line x1="20" y1="10" x2="20" y2="150" stroke="#64748b" stroke-width="1"/>
+              <!-- Onda senoidal -->
+              <path d="M20,80 Q55,10 90,80 Q125,150 160,80 Q195,10 230,80 Q265,150 270,90"
+                    fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+              <!-- Vp -->
+              <line x1="90" y1="10" x2="90" y2="80" stroke="#ef4444" stroke-width="1" stroke-dasharray="4"/>
+              <text x="95" y="20" font-size="10" fill="#ef4444" font-weight="bold">Vp</text>
+              <!-- Vpp -->
+              <line x1="160" y1="10" x2="160" y2="150" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4"/>
+              <text x="165" y="155" font-size="10" fill="#f59e0b" font-weight="bold">Vpp</text>
+              <!-- Vef -->
+              <line x1="20" y1="46" x2="260" y2="46" stroke="#10b981" stroke-width="1" stroke-dasharray="3"/>
+              <text x="230" y="42" font-size="10" fill="#10b981" font-weight="bold">Vef</text>
+            </svg>
+            <table style="width:100%;border-collapse:collapse;font-size:var(--text-sm);margin-top:var(--space-3);">
+              <tbody>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2);font-weight:700;color:var(--color-primary);">Vpp = 2 · Vp</td>
+                  <td style="padding:var(--space-2);color:var(--color-text-muted);">Pico a pico</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2);font-weight:700;color:var(--color-primary);">Vef = Vp / √2</td>
+                  <td style="padding:var(--space-2);color:var(--color-text-muted);">Valor eficaz (RMS)</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2);font-weight:700;color:var(--color-primary);">Vm = 2·Vp / π</td>
+                  <td style="padding:var(--color-text-muted);padding:var(--space-2);">Valor medio semiciclo</td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2);font-weight:700;color:var(--color-primary);">T = 1 / f</td>
+                  <td style="padding:var(--space-2);color:var(--color-text-muted);">Período [s]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">La red eléctrica española es de <strong>230 V eficaces</strong>. El valor de pico es 230 × √2 ≈ 325 V.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ejemplos -->
+      <div style="margin-top:var(--space-5);">
+        <h2 class="section-title">Ejemplos rápidos</h2>
+        <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
+          <button class="btn btn--ghost btn--sm" onclick="loadEx('Vef',230)">Vef=230V (red española)</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadEx('Vp',325)">Vp=325V → Vef=?</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadEx('Vef',12)">Vef=12V (trafo)</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExFT(50)">f=50Hz → T=?</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExFT(null,0.02)">T=20ms → f=?</button>
+        </div>
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./divisor.html"      class="btn btn--ghost">← Calc 3: Divisor</a>
+        <a href="./rc.html"           class="btn btn--primary">Calc 5: RC →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    const SQRT2 = Math.sqrt(2);
+    let vMode = 'Vp';
+
+    function setVMode(m) {
+      vMode = m;
+      const map = {Vp:'vp', Vpp:'vpp', Vef:'vef'};
+      Object.entries(map).forEach(([k,id]) => {
+        document.getElementById('btn-'+id).classList.toggle('active', k===m);
+        document.getElementById('inp-'+id).disabled = (k===m);
+        document.getElementById('inp-'+id).value = '';
+      });
+      document.getElementById('v-results').style.display='none';
+    }
+
+    function calcV() {
+      let vp;
+      const raw = {
+        vp:  parseFloat(document.getElementById('inp-vp').value),
+        vpp: parseFloat(document.getElementById('inp-vpp').value),
+        vef: parseFloat(document.getElementById('inp-vef').value)
+      };
+      if (vMode==='Vp'  && !isNaN(raw.vpp) && !isNaN(raw.vef)) { /* both given */ }
+      if (vMode==='Vp')  { const src = !isNaN(raw.vpp)?raw.vpp/2 : !isNaN(raw.vef)?raw.vef*SQRT2 : NaN; vp=src; }
+      if (vMode==='Vpp') { vp = !isNaN(raw.vp)?raw.vp : !isNaN(raw.vef)?raw.vef*SQRT2 : NaN; }
+      if (vMode==='Vef') { const src = !isNaN(raw.vp)?raw.vp : !isNaN(raw.vpp)?raw.vpp/2 : NaN; vp=src; }
+      if (isNaN(vp) || vp<=0) return;
+      document.getElementById('res-vp').textContent  = fmt(vp);
+      document.getElementById('res-vpp').textContent = fmt(2*vp);
+      document.getElementById('res-vef').textContent = fmt(vp/SQRT2);
+      document.getElementById('res-vm').textContent  = fmt(2*vp/Math.PI);
+      document.getElementById('v-results').style.display='block';
+    }
+
+    function calcFT(from) {
+      const fEl = document.getElementById('inp-freq');
+      const tEl = document.getElementById('inp-period');
+      let f, T;
+      if (from==='f') { f=parseFloat(fEl.value); if(isNaN(f)||f<=0)return; T=1/f; tEl.value=''; }
+      else            { T=parseFloat(tEl.value); if(isNaN(T)||T<=0)return; f=1/T; fEl.value=''; }
+      document.getElementById('res-f').textContent = fmt(f);
+      document.getElementById('res-t').textContent = fmt(T*1000);
+      document.getElementById('ft-results').style.display='grid';
+    }
+
+    function fmt(n) {
+      if(isNaN(n))return'—';
+      if(Math.abs(n)>=100) return n.toFixed(2);
+      if(Math.abs(n)>=1)   return n.toFixed(3);
+      return n.toFixed(4);
+    }
+
+    function clearV() {
+      ['vp','vpp','vef'].forEach(id=>{ const el=document.getElementById('inp-'+id); if(!el.disabled)el.value=''; });
+      document.getElementById('v-results').style.display='none';
+    }
+
+    function loadEx(mode, val) {
+      setVMode(mode);
+      const idMap={Vp:'vp',Vpp:'vpp',Vef:'vef'};
+      // the OTHER fields — pick first non-disabled
+      const nonDisabled = ['vp','vpp','vef'].filter(id=>id!==idMap[mode]);
+      // set the first enabled field
+      const mapToMode = {Vp:{vpp:v=>v*2, vef:v=>v/SQRT2}, Vpp:{vp:v=>v/2, vef:v=>v/2/SQRT2}, Vef:{vp:v=>v*SQRT2, vpp:v=>v*2*SQRT2}};
+      // simpler: just set based on what mode we chose
+      if(mode==='Vp')  document.getElementById('inp-vpp').value=fmt(val*2);
+      if(mode==='Vef') document.getElementById('inp-vp').value=fmt(val*SQRT2);
+      if(mode==='Vpp') document.getElementById('inp-vp').value=fmt(val/2);
+      calcV();
+    }
+
+    function loadExFT(f, T) {
+      if(f!==undefined&&f!==null) { document.getElementById('inp-freq').value=f; document.getElementById('inp-period').value=''; calcFT('f'); }
+      else { document.getElementById('inp-period').value=T; document.getElementById('inp-freq').value=''; calcFT('T'); }
+    }
+
+    setVMode('Vp');
+  </script>
+
+</body>
+</html>

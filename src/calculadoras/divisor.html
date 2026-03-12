@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Divisor de Tensión | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .calc-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      max-width: 540px;
+    }
+    .calc-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+    .calc-field label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .calc-field .field-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+    .calc-field input[type="number"] {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      background: var(--color-bg);
+      color: var(--color-text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .calc-field input[type="number"]:focus { border-color: var(--color-primary); }
+    .calc-field .unit {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      min-width: 2.5rem;
+    }
+    .calc-field .field-hint {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    .calc-result {
+      background: var(--color-primary-dark);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-top: var(--space-3);
+    }
+    .calc-result .result-label {
+      font-size: var(--text-xs);
+      opacity: .75;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .calc-result .result-value {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin: var(--space-1) 0;
+    }
+    .calc-result .result-formula {
+      font-size: var(--text-xs);
+      opacity: .7;
+    }
+    .calc-error {
+      color: var(--color-error, #e53e3e);
+      font-size: var(--text-sm);
+      margin-top: var(--space-2);
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+    .result-mini {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      text-align: center;
+    }
+    .result-mini .mini-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+    .result-mini .mini-value {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-top: 2px;
+    }
+    .result-mini.highlight {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    .result-mini.highlight .mini-label { color: rgba(255,255,255,.75); }
+    .result-mini.highlight .mini-value { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html" class="nav-main__link nav-main__link--active">Calculadoras</a></li>
+      <li><a href="../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Calculadoras</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Divisor de Tensión</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        ⬇️ Calculadora — Divisor de Tensión
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+        Introduce Vin, R1 y R2 para obtener la tensión de salida Vout y demás parámetros del divisor resistivo.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start;">
+
+        <!-- Calculadora -->
+        <div class="calc-card">
+
+          <div class="calc-field">
+            <label for="inp-vin">Tensión de entrada Vin</label>
+            <div class="field-row">
+              <input type="number" id="inp-vin" placeholder="Ej: 12" min="0" step="any" oninput="calculate()">
+              <span class="unit">V</span>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label for="inp-r1">Resistencia R1 (superior)</label>
+            <div class="field-row">
+              <input type="number" id="inp-r1" placeholder="Ej: 1000" min="0.001" step="any" oninput="calculate()">
+              <span class="unit">Ω</span>
+            </div>
+            <span class="field-hint">R1 está conectada entre Vin y el nodo de salida.</span>
+          </div>
+
+          <div class="calc-field">
+            <label for="inp-r2">Resistencia R2 (inferior)</label>
+            <div class="field-row">
+              <input type="number" id="inp-r2" placeholder="Ej: 2000" min="0.001" step="any" oninput="calculate()">
+              <span class="unit">Ω</span>
+            </div>
+            <span class="field-hint">R2 está conectada entre el nodo de salida y GND.</span>
+          </div>
+
+          <div id="result-box" style="display:none;">
+            <div class="calc-result">
+              <p class="result-label">Vout (Tensión de salida)</p>
+              <p class="result-value" id="res-vout">—</p>
+              <p class="result-formula" id="res-formula">Vout = Vin × R2 / (R1 + R2)</p>
+            </div>
+            <div class="results-grid">
+              <div class="result-mini">
+                <div class="mini-label">Corriente I</div>
+                <div class="mini-value" id="res-i">—</div>
+              </div>
+              <div class="result-mini">
+                <div class="mini-label">V en R1</div>
+                <div class="mini-value" id="res-vr1">—</div>
+              </div>
+              <div class="result-mini">
+                <div class="mini-label">Potencia total</div>
+                <div class="mini-value" id="res-ptot">—</div>
+              </div>
+              <div class="result-mini">
+                <div class="mini-label">Relación Vout/Vin</div>
+                <div class="mini-value" id="res-ratio">—</div>
+              </div>
+            </div>
+          </div>
+
+          <p id="calc-error" class="calc-error" style="display:none;"></p>
+
+          <button onclick="clearAll()" style="margin-top:var(--space-4); width:100%; padding:var(--space-2); background:none; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm); color:var(--color-text-muted);">
+            Limpiar
+          </button>
+        </div>
+
+        <!-- Panel con SVG dinámico -->
+        <div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4); margin-bottom:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Diagrama de circuito</p>
+            <svg id="divisor-svg" viewBox="0 0 300 280" width="100%" aria-label="Circuito divisor de tensión">
+              <!-- Battery (left vertical) -->
+              <line x1="40" y1="30" x2="40" y2="250" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Battery symbol at center -->
+              <line x1="32" y1="130" x2="32" y2="150" stroke="var(--color-primary-dark)" stroke-width="4"/>
+              <line x1="32" y1="115" x2="32" y2="165" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Top wire: battery+ → R1 top -->
+              <line x1="40" y1="30" x2="150" y2="30" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- R1 (top resistor — zigzag) -->
+              <path id="r1-path" d="M150,30 L158,30 L162,45 L170,15 L178,45 L186,15 L194,45 L198,30 L210,30"
+                    fill="none" stroke="var(--color-primary)" stroke-width="2.5"/>
+              <!-- Node between R1 and R2 -->
+              <circle cx="150" cy="155" r="4" fill="var(--color-primary)"/>
+              <!-- Wire R1 bottom to node -->
+              <line x1="150" y1="30" x2="150" y2="155" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Actually: R1 connects from top node down to mid node, R2 from mid node to bottom -->
+              <!-- Redo layout: vertical stack -->
+              <!-- Top wire -->
+              <line x1="40" y1="30" x2="120" y2="30" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- R1 vertical from y=30 to y=130 -->
+              <rect x="108" y="55" width="24" height="70" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+              <line x1="120" y1="30" x2="120" y2="55" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Node at y=125 (below R1) -->
+              <line x1="120" y1="125" x2="120" y2="155" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Vout tap wire to right -->
+              <line x1="120" y1="155" x2="200" y2="155" stroke="var(--color-primary)" stroke-width="2" stroke-dasharray="5,3"/>
+              <!-- R2 vertical from y=155 to y=250 -->
+              <rect x="108" y="165" width="24" height="70" fill="none" stroke="var(--color-primary)" stroke-width="2" rx="3"/>
+              <line x1="120" y1="155" x2="120" y2="165" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <line x1="120" y1="235" x2="120" y2="250" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Bottom wire to battery- -->
+              <line x1="40" y1="250" x2="120" y2="250" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <!-- Battery +/- labels -->
+              <text x="24" y="128" font-size="12" fill="var(--color-primary)" font-weight="bold">+</text>
+              <text x="24" y="172" font-size="12" fill="var(--color-text-muted)" font-weight="bold">−</text>
+
+              <!-- Dynamic labels -->
+              <text id="lbl-vin" x="28" y="140" text-anchor="end" font-size="11" fill="var(--color-primary-dark)" font-weight="700">Vin</text>
+              <text id="lbl-r1" x="136" y="85" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R1</text>
+              <text id="lbl-r1v" x="136" y="100" font-size="9" fill="var(--color-text-muted)">—</text>
+              <text id="lbl-r2" x="136" y="195" font-size="10" fill="var(--color-primary-dark)" font-weight="700">R2</text>
+              <text id="lbl-r2v" x="136" y="210" font-size="9" fill="var(--color-text-muted)">—</text>
+              <!-- Vout label -->
+              <text x="204" y="150" font-size="11" fill="var(--color-primary)" font-weight="700">Vout</text>
+              <text id="lbl-vout" x="204" y="164" font-size="10" fill="var(--color-primary-dark)">—</text>
+              <!-- Current arrow on battery wire -->
+              <polygon points="75,22 81,30 75,38" fill="var(--color-primary)"/>
+              <text id="lbl-i" x="55" y="18" font-size="9" fill="var(--color-primary-dark)">I = —</text>
+              <!-- GND symbol at bottom -->
+              <line x1="115" y1="250" x2="125" y2="250" stroke="var(--color-primary-dark)" stroke-width="2"/>
+              <line x1="117" y1="255" x2="123" y2="255" stroke="var(--color-primary-dark)" stroke-width="1.5"/>
+              <line x1="119" y1="259" x2="121" y2="259" stroke="var(--color-primary-dark)" stroke-width="1"/>
+              <text x="120" y="270" text-anchor="middle" font-size="9" fill="var(--color-text-muted)">GND</text>
+            </svg>
+          </div>
+
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Fórmulas</p>
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm);">
+              <tbody>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">Vout = Vin × R2 / (R1+R2)</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Tensión salida</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">I = Vin / (R1+R2)</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Corriente</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">V_R1 = I × R1</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Caída en R1</td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-2); font-weight:700; color:var(--color-primary);">P = Vin × I</td>
+                  <td style="padding:var(--space-2); color:var(--color-text-muted);">Potencia total</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ejemplos rápidos -->
+      <div style="margin-top:var(--space-5);">
+        <h2 class="section-title">Ejemplos rápidos</h2>
+        <div style="display:flex; gap:var(--space-2); flex-wrap:wrap;">
+          <button class="btn btn--ghost btn--sm" onclick="loadExample(12, 1000, 2000)">Vin=12V, R1=1kΩ, R2=2kΩ → Vout=8V</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExample(5, 10000, 10000)">Vin=5V, R1=10kΩ, R2=10kΩ → Vout=2,5V</button>
+          <button class="btn btn--ghost btn--sm" onclick="loadExample(9, 470, 1000)">Vin=9V, R1=470Ω, R2=1kΩ → Vout≈6,1V</button>
+        </div>
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./resistencias.html" class="btn btn--ghost">← Calc 2: Resistencias</a>
+        <a href="./ca-valores.html" class="btn btn--primary">Calc 4: Valores CA →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    function fmt(n) {
+      if (n === undefined || isNaN(n)) return '—';
+      if (Math.abs(n) >= 100) return n.toFixed(2);
+      if (Math.abs(n) >= 1)   return n.toFixed(3);
+      return n.toFixed(4);
+    }
+
+    function fmtV(v) {
+      return fmt(v) + ' V';
+    }
+
+    function fmtR(r) {
+      if (r >= 1e6) return fmt(r/1e6) + ' MΩ';
+      if (r >= 1000) return fmt(r/1000) + ' kΩ';
+      return fmt(r) + ' Ω';
+    }
+
+    function fmtI(i) {
+      if (i < 0.001) return fmt(i*1e6) + ' µA';
+      if (i < 1) return fmt(i*1000) + ' mA';
+      return fmt(i) + ' A';
+    }
+
+    function fmtP(p) {
+      if (p >= 1000) return fmt(p/1000) + ' kW';
+      if (p < 0.001) return fmt(p*1000) + ' mW';
+      return fmt(p) + ' W';
+    }
+
+    function calculate() {
+      const errEl = document.getElementById('calc-error');
+      errEl.style.display = 'none';
+
+      const vin = parseFloat(document.getElementById('inp-vin').value);
+      const r1  = parseFloat(document.getElementById('inp-r1').value);
+      const r2  = parseFloat(document.getElementById('inp-r2').value);
+
+      if (isNaN(vin) || isNaN(r1) || isNaN(r2)) {
+        document.getElementById('result-box').style.display = 'none';
+        updateSVG(NaN, NaN, NaN, NaN, NaN, NaN, NaN);
+        return;
+      }
+
+      try {
+        if (r1 <= 0 || r2 <= 0) throw new Error('R1 y R2 deben ser mayores que 0.');
+        if (vin < 0) throw new Error('Vin debe ser positiva.');
+
+        const rtot = r1 + r2;
+        const vout = vin * r2 / rtot;
+        const I    = vin / rtot;
+        const vr1  = I * r1;
+        const ptot = vin * I;
+        const ratio = vout / vin;
+
+        document.getElementById('result-box').style.display = 'block';
+        document.getElementById('res-vout').textContent = fmtV(vout);
+        document.getElementById('res-formula').textContent = `Vout = ${fmt(vin)}V × ${fmtR(r2)} / (${fmtR(r1)} + ${fmtR(r2)})`;
+        document.getElementById('res-i').textContent = fmtI(I);
+        document.getElementById('res-vr1').textContent = fmtV(vr1);
+        document.getElementById('res-ptot').textContent = fmtP(ptot);
+        document.getElementById('res-ratio').textContent = (ratio * 100).toFixed(1) + '%';
+
+        updateSVG(vin, r1, r2, vout, I, vr1, ptot);
+
+      } catch(e) {
+        errEl.textContent = e.message;
+        errEl.style.display = 'block';
+      }
+    }
+
+    function updateSVG(vin, r1, r2, vout, I, vr1, ptot) {
+      const lblVin  = document.getElementById('lbl-vin');
+      const lblR1   = document.getElementById('lbl-r1');
+      const lblR1v  = document.getElementById('lbl-r1v');
+      const lblR2   = document.getElementById('lbl-r2');
+      const lblR2v  = document.getElementById('lbl-r2v');
+      const lblVout = document.getElementById('lbl-vout');
+      const lblI    = document.getElementById('lbl-i');
+
+      if (isNaN(vin)) {
+        lblVin.textContent = 'Vin';
+        lblR1.textContent = 'R1'; lblR1v.textContent = '—';
+        lblR2.textContent = 'R2'; lblR2v.textContent = '—';
+        lblVout.textContent = '—'; lblI.textContent = 'I = —';
+        return;
+      }
+
+      lblVin.textContent = fmt(vin) + ' V';
+      lblR1.textContent = 'R1 = ' + fmtR(r1);
+      lblR1v.textContent = fmt(vr1) + ' V';
+      lblR2.textContent = 'R2 = ' + fmtR(r2);
+      lblR2v.textContent = fmt(vout) + ' V';
+      lblVout.textContent = fmt(vout) + ' V';
+      lblI.textContent = 'I = ' + fmtI(I);
+    }
+
+    function clearAll() {
+      ['inp-vin','inp-r1','inp-r2'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('result-box').style.display = 'none';
+      document.getElementById('calc-error').style.display = 'none';
+      updateSVG(NaN, NaN, NaN, NaN, NaN, NaN, NaN);
+    }
+
+    function loadExample(vin, r1, r2) {
+      document.getElementById('inp-vin').value = vin;
+      document.getElementById('inp-r1').value = r1;
+      document.getElementById('inp-r2').value = r2;
+      calculate();
+    }
+  </script>
+
+</body>
+</html>

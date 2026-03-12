@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Web educativa del módulo EAE (Electrotecnia y Automatismos Eléctricos) para el Grado Medio de Mantenimiento Industrial.">
+  <title>EAE — Electrotecnia y Automatismos Eléctricos</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/variables.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/components.css">
+</head>
+<body>
+
+  <!-- NAV START -->
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="./index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="./index.html"              class="nav-main__link nav-main__link--active">Inicio</a></li>
+      <li><a href="./temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="./practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="./calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="./simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="./recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+  <!-- NAV END -->
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="hero__title">Electrotecnia y Automatismos Eléctricos</h1>
+    <p class="hero__subtitle">
+      Módulo EAE · Grado Medio Mantenimiento Industrial · Comunidad Valenciana
+    </p>
+    <div class="hero__meta">
+      <span>📚 7 Temas</span>
+      <span>🔬 16 Prácticas</span>
+      <span>🔢 8 Calculadoras</span>
+      <span>🌀 6 Simuladores</span>
+      <span>✅ Quizzes de autoevaluación</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-wrapper">
+
+      <!-- Barra de progreso general -->
+      <div id="progress-summary" style="display:none; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4); margin-bottom:var(--space-5);">
+        <p style="font-size:var(--text-sm); color:var(--color-text-muted);">
+          Tu progreso: <strong id="progress-text"></strong>
+        </p>
+      </div>
+
+      <!-- Temas -->
+      <h2 class="section-title">Temas de Teoría</h2>
+      <div class="cards-grid">
+
+        <article class="card" data-progress-tema="tema1">
+          <div class="card__icon">⚡</div>
+          <div class="card__content">
+            <span class="card__number">Tema 1</span>
+            <h3 class="card__title">Circuitos de Corriente Continua</h3>
+            <p class="card__desc">Ley de Ohm, resistencia, circuitos serie/paralelo y leyes de Kirchhoff.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema1/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema2">
+          <div class="card__icon">🔬</div>
+          <div class="card__content">
+            <span class="card__number">Tema 2</span>
+            <h3 class="card__title">Instrumentación y Medidas</h3>
+            <p class="card__desc">Multímetro, osciloscopio, medidas de tensión, corriente y resistencia.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema2/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema3">
+          <div class="card__icon">🛡️</div>
+          <div class="card__content">
+            <span class="card__number">Tema 3</span>
+            <h3 class="card__title">Protecciones Eléctricas</h3>
+            <p class="card__desc">Magnetotérmicos, diferenciales, fusibles y normativa REBT.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema3/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema4">
+          <div class="card__icon">🏠</div>
+          <div class="card__content">
+            <span class="card__number">Tema 4</span>
+            <h3 class="card__title">Instalaciones Básicas</h3>
+            <p class="card__desc">Conductores, canaletas, conmutadores, cruzamiento y cuadro de distribución.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema4/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema5">
+          <div class="card__icon">🌀</div>
+          <div class="card__content">
+            <span class="card__number">Tema 5</span>
+            <h3 class="card__title">Componentes Inductivos</h3>
+            <p class="card__desc">Bobinas, inductancia, circuito RL y transformadores.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema5/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema6">
+          <div class="card__icon">🔋</div>
+          <div class="card__content">
+            <span class="card__number">Tema 6</span>
+            <h3 class="card__title">Componentes Capacitivos</h3>
+            <p class="card__desc">Condensadores, tipos, carga/descarga RC y reactancia capacitiva.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema6/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+        <article class="card" data-progress-tema="tema7">
+          <div class="card__icon">⚙️</div>
+          <div class="card__content">
+            <span class="card__number">Tema 7</span>
+            <h3 class="card__title">Motores Eléctricos</h3>
+            <p class="card__desc">Motores DC y AC, motor trifásico, arranque y control de velocidad.</p>
+          </div>
+          <div class="card__footer">
+            <span class="badge badge--pending">Pendiente</span>
+            <a href="./temas/tema7/index.html" class="btn btn--primary btn--sm">Ver tema →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Prácticas, Calculadoras, Recursos -->
+      <h2 class="section-title" style="margin-top:var(--space-6);">Prácticas y Herramientas</h2>
+      <div class="cards-grid">
+
+        <article class="card card--featured">
+          <div class="card__icon">🔧</div>
+          <div class="card__content">
+            <span class="card__number">Taller</span>
+            <h3 class="card__title">Prácticas de Taller</h3>
+            <p class="card__desc">16 prácticas con guía de procedimiento, material necesario y quiz de verificación.</p>
+          </div>
+          <div class="card__footer">
+            <a href="./practicas/index.html" class="btn btn--secondary">Ver prácticas →</a>
+          </div>
+        </article>
+
+        <article class="card card--featured">
+          <div class="card__icon">🔢</div>
+          <div class="card__content">
+            <span class="card__number">Interactivo</span>
+            <h3 class="card__title">Calculadoras</h3>
+            <p class="card__desc">8 calculadoras interactivas: Ley de Ohm, potencia, transformadores, motores y más.</p>
+          </div>
+          <div class="card__footer">
+            <a href="./calculadoras/index.html" class="btn btn--secondary">Abrir calculadoras →</a>
+          </div>
+        </article>
+
+        <article class="card card--featured">
+          <div class="card__icon">🌀</div>
+          <div class="card__content">
+            <span class="card__number">Animado</span>
+            <h3 class="card__title">Simuladores</h3>
+            <p class="card__desc">Circuitos en tiempo real: corriente animada, carga RC, bobina RL, fasores girando y campo magnético.</p>
+          </div>
+          <div class="card__footer">
+            <a href="./simuladores/index.html" class="btn btn--secondary">Abrir simuladores →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__icon">📖</div>
+          <div class="card__content">
+            <span class="card__number">Referencia</span>
+            <h3 class="card__title">Recursos</h3>
+            <p class="card__desc">Hoja de fórmulas imprimible, glosario de términos y resumen de la normativa REBT.</p>
+          </div>
+          <div class="card__footer">
+            <a href="./recursos/index.html" class="btn btn--ghost">Ver recursos →</a>
+          </div>
+        </article>
+
+      </div>
+
+    </div><!-- /page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos</p>
+    <p style="margin-top:var(--space-2);">CFGM Mantenimiento Industrial · Comunidad Valenciana</p>
+  </footer>
+
+  <script type="module" src="./assets/js/utils.js"></script>
+  <script type="module" src="./assets/js/main.js"></script>
+  <script type="module">
+    import { getProgressSummary } from './assets/js/progress.js';
+    const s = getProgressSummary();
+    if (s.temasVisited > 0) {
+      const div = document.getElementById('progress-summary');
+      const txt = document.getElementById('progress-text');
+      div.style.display = 'block';
+      txt.textContent = `${s.temasPassed} temas completados, ${s.temasVisited} visitados de ${s.totalTemas}`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "t6q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué mide la capacitancia C de un condensador?",
+    "options": [
+      "La resistencia que ofrece al paso de la corriente continua",
+      "La cantidad de carga eléctrica que puede almacenar por cada voltio de tensión aplicado",
+      "La energía que disipa en forma de calor al cargarse",
+      "La velocidad con la que se carga cuando se conecta a una fuente"
+    ],
+    "correct": 1,
+    "explanation": "La capacitancia C = Q/V expresa cuántos culombios (Q) almacena el condensador por cada voltio (V) aplicado. Su unidad es el Faradio (F). Un condensador de 1 F almacena 1 C con 1 V aplicado. En la práctica se usan µF, nF o pF porque 1 F es una capacitancia enorme."
+  },
+  {
+    "id": "t6q2",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "Un condensador ideal conectado a una fuente de corriente continua en régimen permanente actúa como un circuito abierto (no circula corriente).",
+    "correct": true,
+    "explanation": "VERDADERO. En régimen permanente de CC, la tensión en el condensador es constante (iguala a la fuente), por lo que dV/dt = 0 y la corriente i = C·dV/dt = 0. El condensador solo conduce corriente durante el transitorio de carga (o descarga). Una vez cargado, corta el paso de la CC — al contrario que la bobina, que en CC actúa como resistencia pura."
+  },
+  {
+    "id": "t6q3",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "En un condensador de placas paralelas, ¿qué cambio aumenta la capacitancia?",
+    "options": [
+      "Aumentar la distancia entre las placas",
+      "Reducir la superficie de las armaduras",
+      "Sustituir el dieléctrico por otro de mayor permitividad εᵣ",
+      "Reducir la tensión de alimentación"
+    ],
+    "correct": 2,
+    "explanation": "C = ε·S/d. La capacitancia aumenta con: mayor permitividad ε (usar dieléctrico con εᵣ más alto), mayor superficie S, o menor separación d. La tensión de alimentación no afecta al valor de C — solo determina la carga almacenada Q = C·V."
+  },
+  {
+    "id": "t6q4",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "La constante de tiempo τ de un circuito RC vale 2 ms. ¿Cuánto tiempo tarda el condensador en cargarse prácticamente al 100 %?",
+    "options": [
+      "2 ms",
+      "6,32 ms",
+      "10 ms",
+      "20 ms"
+    ],
+    "correct": 2,
+    "explanation": "El condensador se considera cargado al 100 % tras 5τ = 5 × 2 ms = 10 ms. Tras 1τ solo ha alcanzado el 63,2 %; tras 2τ el 86,5 %; tras 3τ el 95 %; tras 5τ el 99,3 % — suficientemente próximo al 100 % para la mayoría de aplicaciones prácticas."
+  },
+  {
+    "id": "t6q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un circuito RC tiene R = 10 kΩ y C = 47 µF. ¿Cuál es la constante de tiempo τ?",
+    "options": [
+      "0,047 s",
+      "0,47 s",
+      "4,7 s",
+      "47 s"
+    ],
+    "correct": 1,
+    "explanation": "τ = R × C = 10.000 × 47×10⁻⁶ = 10⁴ × 4,7×10⁻⁵ = 4,7×10⁻¹ = 0,47 s. Atención a las unidades: R en Ω, C en F → τ en segundos. Si R = 10 kΩ = 10.000 Ω y C = 47 µF = 0,000047 F, el producto es 0,47 s."
+  },
+  {
+    "id": "t6q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Dos condensadores C₁ = 4 µF y C₂ = 12 µF se conectan en serie. ¿Cuál es la capacitancia equivalente?",
+    "options": [
+      "16 µF",
+      "8 µF",
+      "3 µF",
+      "48 µF"
+    ],
+    "correct": 2,
+    "explanation": "En serie: CT = (C1 × C2) / (C1 + C2) = (4 × 12) / (4 + 12) = 48 / 16 = 3 µF. La capacitancia equivalente en serie siempre es menor que la menor de las individuales (3 µF < 4 µF). Los 16 µF corresponden a la conexión en paralelo, que sería la suma directa."
+  },
+  {
+    "id": "t6q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un condensador de C = 220 µF está cargado a V = 50 V. ¿Cuánta energía almacena?",
+    "options": [
+      "5,5 mJ",
+      "55 mJ",
+      "275 mJ",
+      "550 mJ"
+    ],
+    "correct": 2,
+    "explanation": "W = ½ × C × V² = ½ × 220×10⁻⁶ × 50² = ½ × 220×10⁻⁶ × 2500 = ½ × 0,55 = 0,275 J = 275 mJ. El cuadrado de la tensión hace que duplicar V cuadruplique la energía almacenada — razón por la que la tensión de alimentación es tan importante en el diseño de fuentes de alimentación."
+  },
+  {
+    "id": "t6q8",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué tipo de condensador NO se puede conectar con polaridad invertida?",
+    "options": [
+      "Condensador cerámico",
+      "Condensador de película de poliéster",
+      "Condensador electrolítico de aluminio",
+      "Condensador variable de aire"
+    ],
+    "correct": 2,
+    "explanation": "Los condensadores ELECTROLÍTICOS (aluminio, tantalio) son polarizados: tienen un terminal positivo (+) marcado y DEBEN conectarse respetando la polaridad. Invertir la polaridad destruye el dieléctrico de óxido, puede provocar una explosión y proyección de electrolito. Los cerámicos, de película y variables son no polarizados y se pueden conectar en cualquier sentido."
+  },
+  {
+    "id": "t6q9",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un condensador de C = 100 µF se carga a 24 V a través de R = 1 kΩ. ¿Cuál es la tensión en el condensador en t = 0,2 s? (e⁻² ≈ 0,135)",
+    "options": [
+      "3,24 V",
+      "15,2 V",
+      "20,76 V",
+      "22,8 V"
+    ],
+    "correct": 2,
+    "explanation": "τ = R × C = 1000 × 100×10⁻⁶ = 0,1 s. En t = 0,2 s → t/τ = 0,2/0,1 = 2. V(t) = Vcc × (1 - e^(-t/τ)) = 24 × (1 - e^(-2)) = 24 × (1 - 0,135) = 24 × 0,865 = 20,76 V. Esto equivale a t = 2τ, por lo que el condensador ha alcanzado el 86,5% de 24 V."
+  },
+  {
+    "id": "t6q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Tres condensadores C₁ = 6 µF, C₂ = 6 µF y C₃ = 4 µF están conectados: C₁ y C₂ en paralelo, y ese conjunto en serie con C₃. ¿Cuál es la capacitancia equivalente total?",
+    "options": [
+      "16 µF",
+      "6 µF",
+      "3 µF",
+      "1,5 µF"
+    ],
+    "correct": 2,
+    "explanation": "Paso 1 — C₁ y C₂ en paralelo: C₁₂ = 6 + 6 = 12 µF. Paso 2 — C₁₂ en serie con C₃: CT = (C₁₂ × C₃) / (C₁₂ + C₃) = (12 × 4) / (12 + 4) = 48 / 16 = 3 µF. La capacitancia equivalente (3 µF) es siempre menor que el menor de los dos en serie (C₃ = 4 µF). Recuerda: en paralelo se suman directamente; en serie se usa la fórmula del producto/suma."
+  }
+]

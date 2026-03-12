@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teoría Tema 4: simbología eléctrica, cuadro vivienda, circuitos iluminación, contactor y automatismos.">
+  <title>Tema 4 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema4/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper page-wrapper--with-toc">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 4</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+        </ol>
+      </nav>
+
+      <div class="content-with-toc">
+
+        <!-- TOC lateral -->
+        <aside class="toc" aria-label="Índice de contenidos">
+          <p class="toc__title">En esta página</p>
+          <ol class="toc__list">
+            <li class="toc__item"><a href="#sec1" class="toc__link">1. Simbología general</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec1-1" class="toc__link">1.1 Símb. de maniobra</a></li>
+                <li class="toc__item"><a href="#sec1-2" class="toc__link">1.2 Símb. automatismos</a></li>
+                <li class="toc__item"><a href="#sec1-3" class="toc__link">1.3 Conductores y red</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec2" class="toc__link">2. Unifilar y multifilar</a></li>
+            <li class="toc__item"><a href="#sec3" class="toc__link">3. Circuitos de luz</a></li>
+            <li class="toc__item"><a href="#sec4" class="toc__link">4. Cuadro de vivienda</a></li>
+            <li class="toc__item"><a href="#sec5" class="toc__link">5. Aut. de escalera</a></li>
+            <li class="toc__item"><a href="#sec6" class="toc__link">6. Telerruptor</a></li>
+            <li class="toc__item"><a href="#sec7" class="toc__link">7. El contactor</a></li>
+            <li class="toc__item"><a href="#sec8" class="toc__link">8. Sensores y elem.</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec8-1" class="toc__link">8.1 Sensores ópticos</a></li>
+                <li class="toc__item"><a href="#sec8-2" class="toc__link">8.2 NPN / PNP</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec9" class="toc__link">9. Circuitos maniobra</a></li>
+          </ol>
+        </aside>
+
+        <!-- Contenido -->
+        <div class="content">
+
+          <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-1);">
+            Instalaciones Básicas
+          </h1>
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+            Tema 4 · 9 secciones
+          </p>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 1: SIMBOLOGÍA GENERAL   -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec1">
+            <h2 class="section-title">1. Simbología eléctrica normalizada</h2>
+
+            <p>Los esquemas eléctricos siguen la norma <strong>UNE-EN 81346-1:2009 / IEC 81346</strong> (sustituyendo a la antigua IEC 60617 / UNE-EN 60617, ya anulada pero aún presente en esquemas históricos). Conviene conocer ambas.</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Mecanismos de vivienda</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Elemento</th><th>Descripción / Condiciones de instalación</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Interruptor simple</strong></td><td>Empotrado en caja de mecanismo a 110 cm del suelo (excepto dormitorios: a 15 cm del marco de puerta)</td></tr>
+                <tr><td><strong>Interruptor bipolar</strong></td><td>Corta fase y neutro simultáneamente</td></tr>
+                <tr><td><strong>Conmutador</strong></td><td>Permite controlar un punto de luz desde dos puntos distintos</td></tr>
+                <tr><td><strong>Conmutador de cruzamiento</strong></td><td>Se intercala entre dos conmutadores para control desde 3 o más puntos</td></tr>
+                <tr><td><strong>Pulsador</strong></td><td>Contacto momentáneo; vuelve a la posición de reposo al soltarlo</td></tr>
+                <tr><td><strong>Toma corriente bipolar 16 A con T.T.</strong></td><td>Instalada a 20 cm del suelo (excepto cocinas y baños: 110 cm)</td></tr>
+                <tr><td><strong>Toma corriente bipolar 25 A con T.T.</strong></td><td>Distancia al pavimento: 70 cm. Para electrodomésticos de potencia</td></tr>
+                <tr><td><strong>Punto de luz / lámpara</strong></td><td>Sección mínima del circuito de alimentación: 1,5 mm²</td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Dispositivos de protección y control (en cuadro)</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Elemento</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>ICP</strong> (Interruptor Control Potencia)</td><td>Instalado antes de los dispositivos de protección, en caja precintable. Altura 1,4–2 m.</td></tr>
+                <tr><td><strong>IGA</strong> (Interruptor General Automático)</td><td>Magnetotérmico bipolar F+N. Corta toda la instalación.</td></tr>
+                <tr><td><strong>PIA bipolar</strong></td><td>Interruptor automático bipolar para circuitos monofásicos</td></tr>
+                <tr><td><strong>PIA tripolar / tetrapolar</strong></td><td>Para circuitos trifásicos (motor, climatización industrial)</td></tr>
+                <tr><td><strong>ID bipolar / tetrapolar</strong></td><td>Interruptor diferencial. Si prevén corrientes no senoidales → tipo A</td></tr>
+                <tr><td><strong>Limitador de sobretensiones</strong></td><td>En cuadro de distribución, nivel según necesidad</td></tr>
+              </tbody>
+            </table>
+
+            <!-- SUBSEC 1.1 -->
+            <section id="sec1-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">1.1 Simbología de circuitos de maniobra</h3>
+              <p>Los circuitos de maniobra (control) usan símbolos específicos para representar los contactos, bobinas y señalización:</p>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Símbolo / Bornes</th><th>Elemento</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Contacto NA (bornes terminan en .3 y .4)</td><td>Contacto normalmente abierto — se cierra al activarse el elemento</td></tr>
+                  <tr><td>Contacto NC (bornes terminan en .1 y .2)</td><td>Contacto normalmente cerrado — se abre al activarse el elemento</td></tr>
+                  <tr><td>Contacto temporizado NA al trabajo (.7 y .8)</td><td>Se cierra con retardo tras la activación</td></tr>
+                  <tr><td>Contacto temporizado NC al trabajo (.5 y .6)</td><td>Se abre con retardo tras la activación</td></tr>
+                  <tr><td>Contacto auxiliar NA relé térmico (97-98)</td><td>Se cierra al disparar el relé térmico (señalización de avería)</td></tr>
+                  <tr><td>Contacto auxiliar NC relé térmico (95-96)</td><td>Se abre al disparar el relé térmico (desconecta el contactor)</td></tr>
+                  <tr><td>Bobina contactor / relé (A1-A2)</td><td>Al aplicar tensión entre A1 y A2, activa todos los contactos del elemento</td></tr>
+                  <tr><td>Piloto luminoso</td><td>Indicador de estado. Rojo = fallo/alarma; verde = marcha; blanco = neutro</td></tr>
+                  <tr><td>Bocina / sirena</td><td>Señalización acústica</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 1.2 -->
+            <section id="sec1-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">1.2 Simbología de automatismos — identificadores</h3>
+              <p>En la norma EN 81346, los elementos se designan con una letra de clase + función + número de orden:</p>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Identificador</th><th>Elemento</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>-KM1</strong></td><td>Contactor principal nº 1</td></tr>
+                  <tr><td><strong>-KA2</strong></td><td>Relé auxiliar nº 2</td></tr>
+                  <tr><td><strong>-KT3</strong></td><td>Temporizador nº 3</td></tr>
+                  <tr><td><strong>-Q0</strong></td><td>Seccionador / interruptor general</td></tr>
+                  <tr><td><strong>-Q1</strong></td><td>Magnetotérmico o guardamotor</td></tr>
+                  <tr><td><strong>-F1</strong></td><td>Relé térmico / fusible de protección</td></tr>
+                  <tr><td><strong>-S0</strong></td><td>Pulsador de parada (NC)</td></tr>
+                  <tr><td><strong>-S1</strong></td><td>Pulsador de marcha (NA)</td></tr>
+                  <tr><td><strong>-M1</strong></td><td>Motor eléctrico nº 1</td></tr>
+                  <tr><td><strong>-H1, H2</strong></td><td>Pilotos / indicadores luminosos</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 1.3 -->
+            <section id="sec1-3" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">1.3 Identificación de conductores y red</h3>
+              <p>El número de conductores se indica con cifra × sección + símbolo '+' para neutro o tierra:</p>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Notación</th><th>Significado</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>3×120 mm² + 1×70 mm²</strong></td><td>Tres conductores de fase de 120 mm² + un neutro de 70 mm²</td></tr>
+                  <tr><td><strong>2×120 mm² Al</strong></td><td>Dos conductores de aluminio de 120 mm² (cable monofásico)</td></tr>
+                  <tr><td><strong>2×2,5 mm² + PE</strong></td><td>Dos conductores de 2,5 mm² + conductor de protección (verde-amarillo)</td></tr>
+                </tbody>
+              </table>
+              <p style="margin-top:var(--space-3);">Características de la red:</p>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Notación</th><th>Significado</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>3+N~ 400/230 V 50 Hz</strong></td><td>Trifásica con neutro, 400 V entre fases, 230 V fase-neutro, 50 Hz</td></tr>
+                  <tr><td><strong>3~ 50 Hz 400 V</strong></td><td>Trifásica sin neutro, 400 V entre fases, 50 Hz</td></tr>
+                  <tr><td><strong>= 110 V · 2×120 mm² Al</strong></td><td>Corriente continua a 110 V, dos conductores de aluminio 120 mm²</td></tr>
+                </tbody>
+              </table>
+            </section>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 2: UNIFILAR/MULTIFILAR  -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec2" style="margin-top:var(--space-6);">
+            <h2 class="section-title">2. Esquema unifilar y multifilar</h2>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Tipo</th><th>Representación</th><th>Uso habitual</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Unifilar</strong></td>
+                  <td>El número de conductores se indica sobre la línea (mediante pequeñas rayas oblicuas o cifras). No se dibuja cada conductor por separado.</td>
+                  <td>Cuadros de distribución, instalaciones eléctricas de viviendas, REBT</td>
+                </tr>
+                <tr>
+                  <td><strong>Multifilar</strong></td>
+                  <td>Cada conductor se representa con su propio hilo. El esquema queda más detallado pero más grande.</td>
+                  <td>Esquemas de automatismos: circuito de fuerza + circuito de mando</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-3);">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                Un mismo automatismo (p.ej. arranque directo de un motor) se puede representar en unifilar (visión global rápida) o en multifilar (para el cableado real borne a borne). Los técnicos de mantenimiento deben leer ambos tipos.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 3: CIRCUITOS LUZ        -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec3" style="margin-top:var(--space-6);">
+            <h2 class="section-title">3. Conexiones de punto de luz básico</h2>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Circuito</th><th>Elementos</th><th>Funcionamiento</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Punto simple</strong></td>
+                  <td>1 interruptor + 1 lámpara</td>
+                  <td>El interruptor interrumpe la fase. Un único punto de mando.</td>
+                </tr>
+                <tr>
+                  <td><strong>Punto conmutado</strong></td>
+                  <td>2 conmutadores + 1 lámpara</td>
+                  <td>Permite encender/apagar desde 2 puntos distintos (p.ej. inicio y final de pasillo).</td>
+                </tr>
+                <tr>
+                  <td><strong>Conmutada de cruzamiento</strong></td>
+                  <td>2 conmutadores + N conmutadores de cruzamiento + 1 lámpara</td>
+                  <td>Control desde 3 o más puntos. Por cada punto adicional se añade un cruzamiento entre los dos conmutadores.</td>
+                </tr>
+                <tr>
+                  <td><strong>Fluorescente con reactancia</strong></td>
+                  <td>PIA + reactancia (R) + condensador (C) + tubo</td>
+                  <td>La reactancia limita la corriente; el condensador corrige el factor de potencia. En serie: misma corriente; en paralelo: independencia de tubos.</td>
+                </tr>
+                <tr>
+                  <td><strong>Tubo LED</strong></td>
+                  <td>PIA + tubo LED</td>
+                  <td>El tubo LED lleva el driver integrado. Elimina la reactancia y el cebador. Conexión directa a red.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning" style="margin-top:var(--space-3);">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                El interruptor <strong>siempre interrumpe la FASE</strong>, nunca el neutro. Si se corta el neutro, la lámpara queda sin retorno de corriente pero la fase sigue presente en el casquillo — peligro de contacto.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 4: CUADRO DE VIVIENDA   -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec4" style="margin-top:var(--space-6);">
+            <h2 class="section-title">4. Cuadro de vivienda</h2>
+
+            <p>El cuadro de vivienda (o Cuadro General de Mando y Protección, CGMP) se regula por las instrucciones <strong>ITC-BT-25</strong> (instalaciones interiores) e <strong>ITC-BT-19</strong> (prescripciones generales) del REBT.</p>
+
+            <p style="margin-top:var(--space-3);">La <strong>electrificación básica</strong> contempla 5 circuitos mínimos (C1–C5):</p>
+
+            <table class="data-table" style="margin-top:var(--space-2);">
+              <thead>
+                <tr><th>Circuito</th><th>Destino</th><th>Sección</th><th>PIA</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>C1</strong></td><td>Alumbrado</td><td>2×1,5 mm² + PE</td><td>10 A Curva C</td></tr>
+                <tr><td><strong>C2</strong></td><td>Tomas de corriente generales y frigorífico</td><td>2×2,5 mm² + PE</td><td>16 A Curva C</td></tr>
+                <tr><td><strong>C3</strong></td><td>Cocina y horno</td><td>2×6 mm² + PE</td><td>25 A Curva C</td></tr>
+                <tr><td><strong>C4</strong></td><td>Lavadora, lavavajillas y termo eléctrico</td><td>2×4 mm² + PE</td><td>20 A Curva C</td></tr>
+                <tr><td><strong>C5</strong></td><td>Tomas de corriente baño y cocina</td><td>2×2,5 mm² + PE</td><td>16 A Curva C</td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Jerarquía del cuadro (de arriba a abajo)</h3>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li><strong>ICP</strong> — Instalado por la empresa distribuidora (precintado). Limita la potencia contratada.</li>
+              <li><strong>IGA</strong> — Interruptor General Automático (magnetotérmico bipolar). Corta toda la vivienda.</li>
+              <li><strong>ID</strong> — Interruptor diferencial 25 A / 30 mA. Protección personal.</li>
+              <li><strong>PIAs (C1–C5)</strong> — Un magnetotérmico por cada circuito individual.</li>
+            </ol>
+
+            <div class="alert alert--info" style="margin-top:var(--space-3);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                En electrificación elevada se añaden circuitos adicionales: C6 (segundo circuito iluminación), C7 (segunda toma corriente), C8 (calefacción eléctrica), C9 (aire acondicionado), C10 (secadora), etc.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 5: AUTOMÁTICO ESCALERA  -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec5" style="margin-top:var(--space-6);">
+            <h2 class="section-title">5. Automático de escalera (minutero)</h2>
+
+            <p>El automático de escalera o <strong>minutero</strong> es un dispositivo de <strong>temporización a la desconexión</strong>: al recibir una señal de activación (pulsar cualquier pulsador), conecta la carga durante un tiempo regulable y luego la desconecta automáticamente.</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Configuración</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>3 hilos</strong></td>
+                  <td>Conexión básica: L (fase), N (neutro), 3 (salida). Los pulsadores e iluminación de señalización se conectan a los bornes del minutero.</td>
+                </tr>
+                <tr>
+                  <td><strong>4 hilos</strong></td>
+                  <td>Añade el borne 4 para la señal de retorno de los pulsadores con lámpara piloto integrada.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-3);">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                Para evitar el desgaste de los contactos internos del minutero (que no soportan grandes corrientes), se usa su salida para gobernar la bobina de un <strong>contactor o relé auxiliar</strong>, que sí tiene contactos de fuerza para manejar la carga real (fluorescentes, LEDs, etc.).
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 6: TELERRUPTOR          -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec6" style="margin-top:var(--space-6);">
+            <h2 class="section-title">6. Telerruptor</h2>
+
+            <p>El telerruptor es un dispositivo de control <strong>"todo o nada"</strong> que <strong>cambia el estado de sus contactos</strong> cada vez que recibe el impulso de una señal eléctrica (acción de un pulsador). No es temporizado: mantiene su posición hasta el siguiente impulso.</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Característica</th><th>Automático de escalera</th><th>Telerruptor</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tipo de control</td>
+                  <td>Temporizado (apaga solo)</td>
+                  <td>Bistable (mantiene posición)</td>
+                </tr>
+                <tr>
+                  <td>Nº de pulsadores</td>
+                  <td>Ilimitado (todos en paralelo)</td>
+                  <td>Ilimitado (todos en paralelo)</td>
+                </tr>
+                <tr>
+                  <td>Aplicación típica</td>
+                  <td>Escaleras, pasillos, garajes</td>
+                  <td>Apliques fachada, iluminación zonas con +3 puntos de control</td>
+                </tr>
+                <tr>
+                  <td>Ventaja vs cruzamiento</td>
+                  <td>—</td>
+                  <td>Sustituye a la conmutada de cruzamiento cuando hay más de 3 puntos: el cableado es mucho más sencillo</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 7: EL CONTACTOR         -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec7" style="margin-top:var(--space-6);">
+            <h2 class="section-title">7. El contactor</h2>
+
+            <p>El contactor es un <strong>dispositivo electromagnético controlado a distancia</strong> que abre o cierra circuitos de potencia. Su principal diferencia respecto a un interruptor manual es que puede ser gobernado desde un circuito de mando a otra tensión (p.ej. 24 V CC), con pulsadores o un PLC.</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Partes del contactor</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Parte</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Bobina (A1–A2)</strong></td><td>Al aplicar la tensión nominal entre A1 y A2, genera un campo magnético que atrae el martillo. Fabricada para 12 V, 24 V, 48 V, 230 V AC/DC según aplicación.</td></tr>
+                <tr><td><strong>Culata</strong></td><td>Parte fija del circuito magnético, donde se aloja la bobina.</td></tr>
+                <tr><td><strong>Martillo</strong></td><td>Parte móvil. Al alimentarse la bobina, la culata lo atrae, moviendo todos los contactos solidarios a él.</td></tr>
+                <tr><td><strong>Resorte</strong></td><td>Mantiene el martillo alejado en reposo. Al cortar la bobina, lo devuelve a la posición abierta.</td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Contactos — identificación por número de borne</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Bornes</th><th>Tipo</th><th>Estado en reposo</th><th>Función</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>1–2, 3–4, 5–6</strong></td><td>Contactos de <strong>fuerza</strong></td><td>Abiertos (NA)</td><td>Conectan/desconectan la carga de potencia (motor, resistencias…)</td></tr>
+                <tr><td><strong>13–14</strong></td><td>Contacto auxiliar <strong>NA</strong></td><td>Abierto</td><td>Se cierra al activar el contactor. Se usa para realimentación (enclavamiento) o señalización</td></tr>
+                <tr><td><strong>21–22</strong></td><td>Contacto auxiliar <strong>NC</strong></td><td>Cerrado</td><td>Se abre al activar el contactor. Se usa para enclavamientos (impedir activación simultánea de dos contactores)</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--info" style="margin-top:var(--space-3);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                <strong>Regla de los bornes auxiliares:</strong> el último dígito indica el tipo: terminan en <strong>3–4</strong> → normalmente abierto (NA); terminan en <strong>1–2</strong> → normalmente cerrado (NC); terminan en <strong>5–6 / 7–8</strong> → temporizados.
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Pulsadores</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Tipo</th><th>Color habitual</th><th>Contacto</th><th>Función</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Pulsador de marcha</td><td>Verde</td><td>NA (bornes 13–14)</td><td>Al pulsarlo, cierra el circuito momentáneamente → activa el contactor</td></tr>
+                <tr><td>Pulsador de parada</td><td>Rojo</td><td>NC (bornes 11–12)</td><td>Al pulsarlo, abre el circuito → desactiva el contactor</td></tr>
+                <tr><td>Pulsador de emergencia</td><td>Rojo seta</td><td>NC con enclavamiento</td><td>Mantiene abierto el circuito hasta que se gira o desenclave manualmente</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 8: SENSORES Y ELEMENTOS -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec8" style="margin-top:var(--space-6);">
+            <h2 class="section-title">8. Sensores y elementos de mando</h2>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Elemento</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Final de carrera</strong></td><td>Accionado mecánicamente por la posición de una pieza móvil. Tiene contacto NA y NC. Muy robusto. Usado en posicionamiento de máquinas.</td></tr>
+                <tr><td><strong>Sensor inductivo</strong></td><td>Detecta objetos metálicos sin contacto mediante campo magnético oscilante. No detecta plásticos ni vidrios.</td></tr>
+                <tr><td><strong>Sensor capacitivo</strong></td><td>Detecta cualquier material (metal, plástico, líquido, papel) que altere el campo eléctrico. Más versátil que el inductivo.</td></tr>
+                <tr><td><strong>Sensor ultrasónico</strong></td><td>Emite y recibe ultrasonidos. Mide distancias o detecta presencia. Funciona con materiales transparentes o líquidos.</td></tr>
+              </tbody>
+            </table>
+
+            <!-- SUBSEC 8.1 -->
+            <section id="sec8-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">8.1 Sensores ópticos</h3>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Tipo</th><th>Funcionamiento</th><th>Ventaja principal</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Barrera (por haz)</strong></td>
+                    <td>Emisor y receptor separados. Detecta cuando el objeto interrumpe el haz.</td>
+                    <td>Largas distancias, alta fiabilidad, detecta objetos opacos</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Retroreflectivo</strong></td>
+                    <td>Emisor y receptor en el mismo cuerpo. Haz va al reflector y vuelve. Detecta cuando el objeto interrumpe el retorno.</td>
+                    <td>Cableado fácil (1 solo dispositivo), distancias medias</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Difuso</strong></td>
+                    <td>Emisor y receptor en el mismo cuerpo. Detecta la luz reflejada por el propio objeto.</td>
+                    <td>Instalación muy sencilla (no requiere reflector), diferenciación de colores posible</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 8.2 -->
+            <section id="sec8-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">8.2 Sensores NPN y PNP</h3>
+              <p>Los sensores inductivos, capacitivos y de ultrasonido pueden ser <strong>NPN</strong> o <strong>PNP</strong> según la polaridad de su salida:</p>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Tipo</th><th>También llamado</th><th>Salida activa</th><th>La carga se conecta entre…</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>PNP</strong></td>
+                    <td>"Sinking" (hunde corriente)</td>
+                    <td><strong>Positiva (+)</strong> — la señal de salida va a +24 V al activarse</td>
+                    <td>Salida (BK) y 0 V (BU)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>NPN</strong></td>
+                    <td>"Sourcing" (suministra corriente)</td>
+                    <td><strong>Negativa (–)</strong> — la señal de salida va a 0 V al activarse</td>
+                    <td>+24 V (BN) y salida (BK)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="margin-top:var(--space-2); font-size:var(--text-sm);">Colores de cable estándar: <strong>BN</strong> (marrón) = +V<sub>cc</sub> · <strong>BU</strong> (azul) = 0 V · <strong>BK</strong> (negro) = señal de salida.</p>
+
+              <div class="alert alert--tip" style="margin-top:var(--space-3);">
+                <span class="alert__icon">💡</span>
+                <div class="alert__content">
+                  En Europa y con PLCs Siemens/Schneider, el estándar más común es <strong>PNP</strong> (salida positiva). En Asia y con PLCs orientales es frecuente el NPN. Siempre comprueba la hoja de datos del sensor antes de conectar.
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 9: CIRCUITOS MANIOBRA   -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec9" style="margin-top:var(--space-6);">
+            <h2 class="section-title">9. Circuitos de maniobra y potencia</h2>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-3); margin-bottom:var(--space-2);">9.1 Arranque directo marcha-paro con realimentación</h3>
+            <p>Es el circuito de automatismo más básico. Permite arrancar un motor trifásico con un pulsador y que permanezca en marcha aunque se suelte el pulsador.</p>
+
+            <div class="formula-card" style="margin-top:var(--space-3);">
+              <p class="formula-card__label">Secuencia de funcionamiento</p>
+              <ol style="font-size:var(--text-sm); margin-top:var(--space-2); padding-left:var(--space-4);">
+                <li>Pulsar <strong>S1</strong> (marcha, NA): cierra el circuito → alimenta la bobina de <strong>KM1</strong></li>
+                <li>KM1 activa: sus contactos de fuerza (1–6) se cierran → el <strong>motor M1 arranca</strong></li>
+                <li>Su contacto auxiliar NA <strong>13–14</strong> también se cierra → queda en paralelo con S1 (<strong>realimentación / autoenclavijamiento</strong>)</li>
+                <li>Al soltar S1, la corriente sigue circulando por 13–14 → <strong>motor sigue en marcha</strong></li>
+                <li>Pulsar <strong>S0</strong> (parada, NC): abre el circuito → bobina KM1 sin tensión → motor para → contacto 13–14 se abre</li>
+                <li>Si salta el relé térmico F1: su contacto NC (95–96) se abre → mismo efecto que pulsar S0</li>
+              </ol>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-5); margin-bottom:var(--space-2);">9.2 Dos motores no simultáneos (enclavamiento cruzado)</h3>
+            <p>Impide que dos motores funcionen a la vez. Se consigue añadiendo en el circuito de mando de cada contactor un contacto <strong>NC del otro contactor</strong>:</p>
+            <ul style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>En la rama de KM1 se intercala el contacto NC <strong>11–12 de KM2</strong></li>
+              <li>En la rama de KM2 se intercala el contacto NC <strong>11–12 de KM1</strong></li>
+              <li>Si KM1 está activado, su contacto NC abre la rama de KM2 → <strong>imposible activar KM2</strong> mientras M1 funcione</li>
+            </ul>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-5); margin-bottom:var(--space-2);">9.3 Arranque indirecto con relé auxiliar (maniobra a 24 V)</h3>
+            <p>En instalaciones con PLC o maniobra a baja tensión (24 V CC), el contactor de fuerza KM1 se gobierna a través de un <strong>relé auxiliar KA1</strong>:</p>
+            <ul style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>El PLC activa la bobina de KA1 a 24 V CC</li>
+              <li>El contacto NA de KA1 cierra el circuito de la bobina de KM1 (a 230 V AC)</li>
+              <li>KM1 activa sus contactos de fuerza → el motor arranca</li>
+              <li>Ventaja: el PLC no maneja la alta tensión del contactor directamente — mayor seguridad y flexibilidad</li>
+            </ul>
+
+            <div class="alert alert--info" style="margin-top:var(--space-3);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                <strong>Software de simulación:</strong> <strong>CADe SIMU</strong> permite diseñar y simular en tiempo real esquemas de fuerza y mando de automatismos. <strong>PC SIMU</strong> añade simulación de procesos industriales con lógica tipo escalera. Ambos son gratuitos y muy utilizados en formación profesional.
+              </div>
+            </div>
+          </section>
+
+          <!-- Navegación -->
+          <div class="nav-paginas" style="margin-top:var(--space-6);">
+            <a href="../../temas/tema3/teoria.html" class="btn btn--ghost">← Tema 3</a>
+            <a href="./ejercicios.html" class="btn btn--primary">Ejercicios →</a>
+          </div>
+
+        </div><!-- /content -->
+      </div><!-- /content-with-toc -->
+    </div><!-- /page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

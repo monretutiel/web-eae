@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 4: simbología, cuadro vivienda, circuitos luz, contactor y automatismos.">
+  <title>Tema 4 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema4/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 4</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Instalaciones Básicas
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        8 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong> para comprobar.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- Ejercicio 1 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Identificar simbología eléctrica</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Identifica qué elemento representa cada identificador del esquema de un automatismo: -KM1, -KA2, -KT3, -F1, -S0, -S1, -M1, -H2.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm);">
+              <thead><tr style="background:var(--color-surface);"><th style="padding:var(--space-2); text-align:left;">Identificador</th><th style="padding:var(--space-2); text-align:left;">Elemento</th></tr></thead>
+              <tbody>
+                <tr><td style="padding:var(--space-2);"><strong>-KM1</strong></td><td style="padding:var(--space-2);">Contactor principal nº 1</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-KA2</strong></td><td style="padding:var(--space-2);">Relé auxiliar nº 2</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-KT3</strong></td><td style="padding:var(--space-2);">Temporizador nº 3</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-F1</strong></td><td style="padding:var(--space-2);">Relé térmico / fusible de protección</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-S0</strong></td><td style="padding:var(--space-2);">Pulsador de parada (NC, color rojo)</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-S1</strong></td><td style="padding:var(--space-2);">Pulsador de marcha (NA, color verde)</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-M1</strong></td><td style="padding:var(--space-2);">Motor eléctrico nº 1</td></tr>
+                <tr><td style="padding:var(--space-2);"><strong>-H2</strong></td><td style="padding:var(--space-2);">Piloto luminoso / indicador nº 2 (señalización de avería)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Interpretar la notación de conductores</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Interpreta las siguientes notaciones de conductores:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>3×2,5 mm² + PE</li>
+              <li>2×6 mm² + PE</li>
+              <li>3+N~ 400/230 V 50 Hz</li>
+              <li>3×(2×240 mm²) + 1×240 mm²</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li><strong>3×2,5 mm² + PE:</strong> Tres conductores de fase de 2,5 mm² de sección cada uno, más un conductor de protección (tierra, verde-amarillo).</li>
+              <li><strong>2×6 mm² + PE:</strong> Dos conductores (fase y neutro) de 6 mm² de sección, más conductor de protección. Circuito monofásico (p.ej. C3 cocina).</li>
+              <li><strong>3+N~ 400/230 V 50 Hz:</strong> Red trifásica con neutro, corriente alterna, 400 V entre fases (tensión compuesta), 230 V entre fase y neutro (tensión simple), frecuencia 50 Hz.</li>
+              <li><strong>3×(2×240 mm²) + 1×240 mm²:</strong> Tres fases con dos conductores en paralelo de 240 mm² cada una (total 480 mm² por fase) más un neutro de 240 mm².</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — Circuitos del cuadro de vivienda</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En un cuadro de vivienda con electrificación básica, indica qué circuito (C1-C5), qué sección de cable y qué PIA corresponde a cada situación:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>El horno de la cocina no tiene tensión después de saltar un PIA.</li>
+              <li>Un enchufe del salón no funciona.</li>
+              <li>La lámpara del dormitorio no enciende.</li>
+              <li>La lavadora no arranca pero el resto de la cocina funciona.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li>Ha saltado el <strong>C3</strong> (cocina y horno). Sección 2×6 mm²+PE, protegido con PIA de 25 A curva C.</li>
+              <li>Ha saltado el <strong>C2</strong> (tomas de corriente generales). Sección 2×2,5 mm²+PE, PIA de 16 A curva C.</li>
+              <li>Ha saltado el <strong>C1</strong> (alumbrado). Sección 2×1,5 mm²+PE, PIA de 10 A curva C.</li>
+              <li>Ha saltado el <strong>C4</strong> (lavadora, lavavajillas y termo). Sección 2×4 mm²+PE, PIA de 20 A curva C.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Elegir circuito de iluminación correcto</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Indica qué tipo de circuito de iluminación usarías en cada caso y cuántos elementos de mando se necesitan:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>Lámpara del despacho, controlada solo desde la puerta.</li>
+              <li>Lámpara del pasillo, encendible desde el inicio y el final del pasillo.</li>
+              <li>Lámpara de un dormitorio, controlable desde la puerta, la cama izquierda y la cama derecha.</li>
+              <li>Apliques de una escalera de 6 plantas, controlables desde cada rellano.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li><strong>Punto simple:</strong> 1 interruptor.</li>
+              <li><strong>Punto conmutado:</strong> 2 conmutadores.</li>
+              <li><strong>Conmutada de cruzamiento:</strong> 2 conmutadores + 1 cruzamiento = 3 elementos de mando.</li>
+              <li><strong>Telerruptor:</strong> 6 pulsadores en paralelo conectados al telerruptor. Solución mucho más sencilla que poner 5 cruzamientos en serie.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Identificar contactos de un contactor</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Un contactor tiene los siguientes bornes visibles en su etiqueta: 1, 2, 3, 4, 5, 6, 13, 14, 21, 22, A1, A2. Clasifica cada par de bornes e indica su estado con la bobina sin alimentar y con la bobina alimentada.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <table style="width:100%; border-collapse:collapse; font-size:var(--text-sm);">
+              <thead><tr style="background:var(--color-surface);">
+                <th style="padding:var(--space-2);">Bornes</th>
+                <th style="padding:var(--space-2);">Tipo</th>
+                <th style="padding:var(--space-2);">Sin bobina</th>
+                <th style="padding:var(--space-2);">Con bobina</th>
+              </tr></thead>
+              <tbody>
+                <tr><td style="padding:var(--space-2);">A1–A2</td><td style="padding:var(--space-2);">Bobina (circuito de mando)</td><td style="padding:var(--space-2);">Sin tensión → inactivo</td><td style="padding:var(--space-2);">Con tensión → activa el contactor</td></tr>
+                <tr><td style="padding:var(--space-2);">1–2, 3–4, 5–6</td><td style="padding:var(--space-2);">Contactos de fuerza (NA)</td><td style="padding:var(--space-2);">Abiertos</td><td style="padding:var(--space-2);">Cerrados (motor conectado)</td></tr>
+                <tr><td style="padding:var(--space-2);">13–14</td><td style="padding:var(--space-2);">Contacto auxiliar NA</td><td style="padding:var(--space-2);">Abierto</td><td style="padding:var(--space-2);">Cerrado (realimentación)</td></tr>
+                <tr><td style="padding:var(--space-2);">21–22</td><td style="padding:var(--space-2);">Contacto auxiliar NC</td><td style="padding:var(--space-2);">Cerrado</td><td style="padding:var(--space-2);">Abierto (enclavamiento)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Explicar el autoenclavijamiento</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En el circuito de arranque directo marcha-paro, ¿por qué el motor sigue en marcha después de soltar el pulsador S1? ¿Qué ocurriría si se elimina el contacto de realimentación (13–14)?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Con realimentación:</strong> Al activarse KM1 con S1, su contacto auxiliar NA 13–14 se cierra quedando en paralelo con S1. Aunque soltemos S1 (que se abre), la corriente sigue circulando por 13–14 → KM1 permanece activado → motor en marcha.</p>
+            <p><strong>Sin realimentación (13–14 eliminado):</strong> El circuito de la bobina de KM1 solo tiene corriente mientras se mantiene pulsado S1. Al soltarlo, la bobina se desenergiiza y el motor para. Funcionaría como un "pulsador directo" sin enclavamiento — inútil para maniobra real.</p>
+            <p>Este contacto se llama <strong>contacto de realimentación o autoenclavijamiento</strong> y es imprescindible en cualquier circuito de arranque con función memoria.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Seleccionar el sensor adecuado</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Indica qué tipo de sensor (inductivo, capacitivo, óptico barrera, óptico difuso, final de carrera) elegirías para cada aplicación y justifica brevemente:</p>
+            <ol style="padding-left:var(--space-4);">
+              <li>Detectar si una pieza metálica ha llegado al final de una cinta transportadora (metal, sin contacto).</li>
+              <li>Detectar el nivel de agua en un depósito a través de la pared de plástico.</li>
+              <li>Detectar la presencia de envases de vidrio transparente en una línea de embotellado.</li>
+              <li>Detectar que la puerta de una máquina CNC está correctamente cerrada.</li>
+            </ol>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <ol style="padding-left:var(--space-4);">
+              <li><strong>Sensor inductivo:</strong> Detecta objetos metálicos sin contacto, alta fiabilidad en entornos industriales.</li>
+              <li><strong>Sensor capacitivo:</strong> Penetra a través del plástico del depósito; detecta cualquier material, incluidos líquidos.</li>
+              <li><strong>Óptico barrera (por haz):</strong> El vidrio transparente no refleja suficiente luz para el difuso. La barrera detecta la interrupción del haz aunque el objeto sea transparente.</li>
+              <li><strong>Final de carrera:</strong> La puerta activa mecánicamente el final de carrera al cerrarse. Solución robusta y económica para control de posición.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Enclavamiento cruzado de dos motores</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tienes dos cintas transportadoras M1 y M2 accionadas por KM1 y KM2 respectivamente. Por seguridad, nunca pueden funcionar a la vez. Describe cómo implementarías el enclavamiento cruzado en el circuito de mando.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Circuito de mando de KM1:</strong> Se añade en serie el contacto auxiliar NC 21–22 de KM2. Si KM2 está activado, este contacto NC está abierto → es imposible activar KM1.</p>
+            <p><strong>Circuito de mando de KM2:</strong> Se añade en serie el contacto auxiliar NC 21–22 de KM1. Si KM1 está activado, este contacto NC está abierto → es imposible activar KM2.</p>
+            <p><strong>Resultado:</strong> Solo puede estar activo un contactor a la vez. Si se intenta activar el segundo mientras el primero funciona, el enclavamiento lo impide. Para cambiar de cinta, hay que para la que está en marcha primero.</p>
+            <p style="color:var(--color-text-muted);">Esta técnica es la misma que se usa en el inversión de giro de un motor (contactor de avance + contactor de retroceso), donde el enclavamiento cruzado es obligatorio para evitar un cortocircuito entre fases.</p>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <div class="nav-paginas">
+        <a href="./teoria.html" class="btn btn--ghost">← Teoría</a>
+        <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

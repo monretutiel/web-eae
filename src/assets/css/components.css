@@ -1,0 +1,533 @@
+/* =====================================================
+   COMPONENTS CSS — Cards, botones, alertas, fórmulas, etc.
+   ===================================================== */
+
+/* --- BREADCRUMB --- */
+.breadcrumb {
+  padding: var(--space-3) 0;
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.breadcrumb__item a {
+  color: var(--color-text-muted);
+}
+
+.breadcrumb__item a:hover {
+  color: var(--color-primary-light);
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: '›';
+  margin-right: var(--space-2);
+}
+
+.breadcrumb__item--current {
+  color: var(--color-text);
+  font-weight: var(--font-medium);
+}
+
+/* --- CARDS --- */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card__icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.card__number {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary-light);
+}
+
+.card__title {
+  font-size: var(--text-lg);
+  color: var(--color-primary-dark);
+  margin-top: var(--space-1);
+}
+
+.card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  flex-grow: 1;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+/* Card destacada (para prácticas, calculadoras) */
+.card--featured {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.card--featured .card__title,
+.card--featured .card__number,
+.card--featured .card__desc {
+  color: rgba(255,255,255,0.9);
+}
+
+/* --- BADGES --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge--pending  { background: var(--color-surface-alt); color: var(--color-text-muted); }
+.badge--progress { background: #fff3cd; color: #856404; }
+.badge--done     { background: #d4edda; color: #155724; }
+.badge--easy     { background: #d4edda; color: #155724; }
+.badge--medium   { background: #fff3cd; color: #856404; }
+.badge--hard     { background: #f8d7da; color: #721c24; }
+
+/* --- BOTONES --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.btn:hover { text-decoration: none; }
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.btn--primary:hover {
+  background-color: var(--color-primary-light);
+  color: white;
+}
+
+.btn--secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+}
+.btn--secondary:hover {
+  background-color: var(--color-secondary-light);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+.btn--ghost:hover {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.btn--sm { padding: var(--space-1) var(--space-3); font-size: var(--text-xs); }
+.btn--lg { padding: var(--space-3) var(--space-5); font-size: var(--text-base); }
+
+/* --- ALERTAS PEDAGÓGICAS --- */
+.alert {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  margin: var(--space-4) 0;
+}
+
+.alert__icon { font-size: var(--text-lg); flex-shrink: 0; margin-top: 2px; }
+.alert__content { font-size: var(--text-sm); line-height: var(--leading-normal); }
+.alert__content strong { display: block; margin-bottom: var(--space-1); }
+
+.alert--danger  { background: #fdf0ef; border-color: var(--color-danger);  color: #7b1d1d; }
+.alert--warning { background: #fef9ef; border-color: var(--color-warning); color: #7b4a00; }
+.alert--info    { background: #eff6ff; border-color: var(--color-info);    color: #1e4a7b; }
+.alert--tip     { background: #f0fdf4; border-color: var(--color-success); color: #14532d; }
+
+/* --- TARJETA DE FÓRMULA --- */
+.formula-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+  margin: var(--space-4) 0;
+}
+
+.formula-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.formula-card__equation {
+  font-size: var(--text-2xl);
+  font-family: var(--font-mono);
+  color: var(--color-primary-dark);
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+}
+
+.formula-card__variables {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.formula-card__var {
+  display: flex;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.formula-card__var dt {
+  font-family: var(--font-mono);
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+}
+
+.formula-card__var dd {
+  color: var(--color-text-muted);
+}
+
+/* --- COLLAPSIBLE (ejercicios con solución oculta) --- */
+.collapsible {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+  overflow: hidden;
+}
+
+.collapsible__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-alt);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background-color 0.15s;
+}
+
+.collapsible__trigger:hover {
+  background-color: #e2e8f0;
+}
+
+.collapsible__arrow {
+  font-size: var(--text-xs);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.collapsible--open .collapsible__arrow {
+  transform: rotate(180deg);
+}
+
+.collapsible__content {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.collapsible__content p + p { margin-top: var(--space-2); }
+
+/* --- TABLAS DE DATOS --- */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-4) 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.data-table {
+  font-size: var(--text-sm);
+}
+
+.data-table th {
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-weight: var(--font-bold);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.data-table--striped tbody tr:nth-child(even) td {
+  background-color: var(--color-surface-alt);
+}
+
+/* --- DIAGRAMA DE CIRCUITO --- */
+.circuit-diagram {
+  text-align: center;
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.circuit-diagram img,
+.circuit-diagram svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.circuit-diagram figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* --- TOC SIDEBAR --- */
+.toc {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+.toc__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.toc__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.toc__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.toc__link:hover,
+.toc__link--active {
+  color: var(--color-primary);
+  background-color: var(--color-surface-alt);
+  text-decoration: none;
+}
+
+/* --- CALCULADORA (widget) --- */
+.calculator-widget {
+  background: var(--color-surface);
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
+.calculator-widget__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.calculator-widget__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.calc-field label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.calc-field__input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.calc-field__input-wrap:focus-within {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px rgba(45,95,138,0.15);
+}
+
+.calc-field input[type="number"] {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  -moz-appearance: textfield;
+}
+
+.calc-field input[type="number"]::-webkit-inner-spin-button,
+.calc-field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.calc-field__unit {
+  padding: var(--space-2) var(--space-2) var(--space-2) 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.calc-field--result .calc-field__input-wrap {
+  background: var(--color-surface-alt);
+  border-color: var(--color-success);
+}
+
+.calc-result {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  min-height: 2.5rem;
+}
+
+.calc-result--active {
+  color: var(--color-text);
+}
+
+.calc-error {
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
+/* --- UTILIDADES GENERALES --- */
+.font-mono   { font-family: var(--font-mono); }
+.text-muted  { color: var(--color-text-muted); }
+.text-center { text-align: center; }
+.mt-4        { margin-top: var(--space-4); }
+.mb-4        { margin-bottom: var(--space-4); }
+.mt-5        { margin-top: var(--space-5); }
+
+/* Encabezados de sección dentro del contenido */
+.content h2 {
+  font-size: var(--text-xl);
+  color: var(--color-primary);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+.content h3 {
+  font-size: var(--text-lg);
+  color: var(--color-primary-dark);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.content p {
+  margin-bottom: var(--space-3);
+}
+
+.content ul, .content ol {
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.content ul { list-style: disc; }
+.content ol { list-style: decimal; }
+
+.content li {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}

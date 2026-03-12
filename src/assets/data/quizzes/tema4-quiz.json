@@ -1,0 +1,131 @@
+[
+  {
+    "id": "t4q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué norma regula actualmente la simbología eléctrica normalizada en España?",
+    "options": [
+      "IEC 60617 / UNE-EN 60617",
+      "UNE-EN 81346-1:2009 / IEC 81346",
+      "IEC 60364",
+      "REBT ITC-BT-25"
+    ],
+    "correct": 1,
+    "explanation": "La norma actual es la UNE-EN 81346-1:2009 / IEC 81346. La antigua IEC 60617 / UNE-EN 60617 está anulada, aunque muchos esquemas históricos aún la usan. Es importante conocer ambas."
+  },
+  {
+    "id": "t4q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "En un cuadro de vivienda con electrificación básica, ¿qué circuito alimenta la cocina y el horno?",
+    "options": ["C1 — Alumbrado", "C2 — Tomas corriente generales", "C3 — Cocina y horno", "C4 — Lavadora y lavavajillas"],
+    "correct": 2,
+    "explanation": "El circuito C3 protege cocina y horno con un PIA de 25 A curva C y cable de sección 2×6 mm²+PE. Es el circuito de mayor sección en la electrificación básica por la elevada potencia de estos receptores."
+  },
+  {
+    "id": "t4q3",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cuántos conmutadores y cruzamientos se necesitan para controlar una lámpara desde 4 puntos distintos?",
+    "options": [
+      "4 conmutadores, 0 cruzamientos",
+      "2 conmutadores + 2 cruzamientos",
+      "2 conmutadores + 1 cruzamiento",
+      "4 conmutadores + 1 cruzamiento"
+    ],
+    "correct": 1,
+    "explanation": "Para N puntos de mando: siempre 2 conmutadores (en los extremos) + (N-2) cruzamientos (intermedios). Para 4 puntos: 2 conmutadores + 2 cruzamientos. Alternativa más práctica para muchos puntos: usar un telerruptor con pulsadores."
+  },
+  {
+    "id": "t4q4",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "En una instalación eléctrica doméstica, el interruptor debe cortar siempre el conductor de fase (nunca el neutro).",
+    "correct": true,
+    "explanation": "VERDADERO. El interruptor debe cortar la FASE. Si se cortara el neutro, la fase seguiría presente en el casquillo de la lámpara aunque la luz esté apagada, representando un peligro grave de electrocución."
+  },
+  {
+    "id": "t4q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Cuál es la función del contacto auxiliar NA 13–14 del contactor KM1 en el circuito de arranque marcha-paro?",
+    "options": [
+      "Señalizar que el motor está en marcha encendiendo un piloto",
+      "Mantener activada la bobina del contactor después de soltar el pulsador de marcha (autoenclavijamiento)",
+      "Proteger el motor frente a sobrecargas",
+      "Cortar la alimentación del motor cuando se pulsa parada"
+    ],
+    "correct": 1,
+    "explanation": "El contacto NA 13–14 queda en paralelo con el pulsador de marcha S1. Al activarse KM1, este contacto se cierra y mantiene la corriente circulando por la bobina aunque S1 se suelte. Es el 'autoenclavijamiento' o 'realimentación', imprescindible para que el motor permanezca en marcha."
+  },
+  {
+    "id": "t4q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "En un contactor, los bornes de fuerza se identifican con números de una cifra (1–2, 3–4, 5–6). ¿En qué estado están con la bobina sin alimentar?",
+    "options": [
+      "Cerrados (normalmente cerrados)",
+      "Abiertos (normalmente abiertos)",
+      "Depende del fabricante",
+      "Solo los pares (2, 4, 6) están cerrados"
+    ],
+    "correct": 1,
+    "explanation": "Los contactos de fuerza de un contactor son siempre NORMALMENTE ABIERTOS (NA). Con la bobina sin tensión, los contactos están abiertos y el motor está desconectado. Al alimentar la bobina, se cierran y el motor recibe tensión."
+  },
+  {
+    "id": "t4q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué diferencia fundamental existe entre un telerruptor y un automático de escalera?",
+    "options": [
+      "El telerruptor solo funciona a 24 V; el automático de escalera a 230 V",
+      "El telerruptor es bistable (mantiene posición); el automático de escalera es temporizado (apaga automáticamente)",
+      "El automático de escalera permite más puntos de mando que el telerruptor",
+      "No hay diferencia práctica entre ambos dispositivos"
+    ],
+    "correct": 1,
+    "explanation": "El telerruptor cambia su estado con cada impulso y lo mantiene indefinidamente (bistable). El automático de escalera conecta la carga durante un tiempo regulable y luego la desconecta automáticamente (temporizado). Para una escalera comunal el minutero es más adecuado; para iluminación controlada desde muchos puntos, el telerruptor."
+  },
+  {
+    "id": "t4q8",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un sensor inductivo y un sensor capacitivo, ¿en qué se diferencian principalmente?",
+    "options": [
+      "El inductivo detecta a más distancia que el capacitivo",
+      "El inductivo solo detecta metales; el capacitivo detecta cualquier material (plástico, líquido, papel, metal…)",
+      "El capacitivo solo funciona en corriente continua",
+      "Solo el inductivo puede ser PNP o NPN"
+    ],
+    "correct": 1,
+    "explanation": "El sensor inductivo genera un campo magnético oscilante y solo detecta materiales conductores (metales). El capacitivo altera su campo eléctrico y puede detectar cualquier material con permitividad diferente al aire: plásticos, vidrio, líquidos, papel, etc."
+  },
+  {
+    "id": "t4q9",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un sensor PNP de 3 hilos activa su salida. ¿Qué tensión aparece en el borne BK (negro)?",
+    "options": [
+      "0 V (la salida va a negativo)",
+      "+24 V (la salida va a positivo)",
+      "La misma que la alimentación dividida entre 2",
+      "Depende de la carga conectada"
+    ],
+    "correct": 1,
+    "explanation": "PNP = 'sinking' = la salida activa va a POSITIVO (+V). Al activarse, el borne BK (negro, señal) sube a aproximadamente +24 V. El PLC o la bobina del relé conectada entre BK y 0V recibe entonces la señal. En NPN la salida va a negativo (0V)."
+  },
+  {
+    "id": "t4q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "En un circuito de dos motores no simultáneos con enclavamiento cruzado, ¿qué impide que KM2 se active mientras KM1 está en marcha?",
+    "options": [
+      "Un fusible en serie con la bobina de KM2",
+      "El contacto auxiliar NC 21–22 de KM1 en serie en el circuito de mando de KM2",
+      "El relé térmico F2 que detecta la sobrecarga de M1",
+      "Un temporizador que bloquea KM2 durante 5 segundos"
+    ],
+    "correct": 1,
+    "explanation": "El enclavamiento cruzado usa el contacto auxiliar NC del contactor contrario. El NC 21–22 de KM1 está en serie en la rama de la bobina de KM2. Cuando KM1 se activa, este NC se ABRE, cortando cualquier posibilidad de alimentar la bobina de KM2 — aunque se pulse el pulsador de marcha de M2."
+  }
+]

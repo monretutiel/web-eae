@@ -1,0 +1,67 @@
+/* =====================================================
+   PRINT CSS — Estilos para impresión
+   ===================================================== */
+
+@media print {
+  /* Ocultar elementos de navegación */
+  .nav-main,
+  .breadcrumb,
+  .nav-paginas,
+  .footer,
+  .btn,
+  .quiz-container,
+  .calculator-widget,
+  .toc {
+    display: none !important;
+  }
+
+  /* Fondo blanco y texto negro */
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+
+  .page-wrapper,
+  .tema-layout {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Fórmulas con borde visible */
+  .formula-card {
+    border: 2px solid black;
+    page-break-inside: avoid;
+  }
+
+  /* Tablas con borde */
+  .data-table th,
+  .data-table td {
+    border: 1px solid #999;
+  }
+
+  /* Salto de página antes de sección */
+  h2 {
+    page-break-before: auto;
+    page-break-after: avoid;
+  }
+
+  /* Alertas en escala de grises */
+  .alert {
+    border-left: 4px solid black;
+    background: #f5f5f5;
+    color: black;
+  }
+
+  /* Mostrar URLs de links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript"]::after {
+    content: "";
+  }
+}

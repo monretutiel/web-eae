@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teoría Tema 1: Múltiplos y submúltiplos, Ley de Ohm, resistencia eléctrica, tolerancia, código de colores, circuitos serie, paralelo y mixtos, leyes de Kirchhoff, potencia y energía.">
+  <title>Tema 1 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <!-- MathJax para fórmulas -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' },
+      startup: { typeset: true }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <!-- NAV START -->
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema1/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+  <!-- NAV END -->
+
+  <main>
+    <div class="tema-layout">
+
+      <!-- Contenido principal -->
+      <div>
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+            <li class="breadcrumb__item"><a href="./index.html">Tema 1</a></li>
+            <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+          </ol>
+        </nav>
+
+        <h1 style="font-size:var(--text-2xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+          Circuitos de Corriente Continua
+        </h1>
+        <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+          Tema 1 · 9 secciones · Calculadoras interactivas incluidas
+        </p>
+
+        <div class="content">
+
+          <!-- ========================================
+               0. REPASO MATEMÁTICAS
+               ======================================== -->
+          <h2 id="repaso">0. Múltiplos y submúltiplos</h2>
+
+          <p>Algunas magnitudes eléctricas toman valores muy grandes o muy pequeños. Para evitar escribir números con muchos ceros usamos <strong>múltiplos</strong> (valores grandes) y <strong>submúltiplos</strong> (valores pequeños).</p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Regla de oro: "Subir → dividir / Bajar → multiplicar"</strong><br>
+              Al pasar a una unidad mayor (subir en la tabla), <em>divides</em> entre el factor. Al pasar a una unidad menor (bajar), <em>multiplicas</em>.
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead>
+                <tr><th>Prefijo</th><th>Símbolo</th><th>Factor</th><th>Ejemplo eléctrico</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tera</td><td class="font-mono">T</td><td class="font-mono">10¹²</td><td>—</td></tr>
+                <tr><td>Giga</td><td class="font-mono">G</td><td class="font-mono">10⁹</td><td>1 GHz = 1 000 000 000 Hz</td></tr>
+                <tr><td>Mega</td><td class="font-mono">M</td><td class="font-mono">10⁶</td><td>1 MΩ = 1 000 000 Ω</td></tr>
+                <tr><td>kilo</td><td class="font-mono">k</td><td class="font-mono">10³</td><td>1 kΩ = 1 000 Ω</td></tr>
+                <tr style="font-weight:bold; background:var(--color-primary,#1a3a5c); color:#fff;">
+                  <td colspan="4" style="text-align:center;">← Unidad base (V, A, Ω, W, Hz…) →</td>
+                </tr>
+                <tr><td>mili</td><td class="font-mono">m</td><td class="font-mono">10⁻³</td><td>1 mA = 0,001 A</td></tr>
+                <tr><td>micro</td><td class="font-mono">μ</td><td class="font-mono">10⁻⁶</td><td>1 μV = 0,000 001 V</td></tr>
+                <tr><td>nano</td><td class="font-mono">n</td><td class="font-mono">10⁻⁹</td><td>1 nF = 0,000 000 001 F</td></tr>
+                <tr><td>pico</td><td class="font-mono">p</td><td class="font-mono">10⁻¹²</td><td>1 pF = 0,000 000 000 001 F</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Ejemplos de conversión</h3>
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Cantidad original</th><th>Resultado</th><th>Operación</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono">0,00000523 V</td><td class="font-mono">5,23 μV</td><td>× 10⁶ (bajo a μV → multiplico)</td></tr>
+                <tr><td class="font-mono">12 563 W</td><td class="font-mono">12,563 kW</td><td>÷ 10³ (subo a kW → divido)</td></tr>
+                <tr><td class="font-mono">30 mA</td><td class="font-mono">0,030 A</td><td>÷ 10³ (subo a A → divido)</td></tr>
+                <tr><td class="font-mono">1 000 MHz</td><td class="font-mono">1 GHz</td><td>÷ 10³ (subo a GHz → divido)</td></tr>
+                <tr><td class="font-mono">32 789 Ω</td><td class="font-mono">32,789 kΩ</td><td>÷ 10³ (subo a kΩ → divido)</td></tr>
+                <tr><td class="font-mono">0,563 mH</td><td class="font-mono">563 μH</td><td>× 10³ (bajo a μH → multiplico)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Antes de calcular:</strong> convierte siempre todas las magnitudes a <strong>unidades base</strong> (V, A, Ω, W). Si mezclas kΩ con mA sin convertir, el resultado será incorrecto.
+            </div>
+          </div>
+
+          <!-- ========================================
+               1. INTRODUCCIÓN A LA ELECTRICIDAD
+               ======================================== -->
+          <h2 id="intro">1. Introducción a la electricidad</h2>
+
+          <p>La electricidad es el resultado del movimiento ordenado de <strong>electrones</strong> a través de un material conductor. Para que esto ocurra, necesitamos una diferencia de potencial (tensión) que "empuje" esos electrones.</p>
+
+          <p>Todo material está formado por átomos, que tienen un núcleo (protones con carga positiva y neutrones sin carga) rodeado de electrones (carga negativa). En los materiales <strong>conductores</strong> como el cobre, los electrones de las capas exteriores están poco ligados al núcleo y pueden moverse libremente. En los <strong>aislantes</strong> como el plástico, los electrones están fuertemente ligados.</p>
+
+          <h3>Magnitudes eléctricas fundamentales</h3>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead>
+                <tr>
+                  <th>Magnitud</th>
+                  <th>Símbolo</th>
+                  <th>Unidad</th>
+                  <th>Instrumento</th>
+                  <th>Definición breve</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Tensión (voltaje)</td><td class="font-mono">V</td><td>Voltio (V)</td><td>Voltímetro</td><td>Diferencia de potencial entre dos puntos</td></tr>
+                <tr><td>Corriente</td><td class="font-mono">I</td><td>Amperio (A)</td><td>Amperímetro</td><td>Carga que pasa por un punto por unidad de tiempo</td></tr>
+                <tr><td>Resistencia</td><td class="font-mono">R</td><td>Ohmio (Ω)</td><td>Óhmetro</td><td>Oposición al paso de la corriente</td></tr>
+                <tr><td>Potencia</td><td class="font-mono">P</td><td>Vatio (W)</td><td>Vatímetro</td><td>Energía consumida por unidad de tiempo</td></tr>
+                <tr><td>Energía</td><td class="font-mono">E</td><td>Julio (J) / kWh</td><td>Contador</td><td>Trabajo realizado por la corriente eléctrica</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ========================================
+               2. LEY DE OHM
+               ======================================== -->
+          <h2 id="ohm">2. Ley de Ohm</h2>
+
+          <p>La Ley de Ohm, enunciada por Georg Simon Ohm en 1827, establece que la tensión entre los extremos de un conductor es directamente proporcional a la corriente que lo atraviesa:</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Ley de Ohm</div>
+            <div class="formula-card__equation">\[ V = I \cdot R \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>V</dt><dd>Tensión (Voltios, V)</dd></div>
+              <div class="formula-card__var"><dt>I</dt><dd>Corriente (Amperios, A)</dd></div>
+              <div class="formula-card__var"><dt>R</dt><dd>Resistencia (Ohmios, Ω)</dd></div>
+            </dl>
+          </div>
+
+          <p>Despejando cualquiera de las tres magnitudes:</p>
+          <p style="text-align:center; font-family:var(--font-mono); font-size:var(--text-lg); margin:var(--space-3) 0;">
+            \( V = I \cdot R \quad \Rightarrow \quad I = \dfrac{V}{R} \quad \Rightarrow \quad R = \dfrac{V}{I} \)
+          </p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Truco del triángulo:</strong> Dibuja un triángulo con V arriba, I abajo-izquierda y R abajo-derecha.
+              Para calcular una magnitud, <em>tapa la que buscas</em> y las otras dos te indican si multiplicar (lado a lado) o dividir (una sobre la otra).
+            </div>
+          </div>
+
+          <!-- Calculadora Ohm inline -->
+          <div id="calc-ohm-widget"></div>
+
+          <h3>Ejemplos resueltos</h3>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo 1: Calcular la corriente en una resistencia de 470 Ω a 12 V
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Datos:</strong> V = 12 V · R = 470 Ω · Incógnita: I</p>
+              <p><strong>Fórmula:</strong> \( I = V/R \)</p>
+              <p><strong>Cálculo:</strong> \( I = 12 / 470 = 0{,}02553 \text{ A} = \mathbf{25{,}5 \text{ mA}} \)</p>
+            </div>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo 2: Calcular la tensión para hacer pasar 2 A por 100 Ω
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Datos:</strong> I = 2 A · R = 100 Ω · Incógnita: V</p>
+              <p><strong>Fórmula:</strong> \( V = I \cdot R \)</p>
+              <p><strong>Cálculo:</strong> \( V = 2 \times 100 = \mathbf{200 \text{ V}} \)</p>
+            </div>
+          </div>
+
+          <!-- ========================================
+               3. RESISTENCIA ELÉCTRICA
+               ======================================== -->
+          <h2 id="resistencia">3. Resistencia eléctrica</h2>
+
+          <!-- 3.1 Propiedad eléctrica -->
+          <h3>3.1 Propiedad eléctrica</h3>
+
+          <p>La resistencia al paso de la corriente depende de la <strong>naturaleza del material</strong>. Cada material tiene un coeficiente llamado <strong>Resistividad (ρ)</strong>. El fenómeno contrario a "resistir" es "conducir", por lo que la inversa de la Resistividad es la <strong>Conductividad (σ)</strong>:</p>
+
+          <p style="text-align:center; font-family:var(--font-mono); font-size:var(--text-lg); margin:var(--space-3) 0;">
+            \( \sigma = \dfrac{1}{\rho} \)
+          </p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Material vs componente:</strong><br>
+              Resistividad (ρ) y Conductividad (σ) → dependen de la <em>naturaleza</em> del material.<br>
+              Resistencia (R) y Conductancia (Λ) → dependen de la <em>cantidad</em> de material (longitud, sección).
+            </div>
+          </div>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Resistencia de un conductor</div>
+            <div class="formula-card__equation">\[ R = \rho \cdot \dfrac{L}{S} \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>ρ</dt><dd>Resistividad del material (Ω·m)</dd></div>
+              <div class="formula-card__var"><dt>L</dt><dd>Longitud del conductor (m)</dd></div>
+              <div class="formula-card__var"><dt>S</dt><dd>Sección transversal (m²)</dd></div>
+            </dl>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Material</th><th>ρ (Ω·m) a 20°C</th><th>Clasificación</th></tr></thead>
+              <tbody>
+                <tr><td>Plata (Ag)</td><td class="font-mono">1,6 × 10⁻⁸</td><td>Conductor</td></tr>
+                <tr><td>Cobre (Cu)</td><td class="font-mono">1,7 × 10⁻⁸</td><td>Conductor</td></tr>
+                <tr><td>Aluminio (Al)</td><td class="font-mono">2,7 × 10⁻⁸</td><td>Conductor</td></tr>
+                <tr><td>Tungsteno (W)</td><td class="font-mono">5,6 × 10⁻⁸</td><td>Conductor</td></tr>
+                <tr><td>Plomo (Pb)</td><td class="font-mono">2,1 × 10⁻⁷</td><td>Conductor</td></tr>
+                <tr><td>Constantán (Ni+Cu)</td><td class="font-mono">4,91 × 10⁻⁷</td><td>Conductor (resistencias de precisión)</td></tr>
+                <tr><td>Aleación Fe+Ni</td><td class="font-mono">1,7 × 10⁻⁵</td><td>Conductor (alta resistividad)</td></tr>
+                <tr><td>Carbón (C)</td><td class="font-mono">3,5 × 10⁻⁵</td><td>Semiconductor / resistencias</td></tr>
+                <tr><td>Agua salada</td><td class="font-mono">2,0 × 10⁻¹</td><td>Semiconductor</td></tr>
+                <tr><td>Germanio (Ge)</td><td class="font-mono">5,0 × 10⁻¹</td><td>Semiconductor</td></tr>
+                <tr><td>Óxido de cobre (CuO)</td><td class="font-mono">1,0 × 10³</td><td>Semiconductor</td></tr>
+                <tr><td>Agua destilada</td><td class="font-mono">5,0 × 10³</td><td>Aislante débil</td></tr>
+                <tr><td>Vidrio</td><td class="font-mono">1,0 × 10¹²</td><td>Aislante</td></tr>
+                <tr><td>Aceite de transformador</td><td class="font-mono">2,0 × 10¹⁴</td><td>Aislante</td></tr>
+                <tr><td>Caucho</td><td class="font-mono">1,0 × 10¹⁵</td><td>Aislante</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 3.2 Propiedad térmica -->
+          <h3>3.2 Propiedad térmica</h3>
+
+          <p>La corriente eléctrica transforma parte de la energía eléctrica en calorífica (<strong>Efecto Joule</strong>). El calor aumenta la temperatura del conductor, lo que <em>aumenta su resistencia</em> y disminuye su conductancia.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Resistencia en función de la temperatura</div>
+            <div class="formula-card__equation">\[ R_T = R_0 \cdot (1 + \alpha \cdot \Delta T) \]</div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>\(R_T\)</dt><dd>Resistencia a temperatura T (Ω)</dd></div>
+              <div class="formula-card__var"><dt>\(R_0\)</dt><dd>Resistencia a 0°C (Ω)</dd></div>
+              <div class="formula-card__var"><dt>α</dt><dd>Coeficiente de temperatura del material (/°C)</dd></div>
+              <div class="formula-card__var"><dt>ΔT</dt><dd>T_final − T_inicial</dd></div>
+            </dl>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo: lámpara de Tungsteno 100 W (α = 0,005 /°C)
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Dato medido en frío:</strong> R a 20°C = 48 Ω</p>
+              <p><strong>Paso 1 — Calcular R₀ (a 0°C):</strong></p>
+              <p>\( R_0 = \dfrac{R_T}{1 + \alpha \cdot \Delta T} = \dfrac{48}{1 + 0{,}005 \cdot 20} = \dfrac{48}{1{,}1} = 43{,}6 \text{ Ω} \)</p>
+              <p><strong>Paso 2 — R en caliente a 2 500°C:</strong></p>
+              <p>\( R_T = 43{,}6 \cdot (1 + 0{,}005 \cdot 2500) = 43{,}6 \times 13{,}5 = \mathbf{584 \text{ Ω}} \)</p>
+              <p style="color:var(--color-text-muted);">La resistencia del filamento se multiplica por ×12 entre frío y caliente. Por eso el pico de corriente al encender una bombilla es muy elevado.</p>
+            </div>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Experimento de aula:</strong> Mide la resistencia de una lámpara incandescente con el multímetro en frío. Conéctala 2 minutos y mídela de nuevo. ¿Ha cambiado?
+            </div>
+          </div>
+
+          <!-- 3.3 Potencia y tolerancia -->
+          <h3 id="tolerancia">3.3 Potencia y tolerancia</h3>
+
+          <p>La potencia disipada por una resistencia es \( P = V \cdot I \). Las resistencias comerciales tienen un <strong>valor máximo de potencia</strong> (potencia nominal) y un <strong>margen de error</strong> en su valor óhmico llamado <strong>Tolerancia</strong>, expresado en porcentaje:</p>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Categoría</th><th>Tolerancia</th></tr></thead>
+              <tbody>
+                <tr><td>De gran precisión</td><td class="font-mono">±0,5 % y ±1 %</td></tr>
+                <tr><td>Las más utilizadas</td><td class="font-mono">±2 %, ±5 % y ±10 %</td></tr>
+                <tr><td>En desuso</td><td class="font-mono">±20 % y ±50 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo: ¿Se quemará una resistencia de 470 Ω ±5% (1/4 W) a 5 V?
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Caso más desfavorable:</strong> valor mínimo (más corriente → más potencia disipada).</p>
+              <p>\( R_{baja} = 470 - (470 \times 0{,}05) = 446{,}5 \text{ Ω} \)</p>
+              <p>\( I = \dfrac{5 \text{ V}}{446{,}5 \text{ Ω}} = 11{,}28 \text{ mA} \)</p>
+              <p>\( P = 5 \text{ V} \times 0{,}01128 \text{ A} = 0{,}0564 \text{ W} \)</p>
+              <p>Potencia nominal: \( \frac{1}{4} = 0{,}25 \text{ W} \)</p>
+              <p style="color:var(--color-success);">\( 0{,}0564 \text{ W} < 0{,}25 \text{ W} \) → <strong>NO se quemará ✓</strong></p>
+            </div>
+          </div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Potencia nominal:</strong> nunca superes la potencia máxima de la resistencia. Una de 1/4 W no debe disipar más de 0,25 W. Superarla provoca sobrecalentamiento e incendio.
+            </div>
+          </div>
+
+          <!-- 3.4 Clasificación -->
+          <h3 id="clasificacion">3.4 Clasificación de resistencias</h3>
+
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Fijas</th><th>Variables</th><th>Dependientes</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <ul style="margin:0; padding-left:1.2rem;">
+                      <li>Aglomeradas</li>
+                      <li>Película de carbón</li>
+                      <li>Película metálica</li>
+                      <li>Bobinadas</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul style="margin:0; padding-left:1.2rem;">
+                      <li>Potenciómetro capa carbón</li>
+                      <li>Potenciómetro bobinado</li>
+                      <li>Potenciómetro multivuelta</li>
+                      <li>Potenciómetro miniatura</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul style="margin:0; padding-left:1.2rem;">
+                      <li><strong>NTC</strong> — varía con T° (↑T→↓R)</li>
+                      <li><strong>PTC</strong> — varía con T° (↑T→↑R)</li>
+                      <li><strong>LDR</strong> — varía con la luz</li>
+                      <li><strong>VDR</strong> — varía con la tensión</li>
+                      <li><strong>MDR</strong> — varía con campo B</li>
+                      <li><strong>Galga extensiométrica</strong> — varía con deformación</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>NTC vs PTC:</strong> Ambos son termistores. El NTC (<em>Negative Temperature Coefficient</em>) se usa como sensor de temperatura. El PTC se usa como protección: al calentarse aumenta su R y limita la corriente automáticamente.
+            </div>
+          </div>
+
+          <!-- 3.5 Código de colores (5 bandas) -->
+          <h3 id="colores">3.5 Código de colores (5 bandas)</h3>
+
+          <p>Las resistencias through-hole llevan bandas de color para indicar su valor. Con 5 bandas: bandas 1+2+3 = dígitos | banda 4 = multiplicador | banda 5 = tolerancia.</p>
+
+          <div class="table-responsive">
+            <table class="data-table" style="font-size:var(--text-sm);">
+              <thead>
+                <tr>
+                  <th>Color</th><th>Banda 1</th><th>Banda 2</th><th>Banda 3</th><th>Multiplicador</th><th>Tolerancia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="background:#111;color:#fff;font-weight:bold;padding:.4rem .6rem;">Negro</td><td>0</td><td>0</td><td>0</td><td>× 1 Ω</td><td>—</td></tr>
+                <tr><td style="background:#8B4513;color:#fff;font-weight:bold;padding:.4rem .6rem;">Marrón</td><td>1</td><td>1</td><td>1</td><td>× 10 Ω</td><td>±1 %</td></tr>
+                <tr><td style="background:#dc3545;color:#fff;font-weight:bold;padding:.4rem .6rem;">Rojo</td><td>2</td><td>2</td><td>2</td><td>× 100 Ω</td><td>±2 %</td></tr>
+                <tr><td style="background:#fd7e14;color:#000;font-weight:bold;padding:.4rem .6rem;">Naranja</td><td>3</td><td>3</td><td>3</td><td>× 1 kΩ</td><td>—</td></tr>
+                <tr><td style="background:#ffc107;color:#000;font-weight:bold;padding:.4rem .6rem;">Amarillo</td><td>4</td><td>4</td><td>4</td><td>× 10 kΩ</td><td>—</td></tr>
+                <tr><td style="background:#198754;color:#fff;font-weight:bold;padding:.4rem .6rem;">Verde</td><td>5</td><td>5</td><td>5</td><td>× 100 kΩ</td><td>±0,5 %</td></tr>
+                <tr><td style="background:#0d6efd;color:#fff;font-weight:bold;padding:.4rem .6rem;">Azul</td><td>6</td><td>6</td><td>6</td><td>× 1 MΩ</td><td>±0,25 %</td></tr>
+                <tr><td style="background:#6f42c1;color:#fff;font-weight:bold;padding:.4rem .6rem;">Violeta</td><td>7</td><td>7</td><td>7</td><td>× 10 MΩ</td><td>±0,10 %</td></tr>
+                <tr><td style="background:#6c757d;color:#fff;font-weight:bold;padding:.4rem .6rem;">Gris</td><td>8</td><td>8</td><td>8</td><td>—</td><td>±0,05 %</td></tr>
+                <tr><td style="background:#f8f9fa;color:#000;font-weight:bold;padding:.4rem .6rem;border:1px solid #dee2e6;">Blanco</td><td>9</td><td>9</td><td>9</td><td>—</td><td>—</td></tr>
+                <tr><td style="background:#DAA520;color:#000;font-weight:bold;padding:.4rem .6rem;">Dorado</td><td>—</td><td>—</td><td>—</td><td>× 0,1 Ω</td><td>±5 %</td></tr>
+                <tr><td style="background:#C0C0C0;color:#000;font-weight:bold;padding:.4rem .6rem;">Plateado</td><td>—</td><td>—</td><td>—</td><td>× 0,01 Ω</td><td>±10 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo: Azul – Violeta – Verde – Negro – Marrón = ?
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p>Banda 1 (Azul) = 6 | Banda 2 (Violeta) = 7 | Banda 3 (Verde) = 5 | Banda 4 (Negro) = ×1 Ω | Banda 5 (Marrón) = ±1%</p>
+              <p>\( R = 675 \times 1 = \mathbf{675 \text{ Ω} \pm 1\%} \)</p>
+            </div>
+          </div>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Mnemotécnico (0→9):</strong>
+              <em>Ne Ma Ro Na Am Ve Az Vi Gr Bl</em> →
+              Negro · Marrón · Rojo · Naranja · Amarillo · Verde · Azul · Violeta · Gris · Blanco
+            </div>
+          </div>
+
+          <!-- 3.6 Resistencias SMD -->
+          <h3 id="smd">3.6 Resistencias SMD y código numérico</h3>
+
+          <p>Las resistencias <strong>SMD</strong> (Surface Mount Device) no tienen bandas de color: llevan un código numérico impreso.</p>
+
+          <h4>Código de 3 dígitos (tolerancia ±5%)</h4>
+          <p>Dígitos 1 y 2 = cifras significativas. Dígito 3 = número de ceros a añadir.</p>
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Código</th><th>Lectura</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono">472</td><td>47 × 10² Ω</td><td class="font-mono">4 700 Ω = 4,7 kΩ</td></tr>
+                <tr><td class="font-mono">332</td><td>33 × 10² Ω</td><td class="font-mono">3 300 Ω = 3,3 kΩ</td></tr>
+                <tr><td class="font-mono">650</td><td>65 × 10⁰ Ω</td><td class="font-mono">65 Ω</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Código de 4 dígitos (tolerancia ±1%)</h4>
+          <p>Dígitos 1, 2 y 3 = cifras significativas. Dígito 4 = número de ceros.</p>
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Código</th><th>Lectura</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono">1023</td><td>102 × 10³ Ω</td><td class="font-mono">102 000 Ω = 102 kΩ</td></tr>
+                <tr><td class="font-mono">1000</td><td>100 × 10⁰ Ω</td><td class="font-mono">100 Ω</td></tr>
+                <tr><td class="font-mono">2492</td><td>249 × 10² Ω</td><td class="font-mono">24 900 Ω = 24,9 kΩ</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Encapsulados SMD más comunes</h4>
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Código</th><th>Dimensiones (mm)</th><th>Potencia nominal</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono">0201</td><td>0,6 × 0,3</td><td>1/20 W</td></tr>
+                <tr><td class="font-mono">0402</td><td>1,0 × 0,5</td><td>1/16 W</td></tr>
+                <tr><td class="font-mono">0603</td><td>1,6 × 0,8</td><td>1/16 W</td></tr>
+                <tr><td class="font-mono">0805</td><td>2,0 × 1,25</td><td>1/10 W</td></tr>
+                <tr><td class="font-mono">1206</td><td>3,2 × 1,6</td><td>1/8 W</td></tr>
+                <tr><td class="font-mono">1210</td><td>3,2 × 2,5</td><td>1/4 W</td></tr>
+                <tr><td class="font-mono">1812</td><td>4,5 × 3,2</td><td>1/3 W</td></tr>
+                <tr><td class="font-mono">2010</td><td>5,0 × 2,5</td><td>1/2 W</td></tr>
+                <tr><td class="font-mono">2512</td><td>6,35 × 3,2</td><td>1 W</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ========================================
+               4. CIRCUITOS EN SERIE
+               ======================================== -->
+          <h2 id="serie">4. Circuitos en serie</h2>
+
+          <h3>Topología de un circuito</h3>
+          <div class="table-responsive">
+            <table class="data-table data-table--striped">
+              <thead><tr><th>Concepto</th><th>Definición</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Nodo</strong></td><td>Punto de unión de <strong>3 o más ramas</strong></td></tr>
+                <tr><td><strong>Rama</strong></td><td>Conjunto de elementos en serie situados <strong>entre dos nodos</strong></td></tr>
+                <tr><td><strong>Malla</strong></td><td>Recorrido interno <strong>cerrado</strong> dentro del circuito</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>En un circuito en serie, los componentes están conectados uno a continuación de otro. Solo hay <strong>un camino</strong> para la corriente.</p>
+
+          <!-- SVG Circuito Serie -->
+          <figure class="circuit-diagram">
+            <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;" aria-label="Circuito en serie con fuente V y tres resistencias R1, R2 y R3">
+              <!-- Fuente de tensión -->
+              <rect x="20" y="55" width="36" height="60" rx="4" fill="#fff" stroke="#1a3a5c" stroke-width="2"/>
+              <text x="38" y="82" text-anchor="middle" font-size="11" fill="#1a3a5c" font-weight="bold">V</text>
+              <line x1="38" y1="55" x2="38" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="38" y1="115" x2="38" y2="130" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Conductores -->
+              <line x1="38" y1="40" x2="480" y2="40" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="38" y1="130" x2="480" y2="130" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="480" y1="40" x2="480" y2="130" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R1 -->
+              <rect x="95" y="28" width="60" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="125" y="44" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R1</text>
+              <!-- R2 -->
+              <rect x="215" y="28" width="60" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="245" y="44" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R2</text>
+              <!-- R3 -->
+              <rect x="335" y="28" width="60" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="365" y="44" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R3</text>
+              <!-- Flecha de corriente -->
+              <text x="240" y="150" text-anchor="middle" font-size="11" fill="#27ae60">→ I (misma en todo el circuito)</text>
+              <!-- Etiqueta fuente -->
+              <text x="38" y="96" text-anchor="middle" font-size="10" fill="#2980b9">+</text>
+              <text x="38" y="112" text-anchor="middle" font-size="10" fill="#c0392b">−</text>
+            </svg>
+            <figcaption>Circuito en serie: la misma corriente pasa por la fuente y por cada resistencia.</figcaption>
+          </figure>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Resistencia equivalente en serie</div>
+            <div class="formula-card__equation">\[ R_{eq} = R_1 + R_2 + \cdots + R_n \]</div>
+          </div>
+
+          <h3>Divisor de tensión</h3>
+          <p>En un circuito serie, la tensión se <em>reparte</em> entre las resistencias proporcionalmente a su valor:</p>
+          <p style="text-align:center; font-family:var(--font-mono); margin:var(--space-3) 0;">
+            \( V_{Rx} = V_{total} \cdot \dfrac{R_x}{R_{eq}} \)
+          </p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Regla de serie:</strong> La <em>corriente</em> es igual en todos los elementos.
+              La <em>tensión</em> se reparte según los valores de resistencia.
+            </div>
+          </div>
+
+          <!-- ========================================
+               5. CIRCUITOS EN PARALELO
+               ======================================== -->
+          <h2 id="paralelo">5. Circuitos en paralelo</h2>
+
+          <p>En un circuito en paralelo, todos los componentes comparten los mismos dos nodos. Hay <strong>varios caminos</strong> para la corriente.</p>
+
+          <!-- SVG Circuito Paralelo -->
+          <figure class="circuit-diagram">
+            <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;" aria-label="Circuito en paralelo con fuente V y tres resistencias R1, R2 y R3">
+              <!-- Líneas horizontales -->
+              <line x1="60" y1="30" x2="360" y2="30" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="60" y1="160" x2="360" y2="160" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Fuente -->
+              <rect x="24" y="70" width="36" height="60" rx="4" fill="#fff" stroke="#1a3a5c" stroke-width="2"/>
+              <text x="42" y="97" text-anchor="middle" font-size="11" fill="#1a3a5c" font-weight="bold">V</text>
+              <line x1="42" y1="70" x2="42" y2="30" stroke="#1a3a5c" stroke-width="2"/>
+              <line x1="42" y1="130" x2="42" y2="160" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R1 -->
+              <line x1="130" y1="30" x2="130" y2="58" stroke="#1a3a5c" stroke-width="2"/>
+              <rect x="108" y="58" width="44" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="130" y="74" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R1</text>
+              <line x1="130" y1="82" x2="130" y2="160" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R2 -->
+              <line x1="230" y1="30" x2="230" y2="58" stroke="#1a3a5c" stroke-width="2"/>
+              <rect x="208" y="58" width="44" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="230" y="74" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R2</text>
+              <line x1="230" y1="82" x2="230" y2="160" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- R3 -->
+              <line x1="330" y1="30" x2="330" y2="58" stroke="#1a3a5c" stroke-width="2"/>
+              <rect x="308" y="58" width="44" height="24" rx="4" fill="#fff" stroke="#e8a000" stroke-width="2"/>
+              <text x="330" y="74" text-anchor="middle" font-size="12" fill="#1a3a5c" font-weight="bold">R3</text>
+              <line x1="330" y1="82" x2="330" y2="160" stroke="#1a3a5c" stroke-width="2"/>
+              <!-- Etiqueta V -->
+              <text x="42" y="105" text-anchor="middle" font-size="10" fill="#2980b9">+</text>
+              <text x="42" y="122" text-anchor="middle" font-size="10" fill="#c0392b">−</text>
+              <!-- Etiqueta tensión igual -->
+              <text x="200" y="175" text-anchor="middle" font-size="11" fill="#27ae60">↕ V igual en cada rama</text>
+            </svg>
+            <figcaption>Circuito en paralelo: la misma tensión aparece en cada rama.</figcaption>
+          </figure>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Resistencia equivalente en paralelo</div>
+            <div class="formula-card__equation">\[ \dfrac{1}{R_{eq}} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots + \dfrac{1}{R_n} \]</div>
+          </div>
+
+          <p>Para <strong>dos resistencias</strong>, existe una fórmula directa más cómoda:</p>
+          <p style="text-align:center; font-family:var(--font-mono); margin:var(--space-3) 0;">
+            \( R_{eq} = \dfrac{R_1 \cdot R_2}{R_1 + R_2} \)
+          </p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Regla de paralelo:</strong> La <em>tensión</em> es igual en todas las ramas.
+              La <em>corriente</em> se reparte. Y la Req siempre es <em>menor</em> que la resistencia más pequeña.
+            </div>
+          </div>
+
+          <!-- ========================================
+               6. CIRCUITOS MIXTOS
+               ======================================== -->
+          <h2 id="mixtos">6. Circuitos mixtos</h2>
+
+          <p>Un circuito mixto combina tramos en serie y en paralelo. Se resuelve por <strong>reducción progresiva</strong>: simplificar los grupos paralelo o serie, de dentro hacia afuera, hasta obtener una sola resistencia equivalente.</p>
+
+          <div class="collapsible">
+            <button class="collapsible__trigger" aria-expanded="false">
+              Ejemplo resuelto: R1=100Ω en serie con (R2=200Ω ∥ R3=200Ω), V=12V
+              <span class="collapsible__arrow">▼</span>
+            </button>
+            <div class="collapsible__content" hidden>
+              <p><strong>Paso 1:</strong> Reducir el paralelo R2 ∥ R3</p>
+              <p style="font-family:var(--font-mono);">\( R_{23} = (200 \times 200)/(200+200) = 100 \text{ Ω} \)</p>
+              <p><strong>Paso 2:</strong> Ahora el circuito es R1 en serie con R23</p>
+              <p style="font-family:var(--font-mono);">\( R_{eq} = R_1 + R_{23} = 100 + 100 = 200 \text{ Ω} \)</p>
+              <p><strong>Paso 3:</strong> Calcular corriente total</p>
+              <p style="font-family:var(--font-mono);">\( I = V / R_{eq} = 12 / 200 = 0{,}06 \text{ A} = 60 \text{ mA} \)</p>
+              <p><strong>Paso 4:</strong> Tensión en R1</p>
+              <p style="font-family:var(--font-mono);">\( V_{R1} = I \times R_1 = 0{,}06 \times 100 = 6 \text{ V} \)</p>
+              <p><strong>Paso 5:</strong> Tensión en el paralelo (= 12 - 6 = 6 V, se verifica)</p>
+              <p style="font-family:var(--font-mono);">\( I_{R2} = I_{R3} = 6/200 = 30 \text{ mA (cada una)} \)</p>
+            </div>
+          </div>
+
+          <!-- ========================================
+               7. LEYES DE KIRCHHOFF
+               ======================================== -->
+          <h2 id="kirchhoff">7. Leyes de Kirchhoff</h2>
+
+          <h3>LCK — Ley de Corrientes (Nodos)</h3>
+          <p>La suma algebraica de las corrientes que entran y salen de un nodo es <strong>cero</strong>. Lo que entra = lo que sale.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">LCK — Ley de Corrientes de Kirchhoff</div>
+            <div class="formula-card__equation">\[ \sum I_{entran} = \sum I_{salen} \]</div>
+          </div>
+
+          <!-- SVG Nodo Kirchhoff -->
+          <figure class="circuit-diagram">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;" aria-label="Nodo de Kirchhoff con tres corrientes">
+              <!-- Nodo central -->
+              <circle cx="150" cy="100" r="8" fill="#1a3a5c"/>
+              <!-- I1 entrando desde arriba-izquierda -->
+              <line x1="60" y1="40" x2="144" y2="96" stroke="#27ae60" stroke-width="2.5"/>
+              <polygon points="144,96 130,78 148,82" fill="#27ae60"/>
+              <text x="75" y="58" font-size="13" fill="#27ae60" font-weight="bold">I₁=5A</text>
+              <!-- I2 entrando desde arriba-derecha -->
+              <line x1="240" y1="40" x2="156" y2="96" stroke="#27ae60" stroke-width="2.5"/>
+              <polygon points="156,96 152,80 168,88" fill="#27ae60"/>
+              <text x="218" y="58" font-size="13" fill="#27ae60" font-weight="bold">I₂=3A</text>
+              <!-- I3 saliendo hacia abajo -->
+              <line x1="150" y1="108" x2="150" y2="175" stroke="#c0392b" stroke-width="2.5"/>
+              <polygon points="150,175 143,158 157,158" fill="#c0392b"/>
+              <text x="158" y="155" font-size="13" fill="#c0392b" font-weight="bold">I₃=8A</text>
+              <text x="150" y="195" text-anchor="middle" font-size="11" fill="#6c7a89">I₁ + I₂ = I₃ → 5 + 3 = 8 A ✓</text>
+            </svg>
+            <figcaption>LCK: las corrientes que entran al nodo (verde) suman lo mismo que las que salen (rojo).</figcaption>
+          </figure>
+
+          <h3>LTK — Ley de Tensiones (Mallas)</h3>
+          <p>La suma algebraica de las tensiones en una malla cerrada es <strong>cero</strong>. Las tensiones de los generadores se compensan con las caídas en las resistencias.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">LTK — Ley de Tensiones de Kirchhoff</div>
+            <div class="formula-card__equation">\[ \sum V = 0 \text{ (en una malla cerrada)} \]</div>
+          </div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Error común:</strong> Confundir LCK (nodos, corrientes) con LTK (mallas, tensiones).
+              LCK → corrientes en un punto. LTK → tensiones alrededor de un bucle.
+            </div>
+          </div>
+
+          <!-- ========================================
+               8. POTENCIA Y ENERGÍA
+               ======================================== -->
+          <h2 id="potencia">8. Potencia y energía eléctrica</h2>
+
+          <p>La <strong>potencia</strong> es la velocidad a la que se consume o transforma energía eléctrica.</p>
+
+          <div class="formula-card">
+            <div class="formula-card__name">Potencia eléctrica — cuatro formas equivalentes</div>
+            <div class="formula-card__equation">
+              \[ P = V \cdot I = I^2 \cdot R = \dfrac{V^2}{R} \]
+            </div>
+            <dl class="formula-card__variables">
+              <div class="formula-card__var"><dt>P</dt><dd>Potencia (Vatios, W)</dd></div>
+              <div class="formula-card__var"><dt>V</dt><dd>Tensión (V)</dd></div>
+              <div class="formula-card__var"><dt>I</dt><dd>Corriente (A)</dd></div>
+              <div class="formula-card__var"><dt>R</dt><dd>Resistencia (Ω)</dd></div>
+            </dl>
+          </div>
+
+          <p>La <strong>energía</strong> es la potencia acumulada durante un tiempo:</p>
+          <p style="text-align:center; font-family:var(--font-mono); margin:var(--space-3) 0;">
+            \( E = P \cdot t \)
+          </p>
+          <p>En la práctica se usa el <strong>kilovatio-hora (kWh)</strong>: 1 kWh = 3 600 000 J = 3,6 MJ</p>
+
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content">
+              <strong>Ejemplo real:</strong> Un calentador de 2 kW encendido 3 horas consume
+              E = 2 kW × 3 h = <strong>6 kWh</strong>. A 0,15 €/kWh, el coste es 0,90 €.
+            </div>
+          </div>
+
+          <!-- Calculadora Potencia inline -->
+          <div id="calc-potencia-widget"></div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Efecto Joule:</strong> Toda la potencia disipada en una resistencia se convierte en calor.
+              Una resistencia que supere su potencia nominal se sobrecalentará y puede quemarse o provocar un incendio.
+              Siempre verifica la potencia máxima admisible antes de instalar una resistencia.
+            </div>
+          </div>
+
+          <div class="alert alert--danger">
+            <span class="alert__icon">⚠️</span>
+            <div class="alert__content">
+              <strong>Cortocircuito:</strong> Si R → 0, entonces I → ∞ (Ley de Ohm). Una corriente
+              muy alta destruye cables, componentes y puede causar incendio. Por eso los fusibles
+              y magnetotérmicos cortan el circuito en milisegundos ante un cortocircuito.
+            </div>
+          </div>
+
+        </div><!-- /content -->
+
+        <!-- Navegación anterior/siguiente -->
+        <div class="nav-paginas">
+          <a href="./index.html" class="btn btn--ghost">← Portada del tema</a>
+          <div style="display:flex; gap:var(--space-3);">
+            <a href="./ejercicios.html" class="btn btn--ghost">Ejercicios →</a>
+            <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+          </div>
+        </div>
+
+      </div><!-- /contenido principal -->
+
+      <!-- Sidebar TOC -->
+      <aside class="tema-layout__sidebar">
+        <nav class="toc" aria-label="Tabla de contenidos">
+          <div class="toc__title">En esta página</div>
+          <ul class="toc__list">
+            <li><a href="#repaso"       class="toc__link">0. Múltiplos y submúltiplos</a></li>
+            <li><a href="#intro"        class="toc__link">1. Introducción</a></li>
+            <li><a href="#ohm"          class="toc__link">2. Ley de Ohm</a></li>
+            <li><a href="#resistencia"  class="toc__link">3. Resistencia eléctrica</a></li>
+            <li><a href="#tolerancia"   class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Tolerancia y potencia</a></li>
+            <li><a href="#clasificacion" class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Clasificación</a></li>
+            <li><a href="#colores"      class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Código de colores</a></li>
+            <li><a href="#smd"          class="toc__link" style="padding-left:1.5rem; font-size:var(--text-xs);">↳ Resistencias SMD</a></li>
+            <li><a href="#serie"        class="toc__link">4. Circuitos serie</a></li>
+            <li><a href="#paralelo"     class="toc__link">5. Circuitos paralelo</a></li>
+            <li><a href="#mixtos"       class="toc__link">6. Circuitos mixtos</a></li>
+            <li><a href="#kirchhoff"    class="toc__link">7. Kirchhoff</a></li>
+            <li><a href="#potencia"     class="toc__link">8. Potencia y energía</a></li>
+          </ul>
+          <div style="margin-top:var(--space-4); padding-top:var(--space-3); border-top:1px solid var(--color-border);">
+            <a href="./ejercicios.html" class="btn btn--ghost btn--sm" style="width:100%; justify-content:center;">✏️ Ejercicios</a>
+            <a href="./quiz.html" class="btn btn--secondary btn--sm" style="width:100%; justify-content:center; margin-top:var(--space-2);">✅ Quiz</a>
+          </div>
+        </nav>
+      </aside>
+
+    </div><!-- /tema-layout -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+  <script type="module">
+    import { initCalculator, CALC_OHM, CALC_POTENCIA } from '../../assets/js/calculator.js';
+
+    // Calculadora Ohm inline
+    const ohmWidget = document.getElementById('calc-ohm-widget');
+    if (ohmWidget) {
+      // Añadir solveForOptions a CALC_OHM para el widget
+      const ohmConfig = {
+        ...CALC_OHM,
+        solveForOptions: [
+          { value: 'resistance', label: 'Resistencia (R)' },
+          { value: 'voltage',    label: 'Tensión (V)'    },
+          { value: 'current',    label: 'Corriente (I)'  },
+        ]
+      };
+      initCalculator(ohmConfig, ohmWidget);
+    }
+
+    // Calculadora Potencia inline
+    const potWidget = document.getElementById('calc-potencia-widget');
+    if (potWidget) {
+      initCalculator(CALC_POTENCIA, potWidget);
+    }
+  </script>
+
+</body>
+</html>

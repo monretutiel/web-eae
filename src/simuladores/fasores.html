@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Fasores — RL/RC | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .sim-canvas{background:#0f172a;border-radius:12px;display:block;width:100%}
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4)}
+    .ctrl-row{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)}
+    .ctrl-row label{font-size:var(--text-sm);font-weight:600;min-width:4rem}
+    .ctrl-row input[type="range"]{flex:1;accent-color:var(--color-primary)}
+    .ctrl-row input[type="number"]{width:70px;padding:var(--space-1) var(--space-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-sm);background:var(--color-bg);color:var(--color-text)}
+    .ctrl-row .unit{font-size:var(--text-xs);color:var(--color-text-muted);min-width:2.5rem}
+    .mode-btn{padding:var(--space-2) var(--space-4);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-weight:600;cursor:pointer;font-size:var(--text-sm);transition:all .2s}
+    .mode-btn.active{border-color:var(--color-primary);background:var(--color-primary);color:#fff}
+    .res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-2);margin-top:var(--space-3)}
+    .res-cell{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-2);text-align:center}
+    .res-cell small{display:block;font-size:10px;opacity:.65;text-transform:uppercase}
+    .res-cell strong{font-size:var(--text-base);display:block;margin-top:2px}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Simuladores</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Fasores RL/RC</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">🌀 Simulador — Fasores y desfase RL / RC</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        Visualiza los fasores de tensión y corriente girando. Observa cómo el ángulo φ cambia con R, L/C y la frecuencia.
+      </p>
+
+      <!-- Modo -->
+      <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);">
+        <button class="mode-btn active" id="btn-rl" onclick="setMode('rl')">Circuito RL</button>
+        <button class="mode-btn"        id="btn-rc" onclick="setMode('rc')">Circuito RC</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:var(--space-4);align-items:start;">
+
+        <!-- Controles -->
+        <div>
+          <div class="calc-card" style="margin-bottom:var(--space-3);">
+            <div class="ctrl-row"><label>R</label><input type="range" id="sl-r" min="10" max="2000" value="100" oninput="sync('r',this.value)"><input type="number" id="inp-r" value="100" oninput="sync('r',this.value)"><span class="unit">Ω</span></div>
+            <div class="ctrl-row" id="row-l"><label>L</label><input type="range" id="sl-l" min="1" max="2000" value="200" oninput="sync('l',this.value)"><input type="number" id="inp-l" value="200" oninput="sync('l',this.value)"><span class="unit">mH</span></div>
+            <div class="ctrl-row" id="row-c" style="display:none;"><label>C</label><input type="range" id="sl-c" min="1" max="500" value="100" oninput="sync('c',this.value)"><input type="number" id="inp-c" value="100" oninput="sync('c',this.value)"><span class="unit">µF</span></div>
+            <div class="ctrl-row"><label>f</label><input type="range" id="sl-f" min="1" max="1000" value="50" oninput="sync('f',this.value)"><input type="number" id="inp-f" value="50" oninput="sync('f',this.value)"><span class="unit">Hz</span></div>
+            <div class="ctrl-row"><label>V</label><input type="range" id="sl-v" min="1" max="400" value="230" oninput="sync('v',this.value)"><input type="number" id="inp-v" value="230" oninput="sync('v',this.value)"><span class="unit">V</span></div>
+          </div>
+
+          <div class="res-grid">
+            <div class="res-cell"><small id="lbl-x">XL</small><strong id="res-x">—</strong><span style="font-size:10px;opacity:.65;">Ω</span></div>
+            <div class="res-cell"><small>Z</small><strong id="res-z">—</strong><span style="font-size:10px;opacity:.65;">Ω</span></div>
+            <div class="res-cell"><small>φ</small><strong id="res-phi">—</strong><span style="font-size:10px;opacity:.65;">°</span></div>
+            <div class="res-cell"><small>cos φ</small><strong id="res-cos">—</strong></div>
+          </div>
+
+          <div class="alert alert--tip" style="margin-top:var(--space-3);">
+            <span class="alert__icon">💡</span>
+            <div class="alert__content" id="tip-text" style="font-size:var(--text-xs);">RL: la corriente se <strong>retrasa</strong> respecto a la tensión (φ &gt; 0).</div>
+          </div>
+        </div>
+
+        <!-- Phasor diagram canvas -->
+        <div class="calc-card">
+          <p style="font-weight:700;margin-bottom:var(--space-2);font-size:var(--text-sm);">Diagrama fasorial (animado)</p>
+          <canvas id="phasor" width="400" height="360" class="sim-canvas"></canvas>
+          <div style="display:flex;gap:var(--space-3);margin-top:var(--space-2);flex-wrap:wrap;font-size:var(--text-xs);">
+            <span style="color:#f1f5f9;">━ V total</span>
+            <span style="color:#10b981;">━ VR</span>
+            <span style="color:#f59e0b;" id="lbl-vx-legend">━ VL</span>
+            <span style="color:#ef4444;">━ I (corriente)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-paginas">
+        <a href="./rl.html"          class="btn btn--ghost">← Sim RL</a>
+        <a href="./index.html"       class="btn btn--primary">Ver todos →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    let mode='rl', phi=0, Z=100, simT=0;
+    let R=100, L=0.2, C=100e-6, f=50, Vs=230;
+    const canvas=document.getElementById('phasor');
+    const ctx=canvas.getContext('2d');
+    const CW=400, CH=360, cx=CW/2, cy=CH/2;
+
+    function sync(id,v){
+      document.getElementById('sl-'+id).value=v;
+      document.getElementById('inp-'+id).value=v;
+      if(id==='r') R=parseFloat(v);
+      if(id==='l') L=parseFloat(v)/1000;
+      if(id==='c') C=parseFloat(v)*1e-6;
+      if(id==='f') f=parseFloat(v);
+      if(id==='v') Vs=parseFloat(v);
+      recalc();
+    }
+
+    function setMode(m){
+      mode=m;
+      document.getElementById('btn-rl').classList.toggle('active',m==='rl');
+      document.getElementById('btn-rc').classList.toggle('active',m==='rc');
+      document.getElementById('row-l').style.display=m==='rl'?'flex':'none';
+      document.getElementById('row-c').style.display=m==='rc'?'flex':'none';
+      document.getElementById('lbl-x').textContent=m==='rl'?'XL':'XC';
+      document.getElementById('lbl-vx-legend').textContent=m==='rl'?'━ VL':'━ VC';
+      document.getElementById('tip-text').innerHTML=m==='rl'
+        ?'RL: la corriente se <strong>retrasa</strong> respecto a la tensión (φ > 0).'
+        :'RC: la corriente se <strong>adelanta</strong> respecto a la tensión (φ < 0).';
+      recalc();
+    }
+
+    function recalc(){
+      let X;
+      if(mode==='rl'){ X=2*Math.PI*f*L; phi=Math.atan2(X,R); }
+      else           { X=1/(2*Math.PI*f*C); phi=-Math.atan2(X,R); }
+      Z=Math.sqrt(R*R+X*X);
+      document.getElementById('res-x').textContent=X.toFixed(1);
+      document.getElementById('res-z').textContent=Z.toFixed(1);
+      document.getElementById('res-phi').textContent=(phi*180/Math.PI).toFixed(1);
+      document.getElementById('res-cos').textContent=Math.cos(phi).toFixed(3);
+    }
+
+    function drawArrow(x1,y1,x2,y2,color,lbl,lw=2.5){
+      const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);
+      if(len<2) return;
+      ctx.strokeStyle=color; ctx.lineWidth=lw;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+      const ax=x2-dx/len*12, ay=y2-dy/len*12;
+      const nx=-dy/len*5, ny=dx/len*5;
+      ctx.fillStyle=color;
+      ctx.beginPath(); ctx.moveTo(x2,y2); ctx.lineTo(ax+nx,ay+ny); ctx.lineTo(ax-nx,ay-ny); ctx.closePath(); ctx.fill();
+      if(lbl){
+        ctx.fillStyle=color; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
+        ctx.fillText(lbl,(x1+x2)/2+(dx<0?-8:8),(y1+y2)/2+(dy>0?12:-4));
+      }
+    }
+
+    function drawFrame(){
+      ctx.clearRect(0,0,CW,CH);
+      // Grid
+      ctx.strokeStyle='#1e293b'; ctx.lineWidth=1;
+      for(let r=40;r<=160;r+=40){
+        ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+      }
+      // Axes
+      ctx.strokeStyle='#334155'; ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(cx-180,cy);ctx.lineTo(cx+180,cy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(cx,cy-170);ctx.lineTo(cx,cy+170);ctx.stroke();
+
+      const scale=160/Vs;
+      const I=Vs/Z;
+      const VR=I*R, VX=I*Math.sqrt(Z*Z-R*R);
+
+      // Rotating angle
+      const omega=2*Math.PI*1; // 1 Hz display speed
+      const angle=-simT*omega;
+
+      // V total (white)
+      const vtx=cx+Vs*scale*Math.cos(angle);
+      const vty=cy+Vs*scale*Math.sin(angle);
+      drawArrow(cx,cy,vtx,vty,'#f1f5f9',`V=${Vs}V`);
+
+      // VR (green) — in phase with I
+      const iphase=angle+phi; // I leads V by -phi or lags by phi
+      const vrx=cx+VR*scale*Math.cos(angle-0);
+      const vry=cy+VR*scale*Math.sin(angle-0);
+      // VR is along V direction in simplified diagram
+      const vr_ang = angle;
+      const vrx2=cx+VR*scale*Math.cos(vr_ang);
+      const vry2=cy+VR*scale*Math.sin(vr_ang);
+      drawArrow(cx,cy,vrx2,vry2,'#10b981',`VR=${VR.toFixed(0)}V`,2);
+
+      // VX (amber) — ±90° from VR
+      const vx_ang = mode==='rl' ? angle-Math.PI/2 : angle+Math.PI/2;
+      const vxx=cx+VX*scale*Math.cos(vx_ang);
+      const vxy=cy+VX*scale*Math.sin(vx_ang);
+      drawArrow(cx,cy,vxx,vxy,'#f59e0b',`${mode==='rl'?'VL':'VC'}=${VX.toFixed(0)}V`,2);
+
+      // I (red) — leads or lags V
+      const iscale=Math.min(I*5000,160)/I;
+      const ix=cx+I*iscale*Math.cos(angle+phi);
+      const iy=cy+I*iscale*Math.sin(angle+phi);
+      drawArrow(cx,cy,ix,iy,'#ef4444',`I=${I<0.1?(I*1000).toFixed(0)+'mA':I.toFixed(2)+'A'}`,2);
+
+      // Angle arc
+      if(Math.abs(phi)>0.05){
+        ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.arc(cx,cy,40, angle, angle+phi, phi<0); ctx.stroke();
+        ctx.fillStyle='#f1f5f9'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+        const midA=angle+phi/2;
+        ctx.fillText('φ',cx+50*Math.cos(midA),cy+50*Math.sin(midA));
+      }
+
+      simT+=0.016;
+    }
+
+    function animLoop(){ drawFrame(); requestAnimationFrame(animLoop); }
+
+    recalc();
+    requestAnimationFrame(animLoop);
+  </script>
+
+</body>
+</html>

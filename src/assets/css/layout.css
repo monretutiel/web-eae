@@ -1,0 +1,211 @@
+/* =====================================================
+   LAYOUT CSS — Estructura de página
+   ===================================================== */
+
+/* --- Navegación principal --- */
+.nav-main {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background-color: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-main__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: white;
+}
+
+.nav-main__logo {
+  font-size: var(--text-xl);
+}
+
+.nav-main__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.nav-main__menu {
+  display: none;
+  gap: var(--space-1);
+}
+
+.nav-main__link {
+  color: rgba(255,255,255,0.85);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  transition: background-color 0.15s, color 0.15s;
+  text-decoration: none;
+}
+
+.nav-main__link:hover,
+.nav-main__link--active {
+  background-color: rgba(255,255,255,0.15);
+  color: white;
+  text-decoration: none;
+}
+
+.nav-main__toggle {
+  color: white;
+  font-size: var(--text-xl);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.nav-main__toggle:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+/* Menú móvil abierto */
+.nav-main--open .nav-main__menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background-color: var(--color-primary-dark);
+  padding: var(--space-3);
+  gap: var(--space-1);
+}
+
+@media (min-width: 700px) {
+  .nav-main__menu {
+    display: flex;
+    flex-direction: row;
+  }
+  .nav-main__toggle {
+    display: none;
+  }
+}
+
+/* --- Estructura principal de página --- */
+.page-wrapper {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+.page-wrapper--wide {
+  max-width: var(--max-width-wide);
+}
+
+/* --- Hero del index --- */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  padding: var(--space-7) var(--space-4);
+  text-align: center;
+}
+
+.hero__title {
+  font-size: var(--text-2xl);
+  color: white;
+  margin-bottom: var(--space-3);
+}
+
+.hero__subtitle {
+  font-size: var(--text-lg);
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto var(--space-4);
+}
+
+.hero__meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: var(--text-sm);
+  opacity: 0.75;
+}
+
+/* --- Grid de cards --- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Sección con título --- */
+.section-title {
+  font-size: var(--text-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 3px solid var(--color-secondary);
+  display: inline-block;
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: var(--color-primary-dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
+  font-size: var(--text-sm);
+  margin-top: var(--space-7);
+}
+
+.footer a {
+  color: rgba(255,255,255,0.8);
+}
+
+/* --- Layout de página de tema (con sidebar) --- */
+.tema-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+@media (min-width: 1100px) {
+  .tema-layout {
+    grid-template-columns: 1fr 260px;
+    align-items: start;
+  }
+  .tema-layout__sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-4));
+  }
+}
+
+/* --- Navegación anterior/siguiente --- */
+.nav-paginas {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}

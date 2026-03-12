@@ -1,0 +1,101 @@
+[
+  {
+    "id": "t1q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cuál es la unidad de la resistencia eléctrica?",
+    "options": ["Voltio (V)", "Amperio (A)", "Ohmio (Ω)", "Vatio (W)"],
+    "correct": 2,
+    "explanation": "La resistencia se mide en Ohmios (Ω). La relación es R = V/I, definida por Georg Ohm en 1827."
+  },
+  {
+    "id": "t1q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "Una resistencia de 470 Ω conectada a 12 V, ¿qué corriente circula?",
+    "options": ["25,5 mA", "39,2 mA", "5 640 mA", "0,47 A"],
+    "correct": 0,
+    "explanation": "I = V/R = 12/470 = 0,02553 A = 25,5 mA. Aplicamos directamente la Ley de Ohm."
+  },
+  {
+    "id": "t1q3",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "En un circuito en serie, la corriente es la misma en todos los componentes.",
+    "correct": true,
+    "explanation": "Verdadero. En serie no hay bifurcación de corriente: I₁ = I₂ = ... = Iₙ. La tensión sí varía según R = V·Rx/Req."
+  },
+  {
+    "id": "t1q4",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Dos resistencias de 100 Ω y 200 Ω conectadas en paralelo. ¿Cuál es la Req?",
+    "options": ["300 Ω", "150 Ω", "66,7 Ω", "50 Ω"],
+    "correct": 2,
+    "explanation": "Req = (R1·R2)/(R1+R2) = (100·200)/(100+200) = 20 000/300 = 66,7 Ω. En paralelo la Req siempre es menor que la resistencia más pequeña."
+  },
+  {
+    "id": "t1q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "En un circuito serie con V=24 V, R1=100 Ω y R2=200 Ω, ¿qué tensión cae en R2?",
+    "options": ["8 V", "16 V", "12 V", "24 V"],
+    "correct": 1,
+    "explanation": "I = 24/300 = 0,08 A. V_R2 = I·R2 = 0,08·200 = 16 V. Divisor de tensión: V_R2 = V·R2/(R1+R2) = 24·200/300 = 16 V."
+  },
+  {
+    "id": "t1q6",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "Para convertir 330 mA a Amperios, debes:",
+    "options": [
+      "Multiplicar por 1 000 → 330 000 A",
+      "Dividir entre 1 000 → 0,330 A",
+      "Multiplicar por 100 → 33 000 A",
+      "Dividir entre 100 → 3,3 A"
+    ],
+    "correct": 1,
+    "explanation": "mA = 10⁻³ A. Para pasar de mA a A (subir de unidad), dividimos entre 1 000: 330 ÷ 1 000 = 0,330 A. Regla: 'subir → dividir'."
+  },
+  {
+    "id": "t1q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Una resistencia disipa 50 W con una tensión de 230 V. ¿Cuál es su resistencia?",
+    "options": ["4,6 Ω", "1 058 Ω", "11,5 Ω", "529 Ω"],
+    "correct": 1,
+    "explanation": "R = V²/P = 230²/50 = 52 900/50 = 1 058 Ω. También: I = P/V = 50/230 = 0,217 A → R = V/I = 230/0,217 = 1 058 Ω."
+  },
+  {
+    "id": "t1q8",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "La Ley de Corrientes de Kirchhoff (LCK) establece que en un nodo:",
+    "options": [
+      "La suma de tensiones es cero",
+      "La suma algebraica de corrientes es cero",
+      "La resistencia equivalente es la suma de todas",
+      "La corriente es igual a la tensión dividida por la resistencia"
+    ],
+    "correct": 1,
+    "explanation": "LCK (Nodos): la suma algebraica de corrientes en un nodo es cero (ΣI = 0). La suma de tensiones en una malla es la LTK."
+  },
+  {
+    "id": "t1q9",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un calentador eléctrico de 2 kW funciona 3 horas. ¿Qué energía consume?",
+    "options": ["6 kWh", "0,67 kWh", "2 kWh", "3 kWh"],
+    "correct": 0,
+    "explanation": "E = P · t = 2 kW · 3 h = 6 kWh. La energía es potencia multiplicada por tiempo. En instalaciones se usa el kWh como unidad práctica."
+  },
+  {
+    "id": "t1q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Una resistencia de 5 bandas tiene los colores: Naranja – Naranja – Negro – Rojo – Marrón. ¿Cuál es su valor?",
+    "options": ["330 Ω ±1%", "3,3 kΩ ±1%", "33 kΩ ±1%", "330 kΩ ±1%"],
+    "correct": 2,
+    "explanation": "Bandas 1-3 (dígitos): Naranja=3, Naranja=3, Negro=0 → '330'. Banda 4 (multiplicador): Rojo = ×100 Ω. Resultado: 330 × 100 = 33 000 Ω = 33 kΩ. Banda 5 (Marrón) = ±1%."
+  }
+]

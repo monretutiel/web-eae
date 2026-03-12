@@ -1,0 +1,136 @@
+[
+  {
+    "id": "t7q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Cuál es la unidad del par motor (torque)?",
+    "options": [
+      "Vatio (W)",
+      "Newton·metro (N·m)",
+      "Julio (J)",
+      "Amperio (A)"
+    ],
+    "correct": 1,
+    "explanation": "El par motor M se mide en Newton·metro (N·m). Se calcula como M = P / ω = P × 60 / (2π × n). El vatio es la unidad de potencia, el julio de energía y el amperio de corriente. No confundir: 1 N·m = 1 J, pero el par es una magnitud vectorial (fuerza × brazo) y la energía es escalar."
+  },
+  {
+    "id": "t7q2",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "Un motor CC de excitación serie no debe ponerse en marcha sin carga porque puede alcanzar velocidades peligrosas (embalamiento).",
+    "correct": true,
+    "explanation": "VERDADERO. En el motor serie, la corriente de campo = corriente del inducido. Sin carga, la corriente es mínima, el campo magnético se debilita y la velocidad crece sin límite — fenómeno de embalamiento. Por eso los motores serie siempre se arrancan con carga o mediante circuitos de protección anti-embalamiento."
+  },
+  {
+    "id": "t7q3",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "Un motor trifásico asíncrono de 2 pares de polos conectado a 50 Hz tiene una velocidad sincrónica de:",
+    "options": [
+      "3000 rpm",
+      "1500 rpm",
+      "1000 rpm",
+      "750 rpm"
+    ],
+    "correct": 1,
+    "explanation": "ns = 60 × f / p = 60 × 50 / 2 = 1500 rpm. Para memorizarlo: 1 par de polos → 3000 rpm; 2 pares → 1500 rpm; 3 pares → 1000 rpm; 4 pares → 750 rpm (todo a 50 Hz). El motor asíncrono real girará ligeramente por debajo (p. ej. 1450–1480 rpm) por el deslizamiento."
+  },
+  {
+    "id": "t7q4",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué tipo de motor CC utiliza imanes permanentes en el rotor y devanados en el estátor, sin colector ni escobillas?",
+    "options": [
+      "Motor CC shunt",
+      "Motor CC serie",
+      "Motor brushless (sin escobillas)",
+      "Motor paso a paso"
+    ],
+    "correct": 2,
+    "explanation": "El motor brushless (BLDC) invierte la disposición: imanes permanentes en el rotor y bobinas en el estátor. La commutación la realiza un controlador electrónico (inversor) en lugar de escobillas y colector. Ventajas: sin mantenimiento de escobillas, alta eficiencia, larga vida. Se usa en drones, vehículos eléctricos y herramientas de gama alta."
+  },
+  {
+    "id": "t7q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un motor trifásico asíncrono de 6 polos (3 pares) a 50 Hz gira a 940 rpm con carga. ¿Cuál es el deslizamiento?",
+    "options": [
+      "4 %",
+      "6 %",
+      "8 %",
+      "10 %"
+    ],
+    "correct": 1,
+    "explanation": "Primero: ns = 60 × 50 / 3 = 1000 rpm. Luego: s = (ns − n) / ns × 100 = (1000 − 940) / 1000 × 100 = 60 / 1000 × 100 = 6 %. Un deslizamiento del 2–8 % es normal en motores de inducción a plena carga. Si s = 0, no hay par (motor síncrono ideal); si s = 100 %, el motor está parado."
+  },
+  {
+    "id": "t7q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Cuál es la principal ventaja del motor trifásico asíncrono de rotor de anillos rozantes frente al de jaula de ardilla?",
+    "options": [
+      "Mayor velocidad máxima de giro",
+      "Corriente de arranque reducida y mayor par de arranque gracias a reóstatos externos",
+      "No necesita mantenimiento",
+      "Funciona sin campo magnético giratorio"
+    ],
+    "correct": 1,
+    "explanation": "El rotor bobinado (anillos rozantes) permite conectar reóstatos externos en el circuito del rotor. Esto aumenta la resistencia total del rotor, lo que: 1) reduce la corriente de arranque (importante para no disparar las protecciones), y 2) desplaza el punto de par máximo a velocidades más bajas, aumentando el par de arranque. Una vez en marcha, los reóstatos se cortocircuitan. Desventaja: mayor mantenimiento por escobillas y anillos."
+  },
+  {
+    "id": "t7q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué tipo de motor monofásico utiliza 'espiras de sombra' para generar el par de arranque?",
+    "options": [
+      "Motor de fase partida con condensador",
+      "Motor de reluctancia",
+      "Motor de polos sombreados",
+      "Motor universal"
+    ],
+    "correct": 2,
+    "explanation": "El motor de polos sombreados usa anillos de cobre cortocircuitados ('espiras de sombra') colocados en una parte del polo del estátor. Estas espiras inducen corrientes que crean un campo retardado respecto al principal, generando un campo casi giratorio que arrastra al rotor. Ventajas: barato y robusto. Desventajas: bajo par, baja eficiencia, sentido de giro fijo. Uso típico: ventiladores de baño y de ordenador."
+  },
+  {
+    "id": "t7q8",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un motor CC de 500 W gira a 1800 rpm. ¿Cuál es el par que entrega en el eje? (usa π ≈ 3,14)",
+    "options": [
+      "0,27 N·m",
+      "2,65 N·m",
+      "5,3 N·m",
+      "15,9 N·m"
+    ],
+    "correct": 1,
+    "explanation": "M = P × 60 / (2π × n) = 500 × 60 / (2 × 3,14 × 1800) = 30.000 / 11.304 ≈ 2,65 N·m. Regla práctica: a misma potencia, cuanto más lento gira el motor, mayor es el par que entrega. Un motor de 500 W a 1800 rpm entrega ~2,65 N·m; el mismo motor a 900 rpm entregaría ~5,3 N·m."
+  },
+  {
+    "id": "t7q9",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un motor trifásico de 1,5 kW se alimenta como monofásico con un condensador. ¿Qué capacidad se recomienda para 230 V / 50 Hz?",
+    "options": [
+      "35 µF",
+      "70 µF",
+      "105 µF",
+      "140 µF"
+    ],
+    "correct": 2,
+    "explanation": "La regla práctica es 70 µF por cada kW para motores trifásicos de 230 V / 50 Hz. Para 1,5 kW: C = 70 × 1,5 = 105 µF. El condensador debe ser no polarizado (tipo de trabajo, clase X) y estar dimensionado para la tensión de red (≥ 250 V CA). Con esta solución el rendimiento y el par de arranque serán notablemente inferiores al funcionamiento trifásico."
+  },
+  {
+    "id": "t7q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un motor Dahlander de 4/8 polos funciona a 50 Hz en la conexión de alta velocidad (4 polos) con un deslizamiento del 5 %. ¿Cuál es su velocidad real de giro?",
+    "options": [
+      "712 rpm",
+      "950 rpm",
+      "1425 rpm",
+      "2850 rpm"
+    ],
+    "correct": 2,
+    "explanation": "Paso 1 — velocidad síncrona con 4 polos (2 pares): ns = 60 × 50 / 2 = 1500 rpm. Paso 2 — velocidad real con s = 5 %: n = ns × (1 − s) = 1500 × (1 − 0,05) = 1500 × 0,95 = 1425 rpm. En la conexión de baja velocidad (8 polos, 4 pares): ns = 750 rpm, lo que da la relación característica 2:1 del Dahlander."
+  }
+]

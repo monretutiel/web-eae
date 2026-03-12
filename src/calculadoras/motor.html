@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Motor Asíncrono | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5)}
+    .calc-field{display:flex;flex-direction:column;gap:var(--space-1);margin-bottom:var(--space-3)}
+    .calc-field label{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+    .calc-field .field-row{display:flex;gap:var(--space-2);align-items:center}
+    .calc-field input[type="number"]{flex:1;padding:var(--space-2) var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-base);background:var(--color-bg);color:var(--color-text);outline:none;transition:border-color .2s}
+    .calc-field input[type="number"]:focus{border-color:var(--color-primary)}
+    .calc-field .unit{font-size:var(--text-sm);color:var(--color-text-muted);min-width:3rem}
+    .results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin-top:var(--space-4)}
+    .result-card{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-3);text-align:center}
+    .result-card .rc-label{font-size:var(--text-xs);opacity:.65;text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-1)}
+    .result-card .rc-value{font-size:var(--text-xl);font-weight:700}
+    .result-card .rc-unit{font-size:var(--text-xs);opacity:.65;margin-top:2px}
+    .nameplate{background:#0f172a;color:#f1f5f9;border-radius:var(--radius-lg);padding:var(--space-4);font-family:monospace;font-size:var(--text-sm);line-height:1.8;margin-top:var(--space-4)}
+    .nameplate span{color:#f59e0b}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link nav-main__link--active">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Calculadoras</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Motor asíncrono</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">⚙️ Calculadora — Motor asíncrono trifásico</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+        Introduce los datos de la placa de características y obtén las magnitudes eléctricas y mecánicas del motor.
+      </p>
+
+      <div style="display:grid; grid-template-columns:340px 1fr; gap:var(--space-5); align-items:start;">
+
+        <!-- Inputs -->
+        <div class="calc-card">
+          <p style="font-weight:700;margin-bottom:var(--space-3);color:var(--color-text-muted);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;">Datos de placa</p>
+          <div class="calc-field"><label for="pn">Potencia nominal (Pn)</label><div class="field-row"><input type="number" id="pn" value="7.5" min="0.001" step="any" oninput="calculate()"><span class="unit">kW</span></div></div>
+          <div class="calc-field"><label for="eta">Rendimiento (η)</label><div class="field-row"><input type="number" id="eta" value="90" min="1" max="100" step="any" oninput="calculate()"><span class="unit">%</span></div></div>
+          <div class="calc-field"><label for="cosphi">Factor de potencia (cos φ)</label><div class="field-row"><input type="number" id="cosphi" value="0.85" min="0.1" max="1" step="any" oninput="calculate()"><span class="unit">—</span></div></div>
+          <div class="calc-field"><label for="ul">Tensión de línea (U)</label><div class="field-row"><input type="number" id="ul" value="400" min="1" step="any" oninput="calculate()"><span class="unit">V</span></div></div>
+          <div class="calc-field"><label for="nn">Velocidad nominal (n)</label><div class="field-row"><input type="number" id="nn" value="1450" min="1" step="1" oninput="calculate()"><span class="unit">rpm</span></div></div>
+          <div class="calc-field"><label for="ff">Frecuencia (f)</label><div class="field-row"><input type="number" id="ff" value="50" min="1" step="any" oninput="calculate()"><span class="unit">Hz</span></div></div>
+          <div class="calc-field"><label for="pp">Pares de polos (p)</label><div class="field-row"><input type="number" id="pp" value="2" min="1" step="1" oninput="calculate()"><span class="unit">—</span></div></div>
+          <button onclick="calculate()" class="btn btn--primary" style="width:100%;margin-top:var(--space-2);">Calcular</button>
+        </div>
+
+        <!-- Results -->
+        <div>
+          <div id="results-section" style="display:none;">
+            <div class="results-grid">
+              <div class="result-card"><p class="rc-label">Veloc. síncrona</p><p class="rc-value" id="res-ns">—</p><p class="rc-unit">rpm</p></div>
+              <div class="result-card"><p class="rc-label">Deslizamiento</p><p class="rc-value" id="res-s">—</p><p class="rc-unit">%</p></div>
+              <div class="result-card"><p class="rc-label">Potencia elec.</p><p class="rc-value" id="res-pelec">—</p><p class="rc-unit">kW</p></div>
+              <div class="result-card"><p class="rc-label">Corriente línea</p><p class="rc-value" id="res-il">—</p><p class="rc-unit">A</p></div>
+              <div class="result-card"><p class="rc-label">Potencia aparente</p><p class="rc-value" id="res-s2">—</p><p class="rc-unit">kVA</p></div>
+              <div class="result-card"><p class="rc-label">Par nominal</p><p class="rc-value" id="res-m">—</p><p class="rc-unit">N·m</p></div>
+            </div>
+
+            <div class="nameplate" id="nameplate">
+              <p style="text-align:center;font-size:var(--text-base);color:#f59e0b;font-weight:700;margin-bottom:var(--space-2);">MOTOR ASÍNCRONO TRIFÁSICO</p>
+              <p>Pn = <span id="np-pn">—</span> kW &nbsp; η = <span id="np-eta">—</span> %</p>
+              <p>U = <span id="np-u">—</span> V · <span id="np-f">—</span> Hz &nbsp; cos φ = <span id="np-cos">—</span></p>
+              <p>I = <span id="np-i">—</span> A &nbsp; n = <span id="np-n">—</span> rpm</p>
+              <p>ns = <span id="np-ns">—</span> rpm &nbsp; s = <span id="np-s">—</span> % &nbsp; M = <span id="np-m">—</span> N·m</p>
+            </div>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-4);">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content" id="motor-tip">—</div>
+            </div>
+          </div>
+          <div id="placeholder" style="text-align:center;padding:var(--space-8);color:var(--color-text-muted);font-size:var(--text-sm);">
+            Los valores por defecto corresponden a un motor industrial típico de 7,5 kW. Pulsa <strong>Calcular</strong> para ver los resultados.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./transformador.html" class="btn btn--ghost">← Calc 7: Transformador</a>
+        <a href="./index.html"         class="btn btn--primary">Ver todas las calculadoras →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    function calculate() {
+      const Pn     = parseFloat(document.getElementById('pn').value)*1000;     // W
+      const eta    = parseFloat(document.getElementById('eta').value)/100;
+      const cosPhi = parseFloat(document.getElementById('cosphi').value);
+      const UL     = parseFloat(document.getElementById('ul').value);
+      const n      = parseFloat(document.getElementById('nn').value);
+      const f      = parseFloat(document.getElementById('ff').value);
+      const p      = parseInt(document.getElementById('pp').value);
+      if([Pn,eta,cosPhi,UL,n,f,p].some(x=>isNaN(x)||x<=0)) return;
+
+      const ns     = 60*f/p;
+      const s      = ((ns-n)/ns*100);
+      const Pelec  = Pn/eta;
+      const IL     = Pelec/(Math.sqrt(3)*UL*cosPhi);
+      const S      = Pelec/cosPhi;
+      const M      = 9550*(Pn/1000)/n;
+
+      document.getElementById('res-ns').textContent   = ns.toFixed(0);
+      document.getElementById('res-s').textContent    = s.toFixed(1);
+      document.getElementById('res-pelec').textContent= (Pelec/1000).toFixed(2);
+      document.getElementById('res-il').textContent   = IL.toFixed(2);
+      document.getElementById('res-s2').textContent   = (S/1000).toFixed(2);
+      document.getElementById('res-m').textContent    = M.toFixed(1);
+
+      // Nameplate
+      document.getElementById('np-pn').textContent  = (Pn/1000).toFixed(2);
+      document.getElementById('np-eta').textContent = (eta*100).toFixed(0);
+      document.getElementById('np-u').textContent   = UL;
+      document.getElementById('np-f').textContent   = f;
+      document.getElementById('np-cos').textContent = cosPhi;
+      document.getElementById('np-i').textContent   = IL.toFixed(2);
+      document.getElementById('np-n').textContent   = n;
+      document.getElementById('np-ns').textContent  = ns.toFixed(0);
+      document.getElementById('np-s').textContent   = s.toFixed(1);
+      document.getElementById('np-m').textContent   = M.toFixed(1);
+
+      // Tip
+      document.getElementById('motor-tip').innerHTML =
+        `La corriente de arranque directo (DOL) suele ser <strong>${(IL*6).toFixed(1)} A</strong> (6×In). `+
+        `El deslizamiento del <strong>${s.toFixed(1)}%</strong> es ${s<3?'muy bajo (buen diseño)':s<8?'normal':'alto — revisar carga'}.`;
+
+      document.getElementById('results-section').style.display='block';
+      document.getElementById('placeholder').style.display='none';
+    }
+
+    // Auto-calculate on load
+    document.addEventListener('DOMContentLoaded', calculate);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teoría Tema 6: condensadores, carga y descarga RC, asociaciones, clasificación y criterios de selección.">
+  <title>Tema 6 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema6/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper page-wrapper--with-toc">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 6</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+        </ol>
+      </nav>
+
+      <div class="content-with-toc">
+
+        <!-- TOC lateral -->
+        <aside class="toc" aria-label="Índice de contenidos">
+          <p class="toc__title">En esta página</p>
+          <ol class="toc__list">
+            <li class="toc__item"><a href="#sec1"  class="toc__link">1. Condensadores</a></li>
+            <li class="toc__item"><a href="#sec2"  class="toc__link">2. Geometría y capacitancia</a></li>
+            <li class="toc__item"><a href="#sec3"  class="toc__link">3. Carga y descarga RC</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec3-1" class="toc__link">3.1 Constante de tiempo τ</a></li>
+                <li class="toc__item"><a href="#sec3-2" class="toc__link">3.2 Ecuaciones V(t) e I(t)</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec4"  class="toc__link">4. Energía almacenada</a></li>
+            <li class="toc__item"><a href="#sec5"  class="toc__link">5. Asociación de condensadores</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec5-1" class="toc__link">5.1 En serie</a></li>
+                <li class="toc__item"><a href="#sec5-2" class="toc__link">5.2 En paralelo</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec6"  class="toc__link">6. Clasificación</a></li>
+            <li class="toc__item"><a href="#sec7"  class="toc__link">7. Criterios de selección</a></li>
+          </ol>
+        </aside>
+
+        <!-- Contenido -->
+        <div class="content">
+
+          <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-1);">
+            Componentes Capacitivos
+          </h1>
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+            Tema 6 · 7 secciones
+          </p>
+
+          <!-- ═══════════════════════ -->
+          <!-- SEC 1: CONDENSADORES    -->
+          <!-- ═══════════════════════ -->
+          <section id="sec1">
+            <h2 class="section-title">1. Condensadores</h2>
+
+            <p>Un <strong>condensador</strong> (o capacitor) es un componente que en su forma más simple está formado por dos superficies conductoras (<strong>armaduras</strong>) enfrentadas entre sí y separadas por un material <strong>dieléctrico</strong> (aislante).</p>
+
+            <p style="margin-top:var(--space-3);">Gracias al dieléctrico, la corriente no fluye directamente de una armadura a la otra. Sin embargo, se genera una atracción electrostática entre las cargas de distinta polaridad acumuladas en ambas armaduras, lo que permite <strong>almacenar energía en forma de campo eléctrico</strong>.</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Capacitancia</h3>
+            <p>La <strong>capacitancia</strong> \(C\) es la propiedad que cuantifica cuánta carga puede almacenar el condensador por cada voltio de tensión aplicado:</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ C = \frac{Q}{\Delta V} \qquad \Rightarrow \qquad Q = C \cdot V \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(C\) — Capacitancia [F] (Faradios, en honor a Michael Faraday)</span>
+                <span>\(Q\) — Carga eléctrica almacenada [C] (Culombios)</span>
+                <span>\(\Delta V\) — Diferencia de potencial entre armaduras [V]</span>
+              </div>
+            </div>
+
+            <p style="margin-top:var(--space-3);">1 Faradio es la capacitancia que almacena 1 Culombio de carga con 1 Voltio aplicado. En la práctica los condensadores tienen valores mucho menores: µF (10⁻⁶ F), nF (10⁻⁹ F) o pF (10⁻¹² F).</p>
+
+            <p style="margin-top:var(--space-2);">La carga eléctrica también se puede expresar en función de la corriente y el tiempo:</p>
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ Q = I \cdot t \]
+              </div>
+              <div class="formula-card__legend">
+                <span>1 Culombio = carga transportada en 1 segundo por 1 amperio (6,24 · 10¹⁸ electrones)</span>
+              </div>
+            </div>
+
+            <div class="alert alert--info">
+              <span class="alert__icon">🔗</span>
+              <div class="alert__content">
+                <strong>Analogía con la Ley de Ohm:</strong> \(Q = C \cdot V\) es análoga a \(I = V/R\). En esta analogía, Q actúa como I, V actúa como V, y C actúa como 1/R — es decir, C se comporta igual que la resistencia pero al revés: más capacitancia = más almacenamiento (como menos resistencia = más corriente).
+              </div>
+            </div>
+          </section>
+
+          <!-- ════════════════════════════════ -->
+          <!-- SEC 2: GEOMETRÍA Y CAPACITANCIA  -->
+          <!-- ════════════════════════════════ -->
+          <section id="sec2" style="margin-top:var(--space-6);">
+            <h2 class="section-title">2. Geometría y capacitancia</h2>
+
+            <p>El valor de la capacitancia depende de la geometría del condensador y del material dieléctrico entre las armaduras:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Tipo</th><th>Fórmula</th><th>Variables</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Placas paralelas</strong><br><small>(el más común en la práctica)</small></td>
+                  <td>\(C = \dfrac{\varepsilon \cdot S}{d}\)</td>
+                  <td>\(\varepsilon = \varepsilon_0 \cdot \varepsilon_r\) — permitividad del dieléctrico<br>
+                      \(S\) — superficie de las armaduras [m²]<br>
+                      \(d\) — distancia entre armaduras [m]</td>
+                </tr>
+                <tr>
+                  <td><strong>Cilíndrico</strong></td>
+                  <td>\(C = \dfrac{2\pi\varepsilon_0 L}{\ln(R_2/R_1)}\)</td>
+                  <td>\(L\) — longitud [m] &nbsp;|&nbsp; \(R_1, R_2\) — radios interior/exterior [m]</td>
+                </tr>
+                <tr>
+                  <td><strong>Esférico</strong></td>
+                  <td>\(C = \dfrac{4\pi R_1 R_2 \varepsilon_0}{R_2 - R_1}\)</td>
+                  <td>\(R_1, R_2\) — radio interior/exterior [m]</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:var(--space-3);">Constante: \(\varepsilon_0 = 8{,}85 \times 10^{-12}\ \text{F/m}\) (permitividad del vacío)</p>
+
+            <div class="alert alert--info">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                <strong>Cómo aumentar la capacitancia</strong> en un condensador de placas paralelas:
+                <ul style="margin:var(--space-2) 0 0; padding-left:var(--space-4);">
+                  <li>Aumentar la <strong>superficie S</strong> de las armaduras</li>
+                  <li>Reducir la <strong>distancia d</strong> entre armaduras</li>
+                  <li>Usar un dieléctrico con mayor <strong>permitividad εᵣ</strong></li>
+                </ul>
+                A mayor capacitancia, mayor tensión máxima admisible necesaria. Los condensadores electrolíticos combinan gran superficie (láminas enrolladas) con dieléctrico muy delgado → capacidades muy elevadas en poco volumen.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 3: CARGA Y DESCARGA RC  -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec3" style="margin-top:var(--space-6);">
+            <h2 class="section-title">3. Carga y descarga RC</h2>
+
+            <p>Cuando se conecta un condensador en serie con una resistencia a una fuente de tensión, la carga no es instantánea. La resistencia limita la corriente y el proceso sigue una curva exponencial.</p>
+
+            <section id="sec3-1" style="margin-top:var(--space-4);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">3.1 Constante de tiempo τ</h3>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[ \tau = R \cdot C \]
+                </div>
+                <div class="formula-card__legend">
+                  <span>\(\tau\) — Constante de tiempo [s] (tau)</span>
+                  <span>\(R\) — Resistencia serie [Ω] &nbsp;|&nbsp; \(C\) — Capacitancia [F]</span>
+                </div>
+              </div>
+
+              <p style="margin-top:var(--space-3);">La constante de tiempo \(\tau\) es el tiempo que tarda el condensador en alcanzar el <strong>63,2 %</strong> de la tensión final durante la carga (o en descargarse al 36,8 % de su tensión inicial).</p>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Tiempo transcurrido</th><th>% de carga alcanzada</th><th>% restante</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1τ</td><td>63,2 %</td><td>36,8 %</td></tr>
+                  <tr><td>2τ</td><td>86,5 %</td><td>13,5 %</td></tr>
+                  <tr><td>3τ</td><td>95,0 %</td><td>5,0 %</td></tr>
+                  <tr><td>4τ</td><td>98,2 %</td><td>1,8 %</td></tr>
+                  <tr><td><strong>5τ</strong></td><td><strong>≈ 99,3 % ≈ 100 %</strong></td><td>0,7 %</td></tr>
+                </tbody>
+              </table>
+
+              <div class="alert alert--tip">
+                <span class="alert__icon">📏</span>
+                <div class="alert__content">
+                  <strong>Regla práctica:</strong> Se considera que el condensador está completamente cargado (o descargado) tras <strong>5τ</strong>. Para medir τ con el osciloscopio: es el tiempo desde el inicio hasta que la tensión alcanza el 63,2 % del valor final.
+                </div>
+              </div>
+            </section>
+
+            <section id="sec3-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">3.2 Ecuaciones de carga y descarga</h3>
+
+              <table class="data-table">
+                <thead>
+                  <tr><th></th><th>Carga (condensador vacío → V<sub>cc</sub>)</th><th>Descarga (condensador a V<sub>cc</sub> → 0)</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Tensión V(t)</strong></td>
+                    <td>\(V(t) = V_{cc}\left(1 - e^{-t/RC}\right)\)</td>
+                    <td>\(V(t) = V_{cc} \cdot e^{-t/RC}\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Corriente I(t)</strong></td>
+                    <td>\(I(t) = \dfrac{V_{cc}}{R} \cdot e^{-t/RC}\)</td>
+                    <td>\(I(t) = \dfrac{V_{cc}}{R} \cdot e^{-t/RC}\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Carga Q(t)</strong></td>
+                    <td>\(Q(t) = CV_{cc}\left(1 - e^{-t/RC}\right)\)</td>
+                    <td>\(Q(t) = CV_{cc} \cdot e^{-t/RC}\)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top:var(--space-3); font-size:var(--text-sm);">
+                <strong>Comportamiento de las curvas:</strong><br>
+                — En la <strong>carga</strong>: V(t) sube exponencialmente desde 0 hasta V<sub>cc</sub>. I(t) empieza en su valor máximo (V<sub>cc</sub>/R) y decrece exponencialmente hasta 0.<br>
+                — En la <strong>descarga</strong>: V(t) e I(t) decrecen exponencialmente desde sus valores iniciales hasta 0.
+              </p>
+
+              <div class="alert alert--info">
+                <span class="alert__icon">🔬</span>
+                <div class="alert__content">
+                  <strong>Con el osciloscopio:</strong> Conectando una onda cuadrada a un circuito RC, se observa la curva de carga/descarga en el canal del condensador. Con R = 10 kΩ y C = 100 nF, τ = 1 ms. Con R = 100 kΩ y el mismo C, τ = 10 ms — la curva es 10 veces más lenta y se aprecia claramente la diferencia.
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ════════════════════════════ -->
+          <!-- SEC 4: ENERGÍA ALMACENADA    -->
+          <!-- ════════════════════════════ -->
+          <section id="sec4" style="margin-top:var(--space-6);">
+            <h2 class="section-title">4. Energía almacenada</h2>
+
+            <p>Un condensador cargado almacena energía en el <strong>campo eléctrico</strong> entre sus armaduras. Esta energía puede recuperarse cuando el condensador se descarga.</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[
+                  W = \frac{1}{2} \cdot C \cdot V^2 = \frac{1}{2} \cdot \frac{Q^2}{C} = \frac{1}{2} \cdot Q \cdot V
+                \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(W\) — Energía almacenada [J] (Julios)</span>
+                <span>\(C\) — Capacitancia [F] &nbsp;|&nbsp; \(V\) — Tensión en el condensador [V] &nbsp;|&nbsp; \(Q\) — Carga [C]</span>
+              </div>
+            </div>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Componente</th><th>Almacena energía en</th><th>Fórmula de energía</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Condensador (C)</strong></td>
+                  <td>Campo eléctrico (entre armaduras)</td>
+                  <td>\(W = \tfrac{1}{2} C V^2\)</td>
+                </tr>
+                <tr>
+                  <td><strong>Bobina (L)</strong></td>
+                  <td>Campo magnético (en el núcleo)</td>
+                  <td>\(W = \tfrac{1}{2} L I^2\)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                <strong>Precaución con los condensadores electrolíticos de alta capacidad:</strong> Un condensador de 10.000 µF cargado a 400 V almacena 800 J — energía suficiente para causar quemaduras graves. Los condensadores de las fuentes de alimentación pueden mantener tensiones peligrosas mucho después de desconectar la alimentación.
+              </div>
+            </div>
+          </section>
+
+          <!-- ══════════════════════════════════ -->
+          <!-- SEC 5: ASOCIACIÓN DE CONDENSADORES -->
+          <!-- ══════════════════════════════════ -->
+          <section id="sec5" style="margin-top:var(--space-6);">
+            <h2 class="section-title">5. Asociación de condensadores</h2>
+
+            <p>Las reglas de asociación de condensadores son <strong>inversas</strong> a las de las resistencias: los condensadores en paralelo se suman directamente (como resistencias en serie), y los condensadores en serie se calculan con la inversa de la suma de inversas (como resistencias en paralelo).</p>
+
+            <section id="sec5-1" style="margin-top:var(--space-4);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">5.1 Condensadores en serie</h3>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    \frac{1}{C_T} = \frac{1}{C_1} + \frac{1}{C_2} + \cdots + \frac{1}{C_n}
+                  \]
+                </div>
+              </div>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Magnitud</th><th>Comportamiento en serie</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Capacitancia total \(C_T\)</td><td>Menor que la más pequeña (1/CT = suma de inversas)</td></tr>
+                  <tr><td>Carga \(Q\)</td><td>\(Q_T = Q_1 = Q_2 = \cdots = Q_n\) — <strong>igual en todos</strong></td></tr>
+                  <tr><td>Tensión \(V\)</td><td>\(V_T = V_{C1} + V_{C2} + \cdots + V_{Cn}\) — <strong>se reparte</strong></td></tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top:var(--space-2); font-size:var(--text-sm);">Para <strong>dos condensadores en serie</strong>: \(C_T = \dfrac{C_1 \cdot C_2}{C_1 + C_2}\)</p>
+            </section>
+
+            <section id="sec5-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">5.2 Condensadores en paralelo</h3>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    C_T = C_1 + C_2 + \cdots + C_n
+                  \]
+                </div>
+              </div>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Magnitud</th><th>Comportamiento en paralelo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Capacitancia total \(C_T\)</td><td>Mayor que la mayor (suma directa)</td></tr>
+                  <tr><td>Tensión \(V\)</td><td>\(V_T = V_{C1} = V_{C2} = \cdots = V_{Cn}\) — <strong>igual en todos</strong></td></tr>
+                  <tr><td>Carga \(Q\)</td><td>\(Q_T = Q_1 + Q_2 + \cdots + Q_n\) — <strong>se reparte</strong></td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-4);">
+              <span class="alert__icon">🧠</span>
+              <div class="alert__content">
+                <strong>Regla mnemotécnica:</strong>
+                <ul style="margin:var(--space-2) 0 0; padding-left:var(--space-4);">
+                  <li>Resistencias en <strong>serie</strong> → se suman &nbsp;|&nbsp; Condensadores en <strong>paralelo</strong> → se suman</li>
+                  <li>Resistencias en <strong>paralelo</strong> → inversa de suma &nbsp;|&nbsp; Condensadores en <strong>serie</strong> → inversa de suma</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ════════════════════════════ -->
+          <!-- SEC 6: CLASIFICACIÓN         -->
+          <!-- ════════════════════════════ -->
+          <section id="sec6" style="margin-top:var(--space-6);">
+            <h2 class="section-title">6. Clasificación de condensadores</h2>
+
+            <p>Los condensadores se clasifican principalmente por si admiten polarización o no, y por el tipo de dieléctrico utilizado:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Grupo</th><th>Tipo</th><th>Dieléctrico</th><th>Características principales</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2"><strong>No polarizados</strong><br><small>(se pueden conectar en cualquier sentido)</small></td>
+                  <td>De película</td>
+                  <td>Plástico (Mylar, polipropileno, teflón…) o papel metalizado</td>
+                  <td>Económicos, tolerancia 0,1–20 %, tensiones hasta 1500 V, 5 pF – 100 µF</td>
+                </tr>
+                <tr>
+                  <td>Cerámico</td>
+                  <td>Cerámica (clase 1 = estable; clase 2 = alta capacidad)</td>
+                  <td>Muy estables en temperatura, 1 pF – 68 nF, 50–100 V, tolerancia 7,5–22 %</td>
+                </tr>
+                <tr>
+                  <td rowspan="3"><strong>Polarizados</strong><br><small>(deben conectarse respetando + y −)</small></td>
+                  <td>Electrolítico de aluminio</td>
+                  <td>Óxido de aluminio (muy delgado)</td>
+                  <td>Capacidades enormes: 1 pF – 1 mF, 6,3–450 V, tolerancia ~20 %. Muy usados en fuentes de alimentación.</td>
+                </tr>
+                <tr>
+                  <td>Electrolítico de tantalio</td>
+                  <td>Óxido de tantalio</td>
+                  <td>220 nF – 330 µF, 6,3–50 V. Más estables que los de Al. Más caros.</td>
+                </tr>
+                <tr>
+                  <td>Supercondensador (EDLC)</td>
+                  <td>Doble capa electroquímica</td>
+                  <td>Capacidades gigantes: 100 F – 5 kF, tensiones bajas (&lt;2,7 V). Carga rápida. Energía de respaldo.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- ══════════════════════════════ -->
+          <!-- SEC 7: CRITERIOS DE SELECCIÓN  -->
+          <!-- ══════════════════════════════ -->
+          <section id="sec7" style="margin-top:var(--space-6);">
+            <h2 class="section-title">7. Criterios de selección</h2>
+
+            <p>Para seleccionar el condensador adecuado para una aplicación hay que tener en cuenta seis propiedades fundamentales:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>#</th><th>Propiedad</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td><strong>Valor capacitivo</strong></td><td>Capacitancia nominal necesaria para la aplicación (filtro, temporización, corrección de cosφ…)</td></tr>
+                <tr><td>2</td><td><strong>Tolerancia</strong></td><td>Margen de error admisible en el valor de C (±1 % para precisión, ±20 % para filtros de potencia)</td></tr>
+                <tr><td>3</td><td><strong>Tensión máxima admisible</strong></td><td>La tensión de trabajo debe estar por debajo de la tensión nominal. Se suele aplicar un margen de seguridad del 20–50 %.</td></tr>
+                <tr><td>4</td><td><strong>Dimensiones</strong></td><td>Tamaño físico compatible con el espacio disponible (especialmente relevante en SMD)</td></tr>
+                <tr><td>5</td><td><strong>Temperatura de trabajo</strong></td><td>Rango de temperatura de operación. Los cerámicos clase 1 son muy estables; los electrolíticos tienen mayor deriva térmica.</td></tr>
+                <tr><td>6</td><td><strong>Polarizado o no</strong></td><td>Si el condensador se conecta a CA o su polaridad puede invertirse, debe ser no polarizado. Los electrolíticos SOLO se usan en CC o en aplicaciones con tensión siempre del mismo signo.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                <strong>Error frecuente con condensadores electrolíticos:</strong> Conectar un condensador electrolítico con la polaridad invertida puede destruirlo de forma violenta (explosión y proyección de electrolito). Siempre verificar el terminal positivo (+) marcado en el componente.
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Resumen rápido por aplicación</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Aplicación</th><th>Tipo recomendado</th><th>Motivo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Filtro de alimentación DC (fuente conmutada)</td><td>Electrolítico de aluminio</td><td>Necesita alta capacidad a baja tensión</td></tr>
+                <tr><td>Filtro paso-bajo en señal de audio</td><td>Película plástico (Mylar)</td><td>No polarizado, bajo ruido, baja pérdida</td></tr>
+                <tr><td>Acoplamiento entre etapas (audio)</td><td>Electrolítico tantalio o Al</td><td>Solo hay tensión DC de polarización; alta C en poco espacio</td></tr>
+                <tr><td>Corrección del factor de potencia (CA industrial)</td><td>Película metalizada (polipropileno)</td><td>No polarizado, autoregenerante, soporta CA 230–400 V</td></tr>
+                <tr><td>Temporización RC (señal TTL/CMOS)</td><td>Cerámico clase 1 o película</td><td>Estabilidad en temperatura para τ preciso</td></tr>
+                <tr><td>Arranque de motor monofásico</td><td>Electrolítico AC (bipolar)</td><td>Soporta CA y corrientes de arranque elevadas</td></tr>
+                <tr><td>Respaldo energético (IoT, contadores)</td><td>Supercondensador</td><td>Carga rápida, muchos ciclos, sin memoria</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Navegación inferior -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:var(--space-6); padding-top:var(--space-4); border-top:1px solid var(--color-border);">
+            <a href="./index.html"       class="btn btn--secondary btn--sm">← Volver al Tema 6</a>
+            <a href="./ejercicios.html"  class="btn btn--primary btn--sm">Ejercicios →</a>
+          </div>
+
+        </div><!-- .content -->
+      </div><!-- .content-with-toc -->
+    </div><!-- .page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

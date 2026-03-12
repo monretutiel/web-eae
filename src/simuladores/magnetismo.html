@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Magnetismo | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .sim-canvas{background:#0f172a;border-radius:12px;display:block;width:100%;max-width:600px;margin:0 auto}
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4)}
+    .ctrl-row{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)}
+    .ctrl-row label{font-size:var(--text-sm);font-weight:600;min-width:5.5rem}
+    .ctrl-row input[type="range"]{flex:1;accent-color:var(--color-primary)}
+    .ctrl-row .unit{font-size:var(--text-xs);color:var(--color-text-muted);min-width:3rem}
+    .mode-btn{padding:var(--space-2) var(--space-3);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-weight:600;cursor:pointer;font-size:var(--text-xs);transition:all .2s}
+    .mode-btn.active{border-color:var(--color-primary);background:var(--color-primary);color:#fff}
+    .dir-btn{padding:var(--space-2) var(--space-3);border:2px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);font-weight:600;cursor:pointer;font-size:var(--text-sm);transition:all .2s}
+    .dir-btn.active{border-color:#f59e0b;background:#f59e0b;color:#fff}
+    .info-box{background:var(--color-surface);border-left:3px solid var(--color-primary);border-radius:var(--radius-md);padding:var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-3)}
+    .info-box strong{color:var(--color-text)}
+    .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2);margin-top:var(--space-3)}
+    .res-cell{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-2);text-align:center}
+    .res-cell small{display:block;font-size:10px;opacity:.65;text-transform:uppercase}
+    .res-cell strong{font-size:var(--text-base);display:block;margin-top:2px}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link nav-main__link--active">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Simuladores</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Magnetismo</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">🧲 Simulador — Electromagnetismo</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        Tres modos: campo en conductor recto, solenoide e inducción electromagnética (Ley de Faraday).
+      </p>
+
+      <!-- Modo selector -->
+      <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4);">
+        <button class="mode-btn active" id="btn-conductor" onclick="setMode('conductor')">⚡ Conductor recto</button>
+        <button class="mode-btn"        id="btn-solenoide" onclick="setMode('solenoide')">🌀 Solenoide</button>
+        <button class="mode-btn"        id="btn-induccion" onclick="setMode('induccion')">🔄 Inducción (Faraday)</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,280px);gap:var(--space-4);align-items:start;">
+
+        <!-- Canvas -->
+        <div>
+          <canvas id="sim" class="sim-canvas" width="560" height="340"></canvas>
+        </div>
+
+        <!-- Controles -->
+        <div class="calc-card" style="font-size:var(--text-sm);">
+
+          <!-- Controles: Conductor -->
+          <div id="ctrl-conductor">
+            <p style="font-weight:700;margin-bottom:var(--space-3);">Conductor recto</p>
+            <div class="ctrl-row">
+              <label>Corriente I</label>
+              <input type="range" id="sl-I" min="1" max="20" value="5" oninput="syncI(this.value)">
+              <span class="unit"><span id="val-I">5</span> A</span>
+            </div>
+            <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2);">Dirección de la corriente:</p>
+            <div style="display:flex;gap:var(--space-2);">
+              <button class="dir-btn active" id="btn-out" onclick="setDir('out')">⊙ Sale</button>
+              <button class="dir-btn"        id="btn-in"  onclick="setDir('in')">⊗ Entra</button>
+            </div>
+            <div class="info-box" style="margin-top:var(--space-3);">
+              <strong>Regla de la mano derecha:</strong><br>
+              Pulgar en dirección de <em>I</em> → dedos indican el sentido del campo <em>B</em>.
+              Campo más intenso (líneas más densas) cuanto mayor sea la corriente.
+            </div>
+          </div>
+
+          <!-- Controles: Solenoide -->
+          <div id="ctrl-solenoide" style="display:none;">
+            <p style="font-weight:700;margin-bottom:var(--space-3);">Solenoide</p>
+            <div class="ctrl-row">
+              <label>Corriente I</label>
+              <input type="range" id="sl-SI" min="1" max="20" value="8" oninput="syncSI(this.value)">
+              <span class="unit"><span id="val-SI">8</span> A</span>
+            </div>
+            <div class="ctrl-row">
+              <label>Espiras N</label>
+              <input type="range" id="sl-N" min="3" max="12" value="6" step="1" oninput="syncN(this.value)">
+              <span class="unit"><span id="val-N">6</span></span>
+            </div>
+            <div class="res-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="res-cell"><small>Polo izquierdo</small><strong id="polo-izq">S</strong></div>
+              <div class="res-cell"><small>Polo derecho</small><strong id="polo-der">N</strong></div>
+            </div>
+            <div class="info-box">
+              <strong>Campo en solenoide:</strong><br>
+              B = μ₀ · (N/L) · I<br>
+              <em>Uniforme en el interior, dipolo magnético en el exterior.</em>
+            </div>
+          </div>
+
+          <!-- Controles: Inducción -->
+          <div id="ctrl-induccion" style="display:none;">
+            <p style="font-weight:700;margin-bottom:var(--space-3);">Inducción (Faraday)</p>
+            <div class="ctrl-row">
+              <label>Velocidad</label>
+              <input type="range" id="sl-vel" min="1" max="10" value="4" oninput="syncVel(this.value)">
+              <span class="unit"><span id="val-vel">4</span></span>
+            </div>
+            <div class="ctrl-row">
+              <label>Espiras N</label>
+              <input type="range" id="sl-NI" min="1" max="8" value="4" step="1" oninput="syncNI(this.value)">
+              <span class="unit"><span id="val-NI">4</span></span>
+            </div>
+            <div class="res-grid" style="grid-template-columns:1fr 1fr;margin-top:var(--space-3);">
+              <div class="res-cell"><small>FEM inducida</small><strong id="res-fem">0.0 V</strong></div>
+              <div class="res-cell"><small>Dirección I</small><strong id="res-dir">—</strong></div>
+            </div>
+            <div class="info-box">
+              <strong>Ley de Faraday:</strong><br>
+              ε = −N · dΦ/dt<br>
+              <strong>Ley de Lenz:</strong> la corriente inducida se opone al cambio de flujo.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./fasores.html"      class="btn btn--ghost">← Fasores RL/RC</a>
+        <a href="./index.html"        class="btn btn--primary">Ver todos →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+  // ── State ──────────────────────────────────────────────────────────
+  let mode = 'conductor';
+  let currentI = 5, dirOut = true;
+  let solI = 8, solN = 6;
+  let indVel = 4, indN = 4;
+  let t = 0;
+  let raf;
+
+  const canvas = document.getElementById('sim');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // ── Mode switching ─────────────────────────────────────────────────
+  function setMode(m) {
+    mode = m;
+    ['conductor','solenoide','induccion'].forEach(id => {
+      document.getElementById('ctrl-'+id).style.display = (id===m)?'':'none';
+      document.getElementById('btn-'+id).classList.toggle('active', id===m);
+    });
+    t = 0;
+  }
+
+  // ── Sync controls ──────────────────────────────────────────────────
+  function syncI(v)   { currentI=+v; document.getElementById('val-I').textContent=v; }
+  function syncSI(v)  { solI=+v;     document.getElementById('val-SI').textContent=v; updatePolarity(); }
+  function syncN(v)   { solN=+v;     document.getElementById('val-N').textContent=v; }
+  function syncVel(v) { indVel=+v;   document.getElementById('val-vel').textContent=v; }
+  function syncNI(v)  { indN=+v;     document.getElementById('val-NI').textContent=v; }
+
+  function setDir(d) {
+    dirOut = (d==='out');
+    document.getElementById('btn-out').classList.toggle('active', dirOut);
+    document.getElementById('btn-in').classList.toggle('active', !dirOut);
+  }
+
+  function updatePolarity() {
+    // By convention: current enters right coil terminal → right side = S, left = N
+    // (depends on winding direction assumed CCW viewed from left)
+    document.getElementById('polo-izq').textContent = solI>0 ? 'N' : 'S';
+    document.getElementById('polo-der').textContent = solI>0 ? 'S' : 'N';
+  }
+
+  // ── DRAW helpers ───────────────────────────────────────────────────
+  function arrow(x1,y1,x2,y2,color,w=1.5){
+    const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy);
+    if(len<2) return;
+    const ux=dx/len, uy=dy/len;
+    const hLen=8, hW=4;
+    ctx.save();
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-hLen*ux+hW*uy, y2-hLen*uy-hW*ux);
+    ctx.lineTo(x2-hLen*ux-hW*uy, y2-hLen*uy+hW*ux);
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+
+  function arrowOnCircle(cx,cy,r,angleDeg,color,dirCCW){
+    const a = angleDeg*Math.PI/180;
+    const da = 0.18;
+    const a2 = dirCCW ? a+da : a-da;
+    const x1=cx+r*Math.cos(a), y1=cy+r*Math.sin(a);
+    const x2=cx+r*Math.cos(a2), y2=cy+r*Math.sin(a2);
+    arrow(x1,y1,x2,y2,color,1.5);
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  // MODE 1: CONDUCTOR RECTO
+  // ══════════════════════════════════════════════════════════════════
+  function drawConductor() {
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2, cy=H/2;
+
+    // Background grid dots
+    ctx.fillStyle='#1e293b';
+    for(let x=20;x<W;x+=30) for(let y=20;y<H;y+=30){
+      ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
+    }
+
+    const nLines = 6;
+    const maxR = 155;
+
+    for(let i=1;i<=nLines;i++){
+      const r = 28 + (maxR-28)*((i-1)/(nLines-1));
+      // Opacity and width decrease with distance (field weakens as 1/r)
+      const alpha = 0.85*(nLines-i+1)/nLines;
+      const lw = 0.8+1.2*(nLines-i)/nLines;
+      const intensity = Math.min(1, currentI/15);
+      // Color: cyan for outward, orange for inward
+      const hue = dirOut ? `rgba(103,232,249,${alpha*intensity})` : `rgba(245,158,11,${alpha*intensity})`;
+
+      ctx.save();
+      ctx.strokeStyle = hue;
+      ctx.lineWidth = lw;
+      ctx.beginPath();
+      ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+
+      // Animated arrows on field lines (right-hand rule)
+      const numArrows = 4;
+      for(let j=0;j<numArrows;j++){
+        const baseAngle = (j/numArrows)*360 + (t * (dirOut?1:-1) * 0.4);
+        const arrowAlpha = alpha*intensity;
+        ctx.globalAlpha = arrowAlpha;
+        arrowOnCircle(cx, cy, r, baseAngle, dirOut?'#67e8f9':'#f59e0b', dirOut);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    // Wire cross-section
+    ctx.save();
+    // Glow
+    const grd = ctx.createRadialGradient(cx,cy,2,cx,cy,20);
+    grd.addColorStop(0, dirOut?'rgba(103,232,249,0.6)':'rgba(245,158,11,0.6)');
+    grd.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.beginPath(); ctx.arc(cx,cy,20,0,Math.PI*2); ctx.fill();
+
+    ctx.strokeStyle = dirOut?'#67e8f9':'#f59e0b';
+    ctx.fillStyle = '#1e293b';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.restore();
+
+    // Symbol inside wire: ⊙ or ⊗
+    ctx.save();
+    ctx.fillStyle = dirOut?'#67e8f9':'#f59e0b';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(dirOut?'•':'×', cx, cy+1);
+    ctx.restore();
+
+    // Labels
+    ctx.save();
+    ctx.fillStyle='#94a3b8'; ctx.font='12px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(`I = ${currentI} A  (${dirOut?'sale de la pantalla':'entra en la pantalla'})`, cx, H-15);
+    ctx.fillStyle='#67e8f9'; ctx.font='11px sans-serif';
+    ctx.fillText('Campo B — líneas circulares concéntricas', cx, 18);
+    ctx.restore();
+
+    // Legend: B weakens with r
+    ctx.save();
+    ctx.fillStyle='#64748b'; ctx.font='10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText('B ∝ I / (2π·r)', 10, H-12);
+    ctx.restore();
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  // MODE 2: SOLENOIDE
+  // ══════════════════════════════════════════════════════════════════
+  function drawSolenoide() {
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2, cy=H/2;
+    const solW=300, solH=80;
+    const x0=cx-solW/2, y0=cy-solH/2;
+
+    // Background
+    ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,W,H);
+
+    // ── External field lines (dipole-like) ──
+    // Draw arc field lines looping from right (S) to left (N) pole exterior
+    const nExt = 5;
+    for(let i=1;i<=nExt;i++){
+      const spread = 30 + i*28;
+      const alpha = 0.5*(nExt-i+1)/nExt;
+      ctx.save();
+      ctx.strokeStyle=`rgba(251,191,36,${alpha})`;
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      // Top arc: from N pole exit to S pole exit via top
+      ctx.moveTo(x0, cy);
+      ctx.bezierCurveTo(x0-spread, cy-spread*1.4, x0+solW+spread, cy-spread*1.4, x0+solW, cy);
+      ctx.stroke();
+      // Bottom arc
+      ctx.beginPath();
+      ctx.moveTo(x0, cy);
+      ctx.bezierCurveTo(x0-spread, cy+spread*1.4, x0+solW+spread, cy+spread*1.4, x0+solW, cy);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── Internal field lines (uniform, animated moving dots) ──
+    const nIntLines = 5;
+    for(let i=0;i<nIntLines;i++){
+      const fy = y0+12+(i/(nIntLines-1))*(solH-24);
+      ctx.save();
+      ctx.strokeStyle='rgba(103,232,249,0.25)';
+      ctx.lineWidth=1;
+      ctx.setLineDash([4,6]);
+      ctx.beginPath(); ctx.moveTo(x0,fy); ctx.lineTo(x0+solW,fy); ctx.stroke();
+      ctx.restore();
+
+      // Animated field dots moving right (N pole exits right)
+      const dotSpacing = 40;
+      const offset = (t*0.8*solI/8) % dotSpacing;
+      for(let d=offset; d<solW; d+=dotSpacing){
+        const dx=x0+d, dy=fy;
+        if(dx>x0+8 && dx<x0+solW-8){
+          ctx.save();
+          ctx.fillStyle='#67e8f9';
+          ctx.globalAlpha=0.9;
+          ctx.beginPath(); ctx.arc(dx,dy,2.5,0,Math.PI*2); ctx.fill();
+          ctx.restore();
+        }
+      }
+    }
+
+    // ── Coil turns ──
+    const n = solN;
+    for(let i=0;i<n;i++){
+      const turnX = x0 + 10 + i*(solW-20)/(n-1);
+      // Back ellipse (gray, drawn first)
+      ctx.save();
+      ctx.strokeStyle='#334155'; ctx.lineWidth=2.5;
+      ctx.beginPath();
+      ctx.ellipse(turnX, cy, 8, solH/2, 0, Math.PI, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+      // Front ellipse (colored)
+      ctx.save();
+      ctx.strokeStyle='#06b6d4'; ctx.lineWidth=2.5;
+      ctx.beginPath();
+      ctx.ellipse(turnX, cy, 8, solH/2, 0, 0, Math.PI);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Top/bottom horizontal lines connecting coil
+    ctx.save();
+    ctx.strokeStyle='#06b6d4'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(x0+10,cy-solH/2); ctx.lineTo(x0+solW-10,cy-solH/2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x0+10,cy+solH/2); ctx.lineTo(x0+solW-10,cy+solH/2); ctx.stroke();
+    ctx.restore();
+
+    // Lead wires
+    ctx.save();
+    ctx.strokeStyle='#06b6d4'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(x0+10,cy-solH/2); ctx.lineTo(x0-30,cy-solH/2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x0+solW-10,cy+solH/2); ctx.lineTo(x0+solW+30,cy+solH/2); ctx.stroke();
+    ctx.restore();
+
+    // Poles N/S
+    ctx.save();
+    ctx.font='bold 18px sans-serif'; ctx.textAlign='center';
+    ctx.fillStyle='#ef4444'; ctx.fillText('N', x0-22, cy+6);
+    ctx.fillStyle='#3b82f6'; ctx.fillText('S', x0+solW+22, cy+6);
+    ctx.restore();
+
+    // Labels
+    ctx.save();
+    ctx.fillStyle='#94a3b8'; ctx.font='12px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(`I = ${solI} A   N = ${solN} espiras`, cx, H-12);
+    ctx.fillStyle='#67e8f9'; ctx.font='11px sans-serif';
+    ctx.fillText('Campo B — uniforme en el interior (→ hacia N)', cx, 18);
+    ctx.restore();
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  // MODE 3: INDUCCIÓN ELECTROMAGNÉTICA
+  // ══════════════════════════════════════════════════════════════════
+  let indPos = 0;   // magnet center x, oscillates
+  let indDir = 1;   // magnet movement direction
+
+  function drawInduccion() {
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,W,H);
+
+    const cy=H/2;
+    const coilX = W*0.70;
+    const coilR = 14;   // half-height of coil
+    const coilW = 8;    // coil width per turn
+    const nTurns = indN;
+    const coilTotalW = nTurns*coilW*1.8;
+    const coilLeft = coilX - coilTotalW/2;
+
+    // ── Move magnet ──
+    // Magnet oscillates between x=60 and coilLeft-30
+    const maxX = coilLeft - 35;
+    const minX = 55;
+    const speed = indVel * 0.015;
+    indPos += indDir * speed;
+    if(indPos > maxX) { indPos=maxX; indDir=-1; }
+    if(indPos < minX) { indPos=minX; indDir= 1; }
+
+    // dΦ/dt proportional to velocity and 1/(coilX-magnet)^1.5
+    const dist = Math.max(20, coilX - indPos - 30);
+    const dPhi = indDir * indVel / (dist*0.05 + 1) * 0.8;
+    const fem = -indN * dPhi;   // Faraday: ε = -N dΦ/dt
+    const currentDir = fem > 0 ? 'Antihorario' : 'Horario';
+
+    // ── Draw magnet ──
+    const mW=60, mH=40;
+    const mx = indPos - mW/2;
+    // N half (red)
+    ctx.save();
+    ctx.fillStyle='#ef4444';
+    ctx.strokeStyle='#fca5a5'; ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(mx, cy-mH/2, mW/2, mH, [6,0,0,6])
+                  : ctx.rect(mx, cy-mH/2, mW/2, mH);
+    ctx.fill(); ctx.stroke();
+    // S half (blue)
+    ctx.fillStyle='#3b82f6';
+    ctx.strokeStyle='#93c5fd';
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(mx+mW/2, cy-mH/2, mW/2, mH, [0,6,6,0])
+                  : ctx.rect(mx+mW/2, cy-mH/2, mW/2, mH);
+    ctx.fill(); ctx.stroke();
+    ctx.restore();
+
+    // Magnet labels
+    ctx.save();
+    ctx.font='bold 14px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle='#fff'; ctx.fillText('N', mx+mW/4, cy);
+    ctx.fillStyle='#fff'; ctx.fillText('S', mx+3*mW/4, cy);
+    ctx.restore();
+
+    // Movement arrow
+    ctx.save();
+    ctx.globalAlpha=0.7;
+    if(indDir>0){
+      arrow(indPos+mW/2+5, cy, indPos+mW/2+22, cy, '#fbbf24', 2);
+    } else {
+      arrow(indPos-mW/2-5, cy, indPos-mW/2-22, cy, '#fbbf24', 2);
+    }
+    ctx.globalAlpha=1;
+    ctx.restore();
+
+    // Field lines from magnet (from N pole to right)
+    const fieldLines = 4;
+    for(let fl=0;fl<fieldLines;fl++){
+      const yOff = (fl-(fieldLines-1)/2)*12;
+      const fieldAlpha = 0.35 + 0.2*Math.max(0, 1-dist/150);
+      ctx.save();
+      ctx.strokeStyle=`rgba(251,191,36,${fieldAlpha})`;
+      ctx.lineWidth=1;
+      ctx.setLineDash([4,5]);
+      ctx.beginPath();
+      ctx.moveTo(indPos+mW/2, cy+yOff);
+      ctx.lineTo(coilLeft-10, cy+yOff);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── Draw coil ──
+    for(let i=0;i<nTurns;i++){
+      const tx = coilLeft + i*coilW*1.8 + coilW/2;
+      // Back ellipse
+      ctx.save();
+      ctx.strokeStyle='#334155'; ctx.lineWidth=3;
+      ctx.beginPath();
+      ctx.ellipse(tx, cy, coilW*0.5, coilR+6, 0, Math.PI, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+      // Front ellipse
+      ctx.save();
+      ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=3;
+      ctx.beginPath();
+      ctx.ellipse(tx, cy, coilW*0.5, coilR+6, 0, 0, Math.PI);
+      ctx.stroke();
+      ctx.restore();
+    }
+    // Top/bottom rail
+    ctx.save();
+    ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(coilLeft,cy-coilR-6); ctx.lineTo(coilLeft+coilTotalW,cy-coilR-6); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(coilLeft,cy+coilR+6); ctx.lineTo(coilLeft+coilTotalW,cy+coilR+6); ctx.stroke();
+    ctx.restore();
+
+    // External circuit (U-shape to right)
+    const circX1 = coilLeft+coilTotalW;
+    const circX2 = circX1+50;
+    ctx.save();
+    ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=2.5;
+    // Right top wire
+    ctx.beginPath(); ctx.moveTo(circX1,cy-coilR-6); ctx.lineTo(circX2,cy-coilR-6); ctx.stroke();
+    // Right bottom wire
+    ctx.beginPath(); ctx.moveTo(circX1,cy+coilR+6); ctx.lineTo(circX2,cy+coilR+6); ctx.stroke();
+    // Right vertical (load)
+    ctx.beginPath(); ctx.moveTo(circX2,cy-coilR-6); ctx.lineTo(circX2,cy+coilR+6); ctx.stroke();
+    // Resistor symbol at right
+    ctx.strokeStyle='#f59e0b'; ctx.lineWidth=2;
+    const ry0=cy-12, ry1=cy+12;
+    ctx.beginPath();
+    ctx.moveTo(circX2, ry0);
+    for(let seg=0;seg<6;seg++){
+      const sy=ry0+seg*(ry1-ry0)/6;
+      const sy2=ry0+(seg+0.5)*(ry1-ry0)/6;
+      ctx.lineTo(circX2+8*(seg%2===0?1:-1), sy);
+      ctx.lineTo(circX2+8*(seg%2===0?1:-1), sy2);
+    }
+    ctx.lineTo(circX2, ry1);
+    ctx.stroke();
+    ctx.restore();
+
+    // Animated current dots in circuit
+    const femAbs = Math.abs(fem);
+    if(femAbs > 0.05) {
+      const dotDir = fem > 0 ? 1 : -1;
+      const dotSpeed = Math.min(femAbs*0.3, 2.5);
+      const dotT = ((t * dotSpeed) % 60) / 60;
+
+      // Path: top rail → right down → bottom rail (left)
+      const path=[
+        {x:coilLeft,y:cy-coilR-6},{x:circX2,y:cy-coilR-6},
+        {x:circX2,y:cy+coilR+6},{x:coilLeft,y:cy+coilR+6}
+      ];
+      for(let nd=0;nd<3;nd++){
+        const dt = (dotT + nd/3) % 1;
+        const pt = pathPoint(path, dt*pathLen(path), dotDir);
+        ctx.save();
+        ctx.fillStyle='#67e8f9'; ctx.globalAlpha=0.9;
+        ctx.beginPath(); ctx.arc(pt.x,pt.y,3.5,0,Math.PI*2); ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Update UI results
+    document.getElementById('res-fem').textContent = Math.abs(fem).toFixed(2)+' V';
+    document.getElementById('res-dir').textContent = femAbs<0.05?'—':currentDir;
+
+    // Labels
+    ctx.save();
+    ctx.fillStyle='#67e8f9'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Inducción electromagnética — Ley de Faraday / Lenz', cx, 18);
+    ctx.fillStyle='#94a3b8'; ctx.font='11px sans-serif';
+    ctx.fillText(`ε = ${fem.toFixed(2)} V   |   Imán: ${indDir>0?'→ acercándose':'← alejándose'}`, cx, H-12);
+    ctx.restore();
+  }
+
+  function pathLen(pts){
+    let l=0;
+    for(let i=0;i<pts.length-1;i++) l+=Math.hypot(pts[i+1].x-pts[i].x, pts[i+1].y-pts[i].y);
+    return l;
+  }
+  function pathPoint(pts, s, dir){
+    // if dir<0 reverse traversal direction
+    if(dir<0){
+      const total=pathLen(pts);
+      s=total-s;
+    }
+    let acc=0;
+    for(let i=0;i<pts.length-1;i++){
+      const dx=pts[i+1].x-pts[i].x, dy=pts[i+1].y-pts[i].y;
+      const seg=Math.hypot(dx,dy);
+      if(acc+seg>=s){
+        const f=(s-acc)/seg;
+        return {x:pts[i].x+dx*f, y:pts[i].y+dy*f};
+      }
+      acc+=seg;
+    }
+    return pts[pts.length-1];
+  }
+
+  // ── Main loop ─────────────────────────────────────────────────────
+  function draw() {
+    t += 0.5;
+    if(mode==='conductor') drawConductor();
+    else if(mode==='solenoide') drawSolenoide();
+    else drawInduccion();
+    raf = requestAnimationFrame(draw);
+  }
+  draw();
+  updatePolarity();
+  </script>
+
+</body>
+</html>

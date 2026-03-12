@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejercicios resueltos Tema 1: Ley de Ohm, circuitos serie, paralelo, Kirchhoff, potencia y energía.">
+  <title>Tema 1 — Ejercicios | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema1/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 1</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Ejercicios</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">
+        Ejercicios — Circuitos de Corriente Continua
+      </h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-4);">
+        10 ejercicios · Intenta resolverlos antes de ver la solución
+      </p>
+
+      <div class="alert alert--tip">
+        <span class="alert__icon">💡</span>
+        <div class="alert__content">
+          <strong>Cómo usarlos:</strong> Trabaja el ejercicio en tu cuaderno y pulsa <strong>"Ver solución"</strong>
+          para comprobar. Usa la <a href="../../calculadoras/ohm.html">calculadora de Ohm</a> para verificar resultados numéricos.
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:var(--space-4);">
+
+        <!-- Ejercicio 1 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 1</strong> — Ley de Ohm: calcular corriente</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una resistencia de <strong>1 kΩ</strong> está conectada a una batería de <strong>9 V</strong>. ¿Qué corriente circula? ¿Cuánto es en miliamperios?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Datos:</strong> V = 9 V · R = 1000 Ω · Incógnita: I</p>
+            <p>\( I = \dfrac{V}{R} = \dfrac{9}{1000} = 0{,}009 \text{ A} = \mathbf{9 \text{ mA}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 2</strong> — Ley de Ohm: calcular tensión</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Por una resistencia de <strong>220 Ω</strong> circulan <strong>0,5 A</strong>. ¿Qué tensión hay entre sus bornes?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Datos:</strong> I = 0,5 A · R = 220 Ω · Incógnita: V</p>
+            <p>\( V = I \cdot R = 0{,}5 \times 220 = \mathbf{110 \text{ V}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 3</strong> — Ley de Ohm: calcular resistencia</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una instalación a <strong>230 V</strong> consume <strong>10 A</strong>. ¿Cuál es su resistencia equivalente?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Datos:</strong> V = 230 V · I = 10 A · Incógnita: R</p>
+            <p>\( R = \dfrac{V}{I} = \dfrac{230}{10} = \mathbf{23 \text{ Ω}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 4</strong> — Circuito serie: Req, corriente y tensiones</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Tres resistencias en serie: R1 = 100 Ω, R2 = 150 Ω, R3 = 250 Ω. Tensión de la fuente: V = 12 V.</p>
+            <p>Calcula: Req, corriente total, y tensión en cada resistencia.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( R_{eq} = 100 + 150 + 250 = \mathbf{500 \text{ Ω}} \)</p>
+            <p>\( I = V / R_{eq} = 12 / 500 = \mathbf{24 \text{ mA}} \)</p>
+            <p>\( V_{R1} = 0{,}024 \times 100 = \mathbf{2{,}4 \text{ V}} \)</p>
+            <p>\( V_{R2} = 0{,}024 \times 150 = \mathbf{3{,}6 \text{ V}} \)</p>
+            <p>\( V_{R3} = 0{,}024 \times 250 = \mathbf{6 \text{ V}} \)</p>
+            <p style="color:var(--color-success);">✓ Verificación: 2,4 + 3,6 + 6 = 12 V ✓</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 5</strong> — Circuito paralelo: Req y corrientes de rama</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Dos resistencias en paralelo: R1 = 470 Ω, R2 = 1000 Ω. Tensión: V = 12 V.</p>
+            <p>Calcula: Req, corriente total y corriente en cada rama.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( R_{eq} = \dfrac{R_1 \cdot R_2}{R_1 + R_2} = \dfrac{470 \times 1000}{470 + 1000} = \dfrac{470000}{1470} = \mathbf{319{,}7 \text{ Ω}} \)</p>
+            <p>\( I_{total} = V / R_{eq} = 12 / 319{,}7 = \mathbf{37{,}5 \text{ mA}} \)</p>
+            <p>\( I_{R1} = 12 / 470 = \mathbf{25{,}5 \text{ mA}} \)</p>
+            <p>\( I_{R2} = 12 / 1000 = \mathbf{12 \text{ mA}} \)</p>
+            <p style="color:var(--color-success);">✓ Verificación: 25,5 + 12 = 37,5 mA ✓</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 6</strong> — Circuito mixto</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> R1 = 200 Ω en serie con (R2 = 300 Ω en paralelo con R3 = 600 Ω). Fuente: V = 24 V.</p>
+            <p>Calcula: Req total, corriente total, y corriente por cada resistencia.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p><strong>Paso 1 — Paralelo R2 ∥ R3:</strong></p>
+            <p>\( R_{23} = \dfrac{300 \times 600}{300 + 600} = \dfrac{180000}{900} = 200 \text{ Ω} \)</p>
+            <p><strong>Paso 2 — Serie R1 + R23:</strong></p>
+            <p>\( R_{eq} = 200 + 200 = \mathbf{400 \text{ Ω}} \)</p>
+            <p><strong>Paso 3 — Corriente total:</strong></p>
+            <p>\( I = 24 / 400 = \mathbf{60 \text{ mA}} \)</p>
+            <p><strong>Paso 4 — Tensiones:</strong></p>
+            <p>\( V_{R1} = 0{,}06 \times 200 = 12 \text{ V} \quad V_{paralelo} = 12 \text{ V} \)</p>
+            <p><strong>Paso 5 — Corrientes en el paralelo:</strong></p>
+            <p>\( I_{R2} = 12/300 = \mathbf{40 \text{ mA}} \quad I_{R3} = 12/600 = \mathbf{20 \text{ mA}} \)</p>
+            <p style="color:var(--color-success);">✓ Verificación: 40 + 20 = 60 mA ✓</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 7</strong> — Kirchhoff LCK: corriente desconocida en un nodo</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En un nodo entran tres corrientes: I1 = 3 A, I2 = 5 A, I3 = 2 A. Sale una sola corriente I4. ¿Cuánto vale I4?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>Por la LCK: ΣI_entran = ΣI_salen</p>
+            <p>\( I_1 + I_2 + I_3 = I_4 \)</p>
+            <p>\( 3 + 5 + 2 = \mathbf{I_4 = 10 \text{ A}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 8</strong> — Kirchhoff LTK: tensión de una fuente</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> En una malla hay una fuente V, y caídas de tensión en R1 = 4 V y R2 = 7 V. ¿Cuál es la tensión V de la fuente?</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>Por la LTK (suma de tensiones en la malla = 0):</p>
+            <p>\( V - V_{R1} - V_{R2} = 0 \)</p>
+            <p>\( V = V_{R1} + V_{R2} = 4 + 7 = \mathbf{11 \text{ V}} \)</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 9 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 9</strong> — Potencia y calor disipado</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Por una resistencia de <strong>100 Ω</strong> circulan <strong>2 A</strong>. Calcula la potencia disipada y el calor generado en 10 minutos.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( P = I^2 \cdot R = 2^2 \times 100 = \mathbf{400 \text{ W}} \)</p>
+            <p>Tiempo: t = 10 min = 600 s</p>
+            <p>\( E = P \cdot t = 400 \times 600 = \mathbf{240\,000 \text{ J} = 240 \text{ kJ}} \)</p>
+            <p style="color:var(--color-text-muted); font-size:var(--text-sm);">Este calor es equivalente a calentar unos 0,57 litros de agua de 0 a 100°C.</p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="collapsible">
+          <button class="collapsible__trigger" aria-expanded="false">
+            <span><strong>Ejercicio 10</strong> — Consumo energético y coste</span>
+            <span class="collapsible__arrow">▼</span>
+          </button>
+          <div class="collapsible__content" hidden>
+            <p><strong>Enunciado:</strong> Una instalación tiene una potencia de <strong>3 kW</strong> y funciona <strong>5 horas/día</strong> durante <strong>30 días</strong>. El precio de la energía es <strong>0,15 €/kWh</strong>. Calcula el consumo en kWh y el coste mensual.</p>
+            <hr style="border:none; border-top:1px solid var(--color-border); margin:var(--space-3) 0;">
+            <p>\( E = P \cdot t = 3 \text{ kW} \times (5 \times 30) \text{ h} = 3 \times 150 = \mathbf{450 \text{ kWh}} \)</p>
+            <p>\( \text{Coste} = 450 \times 0{,}15 = \mathbf{67{,}50 \text{ €}} \)</p>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <div class="nav-paginas">
+        <a href="./teoria.html" class="btn btn--ghost">← Teoría</a>
+        <a href="./quiz.html" class="btn btn--secondary">Hacer el quiz →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

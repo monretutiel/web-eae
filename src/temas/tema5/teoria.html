@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teoría Tema 5: electromagnetismo, bobinas, autoinducción, circuitos RLC y transformadores.">
+  <title>Tema 5 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema5/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper page-wrapper--with-toc">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 5</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+        </ol>
+      </nav>
+
+      <div class="content-with-toc">
+
+        <!-- TOC lateral -->
+        <aside class="toc" aria-label="Índice de contenidos">
+          <p class="toc__title">En esta página</p>
+          <ol class="toc__list">
+            <li class="toc__item"><a href="#sec1"  class="toc__link">1. Estructura atómica</a></li>
+            <li class="toc__item"><a href="#sec2"  class="toc__link">2. Campo eléctrico</a></li>
+            <li class="toc__item"><a href="#sec3"  class="toc__link">3. Fenómeno magnético</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec3-1" class="toc__link">3.1 Tipos de materiales</a></li>
+                <li class="toc__item"><a href="#sec3-2" class="toc__link">3.2 Histéresis y reluctancia</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec4"  class="toc__link">4. Inducción electromagnética</a></li>
+            <li class="toc__item"><a href="#sec5"  class="toc__link">5. Corrientes de Foucault</a></li>
+            <li class="toc__item"><a href="#sec6"  class="toc__link">6. Autoinducción</a></li>
+            <li class="toc__item"><a href="#sec7"  class="toc__link">7. Principio del motor</a></li>
+            <li class="toc__item"><a href="#sec8"  class="toc__link">8. Bobinas</a></li>
+            <li class="toc__item"><a href="#sec9"  class="toc__link">9. Reactivos en CC y CA</a></li>
+            <li class="toc__item"><a href="#sec10" class="toc__link">10. Trigonometría y fasores</a></li>
+            <li class="toc__item"><a href="#sec11" class="toc__link">11. Circuitos RLC</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec11-1" class="toc__link">11.1 Circuito RL serie</a></li>
+                <li class="toc__item"><a href="#sec11-2" class="toc__link">11.2 Circuito RC serie</a></li>
+                <li class="toc__item"><a href="#sec11-3" class="toc__link">11.3 Circuito RLC serie</a></li>
+                <li class="toc__item"><a href="#sec11-4" class="toc__link">11.4 Potencia en CA</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec12" class="toc__link">12. Transformadores</a></li>
+          </ol>
+        </aside>
+
+        <!-- Contenido -->
+        <div class="content">
+
+          <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-1);">
+            Componentes Inductivos
+          </h1>
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+            Tema 5 · 12 secciones
+          </p>
+
+          <!-- ══════════════════════════════ -->
+          <!-- SEC 1: ESTRUCTURA ATÓMICA      -->
+          <!-- ══════════════════════════════ -->
+          <section id="sec1">
+            <h2 class="section-title">1. Estructura atómica y carga eléctrica</h2>
+
+            <p>La materia está formada por <strong>átomos</strong>. Cada átomo tiene un núcleo con <strong>protones</strong> (carga positiva) y <strong>neutrones</strong> (sin carga), rodeado de <strong>electrones</strong> (carga negativa) que orbitan en capas o niveles de energía.</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Partícula</th><th>Carga</th><th>Masa relativa</th><th>Ubicación</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Protón</td><td>+1,6 × 10⁻¹⁹ C</td><td>1</td><td>Núcleo</td></tr>
+                <tr><td>Neutrón</td><td>0</td><td>≈ 1</td><td>Núcleo</td></tr>
+                <tr><td>Electrón</td><td>−1,6 × 10⁻¹⁹ C</td><td>1/1836</td><td>Capas orbitales</td></tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:var(--space-3);">Un átomo neutro tiene el mismo número de protones que de electrones. Si pierde o gana electrones se convierte en un <strong>ion</strong> (positivo o negativo respectivamente).</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Ley de Coulomb</h3>
+            <p>La fuerza entre dos cargas puntuales es directamente proporcional al producto de las cargas e inversamente proporcional al cuadrado de la distancia:</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ F = K \cdot \frac{q_1 \cdot q_2}{d^2} \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(F\) — Fuerza [N]</span>
+                <span>\(K = 9 \times 10^9\ \text{N·m}^2/\text{C}^2\) — Constante de Coulomb</span>
+                <span>\(q_1,\, q_2\) — Cargas eléctricas [C]</span>
+                <span>\(d\) — Distancia entre cargas [m]</span>
+              </div>
+            </div>
+
+            <p>Si las cargas son del mismo signo la fuerza es <strong>repulsiva</strong>; si son de signo contrario, <strong>atractiva</strong>.</p>
+
+            <div class="alert alert--info">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                <strong>Conductores, aislantes y semiconductores</strong> se diferencian por la facilidad con que sus electrones de valencia pueden moverse. Los conductores (metales) tienen electrones libres; los aislantes los tienen fuertemente ligados; los semiconductores (Si, Ge) tienen un comportamiento intermedio que cambia con la temperatura y el dopaje.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════ -->
+          <!-- SEC 2: CAMPO ELÉCTRICO      -->
+          <!-- ═══════════════════════════ -->
+          <section id="sec2" style="margin-top:var(--space-6);">
+            <h2 class="section-title">2. Campo eléctrico y magnitudes básicas</h2>
+
+            <p>El <strong>campo eléctrico</strong> \(E\) es la región del espacio donde una carga experimenta una fuerza. Su intensidad indica la fuerza por unidad de carga:</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ E = \frac{F}{q} \quad \Rightarrow \quad [E] = \frac{\text{N}}{\text{C}} = \frac{\text{V}}{\text{m}} \]
+              </div>
+            </div>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Magnitud</th><th>Símbolo</th><th>Unidad</th><th>Definición</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Diferencia de potencial (tensión)</td>
+                  <td>\(V\)</td>
+                  <td>Voltio (V)</td>
+                  <td>Trabajo por unidad de carga para mover q entre dos puntos</td>
+                </tr>
+                <tr>
+                  <td>Corriente eléctrica</td>
+                  <td>\(I\)</td>
+                  <td>Amperio (A)</td>
+                  <td>\(I = \dfrac{q}{t}\) — carga que pasa por sección en 1 s</td>
+                </tr>
+                <tr>
+                  <td>Potencia eléctrica</td>
+                  <td>\(P\)</td>
+                  <td>Vatio (W)</td>
+                  <td>\(P = V \cdot I\) — energía transferida por unidad de tiempo</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- ════════════════════════════ -->
+          <!-- SEC 3: FENÓMENO MAGNÉTICO    -->
+          <!-- ════════════════════════════ -->
+          <section id="sec3" style="margin-top:var(--space-6);">
+            <h2 class="section-title">3. Fenómeno magnético</h2>
+
+            <p>Un conductor por el que circula corriente genera un <strong>campo magnético</strong> a su alrededor (regla de la mano derecha / tornillo de Maxwell). La intensidad del campo magnético \(H\) y la densidad de flujo \(B\) están relacionadas por la permeabilidad del medio:</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ B = \mu \cdot H \qquad \text{y para una bobina de } N \text{ espiras:} \qquad B = \frac{\mu \cdot N \cdot I}{l} \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(B\) — Densidad de flujo magnético [T] (Tesla)</span>
+                <span>\(\mu\) — Permeabilidad magnética del medio [H/m]</span>
+                <span>\(N\) — Número de espiras</span>
+                <span>\(I\) — Corriente [A] &nbsp;|&nbsp; \(l\) — Longitud del núcleo [m]</span>
+              </div>
+            </div>
+
+            <!-- SUBSEC 3.1 -->
+            <section id="sec3-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">3.1 Clasificación de materiales magnéticos</h3>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Tipo</th><th>Comportamiento</th><th>Permeabilidad relativa μᵣ</th><th>Ejemplos</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ferromagnéticos</strong></td>
+                    <td>Se imantan intensamente en la dirección del campo. Conservan magnetización residual.</td>
+                    <td>μᵣ >> 1 (cientos a miles)</td>
+                    <td>Hierro, Níquel, Cobalto, ferrita</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Paramagnéticos</strong></td>
+                    <td>Se imantan débilmente en la dirección del campo. No conservan magnetización.</td>
+                    <td>μᵣ ≈ 1 (ligeramente > 1)</td>
+                    <td>Aluminio, platino, oxígeno</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Diamagnéticos</strong></td>
+                    <td>Se imantan débilmente en sentido contrario al campo.</td>
+                    <td>μᵣ < 1 (ligeramente < 1)</td>
+                    <td>Cobre, bismuto, agua</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 3.2 -->
+            <section id="sec3-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">3.2 Histéresis magnética y reluctancia</h3>
+
+              <p>En los materiales ferromagnéticos, la relación entre \(B\) y \(H\) no es lineal y depende del historial magnético del material. Al representar el ciclo completo de imanación se obtiene el <strong>ciclo de histéresis</strong>:</p>
+
+              <table class="data-table">
+                <thead>
+                  <tr><th>Parámetro</th><th>Definición</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Imanación residual (Bᵣ)</strong></td><td>Densidad de flujo que conserva el material al anular el campo H</td></tr>
+                  <tr><td><strong>Campo coercitivo (Hc)</strong></td><td>Campo H que hay que aplicar en sentido contrario para anular la imanación residual</td></tr>
+                  <tr><td><strong>Pérdidas por histéresis</strong></td><td>Proporcionales al área del ciclo. Se disipan como calor en el núcleo.</td></tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top:var(--space-3);">La <strong>reluctancia magnética</strong> \(R_m\) es la oposición que presenta un circuito magnético al paso del flujo. Es el equivalente magnético de la resistencia eléctrica:</p>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[ R_m = \frac{l}{\mu \cdot S} \qquad \text{(Ley de Hopkinson:)} \qquad \mathcal{F} = R_m \cdot \Phi \]
+                </div>
+                <div class="formula-card__legend">
+                  <span>\(R_m\) — Reluctancia [A/Wb] (amperios por weber)</span>
+                  <span>\(l\) — Longitud del camino magnético [m]</span>
+                  <span>\(S\) — Sección transversal del núcleo [m²]</span>
+                  <span>\(\mathcal{F} = N \cdot I\) — Fuerza magnetomotriz [A] &nbsp;|&nbsp; \(\Phi\) — Flujo magnético [Wb]</span>
+                </div>
+              </div>
+
+              <div class="alert alert--info">
+                <span class="alert__icon">🔗</span>
+                <div class="alert__content">
+                  <strong>Analogía magnética-eléctrica:</strong> Fuerza magnetomotriz \(\mathcal{F}\) ↔ Tensión \(V\) ; Flujo \(\Phi\) ↔ Corriente \(I\) ; Reluctancia \(R_m\) ↔ Resistencia \(R\).
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ══════════════════════════════════ -->
+          <!-- SEC 4: INDUCCIÓN ELECTROMAGNÉTICA  -->
+          <!-- ══════════════════════════════════ -->
+          <section id="sec4" style="margin-top:var(--space-6);">
+            <h2 class="section-title">4. Inducción electromagnética</h2>
+
+            <p>Si el flujo magnético que atraviesa un circuito varía con el tiempo, se induce en él una <strong>fuerza electromotriz (f.e.m.)</strong>. Este es el principio fundamental de generadores, transformadores y motores.</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ e = -N \cdot \frac{\Delta\Phi}{\Delta t} \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(e\) — F.e.m. inducida [V]</span>
+                <span>\(N\) — Número de espiras del devanado</span>
+                <span>\(\Delta\Phi / \Delta t\) — Variación del flujo magnético en el tiempo [Wb/s]</span>
+              </div>
+            </div>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Ley</th><th>Enunciado</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ley de Faraday</strong></td>
+                  <td>La f.e.m. inducida es proporcional a la velocidad de variación del flujo magnético que atraviesa el circuito.</td>
+                </tr>
+                <tr>
+                  <td><strong>Ley de Lenz</strong></td>
+                  <td>La corriente inducida tiene el sentido necesario para oponerse a la causa que la produce (de ahí el signo negativo en la fórmula de Faraday).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Principio básico del transformador</h3>
+            <p>Una corriente alterna en el devanado primario (N₁ espiras) genera un flujo magnético variable en el núcleo ferromagnético. Ese flujo induce una f.e.m. en el devanado secundario (N₂ espiras). La relación entre tensiones es directamente proporcional a la relación de espiras. Este principio se desarrolla completamente en la <a href="#sec12">sección 12</a>.</p>
+          </section>
+
+          <!-- ════════════════════════════════ -->
+          <!-- SEC 5: CORRIENTES DE FOUCAULT    -->
+          <!-- ════════════════════════════════ -->
+          <section id="sec5" style="margin-top:var(--space-6);">
+            <h2 class="section-title">5. Corrientes de Foucault</h2>
+
+            <p>Cuando un campo magnético variable atraviesa una masa conductora, se inducen en su interior <strong>corrientes circulares</strong> (llamadas corrientes de Foucault o corrientes parásitas) que generan calor y producen pérdidas de energía.</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Aspecto</th><th>Detalle</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Efecto principal</strong></td>
+                  <td>Calentamiento del núcleo → pérdidas de energía que reducen el rendimiento</td>
+                </tr>
+                <tr>
+                  <td><strong>Cómo se reducen</strong></td>
+                  <td>Construyendo el núcleo con <strong>chapas laminadas</strong> (delgadas, aisladas entre sí) que interrumpen el camino de las corrientes parásitas</td>
+                </tr>
+                <tr>
+                  <td><strong>Aplicaciones útiles</strong></td>
+                  <td>
+                    <ul style="margin:0; padding-left:var(--space-3);">
+                      <li><strong>Freno de Foucault</strong>: frenado sin contacto mecánico (trenes, dinamómetros)</li>
+                      <li><strong>Cocinas de inducción</strong>: el propio recipiente se calienta por corrientes de Foucault</li>
+                      <li><strong>Detección de metales</strong>: sensores inductivos</li>
+                      <li><strong>Calefacción por inducción industrial</strong>: tratamiento térmico de piezas metálicas</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- ═══════════════════════ -->
+          <!-- SEC 6: AUTOINDUCCIÓN    -->
+          <!-- ═══════════════════════ -->
+          <section id="sec6" style="margin-top:var(--space-6);">
+            <h2 class="section-title">6. Autoinducción</h2>
+
+            <p>Cuando la corriente que circula por una bobina varía, el flujo magnético que ella misma genera también varía, induciendo una f.e.m. en sus propias espiras que se opone al cambio de corriente. Esta propiedad se llama <strong>autoinducción</strong> y se cuantifica con la <strong>inductancia</strong> \(L\).</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ e_{auto} = L \cdot \frac{\Delta I}{\Delta t} \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(e_{auto}\) — F.e.m. de autoinducción [V]</span>
+                <span>\(L\) — Inductancia [H] (Henrios)</span>
+                <span>\(\Delta I / \Delta t\) — Variación de la corriente en el tiempo [A/s]</span>
+              </div>
+            </div>
+
+            <p style="margin-top:var(--space-3);">La inductancia depende de la geometría de la bobina y del material del núcleo:</p>
+            <ul style="font-size:var(--text-sm); padding-left:var(--space-4); line-height:1.8;">
+              <li>Aumenta con el <strong>cuadrado del número de espiras</strong> (\(N^2\))</li>
+              <li>Aumenta con la <strong>permeabilidad del núcleo</strong> (\(\mu\))</li>
+              <li>Aumenta con la <strong>sección</strong> del núcleo y disminuye con su <strong>longitud</strong></li>
+            </ul>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Fórmula</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>\(L = \dfrac{\mu \cdot N^2 \cdot S}{l}\)</td>
+                  <td>Inductancia de una bobina solenoide (núcleo de longitud \(l\), sección \(S\))</td>
+                </tr>
+                <tr>
+                  <td>\(W = \dfrac{1}{2} \cdot L \cdot I^2\)</td>
+                  <td>Energía almacenada en el campo magnético de la bobina [J]</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                <strong>Peligro al desconectar una bobina:</strong> Si se interrumpe bruscamente la corriente en una bobina (\(\Delta t \to 0\)), la f.e.m. de autoinducción puede ser muy elevada y causar un arco eléctrico o dañar componentes. Por esto los contactores y relés llevan un <em>varistor</em> o <em>diodo flyback</em> en paralelo con la bobina.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- SEC 7: PRINCIPIO DEL MOTOR      -->
+          <!-- ═══════════════════════════════ -->
+          <section id="sec7" style="margin-top:var(--space-6);">
+            <h2 class="section-title">7. Principio del motor eléctrico</h2>
+
+            <p>Un conductor por el que circula una corriente eléctrica, situado dentro de un campo magnético, experimenta una fuerza mecánica. Este es el principio de funcionamiento de todos los motores eléctricos.</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ F = B \cdot I \cdot L \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(F\) — Fuerza sobre el conductor [N]</span>
+                <span>\(B\) — Densidad de flujo magnético [T]</span>
+                <span>\(I\) — Corriente por el conductor [A]</span>
+                <span>\(L\) — Longitud del conductor dentro del campo [m]</span>
+              </div>
+            </div>
+
+            <p style="margin-top:var(--space-3);">La <strong>regla de la mano izquierda de Fleming</strong> determina el sentido de la fuerza:</p>
+            <ul style="font-size:var(--text-sm); padding-left:var(--space-4); line-height:1.8;">
+              <li><strong>Dedo índice</strong> → dirección del campo magnético \(\vec{B}\)</li>
+              <li><strong>Dedo corazón</strong> → sentido de la corriente \(I\)</li>
+              <li><strong>Pulgar</strong> → sentido del movimiento (fuerza \(\vec{F}\))</li>
+            </ul>
+
+            <div class="alert alert--info">
+              <span class="alert__icon">🔄</span>
+              <div class="alert__content">
+                <strong>Motor vs Generador:</strong> Si aplicamos fuerza mecánica externa al conductor en un campo magnético, se induce una f.e.m. (generador — regla de la mano derecha). Si aplicamos corriente eléctrica, obtenemos fuerza mecánica (motor — regla de la mano izquierda).
+              </div>
+            </div>
+          </section>
+
+          <!-- ════════════════ -->
+          <!-- SEC 8: BOBINAS   -->
+          <!-- ════════════════ -->
+          <section id="sec8" style="margin-top:var(--space-6);">
+            <h2 class="section-title">8. Bobinas</h2>
+
+            <p>Una <strong>bobina</strong> es un conductor arrollado en espiras (con o sin núcleo ferromagnético) cuya propiedad principal es su inductancia \(L\). En la práctica, toda bobina real presenta además una resistencia serie \(R_L\) (resistencia del hilo de cobre).</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Tipo</th><th>Núcleo</th><th>Características</th><th>Aplicaciones</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bobina de aire</strong></td>
+                  <td>Aire / vacío</td>
+                  <td>L baja, lineal (sin histéresis), estable con la temperatura</td>
+                  <td>Radiofrecuencia, filtros, antenas</td>
+                </tr>
+                <tr>
+                  <td><strong>Bobina con núcleo de hierro</strong></td>
+                  <td>Chapas de Fe-Si laminadas</td>
+                  <td>L muy alta, no lineal (histéresis), pérdidas en el núcleo</td>
+                  <td>Transformadores, reactancias de potencia</td>
+                </tr>
+                <tr>
+                  <td><strong>Bobina toroidal</strong></td>
+                  <td>Ferrita o polvo de hierro en forma de toro</td>
+                  <td>Campo magnético confinado en el interior del toro → mínimas interferencias</td>
+                  <td>Fuentes de alimentación conmutadas, filtros EMI</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:var(--space-3);">La <strong>regla del tornillo de Maxwell</strong> permite determinar el sentido del campo magnético generado por una bobina: si se imagina el avance de un tornillo en el sentido de la corriente, el campo magnético rodea al tornillo según el giro de su rosca.</p>
+          </section>
+
+          <!-- ══════════════════════════════ -->
+          <!-- SEC 9: REACTIVOS EN CC Y CA    -->
+          <!-- ══════════════════════════════ -->
+          <section id="sec9" style="margin-top:var(--space-6);">
+            <h2 class="section-title">9. Comportamiento de bobina y condensador en CC y CA</h2>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Componente</th><th>En corriente continua (CC)</th><th>En corriente alterna (CA)</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bobina (L)</strong></td>
+                  <td>
+                    En régimen permanente: se comporta como una <strong>resistencia pura</strong> \(R_L\) (el hilo de cobre). No hay f.e.m. de autoinducción porque \(\Delta I / \Delta t = 0\).
+                  </td>
+                  <td>
+                    La corriente varía continuamente → genera f.e.m. de autoinducción. Presenta <strong>reactancia inductiva</strong>:<br>
+                    \( X_L = 2\pi f L \)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Condensador (C)</strong></td>
+                  <td>
+                    En régimen permanente: <strong>circuito abierto</strong>. No pasa corriente continua. Solo interviene en el transitorio de carga/descarga.
+                  </td>
+                  <td>
+                    La tensión varía continuamente → el condensador se carga y descarga de forma cíclica. Presenta <strong>reactancia capacitiva</strong>:<br>
+                    \( X_C = \dfrac{1}{2\pi f C} \)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--info">
+              <span class="alert__icon">📐</span>
+              <div class="alert__content">
+                <strong>Efecto del desfase:</strong> En una bobina ideal, la <em>corriente se retrasa</em> 90° respecto a la tensión. En un condensador ideal, la <em>corriente se adelanta</em> 90° respecto a la tensión. Esta diferencia es clave para entender los circuitos RLC y el factor de potencia.
+              </div>
+            </div>
+          </section>
+
+          <!-- ══════════════════════════════════ -->
+          <!-- SEC 10: TRIGONOMETRÍA Y FASORES    -->
+          <!-- ══════════════════════════════════ -->
+          <section id="sec10" style="margin-top:var(--space-6);">
+            <h2 class="section-title">10. Repaso de trigonometría y representación fasorial</h2>
+
+            <p>En los circuitos de CA, tensiones y corrientes son funciones sinusoidales del tiempo. Los <strong>fasores</strong> son vectores giratorios que representan estas señales de forma sencilla, usando su módulo (valor eficaz) y su ángulo de fase.</p>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Identidad / Relación</th><th>Expresión</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Función sinusoidal</td><td>\(v(t) = V_{pico} \cdot \sin(\omega t + \varphi)\)</td></tr>
+                <tr><td>Pulsación angular</td><td>\(\omega = 2\pi f \quad [\text{rad/s}]\)</td></tr>
+                <tr><td>Valor eficaz (RMS)</td><td>\(V_{ef} = \dfrac{V_{pico}}{\sqrt{2}} \approx 0{,}707 \cdot V_{pico}\)</td></tr>
+                <tr><td>Identidad pitagórica</td><td>\(\sin^2\varphi + \cos^2\varphi = 1\)</td></tr>
+                <tr><td>Tangente</td><td>\(\tan\varphi = \dfrac{\sin\varphi}{\cos\varphi} = \dfrac{\text{cateto opuesto}}{\text{cateto adyacente}}\)</td></tr>
+                <tr><td>Módulo del fasor resultante</td><td>\(|Z| = \sqrt{a^2 + b^2} \quad\) (Teorema de Pitágoras)</td></tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:var(--space-3);">En la representación fasorial, los componentes <strong>resistivos</strong> se sitúan en el eje real (horizontal) y los <strong>reactivos</strong> en el eje imaginario (vertical): inductivos hacia arriba (+j), capacitivos hacia abajo (−j).</p>
+          </section>
+
+          <!-- ═══════════════════════ -->
+          <!-- SEC 11: CIRCUITOS RLC   -->
+          <!-- ═══════════════════════ -->
+          <section id="sec11" style="margin-top:var(--space-6);">
+            <h2 class="section-title">11. Circuitos RLC en corriente alterna</h2>
+
+            <p>En un circuito de CA con varios componentes, la oposición total al paso de la corriente se llama <strong>impedancia</strong> \(Z\) y se mide en ohmios (Ω). No es la suma aritmética de R, X<sub>L</sub> y X<sub>C</sub>, sino su combinación vectorial.</p>
+
+            <!-- SUBSEC 11.1 -->
+            <section id="sec11-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">11.1 Circuito RL serie</h3>
+
+              <p>Un resistor \(R\) y una bobina \(L\) en serie. La corriente es la misma en ambos. La tensión en R está en fase con la corriente; la tensión en L se adelanta 90°.</p>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    X_L = 2\pi f L \qquad
+                    Z = \sqrt{R^2 + X_L^2} \qquad
+                    \varphi = \arctan\!\left(\frac{X_L}{R}\right)
+                  \]
+                </div>
+                <div class="formula-card__legend">
+                  <span>\(X_L\) — Reactancia inductiva [Ω] &nbsp;|&nbsp; \(f\) — Frecuencia [Hz] &nbsp;|&nbsp; \(L\) — Inductancia [H]</span>
+                  <span>\(Z\) — Impedancia [Ω] &nbsp;|&nbsp; \(\varphi\) — Ángulo de desfase (tensión adelanta a corriente)</span>
+                </div>
+              </div>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Variable</th><th>Fórmula</th><th>Unidad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Reactancia inductiva</td><td>\(X_L = 2\pi f L = \omega L\)</td><td>Ω</td></tr>
+                  <tr><td>Impedancia</td><td>\(Z = \sqrt{R^2 + X_L^2}\)</td><td>Ω</td></tr>
+                  <tr><td>Corriente (Ley de Ohm)</td><td>\(I = V / Z\)</td><td>A</td></tr>
+                  <tr><td>Tensión en R</td><td>\(V_R = I \cdot R\)</td><td>V</td></tr>
+                  <tr><td>Tensión en L</td><td>\(V_L = I \cdot X_L\)</td><td>V</td></tr>
+                  <tr><td>Tensión total</td><td>\(V = \sqrt{V_R^2 + V_L^2}\)</td><td>V</td></tr>
+                  <tr><td>Factor de potencia</td><td>\(\cos\varphi = R / Z = V_R / V\)</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 11.2 -->
+            <section id="sec11-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">11.2 Circuito RC serie</h3>
+
+              <p>Un resistor \(R\) y un condensador \(C\) en serie. La tensión en C se retrasa 90° respecto a la corriente.</p>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    X_C = \frac{1}{2\pi f C} \qquad
+                    Z = \sqrt{R^2 + X_C^2} \qquad
+                    \varphi = \arctan\!\left(\frac{X_C}{R}\right)
+                  \]
+                </div>
+                <div class="formula-card__legend">
+                  <span>\(X_C\) — Reactancia capacitiva [Ω] &nbsp;|&nbsp; \(f\) — Frecuencia [Hz] &nbsp;|&nbsp; \(C\) — Capacidad [F]</span>
+                  <span>La corriente se adelanta a la tensión total (comportamiento capacitivo)</span>
+                </div>
+              </div>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Variable</th><th>Fórmula</th><th>Unidad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Reactancia capacitiva</td><td>\(X_C = 1 / (2\pi f C)\)</td><td>Ω</td></tr>
+                  <tr><td>Impedancia</td><td>\(Z = \sqrt{R^2 + X_C^2}\)</td><td>Ω</td></tr>
+                  <tr><td>Corriente</td><td>\(I = V / Z\)</td><td>A</td></tr>
+                  <tr><td>Tensión en R</td><td>\(V_R = I \cdot R\)</td><td>V</td></tr>
+                  <tr><td>Tensión en C</td><td>\(V_C = I \cdot X_C\)</td><td>V</td></tr>
+                  <tr><td>Tensión total</td><td>\(V = \sqrt{V_R^2 + V_C^2}\)</td><td>V</td></tr>
+                  <tr><td>Factor de potencia</td><td>\(\cos\varphi = R / Z\)</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 11.3 -->
+            <section id="sec11-3" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">11.3 Circuito RLC serie</h3>
+
+              <p>Al combinar R, L y C en serie, las reactancias inductiva y capacitiva se restan (son de signo contrario en el eje fasorial):</p>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    Z = \sqrt{R^2 + (X_L - X_C)^2} \qquad
+                    \varphi = \arctan\!\left(\frac{X_L - X_C}{R}\right)
+                  \]
+                </div>
+              </div>
+
+              <table class="data-table" style="margin-top:var(--space-3);">
+                <thead>
+                  <tr><th>Condición</th><th>Comportamiento</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>\(X_L > X_C\)</td>
+                    <td>Comportamiento inductivo: tensión adelanta a la corriente (\(\varphi > 0\))</td>
+                  </tr>
+                  <tr>
+                    <td>\(X_L < X_C\)</td>
+                    <td>Comportamiento capacitivo: corriente adelanta a la tensión (\(\varphi < 0\))</td>
+                  </tr>
+                  <tr>
+                    <td>\(X_L = X_C\) → <strong>Resonancia</strong></td>
+                    <td>\(Z = R\) (mínima impedancia). \(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\). Corriente máxima.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSEC 11.4 -->
+            <section id="sec11-4" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">11.4 Potencia en corriente alterna</h3>
+
+              <p>En los circuitos de CA con elementos reactivos, la potencia no es simplemente \(P = V \cdot I\). Hay que distinguir tres tipos:</p>
+
+              <div class="formula-card">
+                <div class="formula-card__formula">
+                  \[
+                    P = V \cdot I \cdot \cos\varphi \quad \text{[W]} \qquad
+                    Q = V \cdot I \cdot \sin\varphi \quad \text{[VAr]} \qquad
+                    S = V \cdot I \quad \text{[VA]}
+                  \]
+                  \[
+                    S = \sqrt{P^2 + Q^2} \qquad \cos\varphi = \frac{P}{S}
+                  \]
+                </div>
+                <div class="formula-card__legend">
+                  <span>\(P\) — Potencia activa [W]: energía que se convierte en trabajo útil (calor, movimiento)</span>
+                  <span>\(Q\) — Potencia reactiva [VAr]: energía que oscila entre la fuente y el campo eléctrico/magnético</span>
+                  <span>\(S\) — Potencia aparente [VA]: potencia total que debe suministrar la red</span>
+                  <span>\(\cos\varphi\) — Factor de potencia: indica qué fracción de la potencia aparente es útil</span>
+                </div>
+              </div>
+
+              <div class="alert alert--info">
+                <span class="alert__icon">💡</span>
+                <div class="alert__content">
+                  <strong>Corrección del factor de potencia:</strong> Las cargas inductivas (motores, transformadores, fluorescentes con reactancia) consumen potencia reactiva inductiva (Q &gt; 0). Para compensarla se conectan <strong>condensadores en paralelo</strong> que suministran potencia reactiva capacitiva (Q &lt; 0). El objetivo es que cosφ se acerque a 1, reduciendo la corriente que circula por la red.
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ══════════════════════════ -->
+          <!-- SEC 12: TRANSFORMADORES    -->
+          <!-- ══════════════════════════ -->
+          <section id="sec12" style="margin-top:var(--space-6);">
+            <h2 class="section-title">12. Transformadores</h2>
+
+            <p>El <strong>transformador</strong> es una máquina estática (sin partes móviles) que transforma tensiones y corrientes alternas manteniendo la potencia constante (en el transformador ideal). Está formado por dos o más devanados enrollados sobre un núcleo ferromagnético laminado.</p>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[ \frac{N_1}{N_2} = \frac{V_1}{V_2} = \frac{I_2}{I_1} = a \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(N_1,\, N_2\) — Número de espiras del primario y secundario</span>
+                <span>\(V_1,\, V_2\) — Tensiones en primario y secundario [V]</span>
+                <span>\(I_1,\, I_2\) — Corrientes en primario y secundario [A]</span>
+                <span>\(a\) — Relación de transformación (adimensional)</span>
+              </div>
+            </div>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Tipo</th><th>Relación \(a\)</th><th>Efecto</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Reductor</strong></td><td>\(a > 1\) → \(N_1 > N_2\)</td><td>\(V_2 < V_1\) ; \(I_2 > I_1\)</td></tr>
+                <tr><td><strong>Elevador</strong></td><td>\(a < 1\) → \(N_1 < N_2\)</td><td>\(V_2 > V_1\) ; \(I_2 < I_1\)</td></tr>
+                <tr><td><strong>Aislamiento</strong></td><td>\(a = 1\) → \(N_1 = N_2\)</td><td>\(V_2 = V_1\) ; separación galvánica</td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Pérdidas en un transformador real</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Tipo de pérdida</th><th>Origen</th><th>Cómo se mide</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pérdidas en el hierro (P<sub>Fe</sub>)</strong></td>
+                  <td>Histéresis + corrientes de Foucault en el núcleo. Son constantes (dependen solo de V₁).</td>
+                  <td>Ensayo en vacío (secundario sin carga)</td>
+                </tr>
+                <tr>
+                  <td><strong>Pérdidas en el cobre (P<sub>Cu</sub>)</strong></td>
+                  <td>Calentamiento por efecto Joule en los devanados (\(I^2 \cdot R\)). Dependen de la carga.</td>
+                  <td>Ensayo de cortocircuito (secundario en cortocircuito)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="formula-card">
+              <div class="formula-card__formula">
+                \[
+                  \eta = \frac{P_{salida}}{P_{entrada}} = \frac{V_2 \cdot I_2 \cdot \cos\varphi_2}{V_2 \cdot I_2 \cdot \cos\varphi_2 + P_{Fe} + P_{Cu}}
+                \]
+              </div>
+              <div class="formula-card__legend">
+                <span>\(\eta\) — Rendimiento del transformador (valor típico: 0,95 – 0,99)</span>
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Autotransformador</h3>
+            <p>El <strong>autotransformador</strong> tiene un único devanado con toma intermedia: parte del devanado hace de primario y parte (o todo) hace de secundario. Ocupa menos espacio y es más eficiente que el transformador convencional, pero <strong>no proporciona aislamiento galvánico</strong> entre primario y secundario.</p>
+
+            <div class="alert alert--warning">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                <strong>Limitación del autotransformador:</strong> Al no haber separación galvánica, la tensión de red puede aparecer en el secundario si se produce un fallo. No se deben usar en circuitos donde el aislamiento sea un requisito de seguridad (p. ej. equipos médicos, instalaciones de muy baja tensión de seguridad MBTS).
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Transformadores trifásicos</h3>
+            <p>En los sistemas trifásicos se utilizan transformadores con tres devanados primarios y tres secundarios (o un banco de tres transformadores monofásicos). Los devanados se pueden conectar en estrella (Y) o triángulo (D/Δ), dando lugar a los grupos de conexión: <strong>Yy, Yd, Dy, Dd</strong>. La elección del grupo afecta al desfase entre primario y secundario y a la puesta a tierra del neutro.</p>
+
+          </section>
+
+          <!-- Navegación inferior -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:var(--space-6); padding-top:var(--space-4); border-top:1px solid var(--color-border);">
+            <a href="./index.html" class="btn btn--secondary btn--sm">← Volver al Tema 5</a>
+            <a href="./ejercicios.html" class="btn btn--primary btn--sm">Ejercicios →</a>
+          </div>
+
+        </div><!-- .content -->
+      </div><!-- .content-with-toc -->
+    </div><!-- .page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

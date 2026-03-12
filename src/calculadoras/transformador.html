@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Transformador Ideal | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .calc-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);max-width:540px}
+    .calc-field{display:flex;flex-direction:column;gap:var(--space-1);margin-bottom:var(--space-3)}
+    .calc-field label{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+    .calc-field .field-row{display:flex;gap:var(--space-2);align-items:center}
+    .calc-field input[type="number"]{flex:1;padding:var(--space-2) var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:var(--text-base);background:var(--color-bg);color:var(--color-text);outline:none;transition:border-color .2s}
+    .calc-field input[type="number"]:focus{border-color:var(--color-primary)}
+    .calc-field .unit{font-size:var(--text-sm);color:var(--color-text-muted);min-width:3rem}
+    .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2);margin-top:var(--space-3)}
+    .result-cell{background:var(--color-primary-dark);color:#fff;border-radius:var(--radius-md);padding:var(--space-3);text-align:center}
+    .result-cell .rc-label{font-size:var(--text-xs);opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+    .result-cell .rc-value{font-size:var(--text-xl);font-weight:700;margin:var(--space-1) 0}
+    .result-cell .rc-unit{font-size:var(--text-xs);opacity:.7}
+    .type-badge{display:inline-block;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full,999px);font-weight:700;font-size:var(--text-sm);margin:var(--space-2) 0}
+    .type-elev{background:#10b981;color:#fff}
+    .type-red{background:#3b82f6;color:#fff}
+    .type-ais{background:#64748b;color:#fff}
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"               class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"   class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"     class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html"  class="nav-main__link nav-main__link--active">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"   class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"      class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Calculadoras</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Transformador</li>
+        </ol>
+      </nav>
+
+      <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-2);">🔁 Calculadora — Transformador ideal</h1>
+      <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+        Introduce los datos del transformador para calcular tensiones, corrientes y relación de transformación.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start;">
+
+        <div class="calc-card">
+          <div class="calc-field">
+            <label for="inp-n1">Espiras primario (N1)</label>
+            <div class="field-row">
+              <input type="number" id="inp-n1" value="100" min="1" step="1" oninput="calculate()">
+              <span class="unit">esp.</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-n2">Espiras secundario (N2)</label>
+            <div class="field-row">
+              <input type="number" id="inp-n2" value="200" min="1" step="1" oninput="calculate()">
+              <span class="unit">esp.</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-v1">Tensión primario (V1)</label>
+            <div class="field-row">
+              <input type="number" id="inp-v1" value="230" min="0" step="any" oninput="calculate()">
+              <span class="unit">V</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="inp-i1">Corriente primario (I1) <span style="color:var(--color-text-muted);font-weight:400">(opcional)</span></label>
+            <div class="field-row">
+              <input type="number" id="inp-i1" value="2" min="0" step="any" oninput="calculate()">
+              <span class="unit">A</span>
+            </div>
+          </div>
+
+          <div id="results" style="display:none;">
+            <div id="type-label" style="text-align:center;margin:var(--space-2) 0;"></div>
+            <div class="result-grid">
+              <div class="result-cell"><p class="rc-label">Relación a = N1/N2</p><p class="rc-value" id="res-a">—</p><p class="rc-unit">—</p></div>
+              <div class="result-cell"><p class="rc-label">V secundario (V2)</p><p class="rc-value" id="res-v2">—</p><p class="rc-unit">V</p></div>
+              <div class="result-cell" id="cell-i2" style="display:none;"><p class="rc-label">I secundario (I2)</p><p class="rc-value" id="res-i2">—</p><p class="rc-unit">A</p></div>
+              <div class="result-cell" id="cell-pot" style="display:none;"><p class="rc-label">Potencia</p><p class="rc-value" id="res-pot">—</p><p class="rc-unit">VA</p></div>
+            </div>
+          </div>
+
+          <button onclick="clearAll()" style="margin-top:var(--space-4);width:100%;padding:var(--space-2);background:none;border:1px solid var(--color-border);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--text-sm);color:var(--color-text-muted);">Limpiar</button>
+        </div>
+
+        <!-- SVG esquema + ejemplos -->
+        <div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Esquema del transformador</p>
+            <svg id="trafo-svg" viewBox="0 0 300 180" width="100%" aria-label="Esquema transformador">
+              <!-- Núcleo -->
+              <rect x="130" y="30" width="40" height="120" fill="#334155" rx="4"/>
+              <!-- Bobina primario (izq) — espiras como arcos -->
+              <g stroke="#3b82f6" stroke-width="2.5" fill="none">
+                <path d="M80,50 Q95,50 95,65 Q95,80 80,80"/>
+                <path d="M80,80 Q95,80 95,95 Q95,110 80,110"/>
+                <path d="M80,110 Q95,110 95,125 Q95,140 80,140"/>
+              </g>
+              <line x1="30" y1="65" x2="80" y2="65" stroke="#3b82f6" stroke-width="2"/>
+              <line x1="30" y1="135" x2="80" y2="135" stroke="#3b82f6" stroke-width="2"/>
+              <!-- Bobina secundario (dch) -->
+              <g stroke="#10b981" stroke-width="2.5" fill="none">
+                <path d="M220,50 Q205,50 205,65 Q205,80 220,80"/>
+                <path d="M220,80 Q205,80 205,95 Q205,110 220,110"/>
+                <path d="M220,110 Q205,110 205,125 Q205,140 220,140"/>
+              </g>
+              <line x1="220" y1="65" x2="270" y2="65" stroke="#10b981" stroke-width="2"/>
+              <line x1="220" y1="135" x2="270" y2="135" stroke="#10b981" stroke-width="2"/>
+              <!-- Etiquetas -->
+              <text x="50" y="22" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="bold">Primario</text>
+              <text x="250" y="22" text-anchor="middle" font-size="11" fill="#10b981" font-weight="bold">Secundario</text>
+              <text x="50" y="100" text-anchor="middle" font-size="10" fill="#94a3b8" id="lbl-n1">N1</text>
+              <text x="250" y="100" text-anchor="middle" font-size="10" fill="#94a3b8" id="lbl-n2">N2</text>
+              <text x="15" y="103" text-anchor="middle" font-size="11" fill="#f1f5f9" id="lbl-v1">V1</text>
+              <text x="285" y="103" text-anchor="middle" font-size="11" fill="#f1f5f9" id="lbl-v2">V2</text>
+              <!-- Flecha flujo -->
+              <path d="M155,20 L165,20 L160,12 Z" fill="#f59e0b"/>
+              <text x="160" y="9" text-anchor="middle" font-size="9" fill="#f59e0b">Φ</text>
+            </svg>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4);">
+            <p style="font-weight:700; margin-bottom:var(--space-3);">Ejemplos rápidos</p>
+            <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+              <button class="btn btn--ghost btn--sm" onclick="loadEx(100,200,230,null)">N1=100, N2=200, V1=230V → Elevador</button>
+              <button class="btn btn--ghost btn--sm" onclick="loadEx(2000,50,230,null)">N1=2000, N2=50, V1=230V → Reductor</button>
+              <button class="btn btn--ghost btn--sm" onclick="loadEx(500,500,230,2)">N1=500, N2=500, V1=230V, I1=2A → Aislamiento</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-paginas" style="margin-top:var(--space-5);">
+        <a href="./potencia.html"  class="btn btn--ghost">← Calc 6: Potencia</a>
+        <a href="./motor.html"     class="btn btn--primary">Calc 8: Motor →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    function calculate() {
+      const n1=parseFloat(document.getElementById('inp-n1').value);
+      const n2=parseFloat(document.getElementById('inp-n2').value);
+      const v1=parseFloat(document.getElementById('inp-v1').value);
+      const i1=parseFloat(document.getElementById('inp-i1').value);
+      if(isNaN(n1)||isNaN(n2)||isNaN(v1)||n1<=0||n2<=0||v1<=0) return;
+
+      const a = n1/n2;
+      const v2 = v1*(n2/n1);
+      let type, cls;
+      if(n2>n1){type='Elevador ↑';cls='type-elev';}
+      else if(n2<n1){type='Reductor ↓';cls='type-red';}
+      else {type='Aislamiento =';cls='type-ais';}
+
+      document.getElementById('res-a').textContent  = a.toFixed(3);
+      document.getElementById('res-v2').textContent = fmt(v2);
+      document.getElementById('type-label').innerHTML = `<span class="type-badge ${cls}">${type}</span>`;
+
+      if(!isNaN(i1)&&i1>0) {
+        const i2=i1*(n1/n2);
+        const pot=v1*i1;
+        document.getElementById('res-i2').textContent  = fmt(i2);
+        document.getElementById('res-pot').textContent = fmt(pot);
+        document.getElementById('cell-i2').style.display='';
+        document.getElementById('cell-pot').style.display='';
+      } else {
+        document.getElementById('cell-i2').style.display='none';
+        document.getElementById('cell-pot').style.display='none';
+      }
+      document.getElementById('results').style.display='block';
+
+      // Update SVG labels
+      document.getElementById('lbl-n1').textContent='N1='+Math.round(n1);
+      document.getElementById('lbl-n2').textContent='N2='+Math.round(n2);
+      document.getElementById('lbl-v1').textContent=fmt(v1)+'V';
+      document.getElementById('lbl-v2').textContent=fmt(v2)+'V';
+    }
+
+    function fmt(n){if(isNaN(n))return'—';if(Math.abs(n)>=100)return n.toFixed(2);if(Math.abs(n)>=1)return n.toFixed(3);return n.toFixed(4);}
+
+    function clearAll(){
+      ['n1','n2','v1','i1'].forEach(id=>{ document.getElementById('inp-'+id).value=''; });
+      document.getElementById('results').style.display='none';
+      ['n1','n2','v1','v2'].forEach(id=>{ const el=document.getElementById('lbl-'+id); if(el) el.textContent=id.toUpperCase(); });
+    }
+
+    function loadEx(n1,n2,v1,i1){
+      document.getElementById('inp-n1').value=n1;
+      document.getElementById('inp-n2').value=n2;
+      document.getElementById('inp-v1').value=v1;
+      document.getElementById('inp-i1').value=i1||'';
+      calculate();
+    }
+    document.addEventListener('DOMContentLoaded', calculate);
+  </script>
+
+</body>
+</html>

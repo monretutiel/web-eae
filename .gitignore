@@ -1,0 +1,18 @@
+# PDFs fuente (privados)
+material/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/settings.json
+.idea/
+*.suo
+*.user
+
+# Temporales
+*.tmp
+*.bak
+~$*

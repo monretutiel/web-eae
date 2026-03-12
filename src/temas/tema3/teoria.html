@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teoría Tema 3: fusibles, magnetotérmico, diferencial, relé térmico, guardamotor y toma de tierra.">
+  <title>Tema 3 — Teoría | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema3/index.html"  class="nav-main__link nav-main__link--active">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper page-wrapper--with-toc">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Tema 3</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Teoría</li>
+        </ol>
+      </nav>
+
+      <div class="content-with-toc">
+
+        <!-- TOC lateral -->
+        <aside class="toc" aria-label="Índice de contenidos">
+          <p class="toc__title">En esta página</p>
+          <ol class="toc__list">
+            <li class="toc__item"><a href="#sec1" class="toc__link">1. Fusibles</a></li>
+            <li class="toc__item"><a href="#sec2" class="toc__link">2. Magnetotérmico</a></li>
+            <li class="toc__item"><a href="#sec3" class="toc__link">3. Diferencial</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec3-1" class="toc__link">3.1 Tipos de diferencial</a></li>
+              </ol>
+            </li>
+            <li class="toc__item"><a href="#sec4" class="toc__link">4. Sobretensiones</a></li>
+            <li class="toc__item"><a href="#sec5" class="toc__link">5. Relé térmico</a></li>
+            <li class="toc__item"><a href="#sec6" class="toc__link">6. Guardamotor</a></li>
+            <li class="toc__item"><a href="#sec7" class="toc__link">7. Toma de tierra</a></li>
+            <li class="toc__item"><a href="#sec8" class="toc__link">8. Otros elementos</a>
+              <ol class="toc__list">
+                <li class="toc__item"><a href="#sec8-1" class="toc__link">8.1 Relés, temporizadores…</a></li>
+                <li class="toc__item"><a href="#sec8-2" class="toc__link">8.2 Optoacopladores y PLC</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="content">
+
+          <h1 style="font-size:var(--text-xl); color:var(--color-primary-dark); margin-bottom:var(--space-1);">
+            Protecciones Eléctricas
+          </h1>
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-bottom:var(--space-5);">
+            Tema 3 · 8 secciones
+          </p>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 1: FUSIBLES                             -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec1">
+            <h2 class="section-title">1. Fusibles</h2>
+
+            <p>Los fusibles son <strong>elementos de protección de un solo uso</strong>. Constan de una envoltura y un material conductor que une ambos extremos de contacto. Cuando la corriente que pasa por el circuito es muy elevada —bien por sobrecarga o por cortocircuito— el material conductor <strong>se funde abriendo el circuito</strong>.</p>
+
+            <p style="margin-top:var(--space-3);">Es un elemento "débil" intercalado en el circuito para que, en caso de fallo, sea el primero en verse afectado, quedando el resto de los elementos protegidos. La categorización se realiza según su <strong>curva de fusión</strong> y su encapsulado. Se identifican mediante letras y la intensidad nominal.</p>
+
+            <div class="alert alert--info" style="margin-top:var(--space-4);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                <strong>Código de clasificación:</strong> primera letra + segunda letra + valor de intensidad nominal (p.ej. <strong>gI 16A</strong>, <strong>aM 25A</strong>).
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Primera letra — Uso</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Letra</th><th>Significado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>g</strong></td><td>Uso general (protege frente a sobrecargas y cortocircuitos)</td></tr>
+                <tr><td><strong>a</strong></td><td>De acompañamiento (solo protege frente a cortocircuitos; la sobrecarga la protege otro dispositivo)</td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Segunda letra — Aplicación</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Letra</th><th>Aplicación</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>l / G</strong></td><td>Protección de líneas y uso general</td></tr>
+                <tr><td><strong>M</strong></td><td>Motores eléctricos</td></tr>
+                <tr><td><strong>R</strong></td><td>Semiconductores (tiristores, diodos de potencia)</td></tr>
+                <tr><td><strong>B</strong></td><td>Minería y líneas de larga longitud</td></tr>
+                <tr><td><strong>Tr</strong></td><td>Protección de transformadores</td></tr>
+                <tr><td><strong>D</strong></td><td>Con retardo (soportan picos de arranque)</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-4);">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                El fusible más común en cuadros domésticos es el <strong>gI</strong> (uso general + líneas). Para motores, se usa el <strong>aM</strong> (acompañamiento + motores), porque el arranque motor genera picos de corriente 5-8 veces superiores a la nominal que el fusible aM tolera sin fundir.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 2: MAGNETOTÉRMICO                       -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec2" style="margin-top:var(--space-6);">
+            <h2 class="section-title">2. Disyuntor magnetotérmico</h2>
+
+            <p>El interruptor magnetotérmico es un <strong>dispositivo de protección reutilizable</strong> con doble mecanismo interno:</p>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); margin-top:var(--space-4);">
+              <div style="background:var(--color-surface); border:2px solid var(--color-warning); border-radius:var(--radius-md); padding:var(--space-3);">
+                <p style="font-weight:700; color:var(--color-warning-dark); margin-bottom:var(--space-2);">Circuito TÉRMICO</p>
+                <p style="font-size:var(--text-sm);">Una corriente elevada mantenida en el tiempo calienta un <strong>bimetal por efecto Joule</strong>. El bimetal se deforma hasta accionar el resorte de apertura. Protege frente a <strong>sobrecargas</strong>.</p>
+              </div>
+              <div style="background:var(--color-surface); border:2px solid var(--color-primary); border-radius:var(--radius-md); padding:var(--space-3);">
+                <p style="font-weight:700; color:var(--color-primary-dark); margin-bottom:var(--space-2);">Circuito MAGNÉTICO</p>
+                <p style="font-size:var(--text-sm);">Un <strong>electroimán</strong> responde a un pico de corriente exponencial muy elevado y repentino (cortocircuito). Atrae el terminal del resorte de disparo, abriendo el circuito instantáneamente. Protege frente a <strong>cortocircuitos</strong>.</p>
+              </div>
+            </div>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Curvas de disparo</h3>
+            <p>La curva de disparo determina cuánto tiempo puede soportar el magnetotérmico una corriente de pico antes de disparar (ej.: durante el arranque de una carga inductiva).</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Curva</th><th>Rango magnético</th><th>Aplicación típica</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>B</strong></td><td>3–5 × In</td><td>Circuitos resistivos: iluminación, calefacción</td></tr>
+                <tr><td><strong>C</strong></td><td>5–10 × In</td><td>Uso general: tomas de corriente, motores pequeños</td></tr>
+                <tr><td><strong>D</strong></td><td>10–20 × In</td><td>Cargas muy inductivas: transformadores, motores grandes</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning" style="margin-top:var(--space-4);">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                <strong>Poder de corte:</strong> es la máxima corriente de cortocircuito que el magnetotérmico puede interrumpir sin dañarse. Se expresa en kA (p.ej. 6 kA, 10 kA). Debe ser siempre ≥ a la corriente de cortocircuito prevista en el punto de instalación.
+              </div>
+            </div>
+
+            <div class="formula-card" style="margin-top:var(--space-4);">
+              <p class="formula-card__label">Ejemplo de lectura de etiqueta</p>
+              <p style="font-size:var(--text-sm); margin-top:var(--space-2);"><strong>P+N · 10 A · curva C · 6 kA</strong></p>
+              <ul style="font-size:var(--text-sm); margin-top:var(--space-2); padding-left:var(--space-4);">
+                <li><strong>P+N:</strong> bipolar (corta fase y neutro)</li>
+                <li><strong>10 A:</strong> calibre — protege hasta 10 A; por encima dispara</li>
+                <li><strong>Curva C:</strong> soporta picos de 5 a 10 × 10 A = 50–100 A sin disparar instantáneamente</li>
+                <li><strong>6 kA:</strong> poder de corte — sus contactos aguantan hasta 6 000 A sin soldarse</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 3: DIFERENCIAL                          -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec3" style="margin-top:var(--space-6);">
+            <h2 class="section-title">3. Interruptor diferencial</h2>
+
+            <p>El interruptor diferencial es un <strong>dispositivo electromecánico de protección personal</strong>. Protege a las personas frente a <strong>contactos indirectos</strong> (derivaciones causadas por faltas de aislamiento entre conductores activos y tierra/masa).</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Principio de funcionamiento</h3>
+            <p>Consta de dos bobinas en serie con los conductores de alimentación (fase y neutro). En condiciones normales, la corriente que entra es igual a la que sale, y los campos magnéticos de ambas bobinas se anulan. Si existe una <strong>fuga a tierra</strong>, la corriente de retorno es menor que la entrante: la diferencia genera un campo resultante que acciona el mecanismo de disparo.</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Parámetro</th><th>Descripción</th><th>Valor típico</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Calibre (In)</td><td>Corriente nominal que puede circular permanentemente</td><td>25 A, 40 A, 63 A</td></tr>
+                <tr><td>Sensibilidad (IΔn)</td><td>Corriente diferencial que provoca el disparo</td><td>10 mA, 30 mA, 300 mA</td></tr>
+                <tr><td>Poder de corte</td><td>Corriente máx. que puede interrumpir</td><td>1 000–6 000 A</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning" style="margin-top:var(--space-3);">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                Para protección personal contra electrocución se usa sensibilidad de <strong>30 mA</strong>. Con 30 mA durante menos de 40 ms la probabilidad de fibrilación ventricular es muy baja. Los de 300 mA se usan solo para proteger instalaciones (no personas).
+              </div>
+            </div>
+
+            <!-- SUBSECCIÓN 3.1 -->
+            <section id="sec3-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">3.1 Tipos de diferencial</h3>
+
+              <table class="data-table">
+                <thead>
+                  <tr><th>Clase</th><th>Corrientes que detecta</th><th>Aplicación</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>AC</strong></td>
+                    <td>Corriente alterna sinusoidal pura (50 Hz)</td>
+                    <td>Instalaciones domésticas estándar. El más utilizado y económico.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>A</strong></td>
+                    <td>CA sinusoidal + corriente continua pulsante</td>
+                    <td>Obligatorio en infraestructuras de recarga de vehículos eléctricos (modo 1 y 2) e instalaciones fotovoltaicas.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>F (SI)</strong></td>
+                    <td>Todo lo anterior + detecta "falsos positivos" por armónicos</td>
+                    <td>Instalaciones con variadores de frecuencia, muchos equipos electrónicos o descargas atmosféricas inducidas.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>B</strong></td>
+                    <td>Todo lo anterior + corriente continua lisa + cargas trifásicas</td>
+                    <td>Recarga vehículo tipo 3 (semi-rápida), variadores trifásicos, ascensores.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>S (selectivo)</strong></td>
+                    <td>Igual que su clase base + retardo al disparo regulable</td>
+                    <td>Se instala "aguas arriba" de otros diferenciales para lograr <strong>selectividad vertical</strong>: solo dispara el diferencial más cercano al fallo.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="alert alert--tip" style="margin-top:var(--space-3);">
+                <span class="alert__icon">💡</span>
+                <div class="alert__content">
+                  <strong>Jerarquía de protección:</strong> AC ⊂ A ⊂ F ⊂ B. Un diferencial Clase B detecta todo lo que detectan A, F y AC, pero es el más caro. Usa el mínimo necesario para cada circuito.
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 4: SOBRETENSIONES                       -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec4" style="margin-top:var(--space-6);">
+            <h2 class="section-title">4. Protección contra sobretensiones</h2>
+
+            <p>Los <strong>limitadores de sobretensión (SPD)</strong> se subclasifican en dos tipos según la naturaleza de la sobretensión que protegen:</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Tipo</th><th>Causa</th><th>Característica</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Transitoria</strong></td>
+                  <td>Conmutaciones en la red aguas arriba, descargas atmosféricas (rayo)</td>
+                  <td>Picos de tensión muy elevados pero muy cortos en el tiempo (microsegundos)</td>
+                </tr>
+                <tr>
+                  <td><strong>Permanente</strong></td>
+                  <td>Rotura del conductor de neutro, descompensación de fases por fallo del transformador</td>
+                  <td>Tensión elevada mantenida en el tiempo; puede quemar receptores</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Principio de funcionamiento</h3>
+            <p>Ambos dispositivos actúan como una <strong>impedancia "infinita" en tensión nominal</strong>, pero cuando la tensión supera el umbral configurado, su impedancia interna desciende en proporción, derivando a tierra el exceso de corriente y autonivel ando la diferencia de potencial en el receptor.</p>
+
+            <div class="alert alert--info" style="margin-top:var(--space-3);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                El <strong>Vigi</strong> (o RCBO) combina magnetotérmico y diferencial en un único módulo de carril DIN, ahorrando espacio en el cuadro. Algunos magnetotérmicos bipolares incorporan también protección de sobretensión permanente y transitoria integrada.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 5: RELÉ TÉRMICO                         -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec5" style="margin-top:var(--space-6);">
+            <h2 class="section-title">5. Relé térmico</h2>
+
+            <p>El relé térmico es un dispositivo de protección utilizado en <strong>circuitos de automatismos para arranque de motores</strong>. Protege el motor contra:</p>
+            <ul style="padding-left:var(--space-4); margin-top:var(--space-2); font-size:var(--text-sm);">
+              <li><strong>Sobrecargas</strong> (corriente superior a la nominal de forma mantenida)</li>
+              <li><strong>Fallo de fase</strong> (pérdida de una de las tres fases en un motor trifásico)</li>
+            </ul>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Conexiones</h3>
+            <table class="data-table">
+              <thead>
+                <tr><th>Parte</th><th>Conexión</th><th>Función</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bornes de fuerza</strong> (6 bornes, 3+3)</td>
+                  <td>En serie en el circuito de fuerza, entre contactor y motor</td>
+                  <td>Detecta la corriente que circula. Si supera el límite regulado, dispara.</td>
+                </tr>
+                <tr>
+                  <td><strong>Contacto auxiliar NC (95-96)</strong></td>
+                  <td>En serie con la bobina del contactor (circuito de mando)</td>
+                  <td>Al disparar, se abre → desconecta la bobina del contactor → motor se para</td>
+                </tr>
+                <tr>
+                  <td><strong>Contacto auxiliar NA (97-98)</strong></td>
+                  <td>Conectado a un piloto de señalización H2</td>
+                  <td>Al disparar, se cierra → enciende el piloto de avería</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">Secuencia de disparo</h3>
+            <ol style="padding-left:var(--space-4); font-size:var(--text-sm);">
+              <li>Sobrecarga o fallo de fase en el circuito de fuerza</li>
+              <li>Relé térmico detecta la anomalía y dispara</li>
+              <li>Contacto NC (95-96) se <strong>abre</strong> → corta alimentación de la bobina de KM1</li>
+              <li>Contactor KM1 abre sus contactos principales → <strong>motor M1 se detiene</strong></li>
+              <li>Contacto NA (97-98) se <strong>cierra</strong> → <strong>piloto H2 se enciende</strong> (aviso de disparo)</li>
+              <li>Para restablecer: eliminar la causa + pulsar botón de <strong>RESET</strong> (manual o automático)</li>
+            </ol>
+
+            <div class="alert alert--tip" style="margin-top:var(--space-4);">
+              <span class="alert__icon">💡</span>
+              <div class="alert__content">
+                <strong>Regulación:</strong> el relé térmico dispone de un selector de corriente (p.ej. 4–6,3 A). Se regula a la <strong>intensidad nominal del motor en plena carga</strong> (dato de la placa de características del motor, parámetro I<sub>N</sub>).
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 6: GUARDAMOTOR                          -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec6" style="margin-top:var(--space-6);">
+            <h2 class="section-title">6. Guardamotor</h2>
+
+            <p>El guardamotor es un <strong>magnetotérmico regulable específico para motores</strong>, con protección de fallo de fase integrada. Es una alternativa al conjunto magnetotérmico + contactor + relé térmico, pero con algunas diferencias clave:</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Característica</th><th>Relé térmico</th><th>Guardamotor</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Corte del circuito de fuerza</td>
+                  <td>No directamente (usa contactos auxiliares para desconectar el contactor)</td>
+                  <td>Sí — abre directamente sus propios contactos de potencia</td>
+                </tr>
+                <tr>
+                  <td>Posición en la instalación</td>
+                  <td>Entre contactor y motor (aguas abajo)</td>
+                  <td>Aguas arriba, antes del contactor</td>
+                </tr>
+                <tr>
+                  <td>Protección magnética (cc)</td>
+                  <td>No (solo térmica)</td>
+                  <td>Sí (magnetotérmica)</td>
+                </tr>
+                <tr>
+                  <td>Regulación</td>
+                  <td>Selector de corriente</td>
+                  <td>Selector de corriente (I<sub>N</sub> del motor en plena carga)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--info" style="margin-top:var(--space-3);">
+              <span class="alert__icon">📌</span>
+              <div class="alert__content">
+                El guardamotor dispone de botón de apagado (OFF/STOP rojo) y botón de encendido (START verde). Su símbolo en esquemas muestra contactos de potencia más disparador térmico y disparador magnético.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 7: TOMA DE TIERRA                       -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec7" style="margin-top:var(--space-6);">
+            <h2 class="section-title">7. Toma de tierra</h2>
+
+            <p>La <strong>puesta a tierra</strong> es la unión eléctrica de partes metálicas no activas de la instalación (carcasas, estructuras, conducciones) con el potencial de tierra. Su función es <strong>proteger a las personas frente a contactos indirectos</strong>.</p>
+
+            <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-top:var(--space-4); margin-bottom:var(--space-2);">¿Cómo protege?</h3>
+            <p>Cuando un conductor activo (con tensión) contacta accidentalmente con una parte metálica (carcasa), esa parte se pone en tensión. La toma de tierra proporciona un <strong>camino de baja impedancia</strong> para que la corriente se derive directamente a tierra en lugar de pasar a través del cuerpo humano (que tiene mayor impedancia).</p>
+
+            <table class="data-table" style="margin-top:var(--space-3);">
+              <thead>
+                <tr><th>Componente</th><th>Función</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Electrodo de puesta a tierra (pica)</td><td>Conductor metálico enterrado que establece contacto con el terreno</td></tr>
+                <tr><td>Cable de conexión</td><td>Une el electrodo con la arqueta de conexión</td></tr>
+                <tr><td>Arqueta de conexión</td><td>Permite la medida y desconexión del electrodo para mantenimiento</td></tr>
+                <tr><td>Conductor de protección (PE)</td><td>Cable verde-amarillo que une las masas metálicas con la arqueta</td></tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert--warning" style="margin-top:var(--space-3);">
+              <span class="alert__icon">⚠️</span>
+              <div class="alert__content">
+                La toma de tierra por sí sola no garantiza protección: <strong>debe combinarse con el interruptor diferencial</strong>. La tierra proporciona el camino de baja impedancia; el diferencial detecta la corriente de fuga y dispara cortando la alimentación.
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SECCIÓN 8: OTROS ELEMENTOS                      -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <section id="sec8" style="margin-top:var(--space-6);">
+            <h2 class="section-title">8. Otros elementos de los cuadros eléctricos</h2>
+
+            <table class="data-table">
+              <thead>
+                <tr><th>Elemento</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Vigi (RCBO)</strong></td>
+                  <td>Combinado magnetotérmico + diferencial en un solo módulo DIN. Ahorra espacio en cuadros.</td>
+                </tr>
+                <tr>
+                  <td><strong>Reconectadora diferencial</strong></td>
+                  <td>Auxiliar o integrado en el diferencial. Permite la <strong>reconexión automática</strong> pasado un tiempo tras el disparo por derivación. Útil en instalaciones remotas o no vigiladas.</td>
+                </tr>
+                <tr>
+                  <td><strong>Interruptor horario</strong></td>
+                  <td>Reloj programable con contactos auxiliares para conectar/desconectar circuitos a horas programadas. Se usa para gobernar contactores (iluminación, climatización, riego).</td>
+                </tr>
+                <tr>
+                  <td><strong>Interruptor seccionador</strong></td>
+                  <td>No es un dispositivo de protección; es un elemento de <strong>control de apertura general</strong> con enclavamiento mecánico y alta capacidad de ruptura incluso en carga. Permite aislar totalmente una instalación para mantenimiento.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- SUBSECCIÓN 8.1 -->
+            <section id="sec8-1" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">8.1 Relés, contactores modulares y temporizadores</h3>
+
+              <table class="data-table">
+                <thead>
+                  <tr><th>Elemento</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Relés auxiliares</strong></td>
+                    <td>Igual función que los contactores pero más pequeños y delicados. Se usan exclusivamente en <strong>circuitos de mando</strong> (baja potencia). No soportan corrientes de fuerza.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Contactor modular</strong></td>
+                    <td>Punto intermedio entre el contactor de fuerza y el relé auxiliar. Se instala en carril DIN dentro del cuadro. Ideal para cargas de potencia media (iluminación LED, motores pequeños).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Temporizadores</strong></td>
+                    <td>Retardan la conexión o desconexión de un circuito. Tipos: neumáticos (se acoplan al contactor) y electrónicos (independientes, mayor precisión, para entornos industriales).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Medidores / contadores</strong></td>
+                    <td>Contadores de energía eléctrica de integración en carril DIN. Miden kWh, potencia activa y reactiva, cosφ, armónicos, etc.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- SUBSECCIÓN 8.2 -->
+            <section id="sec8-2" style="margin-top:var(--space-5);">
+              <h3 style="font-size:var(--text-base); color:var(--color-primary); margin-bottom:var(--space-3);">8.2 Optoacopladores y PLC</h3>
+
+              <table class="data-table">
+                <thead>
+                  <tr><th>Elemento</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Optoacopladores</strong></td>
+                    <td>Borneras de conexión con <strong>aislamiento galvánico</strong> mediante circuito óptico. Protegen elementos de control frágiles (PLC, autómatas) de las tensiones y ruidos eléctricos de los accionadores exteriores. Requieren alimentación auxiliar.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>PLC (Controlador Lógico Programable)</strong></td>
+                    <td>Dispositivo electrónico programable que <strong>sustituye la lógica cableada</strong> por lógica software. Gestiona entradas (sensores, pulsadores) y salidas (contactores, válvulas) de forma flexible y reprogramable.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </section>
+
+          <!-- Navegación -->
+          <div class="nav-paginas" style="margin-top:var(--space-6);">
+            <a href="../../temas/tema2/teoria.html" class="btn btn--ghost">← Tema 2</a>
+            <a href="./ejercicios.html" class="btn btn--primary">Ejercicios →</a>
+          </div>
+
+        </div><!-- /content -->
+      </div><!-- /content-with-toc -->
+    </div><!-- /page-wrapper -->
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "t5q1",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué tipo de material magnético se imantan fuertemente, conservan magnetización residual y tienen permeabilidad relativa μr muy superior a 1?",
+    "options": [
+      "Diamagnéticos",
+      "Paramagnéticos",
+      "Ferromagnéticos",
+      "Semiconductores"
+    ],
+    "correct": 2,
+    "explanation": "Los materiales FERROMAGNÉTICOS (hierro, níquel, cobalto) tienen μr de cientos a miles, se imantan intensamente en la dirección del campo y conservan magnetización residual (remanencia) al retirar el campo. Los paramagnéticos tienen μr ligeramente > 1 y no conservan imanación. Los diamagnéticos tienen μr ligeramente < 1 y se oponen al campo."
+  },
+  {
+    "id": "t5q2",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "Una bobina de 100 espiras está sometida a una variación de flujo magnético de 0,05 Wb en 0,01 s. ¿Cuál es la f.e.m. inducida?",
+    "options": [
+      "0,5 V",
+      "5 V",
+      "50 V",
+      "500 V"
+    ],
+    "correct": 3,
+    "explanation": "Ley de Faraday: e = N × ΔΦ/Δt = 100 × (0,05 / 0,01) = 100 × 5 = 500 V. Ojo con las unidades: ΔΦ/Δt = 0,05 Wb / 0,01 s = 5 Wb/s = 5 V por espira. Con 100 espiras el resultado es 500 V."
+  },
+  {
+    "id": "t5q3",
+    "type": "true-false",
+    "difficulty": "easy",
+    "text": "Las corrientes de Foucault son siempre perjudiciales y no tienen ninguna aplicación práctica útil.",
+    "correct": false,
+    "explanation": "FALSO. Las corrientes de Foucault sí tienen aplicaciones útiles: freno de Foucault (frenado sin contacto mecánico en trenes y dinamómetros), cocinas de inducción (el propio recipiente metálico se calienta), calefacción por inducción industrial y detección de metales. Son perjudiciales cuando se producen en los núcleos de transformadores y motores (pérdidas de energía y calentamiento), por eso se usan núcleos laminados para reducirlas."
+  },
+  {
+    "id": "t5q4",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "text": "¿Qué ocurre con una bobina en un circuito de corriente continua en régimen permanente (corriente constante)?",
+    "options": [
+      "Se comporta como un circuito abierto (no pasa corriente)",
+      "Se comporta como una resistencia pura igual a la resistencia del hilo",
+      "Genera una f.e.m. de autoinducción continua que se opone a la corriente",
+      "Su reactancia inductiva XL es máxima"
+    ],
+    "correct": 1,
+    "explanation": "En CC régimen permanente, la corriente no varía (ΔI/Δt = 0), por lo que la f.e.m. de autoinducción (e = L·ΔI/Δt) es cero. La bobina se comporta simplemente como la resistencia óhmica del hilo de cobre (RLdc). El circuito abierto corresponde al condensador en CC, no a la bobina."
+  },
+  {
+    "id": "t5q5",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Una bobina de L = 200 mH está conectada a una red de 50 Hz. ¿Cuál es su reactancia inductiva XL?",
+    "options": [
+      "6,28 Ω",
+      "31,4 Ω",
+      "62,8 Ω",
+      "628 Ω"
+    ],
+    "correct": 2,
+    "explanation": "XL = 2π × f × L = 2π × 50 × 0,2 = 2 × 3,1416 × 50 × 0,2 = 62,8 Ω. Recuerda convertir mH a H: 200 mH = 0,2 H. Si hubieras usado 200 sin convertir habrías obtenido el resultado incorrecto de 62.800 Ω."
+  },
+  {
+    "id": "t5q6",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "En un circuito RL serie con R = 60 Ω y XL = 80 Ω, ¿cuál es la impedancia Z y el factor de potencia cosφ?",
+    "options": [
+      "Z = 140 Ω, cosφ = 0,43",
+      "Z = 100 Ω, cosφ = 0,60",
+      "Z = 100 Ω, cosφ = 0,80",
+      "Z = 140 Ω, cosφ = 0,57"
+    ],
+    "correct": 1,
+    "explanation": "Z = √(R² + XL²) = √(60² + 80²) = √(3600 + 6400) = √10000 = 100 Ω. cosφ = R/Z = 60/100 = 0,60. Es el triángulo rectángulo 3-4-5 escalado ×20: catetos 60 y 80, hipotenusa 100. El factor de potencia 0,60 indica que solo el 60% de la potencia aparente es útil."
+  },
+  {
+    "id": "t5q7",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "¿Qué diferencia hay entre potencia activa (P) y potencia aparente (S) en un circuito de CA con elementos reactivos?",
+    "options": [
+      "No hay diferencia: P = S siempre",
+      "P es la energía almacenada en la bobina; S es la disipada en la resistencia",
+      "P [W] es la energía convertida en trabajo útil; S [VA] es la potencia total que suministra la red, incluyendo la parte reactiva",
+      "S siempre es menor que P"
+    ],
+    "correct": 2,
+    "explanation": "P (vatios, W) es la potencia activa: energía que se convierte en trabajo útil (calor, movimiento). S (voltamperios, VA) es la potencia aparente: producto V·I que la red debe suministrar. La diferencia es Q (VAr), la potencia reactiva que oscila entre la fuente y los elementos reactivos. Siempre S ≥ P, y cosφ = P/S indica la fracción útil."
+  },
+  {
+    "id": "t5q8",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "text": "Un transformador tiene N₁ = 2000 espiras y N₂ = 100 espiras. Si la tensión primaria es 400 V, ¿cuál es la tensión secundaria?",
+    "options": [
+      "8000 V",
+      "400 V",
+      "20 V",
+      "200 V"
+    ],
+    "correct": 2,
+    "explanation": "Relación de transformación: a = N1/N2 = 2000/100 = 20. Tensión secundaria: V2 = V1/a = 400/20 = 20 V. Es un transformador reductor (a > 1): reduce la tensión 20 veces. La corriente se multiplicará por 20: si I1 = 1 A, entonces I2 = 20 A (conservando la potencia en el transformador ideal)."
+  },
+  {
+    "id": "t5q9",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "En un circuito RLC serie con XL = 50 Ω, XC = 80 Ω y R = 40 Ω, ¿cuál es el comportamiento del circuito y qué ángulo de desfase tiene?",
+    "options": [
+      "Inductivo, φ = +36,9° (tensión adelanta a corriente)",
+      "Capacitivo, φ = −36,9° (corriente adelanta a tensión)",
+      "Resistivo puro, φ = 0°",
+      "Capacitivo, φ = −53,1° (corriente adelanta a tensión)"
+    ],
+    "correct": 1,
+    "explanation": "XL - XC = 50 - 80 = -30 Ω (negativo → comportamiento capacitivo). Z = √(40² + 30²) = √(1600 + 900) = √2500 = 50 Ω. φ = arctan(-30/40) = arctan(-0,75) ≈ -36,9°. El signo negativo indica que la corriente se adelanta a la tensión. cosφ = 40/50 = 0,80. Para hacerlo resistivo habría que añadir una bobina de XL = 30 Ω adicional."
+  },
+  {
+    "id": "t5q10",
+    "type": "multiple-choice",
+    "difficulty": "hard",
+    "text": "Un transformador real entrega 4,8 kW al secundario con cosφ = 0,8. Las pérdidas en el hierro son 80 W y las pérdidas en el cobre son 120 W. ¿Cuál es el rendimiento?",
+    "options": [
+      "96,0 %",
+      "97,6 %",
+      "94,1 %",
+      "98,0 %"
+    ],
+    "correct": 0,
+    "explanation": "Rendimiento: η = P_salida / P_entrada = P_salida / (P_salida + P_Fe + P_Cu) = 4800 / (4800 + 80 + 120) = 4800 / 5000 = 0,960 = 96,0 %. Las pérdidas totales son 200 W sobre una potencia de entrada de 5000 W. Nota: el factor de potencia cosφ = 0,8 ya está incorporado en el valor de potencia activa entregada (4,8 kW), no hay que aplicarlo de nuevo."
+  }
+]
