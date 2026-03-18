@@ -1,0 +1,283 @@
+{
+  "version": "1.0",
+  "total": 6,
+  "puntos_por_ejercicio": 2.33,
+  "ejercicios": [
+    {
+      "id": "E1",
+      "titulo": "Circuito RLC serie",
+      "icono": "🔗",
+      "dificultad": "media",
+      "tema_ref": [3, 4],
+      "enunciado": "Un circuito RLC serie está formado por R = 60 Ω, L = 0,2 H y C = 100 μF. Se conecta a una tensión V = 230 V (ef) a 50 Hz. Calcula los siguientes valores:",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánto vale la reactancia inductiva XL?",
+          "formula": "XL = 2π·f·L",
+          "calculo": "XL = 2π × 50 × 0,2 = 62,8 Ω",
+          "opciones": ["31,4 Ω", "62,8 Ω", "125,7 Ω", "6,3 Ω"],
+          "correcta": 1,
+          "explicacion": "XL = 2π·f·L = 2π·50·0,2 = 62,8 Ω"
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánto vale la reactancia capacitiva XC?",
+          "formula": "XC = 1 / (2π·f·C)",
+          "calculo": "XC = 1 / (2π × 50 × 100×10⁻⁶) = 31,8 Ω",
+          "opciones": ["15,9 Ω", "63,7 Ω", "31,8 Ω", "318 Ω"],
+          "correcta": 2,
+          "explicacion": "XC = 1/(2π·50·100·10⁻⁶) = 1/0,03142 ≈ 31,8 Ω"
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánto vale la impedancia Z?",
+          "formula": "Z = √(R² + (XL − XC)²)",
+          "calculo": "Z = √(60² + (62,8−31,8)²) = √(3600 + 961) = √4561 ≈ 67,5 Ω",
+          "opciones": ["60,0 Ω", "67,5 Ω", "93,8 Ω", "124,6 Ω"],
+          "correcta": 1,
+          "explicacion": "Z = √(60² + 31²) = √4561 ≈ 67,5 Ω. El circuito es inductivo (XL > XC)."
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuánto vale la corriente eficaz I?",
+          "formula": "I = V / Z",
+          "calculo": "I = 230 / 67,5 ≈ 3,41 A",
+          "opciones": ["1,70 A", "2,46 A", "6,83 A", "3,41 A"],
+          "correcta": 3,
+          "explicacion": "I = V/Z = 230/67,5 ≈ 3,41 A"
+        }
+      ]
+    },
+    {
+      "id": "E2",
+      "titulo": "Circuito RL paralelo",
+      "icono": "⚡",
+      "dificultad": "media",
+      "tema_ref": [5],
+      "enunciado": "Un circuito RL paralelo tiene R = 80 Ω y XL = 60 Ω. Se alimenta con V = 120 V a 50 Hz. Calcula:",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánto vale la corriente por la resistencia IR?",
+          "formula": "IR = V / R",
+          "calculo": "IR = 120 / 80 = 1,5 A",
+          "opciones": ["0,75 A", "1,5 A", "3,0 A", "2,0 A"],
+          "correcta": 1,
+          "explicacion": "IR = V/R = 120/80 = 1,5 A. En paralelo, la tensión es la misma en ambas ramas."
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánto vale la corriente por la bobina IL?",
+          "formula": "IL = V / XL",
+          "calculo": "IL = 120 / 60 = 2 A",
+          "opciones": ["1,0 A", "2,0 A", "4,0 A", "0,5 A"],
+          "correcta": 1,
+          "explicacion": "IL = V/XL = 120/60 = 2 A. La bobina limita la corriente según su reactancia."
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánto vale la corriente total IT?",
+          "formula": "IT = √(IR² + IL²)",
+          "calculo": "IT = √(1,5² + 2²) = √(2,25 + 4) = √6,25 = 2,5 A",
+          "opciones": ["3,5 A", "1,8 A", "2,5 A", "5,0 A"],
+          "correcta": 2,
+          "explicacion": "IT = √(IR² + IL²) = √(2,25+4) = 2,5 A. IR e IL están desfasadas 90°, no se suman directamente."
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuánto vale el factor de potencia cosφ?",
+          "formula": "cosφ = IR / IT",
+          "calculo": "cosφ = 1,5 / 2,5 = 0,6",
+          "opciones": ["0,4", "0,6", "0,8", "1,0"],
+          "correcta": 1,
+          "explicacion": "cosφ = IR/IT = 1,5/2,5 = 0,6. El circuito es inductivo (IL > IR)."
+        }
+      ]
+    },
+    {
+      "id": "E3",
+      "titulo": "Potencias y compensación de reactiva",
+      "icono": "📐",
+      "dificultad": "alta",
+      "tema_ref": [6, 7],
+      "enunciado": "Una instalación monofásica consume P = 10 kW con un factor de potencia cosφ₁ = 0,7 (inductivo). Se quiere mejorar a cosφ₂ = 0,95. Tensión V = 230 V, frecuencia f = 50 Hz.",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánta potencia reactiva consume la instalación antes de compensar (Q₁)?",
+          "formula": "Q₁ = P · tanφ₁",
+          "calculo": "φ₁ = arccos(0,7) = 45,6° → tanφ₁ = 1,020 → Q₁ = 10 × 1,020 = 10,2 kVAr",
+          "opciones": ["7,0 kVAr", "10,2 kVAr", "14,3 kVAr", "17,0 kVAr"],
+          "correcta": 1,
+          "explicacion": "Q₁ = P·tanφ₁ = 10·tan(45,6°) = 10·1,020 ≈ 10,2 kVAr"
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánta potencia reactiva queda después de compensar (Q₂)?",
+          "formula": "Q₂ = P · tanφ₂",
+          "calculo": "φ₂ = arccos(0,95) = 18,2° → tanφ₂ = 0,329 → Q₂ = 10 × 0,329 = 3,29 kVAr",
+          "opciones": ["0,5 kVAr", "3,29 kVAr", "6,58 kVAr", "9,5 kVAr"],
+          "correcta": 1,
+          "explicacion": "Q₂ = P·tanφ₂ = 10·tan(18,2°) = 10·0,329 ≈ 3,29 kVAr"
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánta potencia reactiva debe aportar el banco de condensadores (Qc)?",
+          "formula": "Qc = Q₁ − Q₂",
+          "calculo": "Qc = 10,2 − 3,29 = 6,91 kVAr",
+          "opciones": ["3,29 kVAr", "6,91 kVAr", "10,20 kVAr", "13,49 kVAr"],
+          "correcta": 1,
+          "explicacion": "Qc = Q₁ − Q₂ = 10,2 − 3,29 ≈ 6,91 kVAr. Este es el VAr que debe generar el condensador."
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuál es la capacidad C necesaria del banco de condensadores?",
+          "formula": "C = Qc / (ω · V²)",
+          "calculo": "C = 6910 / (314 × 230²) = 6910 / 16 610 600 ≈ 416 μF",
+          "opciones": ["104 μF", "208 μF", "416 μF", "832 μF"],
+          "correcta": 2,
+          "explicacion": "C = Qc/(ω·V²) = 6910/(314·52900) ≈ 416 μF"
+        }
+      ]
+    },
+    {
+      "id": "E4",
+      "titulo": "Sistema trifásico en estrella",
+      "icono": "⭐",
+      "dificultad": "media",
+      "tema_ref": [8, 9, 10],
+      "enunciado": "Un sistema trifásico equilibrado conectado en estrella (Y) tiene VL = 400 V y una carga resistiva de R = 23,1 Ω por fase. Calcula:",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánto vale la tensión de fase Vf?",
+          "formula": "Vf = VL / √3",
+          "calculo": "Vf = 400 / 1,732 ≈ 231 V",
+          "opciones": ["115 V", "231 V", "400 V", "693 V"],
+          "correcta": 1,
+          "explicacion": "Vf = VL/√3 = 400/1,732 ≈ 231 V. En estrella la tensión de fase es menor que la de línea."
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánto vale la corriente de línea IL?",
+          "formula": "IL = If = Vf / R  (en estrella IL = If)",
+          "calculo": "If = 231 / 23,1 = 10 A → IL = 10 A",
+          "opciones": ["5 A", "10 A", "17,3 A", "23,1 A"],
+          "correcta": 1,
+          "explicacion": "En estrella IL = If. If = Vf/R = 231/23,1 = 10 A."
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánto vale la potencia activa total P?",
+          "formula": "P = √3 · VL · IL · cosφ",
+          "calculo": "P = √3 × 400 × 10 × 1 = 1,732 × 4000 ≈ 6928 W ≈ 6,93 kW",
+          "opciones": ["2310 W", "4000 W", "6930 W", "12 000 W"],
+          "correcta": 2,
+          "explicacion": "P = √3·VL·IL·cosφ = 1,732·400·10·1 ≈ 6930 W. cosφ=1 porque la carga es puramente resistiva."
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuánto vale la potencia reactiva total Q?",
+          "formula": "Q = √3 · VL · IL · senφ",
+          "calculo": "Q = √3 × 400 × 10 × sen(0°) = 0 VAr",
+          "opciones": ["0 VAr", "2310 VAr", "4000 VAr", "6930 VAr"],
+          "correcta": 0,
+          "explicacion": "Q = 0 porque la carga es puramente resistiva (φ=0°, senφ=0). No hay energía reactiva."
+        }
+      ]
+    },
+    {
+      "id": "E5",
+      "titulo": "Sistema trifásico en triángulo",
+      "icono": "🔺",
+      "dificultad": "alta",
+      "tema_ref": [9, 10],
+      "enunciado": "Un sistema trifásico equilibrado conectado en triángulo (Δ) tiene VL = 400 V. Cada fase tiene R = 40 Ω y XL = 30 Ω. Calcula:",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánto vale la impedancia de cada fase Zf?",
+          "formula": "Zf = √(R² + XL²)",
+          "calculo": "Zf = √(40² + 30²) = √(1600 + 900) = √2500 = 50 Ω",
+          "opciones": ["70 Ω", "10 Ω", "50 Ω", "35 Ω"],
+          "correcta": 2,
+          "explicacion": "Zf = √(R²+XL²) = √(1600+900) = 50 Ω. Triángulo 3-4-5 escalado."
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánto vale la corriente de fase If?",
+          "formula": "If = Vf / Zf  (en triángulo Vf = VL)",
+          "calculo": "If = 400 / 50 = 8 A",
+          "opciones": ["4 A", "8 A", "13,9 A", "16 A"],
+          "correcta": 1,
+          "explicacion": "En triángulo Vf = VL = 400 V. If = Vf/Zf = 400/50 = 8 A."
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánto vale la corriente de línea IL?",
+          "formula": "IL = √3 · If",
+          "calculo": "IL = 1,732 × 8 = 13,86 A",
+          "opciones": ["8,0 A", "13,9 A", "23,9 A", "4,6 A"],
+          "correcta": 1,
+          "explicacion": "En triángulo IL = √3·If = 1,732·8 ≈ 13,9 A. La corriente de línea es mayor que la de fase."
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuánto vale la potencia activa total P?",
+          "formula": "P = 3 · Vf · If · cosφ",
+          "calculo": "cosφ = R/Zf = 40/50 = 0,8 → P = 3 × 400 × 8 × 0,8 = 7680 W",
+          "opciones": ["3840 W", "7680 W", "9600 W", "13 340 W"],
+          "correcta": 1,
+          "explicacion": "cosφ = R/Zf = 40/50 = 0,8. P = 3·Vf·If·cosφ = 3·400·8·0,8 = 7680 W."
+        }
+      ]
+    },
+    {
+      "id": "E6",
+      "titulo": "Motor eléctrico trifásico",
+      "icono": "⚙️",
+      "dificultad": "alta",
+      "tema_ref": [11, 12],
+      "enunciado": "Un motor trifásico tiene los siguientes datos de placa: VL = 400 V, IL = 15 A, cosφ = 0,85, rendimiento η = 88%, velocidad n = 1450 rpm. Calcula:",
+      "pasos": [
+        {
+          "numero": 1,
+          "pregunta": "¿Cuánto vale la potencia eléctrica absorbida Pelec?",
+          "formula": "Pelec = √3 · VL · IL · cosφ",
+          "calculo": "Pelec = 1,732 × 400 × 15 × 0,85 = 8826 W ≈ 8,83 kW",
+          "opciones": ["5,10 kW", "7,78 kW", "8,83 kW", "10,20 kW"],
+          "correcta": 2,
+          "explicacion": "Pelec = √3·VL·IL·cosφ = 1,732·400·15·0,85 ≈ 8826 W = 8,83 kW"
+        },
+        {
+          "numero": 2,
+          "pregunta": "¿Cuánto vale la potencia mecánica en el eje Pmec?",
+          "formula": "Pmec = Pelec · η",
+          "calculo": "Pmec = 8826 × 0,88 = 7767 W ≈ 7,77 kW",
+          "opciones": ["7,77 kW", "8,83 kW", "10,03 kW", "6,84 kW"],
+          "correcta": 0,
+          "explicacion": "Pmec = Pelec·η = 8826·0,88 ≈ 7767 W = 7,77 kW. Las pérdidas son 8,83−7,77 = 1,06 kW."
+        },
+        {
+          "numero": 3,
+          "pregunta": "¿Cuánto vale la velocidad angular ω en rad/s?",
+          "formula": "ω = 2π · n / 60",
+          "calculo": "ω = 2π × 1450 / 60 = 151,8 rad/s",
+          "opciones": ["75,9 rad/s", "151,8 rad/s", "241,6 rad/s", "48,3 rad/s"],
+          "correcta": 1,
+          "explicacion": "ω = 2π·n/60 = 2π·1450/60 ≈ 151,8 rad/s"
+        },
+        {
+          "numero": 4,
+          "pregunta": "¿Cuánto vale el par motor M en el eje?",
+          "formula": "M = Pmec / ω",
+          "calculo": "M = 7767 / 151,8 ≈ 51,2 N·m",
+          "opciones": ["25,6 N·m", "51,2 N·m", "81,2 N·m", "102,4 N·m"],
+          "correcta": 1,
+          "explicacion": "M = Pmec/ω = 7767/151,8 ≈ 51,2 N·m. El par es la 'fuerza de giro' del motor."
+        }
+      ]
+    }
+  ]
+}

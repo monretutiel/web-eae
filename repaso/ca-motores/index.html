@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Repaso para el examen de Corriente Alterna y Motores Eléctricos. 12 temas con mini-quizzes.">
+  <title>Repaso Examen · CA y Motores | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/quiz.css">
+  <style>
+    .repaso-hero {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, #1a3a5c 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+    .progreso-global {
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .progreso-barra-wrap {
+      flex: 1;
+      min-width: 200px;
+    }
+    .progreso-barra-bg {
+      background: var(--color-border);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .progreso-barra-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-success));
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .bloque-card {
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-3);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .bloque-card.completado {
+      border-color: var(--color-success);
+    }
+    .bloque-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      cursor: pointer;
+      user-select: none;
+    }
+    .bloque-header:hover { background: rgba(0,0,0,0.03); }
+    .bloque-num {
+      background: var(--color-primary-dark);
+      color: #fff;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--text-sm);
+      flex-shrink: 0;
+    }
+    .bloque-card.completado .bloque-num {
+      background: var(--color-success);
+    }
+    .bloque-titulo { font-weight: 700; flex: 1; }
+    .bloque-estado {
+      font-size: var(--text-sm);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .estado-pendiente { background: #f3f4f6; color: #6b7280; }
+    .estado-completado { background: #d1fae5; color: #065f46; }
+    .bloque-chevron {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      transition: transform 0.2s;
+    }
+    .bloque-card.abierto .bloque-chevron { transform: rotate(180deg); }
+    .bloque-body {
+      display: none;
+      padding: 0 var(--space-4) var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+    .bloque-card.abierto .bloque-body { display: block; }
+    .formulas-box {
+      background: #f8fafc;
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-3);
+      margin: var(--space-3) 0;
+      font-size: var(--text-sm);
+    }
+    .formulas-box ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-1); }
+    .formulas-box li::before { content: "→ "; color: var(--color-primary); font-weight: 700; }
+    .mini-quiz-area { margin-top: var(--space-4); }
+    .mini-quiz-pregunta {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+    .mini-quiz-pregunta p { font-weight: 600; font-size: var(--text-sm); margin-bottom: var(--space-2); }
+    .mini-quiz-opciones { display: flex; flex-direction: column; gap: var(--space-1); }
+    .mini-quiz-opciones label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .mini-quiz-opciones label:hover { background: #f3f4f6; }
+    .mini-quiz-opciones label.correcta { background: #d1fae5; border-color: var(--color-success); }
+    .mini-quiz-opciones label.incorrecta { background: #fee2e2; border-color: #ef4444; }
+    .explicacion-mini {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      background: #f0fdf4;
+      border-radius: var(--radius-sm);
+      padding: var(--space-2);
+      margin-top: var(--space-1);
+      display: none;
+    }
+    .btn-corregir-mini {
+      margin-top: var(--space-3);
+    }
+    .resultado-mini {
+      margin-top: var(--space-2);
+      font-weight: 700;
+      font-size: var(--text-sm);
+    }
+    .btn-simulacro-wrap {
+      text-align: center;
+      padding: var(--space-6);
+      background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+      border-radius: var(--radius-lg);
+      margin-top: var(--space-5);
+    }
+    .btn-simulacro-wrap p { color: var(--color-text-muted); font-size: var(--text-sm); margin-top: var(--space-2); }
+    .lock-msg { color: #9ca3af; font-size: var(--text-sm); margin-top: var(--space-2); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Repaso Examen · CA y Motores</li>
+        </ol>
+      </nav>
+
+      <!-- HERO -->
+      <div class="repaso-hero">
+        <div style="display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;">
+          <span style="font-size:3rem;">📋</span>
+          <div>
+            <span style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.1em; opacity:.7;">Modo estudio · Obligatorio antes del simulacro</span>
+            <h1 style="font-size:var(--text-xl); margin-top:var(--space-1);">Repaso Examen: CA y Motores</h1>
+            <p style="opacity:.85; font-size:var(--text-sm); margin-top:var(--space-1);">Repasa los 12 temas y supera el mini-quiz de cada uno. Cuando los tengas todos en verde, se desbloqueará el simulacro.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:var(--space-4); margin-top:var(--space-4); flex-wrap:wrap; font-size:var(--text-sm); opacity:.9;">
+          <span>📝 100 preguntas en el banco</span>
+          <span>🎯 Simulacro: 40 preguntas + 3 ejercicios</span>
+          <span>✅ Aprobado: ≥ 5/10</span>
+        </div>
+      </div>
+
+      <!-- PROGRESO GLOBAL -->
+      <div class="progreso-global">
+        <div style="font-size:2rem;">🏆</div>
+        <div class="progreso-barra-wrap">
+          <div style="display:flex; justify-content:space-between; font-size:var(--text-sm); font-weight:600; margin-bottom:var(--space-1);">
+            <span>Progreso del repaso</span>
+            <span id="progreso-texto">0 / 12 temas completados</span>
+          </div>
+          <div class="progreso-barra-bg">
+            <div class="progreso-barra-fill" id="progreso-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <span id="progreso-pct" style="font-size:var(--text-2xl); font-weight:900; color:var(--color-primary-dark);">0%</span>
+        </div>
+      </div>
+
+      <!-- BLOQUES -->
+      <div id="bloques-container"></div>
+
+      <!-- BOTÓN SIMULACRO -->
+      <div class="btn-simulacro-wrap" id="simulacro-wrap">
+        <div id="simulacro-locked">
+          <div style="font-size:2.5rem;">🔒</div>
+          <p style="font-weight:700; font-size:var(--text-base); color:#6b7280;">Simulacro bloqueado</p>
+          <p class="lock-msg" id="lock-msg">Completa todos los temas para desbloquear el simulacro.</p>
+        </div>
+        <div id="simulacro-unlocked" style="display:none;">
+          <div style="font-size:2.5rem;">🎓</div>
+          <p style="font-weight:700; font-size:var(--text-xl); color:var(--color-success);">¡Repaso completado!</p>
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm); margin-top:var(--space-1); margin-bottom:var(--space-4);">Ya puedes hacer el simulacro de examen: 40 preguntas + 3 ejercicios · Nota sobre 10</p>
+          <a href="simulacro.html" class="btn btn--primary" style="font-size:var(--text-base); padding:var(--space-3) var(--space-6);">Hacer simulacro →</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+  <script>
+  // ─── DATOS DE BLOQUES ───────────────────────────────────────────────────────
+  const BLOQUES = [
+    { num:1,  titulo:'Repaso de trigonometría',             icon:'📐', tema:1,
+      formulas:['sen²φ + cos²φ = 1','tan φ = sen φ / cos φ','180° = π rad','sen(30°)=0,5  cos(60°)=0,5  sen(90°)=1'] },
+    { num:2,  titulo:'Características de la corriente alterna', icon:'〰️', tema:2,
+      formulas:['Vpico = Vef × √2','Vef = Vpico / √2','T = 1/f','ω = 2πf = 314 rad/s (f=50Hz)','v(t) = Vpico·sen(ωt + φ₀)'] },
+    { num:3,  titulo:'Receptores ideales (R, L, C)',        icon:'🔌', tema:3,
+      formulas:['XL = 2πfL (Ω)  →  I retrasa 90°','XC = 1/(2πfC) (Ω)  →  I adelanta 90°','Resistencia: φ = 0° · solo potencia activa'] },
+    { num:4,  titulo:'Circuitos RL, RC y RLC serie',        icon:'🔗', tema:4,
+      formulas:['Z = √(R² + (XL−XC)²)','φ = arctan((XL−XC)/R)','I = V/Z','Resonancia: XL = XC → Z = R (mínima)'] },
+    { num:5,  titulo:'Circuitos RL, RC paralelos y RL+C',  icon:'⚡', tema:5,
+      formulas:['IT = √(IR² + IL²)  (RL paralelo)','IT = √(IR² + IC²)  (RC paralelo)','cosφ = IR / IT','Compensación: IC = IL'] },
+    { num:6,  titulo:'Potencias en CA',                     icon:'💡', tema:6,
+      formulas:['P = V·I·cosφ  (W)','Q = V·I·senφ  (VAr)','S = V·I  (VA)','S = √(P² + Q²)','cosφ = P/S'] },
+    { num:7,  titulo:'Compensación de energía reactiva',    icon:'🔋', tema:7,
+      formulas:['Qc = P·(tanφ₁ − tanφ₂)','C = Qc / (ω·V²)','Objetivo: cosφ ≥ 0,95'] },
+    { num:8,  titulo:'Características de la CA trifásica',  icon:'3️⃣', tema:8,
+      formulas:['3 fases RST desfasadas 120°','VL = 400V · Vf = 230V (red española)','Sistema equilibrado: IN = 0','4 conductores: 3 fases + neutro'] },
+    { num:9,  titulo:'Acoplamiento estrella y triángulo',   icon:'⭐', tema:9,
+      formulas:['Estrella (Y): VL = √3·Vf · IL = If','Triángulo (Δ): Vf = VL · IL = √3·If','VL=400V → Vf(Y)=231V, Vf(Δ)=400V'] },
+    { num:10, titulo:'Potencias trifásicas',                icon:'📊', tema:10,
+      formulas:['P = √3·VL·IL·cosφ  (W)','Q = √3·VL·IL·senφ  (VAr)','S = √3·VL·IL  (VA)','S = √(P²+Q²)'] },
+    { num:11, titulo:'Motores: partes y conexionado',       icon:'⚙️', tema:11,
+      formulas:['Estátor (fijo) + Rotor (giratorio)','6 bornes: U1,V1,W1 / U2,V2,W2','ns = 60f/p  (rpm)','s = (ns−n)/ns'] },
+    { num:12, titulo:'Motores: potencias',                  icon:'🔧', tema:12,
+      formulas:['Pelec = √3·VL·IL·cosφ','Pmec = Pelec·η','M = Pmec/ω  (N·m)','ω = 2πn/60  (rad/s)'] }
+  ];
+
+  const STORAGE_KEY = 'repaso-ca-motores-v1';
+
+  // ─── ESTADO ─────────────────────────────────────────────────────────────────
+  let estado = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  // estado[tema] = { completado: bool, puntos: n, total: n }
+
+  let todasPreguntas = [];
+
+  // ─── CARGAR PREGUNTAS ────────────────────────────────────────────────────────
+  async function cargarPreguntas() {
+    try {
+      const r = await fetch('../../assets/data/repaso/preguntas-ca-motores.json');
+      const data = await r.json();
+      todasPreguntas = data.preguntas;
+      renderBloques();
+      actualizarProgreso();
+    } catch(e) {
+      console.error('Error cargando preguntas', e);
+    }
+  }
+
+  // ─── RENDER BLOQUES ──────────────────────────────────────────────────────────
+  function renderBloques() {
+    const container = document.getElementById('bloques-container');
+    container.innerHTML = '';
+    BLOQUES.forEach(b => {
+      const est = estado[b.tema] || {};
+      const completado = est.completado || false;
+      const pregsBloque = todasPreguntas.filter(p => p.tema === b.tema);
+      const seleccionadas = seleccionar(pregsBloque, 5);
+
+      const card = document.createElement('div');
+      card.className = 'bloque-card' + (completado ? ' completado' : '');
+      card.id = 'bloque-' + b.num;
+      card.innerHTML = `
+        <div class="bloque-header" onclick="toggleBloque(${b.num})">
+          <div class="bloque-num">${completado ? '✓' : b.num}</div>
+          <div style="flex:1;">
+            <div class="bloque-titulo">${b.icon} ${b.titulo}</div>
+            ${completado ? `<div style="font-size:var(--text-xs); color:var(--color-success);">Completado · ${est.puntos}/${est.total} correctas</div>` : ''}
+          </div>
+          <span class="bloque-estado ${completado ? 'estado-completado' : 'estado-pendiente'}">${completado ? '✅ Superado' : '⬜ Pendiente'}</span>
+          <span class="bloque-chevron">▼</span>
+        </div>
+        <div class="bloque-body">
+          <div class="formulas-box">
+            <strong style="font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.05em; color:var(--color-primary-dark);">Fórmulas clave</strong>
+            <ul style="margin-top:var(--space-2);">
+              ${b.formulas.map(f => `<li><code style="font-size:var(--text-xs);">${f}</code></li>`).join('')}
+            </ul>
+          </div>
+          <div class="mini-quiz-area">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-3);">Mini-quiz de verificación (${seleccionadas.length} preguntas)</p>
+            ${seleccionadas.map((p, i) => renderPregunta(p, b.num, i)).join('')}
+            <button class="btn btn--primary btn-corregir-mini" onclick="corregirBloque(${b.num})" id="btn-corregir-${b.num}">Corregir →</button>
+            <div class="resultado-mini" id="resultado-${b.num}"></div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function renderPregunta(p, bloqueNum, idx) {
+    return `
+      <div class="mini-quiz-pregunta" id="preg-${bloqueNum}-${idx}">
+        <p>${idx+1}. ${p.enunciado}</p>
+        <div class="mini-quiz-opciones">
+          ${p.opciones.map((op, oi) => `
+            <label>
+              <input type="radio" name="q-${bloqueNum}-${idx}" value="${oi}"> ${op}
+            </label>
+          `).join('')}
+        </div>
+        <div class="explicacion-mini" id="expl-${bloqueNum}-${idx}">${p.explicacion}</div>
+      </div>
+    `;
+  }
+
+  function toggleBloque(num) {
+    const card = document.getElementById('bloque-' + num);
+    card.classList.toggle('abierto');
+  }
+
+  // ─── CORRECCIÓN ──────────────────────────────────────────────────────────────
+  function corregirBloque(bloqueNum) {
+    const bloque = BLOQUES.find(b => b.num === bloqueNum);
+    const pregsBloque = todasPreguntas.filter(p => p.tema === bloque.tema);
+    const seleccionadas = seleccionar(pregsBloque, 5);
+    let correctas = 0;
+
+    seleccionadas.forEach((p, i) => {
+      const radios = document.querySelectorAll(`input[name="q-${bloqueNum}-${i}"]`);
+      const labels = document.querySelectorAll(`#preg-${bloqueNum}-${i} label`);
+      let seleccionada = -1;
+      radios.forEach((r, ri) => { if(r.checked) seleccionada = ri; r.disabled = true; });
+
+      labels.forEach((l, li) => {
+        if(li === p.correcta) l.classList.add('correcta');
+        else if(li === seleccionada && seleccionada !== p.correcta) l.classList.add('incorrecta');
+      });
+
+      const expl = document.getElementById(`expl-${bloqueNum}-${i}`);
+      expl.style.display = 'block';
+
+      if(seleccionada === p.correcta) correctas++;
+    });
+
+    const total = seleccionadas.length;
+    const superado = correctas >= Math.ceil(total * 0.6); // ≥60% para superar
+
+    const btn = document.getElementById('btn-corregir-' + bloqueNum);
+    btn.disabled = true;
+    btn.textContent = 'Corregido';
+
+    const res = document.getElementById('resultado-' + bloqueNum);
+    res.innerHTML = superado
+      ? `<span style="color:var(--color-success);">✅ ¡Superado! ${correctas}/${total} correctas</span>`
+      : `<span style="color:#ef4444;">❌ ${correctas}/${total} correctas. Repasa las fórmulas e inténtalo de nuevo.</span>`;
+
+    if(superado) {
+      estado[bloque.tema] = { completado: true, puntos: correctas, total };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+      const card = document.getElementById('bloque-' + bloqueNum);
+      card.classList.add('completado');
+      // Actualizar cabecera
+      const numEl = card.querySelector('.bloque-num');
+      numEl.textContent = '✓';
+      numEl.style.background = 'var(--color-success)';
+      card.querySelector('.bloque-estado').className = 'bloque-estado estado-completado';
+      card.querySelector('.bloque-estado').textContent = '✅ Superado';
+      actualizarProgreso();
+    }
+  }
+
+  // ─── PROGRESO ────────────────────────────────────────────────────────────────
+  function actualizarProgreso() {
+    const completados = BLOQUES.filter(b => estado[b.tema]?.completado).length;
+    const total = BLOQUES.length;
+    const pct = Math.round((completados / total) * 100);
+
+    document.getElementById('progreso-texto').textContent = `${completados} / ${total} temas completados`;
+    document.getElementById('progreso-fill').style.width = pct + '%';
+    document.getElementById('progreso-pct').textContent = pct + '%';
+
+    const locked = document.getElementById('simulacro-locked');
+    const unlocked = document.getElementById('simulacro-unlocked');
+    const lockMsg = document.getElementById('lock-msg');
+
+    if(completados === total) {
+      locked.style.display = 'none';
+      unlocked.style.display = 'block';
+    } else {
+      locked.style.display = 'block';
+      unlocked.style.display = 'none';
+      const faltan = total - completados;
+      lockMsg.textContent = `Faltan ${faltan} tema${faltan > 1 ? 's' : ''} por completar.`;
+    }
+  }
+
+  // ─── UTILIDAD: seleccionar N aleatorios con semilla por sesión ───────────────
+  function seleccionar(arr, n) {
+    const copia = [...arr];
+    for(let i = copia.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia.slice(0, Math.min(n, copia.length));
+  }
+
+  // ─── INIT ────────────────────────────────────────────────────────────────────
+  cargarPreguntas();
+  </script>
+
+</body>
+</html>

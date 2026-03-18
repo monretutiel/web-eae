@@ -1,0 +1,1007 @@
+{
+  "version": "1.0",
+  "total": 100,
+  "distribucion": [6, 10, 8, 12, 10, 10, 8, 8, 10, 8, 6, 4],
+  "preguntas": [
+    {
+      "id": "t01-001",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "basica",
+      "enunciado": "¿Cuál es el valor de sen(30°)?",
+      "opciones": ["√3/2", "1/2", "√2/2", "1"],
+      "correcta": 1,
+      "explicacion": "sen(30°) = 0.5 = 1/2. En el triángulo 30-60-90: cateto opuesto = 1, hipotenusa = 2."
+    },
+    {
+      "id": "t01-002",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "basica",
+      "enunciado": "¿Cuál es el valor de cos(60°)?",
+      "opciones": ["√3/2", "√2/2", "1/2", "0"],
+      "correcta": 2,
+      "explicacion": "cos(60°) = 0.5 = 1/2. Es el mismo valor que sen(30°) porque son ángulos complementarios."
+    },
+    {
+      "id": "t01-003",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "basica",
+      "enunciado": "¿Cuántos radianes equivalen a 180°?",
+      "opciones": ["π/2 rad", "2π rad", "π rad", "π/4 rad"],
+      "correcta": 2,
+      "explicacion": "180° = π rad ≈ 3.1416 rad. Es la conversión fundamental grados-radianes."
+    },
+    {
+      "id": "t01-004",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "media",
+      "enunciado": "Si cos(φ) = 0.8, ¿cuánto vale sen(φ)?",
+      "opciones": ["0.2", "0.4", "0.8", "0.6"],
+      "correcta": 3,
+      "explicacion": "Por la identidad pitagórica: sen²(φ) + cos²(φ) = 1 → sen(φ) = √(1 − 0.64) = √0.36 = 0.6."
+    },
+    {
+      "id": "t01-005",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "media",
+      "enunciado": "En la expresión v(t) = 311·sen(314t + π/6), ¿cuál es la fase inicial en grados?",
+      "opciones": ["60°", "45°", "90°", "30°"],
+      "correcta": 3,
+      "explicacion": "π/6 rad = 180°/6 = 30°. La fase inicial es el ángulo constante dentro del seno."
+    },
+    {
+      "id": "t01-006",
+      "tema": 1,
+      "bloque": "Repaso de trigonometría",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la definición correcta de la tangente de un ángulo φ?",
+      "opciones": ["cos(φ)/sen(φ)", "sen(φ)×cos(φ)", "sen(φ)/cos(φ)", "1/sen(φ)"],
+      "correcta": 2,
+      "explicacion": "tan(φ) = sen(φ)/cos(φ) = cateto opuesto / cateto adyacente. Es la relación entre seno y coseno."
+    },
+    {
+      "id": "t02-001",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "basica",
+      "enunciado": "La red eléctrica española tiene una tensión eficaz de 230 V. ¿Cuál es aproximadamente su valor de pico?",
+      "opciones": ["163 V", "230 V", "325 V", "460 V"],
+      "correcta": 2,
+      "explicacion": "Vpico = Vef × √2 = 230 × 1.414 ≈ 325 V. El valor eficaz es el de pico dividido entre √2."
+    },
+    {
+      "id": "t02-002",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "basica",
+      "enunciado": "La frecuencia de la red en España es 50 Hz. ¿Cuál es el período T?",
+      "opciones": ["50 ms", "10 ms", "100 ms", "20 ms"],
+      "correcta": 3,
+      "explicacion": "T = 1/f = 1/50 = 0.02 s = 20 ms. El período es el inverso de la frecuencia."
+    },
+    {
+      "id": "t02-003",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "basica",
+      "enunciado": "¿Cuánto vale la pulsación ω para f = 50 Hz?",
+      "opciones": ["50 rad/s", "100 rad/s", "157 rad/s", "314 rad/s"],
+      "correcta": 3,
+      "explicacion": "ω = 2πf = 2 × 3.1416 × 50 ≈ 314 rad/s. La pulsación relaciona frecuencia con el ángulo por segundo."
+    },
+    {
+      "id": "t02-004",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "media",
+      "enunciado": "En la expresión i(t) = 10·sen(100πt − π/4), ¿cuál es el valor eficaz de la corriente?",
+      "opciones": ["10 A", "5 A", "7.07 A", "14.14 A"],
+      "correcta": 2,
+      "explicacion": "Ief = Ip/√2 = 10/1.414 ≈ 7.07 A. El valor eficaz es siempre el de pico dividido entre √2."
+    },
+    {
+      "id": "t02-005",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "media",
+      "enunciado": "Dos señales sinusoidales tienen la misma frecuencia. La señal A alcanza el máximo antes que la señal B. Se dice que A está:",
+      "opciones": ["En fase con B", "Retrasada respecto a B", "En oposición de fase con B", "Adelantada respecto a B"],
+      "correcta": 3,
+      "explicacion": "Si A alcanza el máximo antes que B, A está adelantada (o B retrasada). El desfase de A respecto a B es positivo."
+    },
+    {
+      "id": "t02-006",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "basica",
+      "enunciado": "¿Cuál es el valor medio de una señal senoidal completa (un ciclo entero)?",
+      "opciones": ["Vp/√2", "Vp/π", "0", "2Vp/π"],
+      "correcta": 2,
+      "explicacion": "El valor medio de una señal sinusoidal simétrica sobre un ciclo completo es cero, ya que los semiciclos positivo y negativo se cancelan."
+    },
+    {
+      "id": "t02-007",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "media",
+      "enunciado": "¿Qué representa el valor eficaz (RMS) de una corriente alterna?",
+      "opciones": ["El valor máximo que alcanza la señal", "La corriente CC equivalente que produce el mismo calor en una resistencia", "La media aritmética de los valores instantáneos", "El valor de la señal en t = 0"],
+      "correcta": 1,
+      "explicacion": "El valor eficaz equivale a la CC que disipa la misma potencia en una resistencia. De ahí el nombre 'Root Mean Square' (raíz del valor medio cuadrado)."
+    },
+    {
+      "id": "t02-008",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "media",
+      "enunciado": "Si la tensión de red es v(t) = 325·sen(314t), ¿cuál es su frecuencia?",
+      "opciones": ["314 Hz", "100 Hz", "50 Hz", "25 Hz"],
+      "correcta": 2,
+      "explicacion": "ω = 314 rad/s → f = ω/(2π) = 314/6.283 ≈ 50 Hz. La red española opera a 50 Hz."
+    },
+    {
+      "id": "t02-009",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "alta",
+      "enunciado": "Una tensión v(t) = 200·sen(314t + π/3) y una corriente i(t) = 5·sen(314t − π/6) tienen un desfase entre ellas de:",
+      "opciones": ["π/6 rad (30°)", "π/2 rad (90°)", "π/3 rad (60°)", "π/4 rad (45°)"],
+      "correcta": 1,
+      "explicacion": "φv − φi = π/3 − (−π/6) = π/3 + π/6 = 2π/6 + π/6 = 3π/6 = π/2 rad = 90°. La tensión adelanta 90° a la corriente."
+    },
+    {
+      "id": "t02-010",
+      "tema": 2,
+      "bloque": "Características de la corriente alterna",
+      "dificultad": "alta",
+      "enunciado": "Una señal alterna tiene Vpico = 141.4 V y f = 60 Hz. ¿Cuál es su expresión instantánea?",
+      "opciones": ["v(t) = 141.4·sen(60t)", "v(t) = 100·sen(377t)", "v(t) = 141.4·sen(377t)", "v(t) = 100·sen(120πt)"],
+      "correcta": 2,
+      "explicacion": "ω = 2π×60 ≈ 377 rad/s. Vef = 141.4/√2 = 100 V (dato de comprobación). v(t) = 141.4·sen(377t)."
+    },
+    {
+      "id": "t03-001",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "basica",
+      "enunciado": "En una resistencia pura conectada a CA, ¿qué desfase existe entre tensión y corriente?",
+      "opciones": ["La corriente adelanta 90°", "La corriente retrasa 90°", "No hay desfase (φ = 0°)", "El desfase depende de la frecuencia"],
+      "correcta": 2,
+      "explicacion": "En una resistencia pura, tensión y corriente están en fase (φ = 0°). Solo consume potencia activa."
+    },
+    {
+      "id": "t03-002",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "basica",
+      "enunciado": "En una bobina ideal conectada a CA, ¿cómo es la corriente respecto a la tensión?",
+      "opciones": ["La corriente adelanta 90° a la tensión", "La corriente retrasa 90° respecto a la tensión", "Están en fase", "La corriente adelanta 45°"],
+      "correcta": 1,
+      "explicacion": "En una bobina ideal, la corriente retrasa 90° respecto a la tensión. La bobina se opone a los cambios de corriente."
+    },
+    {
+      "id": "t03-003",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "basica",
+      "enunciado": "En un condensador ideal conectado a CA, ¿cómo es la corriente respecto a la tensión?",
+      "opciones": ["Están en fase", "La corriente retrasa 90°", "La corriente adelanta 90° respecto a la tensión", "La corriente retrasa 45°"],
+      "correcta": 2,
+      "explicacion": "En un condensador ideal, la corriente adelanta 90° a la tensión (ICE). El condensador se opone a los cambios de tensión."
+    },
+    {
+      "id": "t03-004",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la reactancia inductiva XL de una bobina de L = 0.1 H a f = 50 Hz?",
+      "opciones": ["5 Ω", "15.9 Ω", "31.4 Ω", "62.8 Ω"],
+      "correcta": 2,
+      "explicacion": "XL = 2πfL = 2 × 3.1416 × 50 × 0.1 = 31.4 Ω. La reactancia inductiva es proporcional a la frecuencia."
+    },
+    {
+      "id": "t03-005",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la reactancia capacitiva XC de un condensador de 100 µF a f = 50 Hz?",
+      "opciones": ["3.14 Ω", "15.9 Ω", "31.8 Ω", "63.7 Ω"],
+      "correcta": 2,
+      "explicacion": "XC = 1/(2πfC) = 1/(2×3.1416×50×100×10⁻⁶) = 1/0.03142 ≈ 31.8 Ω."
+    },
+    {
+      "id": "t03-006",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "media",
+      "enunciado": "Si se duplica la frecuencia, ¿qué ocurre con la reactancia inductiva XL y la capacitiva XC?",
+      "opciones": ["XL baja a la mitad, XC sube al doble", "XL sube al doble, XC baja a la mitad", "Ambas suben al doble", "Ambas bajan a la mitad"],
+      "correcta": 1,
+      "explicacion": "XL = 2πfL es proporcional a f; XC = 1/(2πfC) es inversamente proporcional a f. Si f×2 → XL×2, XC/2."
+    },
+    {
+      "id": "t03-007",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "alta",
+      "enunciado": "Una bobina ideal de XL = 50 Ω está conectada a V = 230 V (eficaz). ¿Cuál es la corriente eficaz?",
+      "opciones": ["11500 A", "230 A", "4.6 A", "0.22 A"],
+      "correcta": 2,
+      "explicacion": "I = V/XL = 230/50 = 4.6 A. Para una bobina ideal se usa XL igual que una resistencia en la ley de Ohm."
+    },
+    {
+      "id": "t03-008",
+      "tema": 3,
+      "bloque": "Receptores ideales (R, L, C)",
+      "dificultad": "alta",
+      "enunciado": "¿Qué tipo de potencia consume exclusivamente una bobina ideal?",
+      "opciones": ["Potencia activa (W)", "Potencia aparente (VA)", "Potencia reactiva inductiva (VAr)", "Potencia activa y reactiva por igual"],
+      "correcta": 2,
+      "explicacion": "Una bobina ideal no tiene resistencia, por lo que no consume potencia activa. Solo intercambia energía con la red como potencia reactiva inductiva (VAr)."
+    },
+    {
+      "id": "t04-001",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "basica",
+      "enunciado": "En un circuito RL serie con R = 3 Ω y XL = 4 Ω, ¿cuánto vale la impedancia Z?",
+      "opciones": ["7 Ω", "1 Ω", "5 Ω", "3.5 Ω"],
+      "correcta": 2,
+      "explicacion": "Z = √(R² + XL²) = √(9 + 16) = √25 = 5 Ω. Clásico triángulo rectángulo 3-4-5."
+    },
+    {
+      "id": "t04-002",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "basica",
+      "enunciado": "En un circuito RL serie con V = 100 V, R = 60 Ω y XL = 80 Ω, ¿cuánto vale la corriente I?",
+      "opciones": ["0.6 A", "1.25 A", "1 A", "1.67 A"],
+      "correcta": 2,
+      "explicacion": "Z = √(60² + 80²) = √(3600 + 6400) = √10000 = 100 Ω. I = V/Z = 100/100 = 1 A."
+    },
+    {
+      "id": "t04-003",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "En un circuito RC serie con R = 100 Ω y XC = 100 Ω, ¿cuánto vale el ángulo de desfase φ?",
+      "opciones": ["30°", "60°", "45°", "90°"],
+      "correcta": 2,
+      "explicacion": "tan(φ) = XC/R = 100/100 = 1 → φ = arctan(1) = 45°. Con R = XC el triángulo es isósceles y el ángulo es 45°."
+    },
+    {
+      "id": "t04-004",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "En un circuito RLC serie, si XL > XC, el circuito se comporta como:",
+      "opciones": ["Capacitivo (corriente adelanta a la tensión)", "Resistivo puro", "Inductivo (corriente retrasa a la tensión)", "A frecuencia de resonancia"],
+      "correcta": 2,
+      "explicacion": "Si XL > XC, predomina la reactancia inductiva → el circuito es inductivo y la corriente retrasa a la tensión."
+    },
+    {
+      "id": "t04-005",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "En un circuito RLC serie en resonancia, ¿cuál es el valor de la impedancia Z?",
+      "opciones": ["Z = 0 Ω", "Z = XL", "Z = R (valor mínimo)", "Z = XL + XC"],
+      "correcta": 2,
+      "explicacion": "En resonancia XL = XC, se cancelan y Z = √(R² + 0²) = R. La impedancia es mínima e igual a la resistencia."
+    },
+    {
+      "id": "t04-006",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "Un circuito RLC serie tiene R = 50 Ω, XL = 120 Ω y XC = 80 Ω. ¿Cuánto vale Z?",
+      "opciones": ["90 Ω", "170 Ω", "64.03 Ω", "50 Ω"],
+      "correcta": 2,
+      "explicacion": "Xnet = XL − XC = 120 − 80 = 40 Ω. Z = √(50² + 40²) = √(2500 + 1600) = √4100 ≈ 64 Ω."
+    },
+    {
+      "id": "t04-007",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "alta",
+      "enunciado": "En un circuito RL serie con V = 100 V, R = 60 Ω, XL = 80 Ω, ¿cuánto valen VR y VL?",
+      "opciones": ["VR = 60 V, VL = 80 V", "VR = 50 V, VL = 50 V", "VR = 80 V, VL = 60 V", "VR = 100 V, VL = 100 V"],
+      "correcta": 0,
+      "explicacion": "Z = 100 Ω, I = 1 A. VR = I×R = 1×60 = 60 V; VL = I×XL = 1×80 = 80 V. Verificación: √(60²+80²) = 100 V ✓."
+    },
+    {
+      "id": "t04-008",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la fórmula de la frecuencia de resonancia f₀ en un circuito RLC serie?",
+      "opciones": ["f₀ = 2π√(LC)", "f₀ = 1/(2π√(LC))", "f₀ = √(L/C)", "f₀ = R/(2πL)"],
+      "correcta": 1,
+      "explicacion": "En resonancia XL = XC → 2πf₀L = 1/(2πf₀C) → f₀ = 1/(2π√(LC))."
+    },
+    {
+      "id": "t04-009",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "alta",
+      "enunciado": "Un circuito RC serie tiene R = 30 Ω, XC = 40 Ω y V = 250 V. ¿Cuál es la corriente eficaz?",
+      "opciones": ["8.33 A", "5 A", "6.25 A", "10 A"],
+      "correcta": 1,
+      "explicacion": "Z = √(30² + 40²) = √(900 + 1600) = √2500 = 50 Ω. I = V/Z = 250/50 = 5 A."
+    },
+    {
+      "id": "t04-010",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "alta",
+      "enunciado": "En un circuito RLC serie, VR = 40 V, VL = 70 V y VC = 40 V. ¿Cuánto vale la tensión total V?",
+      "opciones": ["150 V", "50 V", "70 V", "90 V"],
+      "correcta": 1,
+      "explicacion": "VL y VC son opuestas: Vnet = VL − VC = 70 − 40 = 30 V (inductivo). V = √(VR² + Vnet²) = √(40² + 30²) = √(1600+900) = √2500 = 50 V."
+    },
+    {
+      "id": "t04-011",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "media",
+      "enunciado": "¿Qué ocurre con la corriente en un circuito RLC serie cuando la frecuencia sube por encima de la resonancia?",
+      "opciones": ["La corriente sigue aumentando", "La corriente disminuye porque XL > XC y Z aumenta", "La corriente no varía", "La corriente disminuye porque XC > XL y Z aumenta"],
+      "correcta": 1,
+      "explicacion": "Por encima de f₀, XL > XC → Z aumenta → I = V/Z disminuye. El circuito se vuelve más inductivo."
+    },
+    {
+      "id": "t04-012",
+      "tema": 4,
+      "bloque": "Circuitos RL, RC y RLC serie",
+      "dificultad": "alta",
+      "enunciado": "Un circuito RL serie tiene R = 8 Ω y XL = 6 Ω. Si la corriente eficaz es I = 10 A, ¿cuál es la tensión de alimentación V?",
+      "opciones": ["140 V", "60 V", "80 V", "100 V"],
+      "correcta": 3,
+      "explicacion": "Z = √(8² + 6²) = √(64 + 36) = √100 = 10 Ω. V = I×Z = 10×10 = 100 V."
+    },
+    {
+      "id": "t05-001",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "basica",
+      "enunciado": "En un circuito paralelo (RL o RC), ¿qué magnitud es común a todas las ramas?",
+      "opciones": ["La corriente total", "La frecuencia de la red", "La tensión de alimentación", "La impedancia"],
+      "correcta": 2,
+      "explicacion": "En una conexión en paralelo, la tensión es la misma en todas las ramas. Las corrientes se suman fasorialemente."
+    },
+    {
+      "id": "t05-002",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "media",
+      "enunciado": "Un circuito RL paralelo tiene IR = 3 A e IL = 4 A. ¿Cuánto vale la corriente total IT?",
+      "opciones": ["7 A", "1 A", "3.5 A", "5 A"],
+      "correcta": 3,
+      "explicacion": "IT = √(IR² + IL²) = √(9 + 16) = √25 = 5 A. IR e IL están desfasadas 90°, se suman como vectores perpendiculares."
+    },
+    {
+      "id": "t05-003",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "media",
+      "enunciado": "En el circuito RL paralelo del ejercicio anterior (IR = 3 A, IL = 4 A, IT = 5 A), ¿cuánto vale cosφ?",
+      "opciones": ["0.8", "0.6", "0.5", "1.0"],
+      "correcta": 1,
+      "explicacion": "cosφ = IR/IT = 3/5 = 0.6. En el paralelo, el cosφ es la relación entre la corriente resistiva y la total."
+    },
+    {
+      "id": "t05-004",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "media",
+      "enunciado": "Un circuito RC paralelo tiene IR = 6 A e IC = 8 A. ¿Cuánto vale la corriente total IT?",
+      "opciones": ["14 A", "2 A", "7 A", "10 A"],
+      "correcta": 3,
+      "explicacion": "IT = √(IR² + IC²) = √(36 + 64) = √100 = 10 A. Triángulo rectángulo 6-8-10."
+    },
+    {
+      "id": "t05-005",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "media",
+      "enunciado": "En un circuito RC paralelo, ¿cómo es la corriente total respecto a la tensión?",
+      "opciones": ["Retrasa 90°", "Adelanta entre 0° y 90°", "Retrasa entre 0° y 90°", "Están en fase"],
+      "correcta": 1,
+      "explicacion": "En paralelo RC, IC adelanta 90° a la tensión e IR está en fase. La corriente total adelanta entre 0° y 90° (circuito capacitivo)."
+    },
+    {
+      "id": "t05-006",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "alta",
+      "enunciado": "Un circuito RL paralelo alimentado con V = 100 V tiene R = 20 Ω y XL = 25 Ω. ¿Cuánto vale IT?",
+      "opciones": ["4 A", "5 A", "6.4 A", "9 A"],
+      "correcta": 2,
+      "explicacion": "IR = V/R = 100/20 = 5 A. IL = V/XL = 100/25 = 4 A. IT = √(5² + 4²) = √(25+16) = √41 ≈ 6.4 A."
+    },
+    {
+      "id": "t05-007",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "alta",
+      "enunciado": "En un circuito RL+C paralelo, ¿en qué condición se consigue la resonancia en paralelo?",
+      "opciones": ["Cuando XL = R", "Cuando IC = IR", "Cuando IC = IL (las corrientes reactivas se compensan)", "Cuando IT = 0"],
+      "correcta": 2,
+      "explicacion": "En resonancia en paralelo, IC = IL → las corrientes reactivas se cancelan → IT = IR (mínima). La impedancia es máxima."
+    },
+    {
+      "id": "t05-008",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "media",
+      "enunciado": "Un circuito RL+C paralelo tiene IR = 4 A, IL = 7 A e IC = 4 A. ¿Cuánto vale IT?",
+      "opciones": ["15 A", "7 A", "5 A", "3 A"],
+      "correcta": 2,
+      "explicacion": "IL y IC son opuestas: Inet = IL − IC = 7 − 4 = 3 A (inductivo). IT = √(IR² + Inet²) = √(16 + 9) = √25 = 5 A."
+    },
+    {
+      "id": "t05-009",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "alta",
+      "enunciado": "En un circuito RL paralelo, si aumentamos la frecuencia, ¿qué ocurre con IL y con IT?",
+      "opciones": ["IL aumenta y IT aumenta", "IL disminuye (XL sube) y IT disminuye acercándose a IR", "IL no varía e IT tampoco", "IL aumenta e IT disminuye"],
+      "correcta": 1,
+      "explicacion": "Al subir f, XL = 2πfL aumenta → IL = V/XL disminuye → IT = √(IR² + IL²) se acerca a IR. El circuito se vuelve más resistivo."
+    },
+    {
+      "id": "t05-010",
+      "tema": 5,
+      "bloque": "Circuitos RL, RC paralelos y RL+C",
+      "dificultad": "basica",
+      "enunciado": "En un circuito RC paralelo, ¿cómo se calcula el cosφ?",
+      "opciones": ["cosφ = IC/IT", "cosφ = IT/IR", "cosφ = IR/IT", "cosφ = R/XC"],
+      "correcta": 2,
+      "explicacion": "cosφ = IR/IT. La corriente resistiva IR está en fase con la tensión, y es la componente 'activa' de la corriente total."
+    },
+    {
+      "id": "t06-001",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "basica",
+      "enunciado": "¿Qué unidad se usa para la potencia activa P?",
+      "opciones": ["VA (voltamperio)", "VAr (voltamperio reactivo)", "W (vatio)", "Wh (vatio·hora)"],
+      "correcta": 2,
+      "explicacion": "La potencia activa P se mide en vatios (W). Es la potencia real que realiza trabajo útil."
+    },
+    {
+      "id": "t06-002",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "basica",
+      "enunciado": "¿Cómo se calcula la potencia aparente S a partir de P y Q?",
+      "opciones": ["S = P + Q", "S = P − Q", "S = √(P² + Q²)", "S = P × Q"],
+      "correcta": 2,
+      "explicacion": "S = √(P² + Q²). Las potencias forman el triángulo de potencias donde S es la hipotenusa."
+    },
+    {
+      "id": "t06-003",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "media",
+      "enunciado": "Un receptor tiene P = 4 kW y Q = 3 kVAr. ¿Cuál es la potencia aparente S y el factor de potencia cosφ?",
+      "opciones": ["S = 7 kVA, cosφ = 0.57", "S = 5 kVA, cosφ = 0.8", "S = 5 kVA, cosφ = 0.6", "S = 3.5 kVA, cosφ = 0.75"],
+      "correcta": 1,
+      "explicacion": "S = √(4² + 3²) = √25 = 5 kVA. cosφ = P/S = 4/5 = 0.8. Triángulo de potencias 3-4-5."
+    },
+    {
+      "id": "t06-004",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "media",
+      "enunciado": "Un motor consume P = 3 kW con cosφ = 0.6. ¿Cuál es la potencia aparente S?",
+      "opciones": ["1.8 kVA", "3 kVA", "3.6 kVA", "5 kVA"],
+      "correcta": 3,
+      "explicacion": "S = P/cosφ = 3/0.6 = 5 kVA. Con cosφ bajo, la potencia aparente es mucho mayor que la activa."
+    },
+    {
+      "id": "t06-005",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "media",
+      "enunciado": "¿Qué potencia consume exclusivamente una resistencia pura en CA?",
+      "opciones": ["Solo potencia reactiva Q", "Solo potencia aparente S", "Solo potencia activa P (Q = 0)", "Partes iguales de P y Q"],
+      "correcta": 2,
+      "explicacion": "En una resistencia pura, φ = 0° → cosφ = 1, senφ = 0. P = V×I (máxima), Q = 0. Solo consume potencia activa."
+    },
+    {
+      "id": "t06-006",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "media",
+      "enunciado": "Un circuito tiene V = 230 V, I = 10 A y cosφ = 0.85. ¿Cuánto vale la potencia activa P?",
+      "opciones": ["230 W", "2300 W", "1955 W", "2711 W"],
+      "correcta": 2,
+      "explicacion": "P = V × I × cosφ = 230 × 10 × 0.85 = 1955 W ≈ 1.96 kW."
+    },
+    {
+      "id": "t06-007",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "alta",
+      "enunciado": "Un receptor tiene V = 100 V, I = 5 A y cosφ = 0.6. ¿Cuánto valen P, Q y S?",
+      "opciones": ["P=300W, Q=400VAr, S=500VA", "P=500W, Q=300VAr, S=400VA", "P=400W, Q=300VAr, S=500VA", "P=600W, Q=0, S=600VA"],
+      "correcta": 0,
+      "explicacion": "S = V×I = 500 VA. P = S×cosφ = 500×0.6 = 300 W. senφ = 0.8 (identidad: √(1-0.36)). Q = S×senφ = 500×0.8 = 400 VAr."
+    },
+    {
+      "id": "t06-008",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "alta",
+      "enunciado": "¿Cuál es la relación entre el factor de potencia cosφ y el triángulo de potencias?",
+      "opciones": ["cosφ = Q/S", "cosφ = S/P", "cosφ = P/S", "cosφ = P/Q"],
+      "correcta": 2,
+      "explicacion": "cosφ = P/S. En el triángulo de potencias, P es el cateto adyacente, Q el opuesto y S la hipotenusa del ángulo φ."
+    },
+    {
+      "id": "t06-009",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "media",
+      "enunciado": "¿Qué tipo de potencia reactiva Q genera un condensador?",
+      "opciones": ["Q inductivo (positivo)", "Q capacitivo (negativo)", "Q = 0 siempre", "Depende de la frecuencia"],
+      "correcta": 1,
+      "explicacion": "Los condensadores generan potencia reactiva capacitiva (Q negativo, por convenio). Las bobinas consumen Q inductivo (positivo)."
+    },
+    {
+      "id": "t06-010",
+      "tema": 6,
+      "bloque": "Potencias en CA",
+      "dificultad": "alta",
+      "enunciado": "Un circuito RL serie tiene R = 6 Ω y XL = 8 Ω, con I = 10 A eficaz. ¿Cuánto valen P y Q?",
+      "opciones": ["P=800W, Q=600VAr", "P=600W, Q=800VAr", "P=1000W, Q=1000VAr", "P=480W, Q=640VAr"],
+      "correcta": 1,
+      "explicacion": "P = I²×R = 100×6 = 600 W. Q = I²×XL = 100×8 = 800 VAr. S = I²×Z = 100×10 = 1000 VA. Verificación: √(600²+800²)=1000 ✓."
+    },
+    {
+      "id": "t07-001",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "basica",
+      "enunciado": "¿Qué elemento se usa para compensar la energía reactiva inductiva de cargas como motores?",
+      "opciones": ["Una bobina adicional", "Una resistencia en paralelo", "Un condensador en paralelo", "Un transformador"],
+      "correcta": 2,
+      "explicacion": "Se conecta un condensador en paralelo porque genera Q capacitivo que compensa el Q inductivo del motor, reduciendo la corriente total."
+    },
+    {
+      "id": "t07-002",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "basica",
+      "enunciado": "¿Qué ocurre con la corriente de línea cuando se mejora el factor de potencia de una instalación?",
+      "opciones": ["Aumenta", "No varía", "Disminuye", "Se duplica"],
+      "correcta": 2,
+      "explicacion": "Al compensar reactiva, el cosφ sube → la corriente I = P/(V×cosφ) disminuye para la misma potencia activa."
+    },
+    {
+      "id": "t07-003",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es el objetivo habitual de la compensación de energía reactiva en industria?",
+      "opciones": ["Alcanzar cosφ = 0", "Alcanzar cosφ ≥ 0.95", "Alcanzar cosφ = 0.5", "Alcanzar cosφ = 0.7"],
+      "correcta": 1,
+      "explicacion": "Las compañías eléctricas penalizan cosφ < 0.95. El objetivo es mantener cosφ ≥ 0.95 para evitar recargos."
+    },
+    {
+      "id": "t07-004",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "media",
+      "enunciado": "¿Qué ocurre si se sobrecompensa una instalación (se instala demasiada capacidad)?",
+      "opciones": ["El cosφ sube a 1 y se mantiene", "La instalación pasa a comportarse como capacitiva", "La corriente se anula", "No hay ningún efecto negativo"],
+      "correcta": 1,
+      "explicacion": "Si QC > QL, la instalación pasa a ser capacitiva (corriente adelanta a la tensión), lo que también es perjudicial para la red."
+    },
+    {
+      "id": "t07-005",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "media",
+      "enunciado": "Una instalación tiene P = 10 kW y cosφ₁ = 0.7071 (φ₁ = 45°). ¿Cuánto vale Q₁?",
+      "opciones": ["5 kVAr", "7.07 kVAr", "10 kVAr", "14.14 kVAr"],
+      "correcta": 2,
+      "explicacion": "tan(45°) = 1 → Q₁ = P×tan(φ₁) = 10×1 = 10 kVAr. Con cosφ = 0.707, el triángulo de potencias es isósceles (P = Q)."
+    },
+    {
+      "id": "t07-006",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "alta",
+      "enunciado": "¿Cuál es la fórmula para calcular la capacidad C del condensador de compensación?",
+      "opciones": ["C = Qc / (ω × V)", "C = Qc / (ω × V²)", "C = V² / (ω × Qc)", "C = ω × V² × Qc"],
+      "correcta": 1,
+      "explicacion": "La potencia reactiva del condensador es Qc = ω×C×V². Despejando: C = Qc/(ω×V²). Se usa V eficaz."
+    },
+    {
+      "id": "t07-007",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "alta",
+      "enunciado": "Una instalación tiene P = 6 kW, cosφ₁ = 0.6 y se desea llegar a cosφ₂ = 1. ¿Cuánta potencia reactiva Qc debe aportar el condensador?",
+      "opciones": ["6 kVAr", "8 kVAr", "10 kVAr", "5 kVAr"],
+      "correcta": 1,
+      "explicacion": "Con cosφ₁=0.6 → senφ₁=0.8 → S₁=P/cosφ₁=10 kVA → Q₁=S₁×senφ₁=8 kVAr. Para cosφ₂=1, Q₂=0, luego Qc=8 kVAr."
+    },
+    {
+      "id": "t07-008",
+      "tema": 7,
+      "bloque": "Compensación de energía reactiva",
+      "dificultad": "media",
+      "enunciado": "¿Qué ventaja tiene la compensación de energía reactiva para la empresa distribuidora de electricidad?",
+      "opciones": ["Aumenta la tensión de la red", "Reduce las pérdidas en los cables de distribución (I²×R)", "Aumenta la frecuencia de la red", "Reduce la potencia activa consumida"],
+      "correcta": 1,
+      "explicacion": "Al reducir la corriente reactiva, la corriente total I disminuye → las pérdidas en cables P_pérd = I²×R disminuyen significativamente."
+    },
+    {
+      "id": "t08-001",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "basica",
+      "enunciado": "¿Cuántas fases tiene un sistema trifásico y cómo están desfasadas entre sí?",
+      "opciones": ["2 fases, desfasadas 90°", "3 fases, desfasadas 120°", "3 fases, desfasadas 90°", "4 fases, desfasadas 45°"],
+      "correcta": 1,
+      "explicacion": "Un sistema trifásico tiene 3 fases (RST o UVW) desfasadas 120° entre sí. Esto permite generar un campo magnético giratorio."
+    },
+    {
+      "id": "t08-002",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "basica",
+      "enunciado": "En la red española trifásica, ¿cuáles son las tensiones de línea (VL) y de fase (Vf)?",
+      "opciones": ["VL = 230 V, Vf = 400 V", "VL = 400 V, Vf = 230 V", "VL = 380 V, Vf = 220 V", "VL = 690 V, Vf = 400 V"],
+      "correcta": 1,
+      "explicacion": "En España: tensión de línea VL = 400 V (entre fases) y tensión de fase Vf = 230 V (entre fase y neutro). VL = √3 × Vf."
+    },
+    {
+      "id": "t08-003",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "media",
+      "enunciado": "¿Cuánto vale la corriente por el neutro en un sistema trifásico equilibrado?",
+      "opciones": ["Tres veces la corriente de fase", "La misma que la corriente de línea", "Cero amperios", "Depende del factor de potencia"],
+      "correcta": 2,
+      "explicacion": "En un sistema equilibrado (cargas iguales en las tres fases), las tres corrientes se cancelan en el neutro: IN = 0."
+    },
+    {
+      "id": "t08-004",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "media",
+      "enunciado": "¿Qué ventaja principal tiene el sistema trifásico frente al monofásico para transportar la misma potencia?",
+      "opciones": ["Necesita más conductores", "Requiere menor sección de cable para transportar la misma potencia", "Opera a frecuencias más altas", "La tensión es más estable"],
+      "correcta": 1,
+      "explicacion": "Con 3 fases se transporta el triple de potencia usando solo 3 conductores (o 4 con neutro), ahorrando material respecto a 3 circuitos monofásicos independientes."
+    },
+    {
+      "id": "t08-005",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "media",
+      "enunciado": "¿Cómo se denominan las tres fases de un sistema trifásico en España?",
+      "opciones": ["A, B, C", "X, Y, Z", "R, S, T (o L1, L2, L3)", "U, V, W"],
+      "correcta": 2,
+      "explicacion": "En España se denominan R, S, T (nomenclatura tradicional) o L1, L2, L3 (normativa IEC). U, V, W es la nomenclatura de los bornes del motor."
+    },
+    {
+      "id": "t08-006",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "basica",
+      "enunciado": "¿Cuántos conductores tiene una línea trifásica con neutro?",
+      "opciones": ["2 conductores", "3 conductores", "4 conductores", "5 conductores"],
+      "correcta": 2,
+      "explicacion": "Una línea trifásica con neutro tiene 4 conductores: 3 fases (RST) + 1 neutro (N). Sin neutro serían 3 conductores."
+    },
+    {
+      "id": "t08-007",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "alta",
+      "enunciado": "¿Cuál es la relación matemática entre la tensión de línea VL y la tensión de fase Vf en un sistema trifásico equilibrado?",
+      "opciones": ["VL = 2 × Vf", "VL = √2 × Vf", "VL = 3 × Vf", "VL = √3 × Vf"],
+      "correcta": 3,
+      "explicacion": "VL = √3 × Vf ≈ 1.732 × Vf. En España: 400 = 1.732 × 230.9 ≈ 400 V ✓. Es resultado de la suma fasorial de dos tensiones de fase."
+    },
+    {
+      "id": "t08-008",
+      "tema": 8,
+      "bloque": "Características de la CA trifásica",
+      "dificultad": "alta",
+      "enunciado": "En un sistema trifásico desequilibrado, ¿qué ocurre con la corriente de neutro?",
+      "opciones": ["Sigue siendo cero", "Es igual a la corriente de fase mayor", "Es diferente de cero (circula corriente por el neutro)", "Se invierte"],
+      "correcta": 2,
+      "explicacion": "En un sistema desequilibrado, las corrientes de las tres fases no se cancelan, y por el neutro circula la suma fasorial de las tres corrientes de fase."
+    },
+    {
+      "id": "t09-001",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "basica",
+      "enunciado": "En conexión en estrella (Y), ¿qué relación hay entre la tensión de línea VL y la tensión de fase Vf?",
+      "opciones": ["VL = Vf", "VL = √3 × Vf", "VL = Vf / √3", "VL = 3 × Vf"],
+      "correcta": 1,
+      "explicacion": "En estrella: VL = √3 × Vf ≈ 1.732 × Vf. La tensión de línea es mayor que la de fase."
+    },
+    {
+      "id": "t09-002",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "basica",
+      "enunciado": "En conexión en triángulo (Δ), ¿qué relación hay entre la corriente de línea IL y la corriente de fase If?",
+      "opciones": ["IL = If", "IL = If / √3", "IL = √3 × If", "IL = 3 × If"],
+      "correcta": 2,
+      "explicacion": "En triángulo: IL = √3 × If. La corriente de línea es mayor que la de fase porque en cada nodo confluyen dos corrientes de fase."
+    },
+    {
+      "id": "t09-003",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "basica",
+      "enunciado": "En conexión en triángulo (Δ), ¿qué relación hay entre la tensión de fase Vf y la tensión de línea VL?",
+      "opciones": ["Vf = VL / √3", "Vf = √3 × VL", "Vf = VL", "Vf = VL / 3"],
+      "correcta": 2,
+      "explicacion": "En triángulo: Vf = VL. Cada bobina del receptor está directamente conectada entre dos líneas, por lo que ve la tensión de línea."
+    },
+    {
+      "id": "t09-004",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "media",
+      "enunciado": "La red trifásica tiene VL = 400 V. ¿Qué tensión ve cada receptor en conexión estrella?",
+      "opciones": ["400 V", "693 V", "231 V", "115 V"],
+      "correcta": 2,
+      "explicacion": "En estrella: Vf = VL/√3 = 400/1.732 ≈ 231 V. Cada receptor ve la tensión de fase (fase-neutro)."
+    },
+    {
+      "id": "t09-005",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "media",
+      "enunciado": "La red trifásica tiene VL = 400 V. ¿Qué tensión ve cada receptor en conexión triángulo?",
+      "opciones": ["231 V", "693 V", "400 V", "115 V"],
+      "correcta": 2,
+      "explicacion": "En triángulo: Vf = VL = 400 V. El receptor ve directamente la tensión entre líneas."
+    },
+    {
+      "id": "t09-006",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "media",
+      "enunciado": "Un motor está marcado como 230/400 V Δ/Y. Si se conecta a una red de 400 V, ¿qué conexión debe hacerse?",
+      "opciones": ["Triángulo (Δ), porque el motor funciona a 230 V", "Estrella (Y), porque en estrella ve 230 V ≈ 231 V", "Triángulo (Δ), porque la tensión de red es 400 V", "Indiferente, ambas son válidas"],
+      "correcta": 1,
+      "explicacion": "El motor está diseñado para 230 V (baja tensión). En red 400 V, conectando en Y cada bobina ve 400/√3 ≈ 231 V. En Δ vería 400 V y se destruiría."
+    },
+    {
+      "id": "t09-007",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "media",
+      "enunciado": "Un motor está marcado como 400/690 V Δ/Y. Si se conecta a una red de 400 V, ¿qué conexión debe hacerse?",
+      "opciones": ["Estrella (Y), para que vea 231 V", "Triángulo (Δ), para que cada bobina vea 400 V", "Estrella (Y), para que vea 690 V", "Indiferente"],
+      "correcta": 1,
+      "explicacion": "El motor está diseñado para 400 V en conexión Δ. En red de 400 V, conectar en Δ para que cada bobina vea 400 V (tensión nominal)."
+    },
+    {
+      "id": "t09-008",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "alta",
+      "enunciado": "Un motor en conexión estrella tiene VL = 400 V e If = 10 A. Si se pasa a triángulo con la misma tensión de red, ¿cuánto vale ahora la corriente de línea?",
+      "opciones": ["10 A", "5.77 A", "17.32 A", "30 A"],
+      "correcta": 2,
+      "explicacion": "En Δ, Vf = VL = 400 V (antes era 231 V). If_Δ = If_Y × √3 = 10 × √3 = 17.32 A. Además IL_Δ = √3 × If_Δ = 30 A. La potencia se triplica."
+    },
+    {
+      "id": "t09-009",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "alta",
+      "enunciado": "¿Por qué el arranque estrella-triángulo reduce la corriente de arranque de un motor?",
+      "opciones": ["Porque arranca con tensión reducida en Y y luego pasa a Δ con tensión plena", "Porque en Δ la corriente es menor que en Y", "Porque se usan resistencias externas durante el arranque", "Porque se reduce la frecuencia de arranque"],
+      "correcta": 0,
+      "explicacion": "En arranque Y, cada bobina ve Vf = VL/√3 (tensión reducida) → corriente de arranque reducida a 1/3 respecto al arranque directo en Δ."
+    },
+    {
+      "id": "t09-010",
+      "tema": 9,
+      "bloque": "Acoplamiento estrella y triángulo",
+      "dificultad": "media",
+      "enunciado": "En estrella (Y), ¿qué relación hay entre la corriente de línea IL y la corriente de fase If?",
+      "opciones": ["IL = √3 × If", "IL = If / √3", "IL = 3 × If", "IL = If"],
+      "correcta": 3,
+      "explicacion": "En estrella: IL = If. La misma corriente que circula por la línea es la que pasa por cada bobina del receptor."
+    },
+    {
+      "id": "t10-001",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "basica",
+      "enunciado": "¿Cuál es la fórmula de la potencia activa total en un sistema trifásico equilibrado?",
+      "opciones": ["P = VL × IL × cosφ", "P = 3 × VL × IL × cosφ", "P = √3 × VL × IL × cosφ", "P = Vf × IL × cosφ"],
+      "correcta": 2,
+      "explicacion": "P = √3 × VL × IL × cosφ. Esta es la fórmula universal para sistemas trifásicos equilibrados usando tensión y corriente de línea."
+    },
+    {
+      "id": "t10-002",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "media",
+      "enunciado": "Un motor trifásico consume P = 15 kW con cosφ = 0.85 y VL = 400 V. ¿Cuánto vale la corriente de línea IL?",
+      "opciones": ["21.6 A", "25.5 A", "37.5 A", "43.7 A"],
+      "correcta": 1,
+      "explicacion": "IL = P/(√3 × VL × cosφ) = 15000/(1.732 × 400 × 0.85) = 15000/588.9 ≈ 25.5 A."
+    },
+    {
+      "id": "t10-003",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "media",
+      "enunciado": "¿Cuánto vale la potencia aparente trifásica S si P = 12 kW y Q = 9 kVAr?",
+      "opciones": ["21 kVA", "3 kVA", "15 kVA", "10.8 kVA"],
+      "correcta": 2,
+      "explicacion": "S = √(P² + Q²) = √(144 + 81) = √225 = 15 kVA. Triángulo de potencias 9-12-15 (escala de 3-4-5)."
+    },
+    {
+      "id": "t10-004",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "media",
+      "enunciado": "Si en un sistema trifásico cosφ = 1, ¿cuánto vale la potencia reactiva Q?",
+      "opciones": ["Q = P", "Q = S", "Q = 0", "Q = √3 × P"],
+      "correcta": 2,
+      "explicacion": "cosφ = 1 → φ = 0° → senφ = 0 → Q = S × senφ = 0. Solo hay potencia activa. No hay componente reactiva."
+    },
+    {
+      "id": "t10-005",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "alta",
+      "enunciado": "Un sistema trifásico tiene VL = 400 V, IL = 20 A y cosφ = 0.9. ¿Cuánto vale P?",
+      "opciones": ["7200 W", "8000 W", "12470 W", "6236 W"],
+      "correcta": 2,
+      "explicacion": "P = √3 × VL × IL × cosφ = 1.732 × 400 × 20 × 0.9 = 1.732 × 7200 = 12470 W ≈ 12.47 kW."
+    },
+    {
+      "id": "t10-006",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "alta",
+      "enunciado": "¿Cuál es la expresión equivalente de la potencia trifásica usando tensiones y corrientes de fase?",
+      "opciones": ["P = Vf × If × cosφ", "P = 3 × Vf × If × cosφ", "P = √3 × Vf × If × cosφ", "P = 3 × VL × IL × cosφ"],
+      "correcta": 1,
+      "explicacion": "P = 3 × Vf × If × cosφ. Es la potencia de una fase multiplicada por 3. Equivalente a P = √3 × VL × IL × cosφ."
+    },
+    {
+      "id": "t10-007",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "alta",
+      "enunciado": "Un motor trifásico tiene VL = 400 V, IL = 10 A y cosφ = 0.8. ¿Cuánto vale la potencia reactiva Q?",
+      "opciones": ["2771 VAr", "5543 VAr", "4157 VAr", "6928 VAr"],
+      "correcta": 2,
+      "explicacion": "S = √3×400×10 = 6928 VA. P = S×cosφ = 6928×0.8 = 5543 W. senφ = 0.6 → Q = S×senφ = 6928×0.6 ≈ 4157 VAr."
+    },
+    {
+      "id": "t10-008",
+      "tema": 10,
+      "bloque": "Potencias trifásicas",
+      "dificultad": "media",
+      "enunciado": "¿Cuánto vale la potencia aparente S de un sistema trifásico con VL = 400 V e IL = 50 A?",
+      "opciones": ["20000 VA", "34641 VA", "28284 VA", "60000 VA"],
+      "correcta": 1,
+      "explicacion": "S = √3 × VL × IL = 1.732 × 400 × 50 = 34641 VA ≈ 34.6 kVA. La potencia aparente no depende del cosφ."
+    },
+    {
+      "id": "t11-001",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "basica",
+      "enunciado": "¿Cuáles son las dos partes principales de un motor de inducción trifásico?",
+      "opciones": ["Inducido y colector", "Estátor y rotor", "Armadura y campo", "Núcleo y bobinado"],
+      "correcta": 1,
+      "explicacion": "El motor de inducción tiene estátor (parte fija con bobinados trifásicos) y rotor (parte giratoria, jaula de ardilla o bobinado)."
+    },
+    {
+      "id": "t11-002",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "basica",
+      "enunciado": "¿Cuántos bornes tiene la caja de conexiones de un motor trifásico estándar?",
+      "opciones": ["3 bornes", "4 bornes", "6 bornes", "9 bornes"],
+      "correcta": 2,
+      "explicacion": "Un motor trifásico tiene 6 bornes: U1, V1, W1 (principios de bobina) y U2, V2, W2 (finales), que permiten conexión en Y o Δ."
+    },
+    {
+      "id": "t11-003",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la velocidad de sincronismo ns de un motor de 4 polos (p = 2 pares de polos) con f = 50 Hz?",
+      "opciones": ["3000 rpm", "1500 rpm", "1000 rpm", "750 rpm"],
+      "correcta": 1,
+      "explicacion": "ns = 60 × f / p = 60 × 50 / 2 = 1500 rpm. Con 4 polos (2 pares), el campo gira a 1500 rpm."
+    },
+    {
+      "id": "t11-004",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "media",
+      "enunciado": "¿Qué es el deslizamiento s en un motor de inducción?",
+      "opciones": ["La diferencia entre el par motor y el par resistente", "El cociente (ns − n) / ns, que indica cuánto se retrasa el rotor respecto al campo", "La relación entre potencia mecánica y eléctrica", "El ángulo entre tensión y corriente del estátor"],
+      "correcta": 1,
+      "explicacion": "s = (ns − n)/ns. Indica el retraso relativo del rotor. A plena carga suele ser 2-8%. Si s = 0, el rotor gira a sincronismo (imposible en inducción)."
+    },
+    {
+      "id": "t11-005",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "alta",
+      "enunciado": "Un motor gira a n = 1440 rpm con ns = 1500 rpm. ¿Cuánto vale el deslizamiento s en porcentaje?",
+      "opciones": ["1%", "2%", "4%", "6%"],
+      "correcta": 2,
+      "explicacion": "s = (ns − n)/ns = (1500 − 1440)/1500 = 60/1500 = 0.04 = 4%. Deslizamiento típico a plena carga."
+    },
+    {
+      "id": "t11-006",
+      "tema": 11,
+      "bloque": "Motores: partes y conexionado",
+      "dificultad": "media",
+      "enunciado": "Para invertir el sentido de giro de un motor trifásico, ¿qué se debe hacer?",
+      "opciones": ["Cambiar la tensión de alimentación", "Invertir dos de las tres fases de alimentación", "Reducir la tensión a la mitad", "Aumentar la frecuencia"],
+      "correcta": 1,
+      "explicacion": "Intercambiando dos fases cualesquiera (por ejemplo R y S), el campo magnético giratorio invierte su sentido y el motor gira al revés."
+    },
+    {
+      "id": "t12-001",
+      "tema": 12,
+      "bloque": "Motores: potencias",
+      "dificultad": "media",
+      "enunciado": "Un motor eléctrico consume Pelec = 5 kW de la red y tiene un rendimiento η = 0.8 (80%). ¿Cuánta potencia mecánica Pmec entrega en el eje?",
+      "opciones": ["6.25 kW", "5 kW", "4 kW", "0.8 kW"],
+      "correcta": 2,
+      "explicacion": "η = Pmec/Pelec → Pmec = η × Pelec = 0.8 × 5 = 4 kW. Las pérdidas son 5 − 4 = 1 kW (calor en bobinas, rozamiento, etc.)."
+    },
+    {
+      "id": "t12-002",
+      "tema": 12,
+      "bloque": "Motores: potencias",
+      "dificultad": "media",
+      "enunciado": "¿Cuál es la fórmula del par motor M a partir de la potencia P y la velocidad angular ω?",
+      "opciones": ["M = P + ω", "M = ω / P", "M = P × ω", "M = P / ω"],
+      "correcta": 3,
+      "explicacion": "M = P / ω, donde ω = 2πn/60 en rad/s. El par es la potencia dividida entre la velocidad angular."
+    },
+    {
+      "id": "t12-003",
+      "tema": 12,
+      "bloque": "Motores: potencias",
+      "dificultad": "alta",
+      "enunciado": "Un motor gira a n = 1450 rpm y entrega P = 3 kW. ¿Cuánto vale el par motor M?",
+      "opciones": ["2.07 Nm", "19.77 Nm", "4.54 Nm", "45.4 Nm"],
+      "correcta": 1,
+      "explicacion": "ω = 2π × 1450/60 = 151.8 rad/s. M = P/ω = 3000/151.8 ≈ 19.77 Nm ≈ 19.8 Nm."
+    },
+    {
+      "id": "t12-004",
+      "tema": 12,
+      "bloque": "Motores: potencias",
+      "dificultad": "alta",
+      "enunciado": "Un motor trifásico tiene: VL = 400 V, IL = 10 A, cosφ = 0.85 y η = 0.90. ¿Cuánto vale la potencia mecánica Pmec?",
+      "opciones": ["3400 W", "5290 W", "6235 W", "3060 W"],
+      "correcta": 1,
+      "explicacion": "Pelec = √3 × VL × IL × cosφ = 1.732 × 400 × 10 × 0.85 = 5876 W. Pmec = η × Pelec = 0.9 × 5876 ≈ 5288 W ≈ 5290 W."
+    }
+  ]
+}
