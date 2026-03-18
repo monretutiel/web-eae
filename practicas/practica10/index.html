@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="P10 - Arranque estrella-triángulo: montar arranque Y-Δ con tres contactores y temporizador.">
+  <title>P10 — Arranque estrella-triángulo (Y-Δ) | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/quiz.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link nav-main__link--active">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="../index.html">Prácticas</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">P10</li>
+        </ol>
+      </nav>
+
+      <!-- Cabecera -->
+      <div style="background:var(--color-primary-dark); color:#fff; border-radius:var(--radius-lg); padding:var(--space-5); margin-bottom:var(--space-5);">
+        <div style="display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;">
+          <span style="font-size:3rem; line-height:1;">⭐</span>
+          <div>
+            <span style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.1em; opacity:.7;">Práctica 10 · Avanzada</span>
+            <h1 style="font-size:var(--text-xl); margin-top:var(--space-1);">Arranque estrella-triángulo (Y-Δ)</h1>
+            <p style="opacity:.85; font-size:var(--text-sm); margin-top:var(--space-1);">
+              Montar el arranque Y-Δ con 3 contactores (KM1 principal, KM2 estrella, KM3 triángulo) y temporizador ON-DELAY.
+            </p>
+          </div>
+        </div>
+        <div style="display:flex; gap:var(--space-4); margin-top:var(--space-4); flex-wrap:wrap; font-size:var(--text-sm); opacity:.9;">
+          <span>⏱ Duración estimada: 120 min (2–3 sesiones)</span>
+          <span>👥 Parejas recomendado</span>
+          <span>📚 Tema relacionado: <a href="../../temas/tema7/teoria.html" style="color:#FFD166;">Tema 7</a></span>
+        </div>
+      </div>
+
+      <!-- Objetivos -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Objetivos</h2>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:var(--space-2);">
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Entender por qué la conexión Y reduce la corriente de arranque al 33% respecto a Δ
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Identificar los 6 bornes del motor (U1-U2, V1-V2, W1-W2) y sus conexiones Y y Δ
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Montar el circuito: KM1 (principal) + KM2 (estrella) + KM3 (triángulo) + temporizador ON-DELAY
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Medir la corriente de arranque en Y y en Δ con pinza amperimétrica
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Elaborar el cronograma completo del circuito (S0, S1, KM1, KM2, KM3, temporizador)
+          </li>
+        </ul>
+      </section>
+
+      <!-- Material -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Material necesario</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:var(--space-3);">
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">⚙️ Motor trifásico 6 bornes</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Bobinado para 400V en Δ (bornes U1,V1,W1 + U2,V2,W2 accesibles)</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">🔌 3 Contactores KM1, KM2, KM3</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">KM1: principal; KM2: estrella; KM3: triángulo. Con auxiliares NC (21-22).</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">⏱ Temporizador ON-DELAY</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Ajustable 3–30 s, con contacto NC (abre tras tiempo) y NA (cierra tras tiempo)</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">📐 Pinza amperimétrica</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Para medir la corriente de arranque en Y y en Δ sin interrumpir el circuito</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">🌡️ Relé térmico + Magnetotérmico 3P</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Relé calibrado para Ib del motor en Δ. Mag. 3P tipo C.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fundamento teórico -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Fundamento teórico</h2>
+        <p>En la conexión <strong>estrella (Y)</strong> cada bobina recibe \( V_Y = V_L / \sqrt{3} \approx 231\,\text{V} \) (en red 400V). En <strong>triángulo (Δ)</strong> cada bobina recibe 400V. La corriente de línea en Y es:</p>
+        <div class="formula-card" style="margin:var(--space-3) 0;">
+          <p class="formula-card__label">Reducción de corriente Y vs Δ</p>
+          <p style="text-align:center; padding:var(--space-2) 0;">\[ I_{arranque,Y} = \frac{I_{arranque,\Delta}}{3} \qquad \text{(reducción al 33\%)} \]</p>
+        </div>
+        <p>La secuencia del arranque Y-Δ es:</p>
+        <ol style="padding-left:var(--space-4); display:flex; flex-direction:column; gap:var(--space-1); font-size:var(--text-sm); margin-top:var(--space-2);">
+          <li>Pulsar marcha → KM1 (principal) + KM2 (estrella) se activan → motor arranca en Y</li>
+          <li>Temporizador cuenta el tiempo T (3–10 s)</li>
+          <li>Al terminar T: KM2 se abre (quita neutro) → pequeña pausa → KM3 (triángulo) se cierra</li>
+          <li>Motor funciona en Δ a velocidad nominal</li>
+        </ol>
+      </section>
+
+      <!-- Seguridad -->
+      <div class="alert alert--danger" style="margin-bottom:var(--space-4);">
+        <span class="alert__icon">🚫</span>
+        <div class="alert__content">
+          <strong>PELIGRO:</strong> KM2 (estrella) y KM3 (triángulo) NUNCA deben estar activos simultáneamente. Conectarían los terminales del motor a tierra (neutro de estrella) y a la red al mismo tiempo: cortocircuito interno. El enclavamiento KM2↔KM3 es OBLIGATORIO.
+        </div>
+      </div>
+
+      <!-- Procedimiento -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Procedimiento</h2>
+
+        <div style="display:flex; flex-direction:column; gap:var(--space-3);">
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">1</span>
+            <div>
+              <p style="font-weight:600;">Identificar los 6 bornes del motor</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">En la caja de bornes del motor, con multímetro en continuidad, localiza los 3 bobinados: U1-U2, V1-V2, W1-W2. Cada par da continuidad, entre pares distintos no la hay.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">2</span>
+            <div>
+              <p style="font-weight:600;">Montar el circuito de potencia</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Red L1/L2/L3 → Magnetotérmico → KM1 (principal, salidas hacia U1/V1/W1 del motor). KM2 (estrella): cortocircuita U2+V2+W2. KM3 (triángulo): conecta U2→L1/V2→L2/W2→L3. Relé térmico entre KM1 y el motor.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">3</span>
+            <div>
+              <p style="font-weight:600;">Cablear el enclavamiento KM2-KM3</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">KM2(21-22 NC) en serie con bobina KM3. KM3(21-22 NC) en serie con bobina KM2. Verifica con multímetro que al accionar KM2 manualmente, el camino a KM3 se abre.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">4</span>
+            <div>
+              <p style="font-weight:600;">Cablear el circuito de mando con temporizador</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Fase → F1(95-96) → S0(NC) → S1(NA) + KM1(13-14 NA) → bobina KM1. KM1 activa → también activa temporizador (bobina temporizador en paralelo con bobina KM1) + activa KM2 (bobina KM2 desde contacto NA del temporizador NC en espera). Al terminar el tiempo: contacto NC del temporizador abre KM2; contacto NA del temporizador cierra KM3.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">5</span>
+            <div>
+              <p style="font-weight:600;">Ajustar temporizador y medir corrientes</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Ajusta el temporizador a 5 s. Coloca la pinza amperimétrica en una fase. Arranca → anota corriente en Y (arranque). Observa la conmutación a Δ → anota corriente en Δ. Verifica que I<sub>Y</sub> ≈ I<sub>Δ</sub>/3.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">6</span>
+            <div>
+              <p style="font-weight:600;">Dibujar el cronograma</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">En tu cuaderno, dibuja el cronograma: eje X = tiempo. Trazas: S1 (pulsado brevemente), KM1 (activo desde el inicio hasta el paro), KM2 (activo desde arranque hasta fin del tiempo T), temporizador, KM3 (activo desde fin T hasta el paro).</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tabla de resultados -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Tabla de resultados</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>Medida</th><th>Valor teórico</th><th>Valor medido</th><th>Verificación</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tiempo de conmutación Y→Δ (s)</td><td>5 s (ajustado)</td><td>_____ s</td><td>□ OK</td></tr>
+            <tr><td>Corriente de arranque en Y (A)</td><td>≈ In × 1,7</td><td>_____ A</td><td>—</td></tr>
+            <tr><td>Corriente nominal en Δ (A)</td><td>In placa</td><td>_____ A</td><td>—</td></tr>
+            <tr><td>Relación I<sub>Y</sub>/I<sub>Δ</sub></td><td>≈ 1/3</td><td>_____</td><td>□ ≈ 0,33</td></tr>
+            <tr><td>Enclavamiento KM2↔KM3</td><td>No activan juntos</td><td>□ Correcto □ Fallo</td><td>—</td></tr>
+            <tr><td>Cronograma dibujado</td><td>—</td><td>□ Sí □ No</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Mini quiz -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Quiz de verificación</h2>
+        <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-bottom:var(--space-3);">Responde antes de salir del taller para confirmar que has asimilado los conceptos clave.</p>
+        <div id="quiz-container"
+             data-quiz-src="../../assets/data/quizzes/practica10-quiz.json"
+             data-quiz-id="practica10"
+             data-quiz-title="P10 Verificación"
+             data-quiz-passing="60">
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm);">Cargando preguntas…</p>
+        </div>
+      </section>
+
+      <!-- Navegación -->
+      <div class="nav-paginas">
+        <a href="../practica09/index.html" class="btn btn--ghost">← P09</a>
+        <a href="../practica11/index.html" class="btn btn--primary">P11 →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+  <script type="module">
+    import { initQuizFromDOM } from '../../assets/js/quiz-engine.js';
+    initQuizFromDOM();
+  </script>
+
+</body>
+</html>

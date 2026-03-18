@@ -1,0 +1,41 @@
+{
+  "title": "P08 Verificación — Arranque directo (DOL)",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p08q1",
+      "text": "En el circuito de mando DOL, ¿para qué sirve el contacto auxiliar KM1(13-14) en paralelo con el pulsador de marcha S1?",
+      "options": ["Para apagar el motor", "Para que el motor siga en marcha aunque sueltes el pulsador (autoenclavamiento)", "Para limitar la corriente de arranque", "Para señalizar que el motor está en marcha"],
+      "correct": 1,
+      "explanation": "El contacto auxiliar NA (13-14) de KM1 cierra cuando el contactor está energizado, manteniendo la bobina excitada aunque el operador suelte el pulsador de marcha. Este principio se llama autoenclavamiento o autorretención."
+    },
+    {
+      "id": "p08q2",
+      "text": "¿Por qué el pulsador de paro S0 es de tipo NC (normalmente cerrado)?",
+      "options": ["Porque es más barato", "Para que el circuito esté abierto en reposo", "Para que si se rompe el cable del pulsador, el motor se pare por seguridad (fallo seguro)", "Porque el manual lo indica"],
+      "correct": 2,
+      "explanation": "El pulsador NC proporciona seguridad ante un fallo de cableado: si el cable se rompe o desconecta, el circuito se abre y el contactor se desenergiza, parando el motor. Es el principio de diseño 'fallo-seguro'."
+    },
+    {
+      "id": "p08q3",
+      "text": "Los contactos 95-96 del relé térmico son:",
+      "options": ["Un contacto NA para señalización", "Un contacto NC que se abre cuando el relé dispara por sobretemperatura", "La conexión del motor", "Los bornes de entrada de la corriente de línea"],
+      "correct": 1,
+      "explanation": "Los bornes 95-96 son el contacto NC del relé térmico. En condiciones normales están cerrados. Cuando el relé dispara por sobrecalentamiento, se abren y el contactor se desenergiza."
+    },
+    {
+      "id": "p08q4",
+      "text": "Para un motor trifásico de 1,1 kW, 380V, cosφ=0,85, η=0,90, la corriente nominal Ib es aproximadamente:",
+      "options": ["1,1 A", "2,2 A", "4,4 A", "8,8 A"],
+      "correct": 1,
+      "explanation": "Ib = P / (√3 × V × cosφ × η) = 1100 / (1,732 × 380 × 0,85 × 0,90) ≈ 1100/503 ≈ 2,2 A."
+    },
+    {
+      "id": "p08q5",
+      "text": "¿Qué ocurre si se intercambian dos fases en los bornes del motor trifásico?",
+      "options": ["El motor se para", "El motor invierte su sentido de giro", "El motor acelera", "Se dispara el relé térmico inmediatamente"],
+      "correct": 1,
+      "explanation": "En un motor trifásico, intercambiando cualquier par de fases (p.ej. L1 y L2) el campo magnético rotante invierte su sentido, y con él el rotor. Esta es la base del circuito inversor de giro."
+    }
+  ]
+}

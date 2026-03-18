@@ -1,0 +1,41 @@
+{
+  "title": "P09 Verificación — Inversión de giro",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p09q1",
+      "text": "¿Por qué para invertir el giro de un motor trifásico se intercambian dos fases en lugar de las tres?",
+      "options": ["Por ahorro de contactores", "Porque solo hay que cambiar el sentido del campo rotante, y esto se consigue intercambiando cualquier par de fases", "Porque invertir las tres fases no cambia el giro", "Por normativa UNE"],
+      "correct": 1,
+      "explanation": "El campo magnético rotante del motor depende del orden de las fases. Intercambiando cualquier par de fases (p.ej. L1↔L3) se invierte el orden de secuencia y con él el sentido de rotación del campo y del rotor."
+    },
+    {
+      "id": "p09q2",
+      "text": "¿Qué función cumplen los contactos NC (21-22) de cada contactor en el circuito de inversión?",
+      "options": ["Señalización de marcha", "Enclavamiento eléctrico cruzado: impiden que el contactor opuesto se active", "Reseteo del relé térmico", "Contacto de autoenclavamiento"],
+      "correct": 1,
+      "explanation": "El contacto NC 21-22 de KM1 está en serie con la bobina de KM2 y viceversa. Si KM1 está activado, su NC abre el circuito de KM2, imposibilitando su energización. Esto previene el cortocircuito entre L1 y L3."
+    },
+    {
+      "id": "p09q3",
+      "text": "¿Qué pasaría si se activaran simultáneamente KM1 y KM2 sin enclavamiento?",
+      "options": ["El motor invertiría el giro suavemente", "Se cortocircuitarían las fases L1 y L3 a través de los contactos de los dos contactores", "El relé térmico lo impediría", "El magnetotérmico lo impediría siempre sin daños"],
+      "correct": 1,
+      "explanation": "Sin enclavamiento, los contactos de potencia de KM1 (L1→U) y KM2 (L3→U) estarían en paralelo, creando un cortocircuito directo entre L1 y L3. El arco resultante puede destruir los contactores y causar una avería grave."
+    },
+    {
+      "id": "p09q4",
+      "text": "¿Cuál es la diferencia entre el enclavamiento eléctrico y el mecánico?",
+      "options": ["Son equivalentes, cualquiera es suficiente", "El eléctrico usa contactos NC auxiliares; el mecánico usa una leva física que bloquea el accionamiento del otro contactor. Lo más seguro es usar ambos", "El mecánico solo existe en contactores de gran potencia", "El eléctrico se hace con el PLC"],
+      "correct": 1,
+      "explanation": "El enclavamiento eléctrico puede fallar si un contacto auxiliar está defectuoso. El mecánico bloquea físicamente el accionamiento. La solución más segura combina ambos tipos de enclavamiento."
+    },
+    {
+      "id": "p09q5",
+      "text": "En el circuito de mando del inversor, ¿por qué se usa un pulsador de PARO NC entre las dos ramas (directa e inversa)?",
+      "options": ["Para ahorrar un pulsador", "Para que con un solo pulsador se pueda parar desde cualquier estado (directa o inversa)", "Para reiniciar el enclavamiento", "Por el REBT"],
+      "correct": 1,
+      "explanation": "El pulsador de paro NC está en la parte común del circuito de mando (antes de bifurcarse en directa e inversa). Así, un solo pulsador corta la alimentación a ambas bobinas, parando el motor independientemente del estado de giro."
+    }
+  ]
+}

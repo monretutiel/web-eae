@@ -1,0 +1,41 @@
+{
+  "title": "P04 Verificación — Osciloscopio",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p04q1",
+      "text": "En un osciloscopio se mide Vp = 10 V en una señal sinusoidal. ¿Cuál es su valor eficaz Vef?",
+      "options": ["10 V", "14,14 V", "7,07 V", "5 V"],
+      "correct": 2,
+      "explanation": "Vef = Vp / √2 = 10 / 1,414 ≈ 7,07 V. El valor eficaz de una sinusoide es siempre menor que el valor de pico."
+    },
+    {
+      "id": "p04q2",
+      "text": "El timebase del osciloscopio está en 5 ms/div y un ciclo completo ocupa 4 divisiones. ¿Cuál es la frecuencia?",
+      "options": ["50 Hz", "200 Hz", "5 Hz", "20 Hz"],
+      "correct": 0,
+      "explanation": "T = 5 ms/div × 4 div = 20 ms = 0,02 s. f = 1/T = 1/0,02 = 50 Hz."
+    },
+    {
+      "id": "p04q3",
+      "text": "¿Por qué es importante usar la sonda en posición ×10 para medir señales de alta frecuencia?",
+      "options": ["Para amplificar la señal", "Para reducir la capacidad parásita de la sonda y no distorsionar la señal", "Para proteger el osciloscopio de sobretensiones", "Para aumentar la impedancia de entrada"],
+      "correct": 1,
+      "explanation": "La sonda ×10 tiene una capacidad parásita mucho menor que la ×1. A alta frecuencia, esta capacidad actúa como camino de fuga y deforma la señal. Con ×10 se evita esto (aunque hay que multiplicar por 10 la lectura)."
+    },
+    {
+      "id": "p04q4",
+      "text": "¿Qué magnitud mide el multímetro cuando está en modo CA (ACV)?",
+      "options": ["Valor de pico", "Valor pico a pico", "Valor eficaz (RMS)", "Valor medio"],
+      "correct": 2,
+      "explanation": "El multímetro en modo CA mide el valor eficaz o RMS (Root Mean Square), que es el equivalente en CC en términos de potencia disipada."
+    },
+    {
+      "id": "p04q5",
+      "text": "En el osciloscopio, la sensibilidad vertical está en 2 V/div y una señal ocupa 3,5 divisiones de pico a pico. ¿Cuál es Vpp?",
+      "options": ["3,5 V", "7 V", "14 V", "1,75 V"],
+      "correct": 1,
+      "explanation": "Vpp = sensibilidad × divisiones = 2 V/div × 3,5 div = 7 V."
+    }
+  ]
+}

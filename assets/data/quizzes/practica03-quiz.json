@@ -1,0 +1,41 @@
+{
+  "title": "P03 Verificación — Uso del multímetro",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p03q1",
+      "text": "¿Cómo se conecta el voltímetro para medir la tensión en una resistencia?",
+      "options": ["En serie con la resistencia", "En paralelo con la resistencia", "Entre los bornes de la fuente únicamente", "Con la fuente apagada"],
+      "correct": 1,
+      "explanation": "El voltímetro siempre se conecta en PARALELO con el elemento cuya tensión se quiere medir. Si se conectara en serie, su alta impedancia cortaría el circuito."
+    },
+    {
+      "id": "p03q2",
+      "text": "¿En qué posición debe estar el selector del multímetro para medir la resistencia de un componente?",
+      "options": ["DCV", "ACV", "Ω (ohmios)", "DCA"],
+      "correct": 2,
+      "explanation": "Para medir resistencia se selecciona la función Ω. Además, el componente debe estar desconectado del circuito y sin tensión, de lo contrario el multímetro puede dañarse."
+    },
+    {
+      "id": "p03q3",
+      "text": "Al medir un diodo en polarización directa con el multímetro en modo diodo, la lectura típica es:",
+      "options": ["0,0 V (cortocircuito)", "OL (circuito abierto)", "0,6 – 0,7 V", "12 V"],
+      "correct": 2,
+      "explanation": "Un diodo de silicio en polarización directa tiene una caída de tensión de aproximadamente 0,6–0,7 V. Si marca OL, está en inversa o está abierto."
+    },
+    {
+      "id": "p03q4",
+      "text": "Si el multímetro en modo corriente se conecta en PARALELO accidentalmente:",
+      "options": ["Mide la corriente correctamente", "No pasa nada, es equivalente", "Puede dañarse por exceso de corriente", "Mide la tensión en su lugar"],
+      "correct": 2,
+      "explanation": "El amperímetro tiene muy baja resistencia interna. Conectado en paralelo actúa como un cortocircuito, pudiendo quemar el fusible interno o dañar el instrumento."
+    },
+    {
+      "id": "p03q5",
+      "text": "¿Qué indica el multímetro en modo continuidad (zumbador) al medir un cable sin rotura?",
+      "options": ["Infinito (OL)", "Alrededor de 0 Ω y emite sonido", "230 V", "12 V"],
+      "correct": 1,
+      "explanation": "En modo continuidad, si el cable está íntegro la resistencia es prácticamente cero y el multímetro emite un pitido. Si hay rotura marca OL."
+    }
+  ]
+}

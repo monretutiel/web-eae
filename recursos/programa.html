@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Programa oficial del módulo EAE (0951): Resultados de Aprendizaje, criterios de evaluación y matrices de cobertura. BOE-A-2023-10394.">
+  <title>Programa del Módulo | EAE</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .ra-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+    .ra-card__header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-primary-dark);
+      color: #fff;
+    }
+    .ra-card__num {
+      font-size: var(--text-2xl);
+      font-weight: 900;
+      line-height: 1;
+      opacity: .6;
+      flex-shrink: 0;
+      min-width: 3rem;
+    }
+    .ra-card__title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+    .ra-card__enunciado {
+      font-size: var(--text-sm);
+      opacity: .85;
+      margin-top: var(--space-1);
+      font-style: italic;
+    }
+    .ra-card__body {
+      padding: var(--space-4);
+    }
+    .criterios-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+    .criterios-list li {
+      display: flex;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+    }
+    .criterios-list li::before {
+      content: attr(data-letra);
+      color: var(--color-primary);
+      font-weight: 700;
+      min-width: 1.4rem;
+      flex-shrink: 0;
+    }
+    .ra-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border);
+    }
+    .ra-tag {
+      font-size: var(--text-xs);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+    .ra-tag--tema {
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+    }
+    .ra-tag--bloque {
+      background: #FFF3CD;
+      color: #7a5200;
+    }
+    .ra-tag--aviso {
+      background: #FFF0F0;
+      color: #c0392b;
+    }
+    .matrix-wrapper {
+      overflow-x: auto;
+    }
+    @media print {
+      .nav-main, .breadcrumb, footer, .no-print { display: none !important; }
+      .ra-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../practicas/index.html"    class="nav-main__link">Prácticas</a></li>
+      <li><a href="../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../recursos/index.html"     class="nav-main__link nav-main__link--active">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="./index.html">Recursos</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">Programa del módulo</li>
+        </ol>
+      </nav>
+
+      <div style="margin-bottom:var(--space-5);">
+        <h1 style="font-size:var(--text-2xl); color:var(--color-primary-dark);">Programa del Módulo 0951</h1>
+        <p style="color:var(--color-text-muted); margin-top:var(--space-2); max-width:65ch; font-size:var(--text-sm);">
+          Electricidad y Automatismos Eléctricos · CFGM Mantenimiento Industrial · <strong>140 horas</strong><br>
+          Fuente: <strong>BOE-A-2023-10394</strong> (1 de mayo de 2023)
+        </p>
+      </div>
+
+      <div class="alert alert--tip" style="margin-bottom:var(--space-5);">
+        <span class="alert__icon">📋</span>
+        <div class="alert__content">
+          El módulo se evalúa mediante <strong>6 Resultados de Aprendizaje (RAs)</strong>. Cada RA tiene sus criterios de evaluación, los temas teóricos que lo cubren y las prácticas de taller que lo evalúan.
+        </div>
+      </div>
+
+      <!-- RA1 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA1</span>
+          <div>
+            <p class="ra-card__title">Circuitos de Corriente Continua</p>
+            <p class="ra-card__enunciado">Mide parámetros de magnitudes eléctricas en circuitos de CC, comparándolos con los cálculos efectuados.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Identificar características de conductores, aislantes y semiconductores</li>
+            <li data-letra="b)">Identificar las principales magnitudes eléctricas (V, I, R) y sus unidades</li>
+            <li data-letra="c)">Comprobar de forma práctica la Ley de Ohm</li>
+            <li data-letra="d)">Comprobar de forma práctica la potencia y energía</li>
+            <li data-letra="e)">Realizar e interpretar esquemas de circuitos con simbología normalizada</li>
+            <li data-letra="f)">Realizar cálculos de agrupaciones serie y paralelo de resistencias y tomar medidas</li>
+            <li data-letra="g)">Reconocer las propiedades de los condensadores y su función</li>
+            <li data-letra="h)">Realizar agrupaciones de condensadores</li>
+            <li data-letra="i)">Identificar características y formas de conexión de aparatos de medida</li>
+            <li data-letra="j)">Realizar medidas de V, I, R y P, observando normas de seguridad</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 1 — CC</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 2 — Instrumentación</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 6 — Capacitivos</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P01 — Ley de Ohm</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P02 — Circuito paralelo</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P03 — Multímetro</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RA2 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA2</span>
+          <div>
+            <p class="ra-card__title">Circuitos de Corriente Alterna Monofásica</p>
+            <p class="ra-card__enunciado">Mide parámetros de magnitudes eléctricas en circuitos de CA monofásica, describiendo los aspectos diferenciales con la CC.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Identificar las características de una señal sinusoidal</li>
+            <li data-letra="b)">Reconocer los valores característicos de la CA (Vpico, Vef, T, f, ω)</li>
+            <li data-letra="c)">Verificar las relaciones entre V, I y P en circuitos serie RLC</li>
+            <li data-letra="d)">Calcular el factor de potencia de circuitos de CA</li>
+            <li data-letra="e)">Relacionar el factor de potencia con el consumo de energía eléctrica</li>
+            <li data-letra="f)">Realizar medidas de V, I, P y cosφ</li>
+            <li data-letra="g)">Identificar cómo corregir el factor de potencia de una instalación</li>
+            <li data-letra="h)">Tomar medidas de caídas de tensión en líneas monofásicas de CA</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 2 — Instrumentación</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 5 — Inductivos</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 6 — Capacitivos</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P04 — Osciloscopio</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RA3 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA3</span>
+          <div>
+            <p class="ra-card__title">Sistemas Trifásicos</p>
+            <p class="ra-card__enunciado">Mide parámetros de magnitudes eléctricas en un sistema trifásico, comparándolas con los cálculos efectuados.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Describir los sistemas de generación y distribución a tres o cuatro hilos</li>
+            <li data-letra="b)">Identificar las diferentes formas de conexión de receptores trifásicos (Y y Δ)</li>
+            <li data-letra="c)">Reconocer la diferencia entre receptores equilibrados y desequilibrados</li>
+            <li data-letra="d)">Realizar medidas de V, I, P y energía según el tipo de sistema y carga</li>
+            <li data-letra="e)">Realizar cálculos de mejora del factor de potencia en instalaciones trifásicas</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 7 — Motores (sección trifásica)</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P08 – P10 — Arranque y maniobra</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RA4 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA4</span>
+          <div>
+            <p class="ra-card__title">Dispositivos de Protección</p>
+            <p class="ra-card__enunciado">Identifica los dispositivos de protección que se deben emplear, relacionándolos con los riesgos y efectos de la electricidad.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Manejar el REBT y la normativa de PRL</li>
+            <li data-letra="b)">Reconocer los inconvenientes del efecto térmico de la electricidad</li>
+            <li data-letra="c)">Identificar riesgos de choque eléctrico y sus efectos fisiológicos</li>
+            <li data-letra="d)">Identificar los riesgos de incendio por calentamiento</li>
+            <li data-letra="e)">Reconocer los tipos de accidentes eléctricos</li>
+            <li data-letra="f)">Reconocer los riesgos derivados del uso de instalaciones eléctricas</li>
+            <li data-letra="g)">Interpretar las reglas para trabajos sin tensión</li>
+            <li data-letra="h)">Calcular la sección de conductores considerando las prescripciones reglamentarias</li>
+            <li data-letra="i)">Identificar las protecciones necesarias contra sobreintensidades y sobretensiones</li>
+            <li data-letra="j)">Identificar los sistemas de protección contra contactos directos e indirectos</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 3 — Protecciones</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 4 — Instalaciones</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P05 — Fusibles y magnetotérmicos</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P06 — Diferencial y tierra</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P07 — Cuadro vivienda</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RA5 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA5</span>
+          <div>
+            <p class="ra-card__title">Mecanizado de Cuadros Eléctricos</p>
+            <p class="ra-card__enunciado">Ejecuta operaciones de mecanizado de cuadros, aplicando técnicas de medición y marcado utilizando máquinas y herramientas.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Identificar la simbología y especificaciones técnicas en planos</li>
+            <li data-letra="b)">Identificar materiales (perfiles, envolventes y cuadros)</li>
+            <li data-letra="c)">Definir las fases y operaciones del proceso</li>
+            <li data-letra="d)">Realizar un plan de mecanizado y montaje</li>
+            <li data-letra="e)">Relacionar herramientas, medios técnicos y de seguridad según cada intervención</li>
+            <li data-letra="f)">Seleccionar equipos, herramientas y medios técnicos de seguridad</li>
+            <li data-letra="g)">Realizar mediciones con la precisión exigida</li>
+            <li data-letra="h)">Ejecutar operaciones de distribución, trazado y marcado</li>
+            <li data-letra="i)">Operar con herramientas y equipos de trabajo característicos</li>
+            <li data-letra="j)">Ejecutar operaciones de mecanizado en perfiles, envolventes y cuadros</li>
+            <li data-letra="k)">Resolver las contingencias surgidas</li>
+            <li data-letra="l)">Tener en cuenta los tiempos previstos para el proceso</li>
+            <li data-letra="m)">Respetar los criterios de calidad</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 4 — Instalaciones (simbología, esquemas)</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P08 – P10 — Selección de aparamenta</span>
+            <span class="ra-tag ra-tag--aviso">⚠️ Evaluación principalmente en taller (actividad manual)</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RA6 -->
+      <article class="ra-card">
+        <div class="ra-card__header">
+          <span class="ra-card__num">RA6</span>
+          <div>
+            <p class="ra-card__title">Montaje de Cuadros y Automatismos</p>
+            <p class="ra-card__enunciado">Monta cuadros y sistemas eléctricos asociados, interpretando documentación técnica y verificando su funcionamiento.</p>
+          </div>
+        </div>
+        <div class="ra-card__body">
+          <ul class="criterios-list">
+            <li data-letra="a)">Obtener información de croquis y esquemas de mando y maniobra</li>
+            <li data-letra="b)">Utilizar programas de CAD electrotécnico para representar esquemas</li>
+            <li data-letra="c)">Aplicar la normativa electrotécnica y convencionalismos de automatismos</li>
+            <li data-letra="d)">Relacionar cada elemento con su función de conjunto</li>
+            <li data-letra="e)">Montar circuitos de mando y potencia para motores</li>
+            <li data-letra="f)">Realizar maniobras con motores</li>
+            <li data-letra="g)">Operar con autonomía en las actividades propuestas</li>
+            <li data-letra="h)">Comprobar el funcionamiento de la instalación</li>
+            <li data-letra="i)">Realizar medidas y verificaciones para la localización de averías</li>
+            <li data-letra="j)">Operar con autonomía y destreza en la manipulación de elementos, equipos y herramientas</li>
+          </ul>
+          <div class="ra-tags">
+            <span class="ra-tag ra-tag--tema">📖 Tema 4 — Automatismos</span>
+            <span class="ra-tag ra-tag--tema">📖 Tema 7 — Motores</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P08 — DOL</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P09 — Inversión de giro</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P10 — Arranque Y-Δ</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P11 — Grupo bombeo</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P12 — Identificación motor</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P13 — Dahlander</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P14 — Arranque temporizado</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P15 — Inversor monofásico</span>
+            <span class="ra-tag ra-tag--bloque">🔧 P16 — Motor lavadora</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- MATRICES -->
+      <h2 class="section-title" style="margin-top:var(--space-6);">Matrices de cobertura</h2>
+
+      <h3 style="font-size:var(--text-base); font-weight:700; margin-bottom:var(--space-3); color:var(--color-primary-dark);">Temas → Resultados de Aprendizaje</h3>
+      <div class="matrix-wrapper" style="margin-bottom:var(--space-5);">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th style="text-align:center;">RA1</th>
+              <th style="text-align:center;">RA2</th>
+              <th style="text-align:center;">RA3</th>
+              <th style="text-align:center;">RA4</th>
+              <th style="text-align:center;">RA5</th>
+              <th style="text-align:center;">RA6</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="../temas/tema1/index.html">T1 — Circuitos CC</a></td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema2/index.html">T2 — Instrumentación</a></td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema3/index.html">T3 — Protecciones</a></td>
+              <td></td><td></td><td></td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td></td><td></td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema4/index.html">T4 — Instalaciones</a></td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (e)</td>
+              <td></td><td></td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (a)</td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (a,c,d)</td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema5/index.html">T5 — Inductivos</a></td>
+              <td></td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (b,c,d)</td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema6/index.html">T6 — Capacitivos</a></td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (g,h)</td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (c,d,e,g)</td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><a href="../temas/tema7/index.html">T7 — Motores</a></td>
+              <td></td><td></td>
+              <td style="text-align:center; color:var(--color-success);">✅</td>
+              <td></td><td></td>
+              <td style="text-align:center; font-size:var(--text-xs);">✅ (e,f)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:var(--text-base); font-weight:700; margin-bottom:var(--space-3); color:var(--color-primary-dark);">Prácticas → Resultados de Aprendizaje</h3>
+      <div class="matrix-wrapper" style="margin-bottom:var(--space-5);">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Práctica</th>
+              <th style="text-align:center;">RA1</th>
+              <th style="text-align:center;">RA2</th>
+              <th style="text-align:center;">RA3</th>
+              <th style="text-align:center;">RA4</th>
+              <th style="text-align:center;">RA5</th>
+              <th style="text-align:center;">RA6</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="../practicas/practica01/index.html">P01 — Ley de Ohm</a></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica02/index.html">P02 — Circuito paralelo</a></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica03/index.html">P03 — Multímetro</a></td><td style="text-align:center; color:var(--color-success);">✅</td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica04/index.html">P04 — Osciloscopio</a></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica05/index.html">P05 — Fusibles y magnetotérmicos</a></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica06/index.html">P06 — Diferencial y tierra</a></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica07/index.html">P07 — Cuadro vivienda</a></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td></td></tr>
+            <tr><td><a href="../practicas/practica08/index.html">P08 — Arranque DOL</a></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica09/index.html">P09 — Inversión de giro</a></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica10/index.html">P10 — Arranque Y-Δ</a></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica11/index.html">P11 — Grupo bombeo</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica12/index.html">P12 — Identificación motor</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica13/index.html">P13 — Motor Dahlander</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica14/index.html">P14 — Arranque temporizado</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica15/index.html">P15 — Inversor monofásico</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+            <tr><td><a href="../practicas/practica16/index.html">P16 — Motor lavadora</a></td><td></td><td></td><td></td><td></td><td></td><td style="text-align:center; color:var(--color-success);">✅</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Contenidos básicos BOE -->
+      <h2 class="section-title" style="margin-top:var(--space-6);">Contenidos básicos (BOE)</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:var(--space-3); margin-bottom:var(--space-5);">
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 1 — Medidas en CC</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Aislantes, conductores y semiconductores</li>
+            <li>Circuito eléctrico y resistencia eléctrica</li>
+            <li>Ley de Ohm en CC</li>
+            <li>Asociación de resistencias serie-paralelo</li>
+            <li>Potencia y energía</li>
+            <li>Medidas de V, I, R y P en CC</li>
+            <li>Condensadores</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 2 — Medidas en CA monofásica</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Corriente alterna monofásica</li>
+            <li>Valores característicos (Vpico, Vef, T, f, ω)</li>
+            <li>Comportamiento de R, L, C en CA</li>
+            <li>Circuitos RLC serie en CA monofásica</li>
+            <li>Potencia y factor de potencia</li>
+            <li>Medidas de V, I y P en CA monofásica</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 3 — Medidas en sistemas trifásicos</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Circuito eléctrico trifásico</li>
+            <li>Conexión Y y Δ de receptores</li>
+            <li>Potencia en sistemas trifásicos</li>
+            <li>Medidas de V, I, P y energía</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 4 — Identificación de protecciones</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Seguridad en instalaciones electrotécnicas</li>
+            <li>Normativa (REBT, PRL)</li>
+            <li>Cálculo de sección de conductores</li>
+            <li>Caída de tensión en líneas eléctricas</li>
+            <li>Riesgo eléctrico</li>
+            <li>Protecciones contra sobreintensidades y sobretensiones</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 5 — Mecanizado de cuadros</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Organización del proceso de mecanización</li>
+            <li>Simbología normalizada (UNE-EN 81346)</li>
+            <li>Materiales para cuadros y canalizaciones</li>
+            <li>Operaciones de mecanizado</li>
+            <li>Montaje de armarios y cuadros eléctricos</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-4);">
+          <p style="font-weight:700; font-size:var(--text-sm); color:var(--color-primary-dark); margin-bottom:var(--space-2);">Bloque 6 — Montaje de cuadros y automatismos</p>
+          <ul style="list-style:disc; padding-left:var(--space-4); font-size:var(--text-sm); color:var(--color-text-muted); display:flex; flex-direction:column; gap:var(--space-1);">
+            <li>Interpretación de documentación técnica</li>
+            <li>Simbología y convencionalismos de automatismos</li>
+            <li>Sensores y actuadores</li>
+            <li>Arranque y maniobra de motores</li>
+            <li>Protecciones contra cortocircuitos y sobrecargas</li>
+            <li>Diagnóstico y localización de averías</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="no-print" style="margin-top:var(--space-4);">
+        <button class="btn btn--primary" onclick="window.print()">🖨️ Imprimir programa</button>
+        <a href="./index.html" class="btn btn--ghost" style="margin-left:var(--space-2);">← Volver a Recursos</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../assets/js/main.js"></script>
+
+</body>
+</html>

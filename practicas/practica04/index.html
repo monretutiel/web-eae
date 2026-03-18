@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="P04 - Osciloscopio básico: leer Vp, Vpp, Vef, periodo y frecuencia de una señal alterna.">
+  <title>P04 — Osciloscopio básico | EAE</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/quiz.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+
+  <nav class="nav-main" role="navigation">
+    <a href="../../index.html" class="nav-main__brand">
+      <span class="nav-main__logo">⚡</span>
+      <span class="nav-main__title">EAE · Electrotecnia</span>
+    </a>
+    <button class="nav-main__toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <ul class="nav-main__menu" role="list">
+      <li><a href="../../index.html"              class="nav-main__link">Inicio</a></li>
+      <li><a href="../../temas/tema1/index.html"  class="nav-main__link">Temas</a></li>
+      <li><a href="../../practicas/index.html"    class="nav-main__link nav-main__link--active">Prácticas</a></li>
+      <li><a href="../../calculadoras/index.html" class="nav-main__link">Calculadoras</a></li>
+      <li><a href="../../simuladores/index.html"  class="nav-main__link">Simuladores</a></li>
+      <li><a href="../../recursos/index.html"     class="nav-main__link">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-wrapper">
+
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="../../index.html">Inicio</a></li>
+          <li class="breadcrumb__item"><a href="../index.html">Prácticas</a></li>
+          <li class="breadcrumb__item breadcrumb__item--current">P04</li>
+        </ol>
+      </nav>
+
+      <!-- Cabecera -->
+      <div style="background:var(--color-primary-dark); color:#fff; border-radius:var(--radius-lg); padding:var(--space-5); margin-bottom:var(--space-5);">
+        <div style="display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;">
+          <span style="font-size:3rem; line-height:1;">📺</span>
+          <div>
+            <span style="font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.1em; opacity:.7;">Práctica 04 · Media</span>
+            <h1 style="font-size:var(--text-xl); margin-top:var(--space-1);">Osciloscopio básico</h1>
+            <p style="opacity:.85; font-size:var(--text-sm); margin-top:var(--space-1);">
+              Leer Vp, Vpp, Vef, periodo y frecuencia de una señal alterna con osciloscopio analógico o digital.
+            </p>
+          </div>
+        </div>
+        <div style="display:flex; gap:var(--space-4); margin-top:var(--space-4); flex-wrap:wrap; font-size:var(--text-sm); opacity:.9;">
+          <span>⏱ Duración estimada: 60 min</span>
+          <span>👥 Individual o parejas</span>
+          <span>📚 Tema relacionado: <a href="../../temas/tema2/teoria.html" style="color:#FFD166;">Tema 2</a></span>
+        </div>
+      </div>
+
+      <!-- Objetivos -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Objetivos</h2>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:var(--space-2);">
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Ajustar correctamente el timebase (tiempo/div) y la sensibilidad vertical (V/div)
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Leer y calcular V<sub>p</sub>, V<sub>pp</sub>, V<sub>ef</sub>, periodo T y frecuencia f
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Comprender la diferencia entre valor de pico y valor eficaz: \( V_{ef} = \dfrac{V_p}{\sqrt{2}} \)
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Medir el desfase entre dos señales (CH1 y CH2)
+          </li>
+          <li style="display:flex; gap:var(--space-2); font-size:var(--text-sm);">
+            <span style="color:var(--color-success); font-weight:700; flex-shrink:0;">✓</span>
+            Usar la sonda en posición ×1 y ×10 y corregir la lectura
+          </li>
+        </ul>
+      </section>
+
+      <!-- Material -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Material necesario</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:var(--space-3);">
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">📺 Osciloscopio 2 canales</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Analógico o digital, ancho de banda ≥ 20 MHz, con sonda ×1/×10</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">🔌 Fuente de señal</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Trafo 230/12 V CA (50 Hz) o generador de funciones</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">📏 Multímetro</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">Para comparación del valor eficaz medido vs calculado</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3);">
+            <p style="font-weight:700; font-size:var(--text-sm); margin-bottom:var(--space-2);">🔩 Circuito RC (desfase)</p>
+            <p style="font-size:var(--text-sm); color:var(--color-text-muted);">R = 10 kΩ y C = 100 nF (para medir desfase CH1/CH2)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fundamento teórico -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Fundamento teórico</h2>
+        <p>El osciloscopio muestra la variación de tensión en el tiempo. Cada división horizontal representa un tiempo (timebase) y cada división vertical representa una tensión (sensibilidad vertical):</p>
+        <div class="formula-card" style="margin:var(--space-3) 0;">
+          <p class="formula-card__label">Relaciones clave</p>
+          <p style="text-align:center; padding:var(--space-2) 0;">
+            \[ V_{pp} = \text{div}_{pp} \times \frac{V}{\text{div}} \qquad V_p = \frac{V_{pp}}{2} \qquad V_{ef} = \frac{V_p}{\sqrt{2}} \approx 0{,}707 \cdot V_p \]
+          </p>
+          <p style="text-align:center; padding:var(--space-2) 0;">
+            \[ T = \text{div}_T \times \frac{\text{ms}}{\text{div}} \qquad f = \frac{1}{T} \]
+          </p>
+        </div>
+        <p>El desfase entre dos señales se calcula midiendo el desplazamiento temporal (Δt) entre los cruces por cero y convirtiéndolo a grados:</p>
+        <div class="formula-card" style="margin:var(--space-3) 0;">
+          <p class="formula-card__label">Ángulo de desfase</p>
+          <p style="text-align:center; padding:var(--space-2) 0;">\[ \varphi = \frac{\Delta t}{T} \times 360° \]</p>
+        </div>
+      </section>
+
+      <!-- Procedimiento -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Procedimiento</h2>
+
+        <div class="alert alert--warning" style="margin-bottom:var(--space-4);">
+          <span class="alert__icon">⚠️</span>
+          <div class="alert__content">
+            <strong>Seguridad:</strong> La masa (GND) de la sonda está conectada a la toma de tierra del osciloscopio. Nunca conectes la masa de la sonda a un punto con tensión respecto a tierra.
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:var(--space-3);">
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">1</span>
+            <div>
+              <p style="font-weight:600;">Calibrar el osciloscopio</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Ajusta el punto cero de la traza al centro de la pantalla sin señal. Si el osciloscopio tiene señal de calibración interna (1 kHz, 2 Vpp), conéctala y verifica que la sonda esté compensada.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">2</span>
+            <div>
+              <p style="font-weight:600;">Conectar señal 50 Hz del trafo en CH1</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Conecta la sonda al secundario del trafo (12 V CA, 50 Hz). Ajusta la sensibilidad vertical (p.ej. 5 V/div) y el timebase (p.ej. 5 ms/div) para ver 2–3 ciclos completos.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">3</span>
+            <div>
+              <p style="font-weight:600;">Leer Vpp, Vp y calcular Vef</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Cuenta las divisiones de pico a pico de la señal. Calcula V<sub>pp</sub> = divisiones × V/div. Calcula V<sub>p</sub> = V<sub>pp</sub>/2 y V<sub>ef</sub> = V<sub>p</sub>/√2. Compara V<sub>ef</sub> calculada con la lectura del multímetro en ACV.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">4</span>
+            <div>
+              <p style="font-weight:600;">Leer el periodo T y calcular f</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Cuenta las divisiones de un ciclo completo. Calcula T = divisiones × ms/div. Calcula f = 1/T. Compara con la frecuencia nominal de la red (50 Hz).</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">5</span>
+            <div>
+              <p style="font-weight:600;">Medir el desfase en circuito RC</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Monta el circuito RC (R=10 kΩ, C=100 nF) con el trafo. Conecta CH1 a la entrada (V<sub>trafo</sub>) y CH2 a la tensión en el condensador (V<sub>C</sub>). Mide el desplazamiento Δt entre los cruces por cero y calcula φ = Δt/T × 360°. Valor teórico: φ = arctan(1/ωRC).</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <span style="background:var(--color-primary); color:#fff; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:var(--text-sm);">6</span>
+            <div>
+              <p style="font-weight:600;">Probar la sonda en posición ×10</p>
+              <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-top:var(--space-1);">Cambia la sonda a ×10. Repite la medida de V<sub>pp</sub>. El osciloscopio muestra 1/10 del valor real: multiplica la lectura por 10 para obtener el valor correcto. Observa la diferencia de forma con ×1.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tabla de resultados -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Tabla de resultados</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Magnitud</th>
+              <th>Cálculo / Lectura</th>
+              <th>Valor obtenido</th>
+              <th>Referencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sensibilidad vertical usada (V/div)</td><td>Ajuste del instrumento</td><td>_____ V/div</td><td>—</td></tr>
+            <tr><td>Timebase usado (ms/div)</td><td>Ajuste del instrumento</td><td>_____ ms/div</td><td>—</td></tr>
+            <tr><td>Divisiones pico a pico</td><td>Lectura visual</td><td>_____ div</td><td>—</td></tr>
+            <tr><td>V<sub>pp</sub> (V)</td><td>div × V/div</td><td>_____ V</td><td>≈ 33,9 V</td></tr>
+            <tr><td>V<sub>p</sub> (V)</td><td>V<sub>pp</sub> / 2</td><td>_____ V</td><td>≈ 16,97 V</td></tr>
+            <tr><td>V<sub>ef</sub> calculada (V)</td><td>V<sub>p</sub> / √2</td><td>_____ V</td><td>≈ 12,0 V</td></tr>
+            <tr><td>V<sub>ef</sub> multímetro (V)</td><td>Lectura ACV</td><td>_____ V</td><td>≈ 12,0 V</td></tr>
+            <tr><td>Divisiones de un ciclo</td><td>Lectura visual</td><td>_____ div</td><td>—</td></tr>
+            <tr><td>Periodo T (ms)</td><td>div × ms/div</td><td>_____ ms</td><td>20 ms</td></tr>
+            <tr><td>Frecuencia f (Hz)</td><td>1/T</td><td>_____ Hz</td><td>50 Hz</td></tr>
+            <tr><td>Desfase RC φ (°)</td><td>Δt/T × 360</td><td>_____ °</td><td>≈ 27° (RC 10kΩ/100nF a 50Hz)</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Mini quiz -->
+      <section style="margin-bottom:var(--space-5);">
+        <h2 class="section-title">Quiz de verificación</h2>
+        <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin-bottom:var(--space-3);">Responde antes de salir del taller para confirmar que has asimilado los conceptos clave.</p>
+        <div id="quiz-container"
+             data-quiz-src="../../assets/data/quizzes/practica04-quiz.json"
+             data-quiz-id="practica04"
+             data-quiz-title="P04 Verificación"
+             data-quiz-passing="60">
+          <p style="color:var(--color-text-muted); font-size:var(--text-sm);">Cargando preguntas…</p>
+        </div>
+      </section>
+
+      <!-- Navegación -->
+      <div class="nav-paginas">
+        <a href="../practica03/index.html" class="btn btn--ghost">← P03</a>
+        <a href="../practica05/index.html" class="btn btn--primary">P05 →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>EAE · Electrotecnia y Automatismos Eléctricos · CFGM Mantenimiento Industrial</p>
+  </footer>
+
+  <script type="module" src="../../assets/js/main.js"></script>
+  <script type="module">
+    import { initQuizFromDOM } from '../../assets/js/quiz-engine.js';
+    initQuizFromDOM();
+  </script>
+
+</body>
+</html>

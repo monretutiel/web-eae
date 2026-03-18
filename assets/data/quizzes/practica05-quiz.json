@@ -1,0 +1,41 @@
+{
+  "title": "P05 Verificación — Fusibles y magnetotérmicos",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p05q1",
+      "text": "¿Qué significa la letra 'g' en la categoría de utilización de un fusible gG?",
+      "options": ["Solo protección contra cortocircuitos", "Protección total (sobrecarga + cortocircuito)", "Solo protección térmica", "Fusible de gas"],
+      "correct": 1,
+      "explanation": "La letra 'g' (general) indica que el fusible protege frente a sobrecargas Y cortocircuitos. La 'G' indica uso general de línea. Un fusible 'a' solo protege contra cortocircuitos (backups)."
+    },
+    {
+      "id": "p05q2",
+      "text": "¿Para qué se usa la categoría de utilización 'gM' (antes 'aM')?",
+      "options": ["Protección de líneas generales", "Arranque de motores (protección de backups)", "Protección de semiconductores", "Circuitos de alumbrado"],
+      "correct": 1,
+      "explanation": "La categoría gM/aM está diseñada para la protección de motores. Tolera las corrientes de arranque (5-8×In) sin disparar, pero protege frente a cortocircuitos."
+    },
+    {
+      "id": "p05q3",
+      "text": "Un magnetotérmico tipo C tiene rango de disparo magnético de:",
+      "options": ["3–5 × In", "5–10 × In", "10–20 × In", "1–2 × In"],
+      "correct": 1,
+      "explanation": "Curva C: disparo magnético instantáneo entre 5 y 10 veces la corriente nominal. Se usa en cargas mixtas como motores pequeños o transformadores."
+    },
+    {
+      "id": "p05q4",
+      "text": "Para proteger un circuito de alumbrado de 2 kW a 230 V, la corriente de diseño Ib es:",
+      "options": ["2 A", "4,35 A", "8,7 A", "17,4 A"],
+      "correct": 2,
+      "explanation": "Ib = P/V = 2000/230 ≈ 8,7 A. Se selecciona un magnetotérmico cuya In sea ≥ 8,7 A → In = 10 A es la elección estándar."
+    },
+    {
+      "id": "p05q5",
+      "text": "¿Qué ocurre si al reponer un fusible fundido se instala uno de mayor calibre?",
+      "options": ["El circuito queda mejor protegido", "El fusible no funcionará", "La instalación queda sin protección adecuada y puede sobrecalentarse el cableado", "El magnetotérmico compensará la diferencia"],
+      "correct": 2,
+      "explanation": "Usar un fusible de mayor calibre elimina la protección de la instalación. La corriente de sobrecarga puede circular libremente, sobrecalentando conductores y pudiendo causar un incendio."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "P02 Verificación — Circuito Paralelo",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p02q1",
+      "text": "En un circuito paralelo con R1=100Ω, R2=200Ω conectadas a 12V, ¿cuál es la corriente total?",
+      "options": ["60 mA", "90 mA", "180 mA", "120 mA"],
+      "correct": 2,
+      "explanation": "IT = V/R1 + V/R2 = 12/100 + 12/200 = 120mA + 60mA = 180 mA. En paralelo las corrientes se suman."
+    },
+    {
+      "id": "p02q2",
+      "text": "¿Qué magnitud es igual en todas las ramas de un circuito paralelo?",
+      "options": ["La corriente", "La resistencia", "La tensión", "La potencia"],
+      "correct": 2,
+      "explanation": "En un circuito paralelo, todos los elementos tienen los mismos terminales, por lo que la tensión es idéntica en todas las ramas."
+    },
+    {
+      "id": "p02q3",
+      "text": "Si añades una resistencia más en paralelo a un circuito ya montado, ¿qué ocurre con la resistencia equivalente?",
+      "options": ["Aumenta", "Disminuye", "No cambia", "Se duplica"],
+      "correct": 1,
+      "explanation": "Al añadir una rama más en paralelo se abre un nuevo camino para la corriente. La resistencia equivalente siempre disminuye al añadir ramas en paralelo."
+    },
+    {
+      "id": "p02q4",
+      "text": "¿Cuál es la 1ª Ley de Kirchhoff aplicada a un nodo de un circuito paralelo?",
+      "options": ["La suma de tensiones en el nodo es cero", "La suma de corrientes que entran es igual a la suma de las que salen", "La potencia total es la suma de potencias", "La resistencia total es la suma de resistencias"],
+      "correct": 1,
+      "explanation": "La 1ª ley de Kirchhoff (ley de nodos) establece que la suma algebraica de las corrientes en un nodo es cero: las que entran son iguales a las que salen."
+    },
+    {
+      "id": "p02q5",
+      "text": "Tres resistencias de 120Ω conectadas en paralelo tienen una resistencia equivalente de:",
+      "options": ["360 Ω", "40 Ω", "120 Ω", "60 Ω"],
+      "correct": 1,
+      "explanation": "Para n resistencias iguales en paralelo: Req = R/n = 120/3 = 40 Ω."
+    }
+  ]
+}

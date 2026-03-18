@@ -1,0 +1,41 @@
+{
+  "title": "P06 Verificación — Diferencial y toma de tierra",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p06q1",
+      "text": "Un diferencial de 30 mA debe disparar cuando la corriente de fuga a tierra supera:",
+      "options": ["30 mA", "300 mA", "3 A", "10 mA"],
+      "correct": 0,
+      "explanation": "La sensibilidad del diferencial es la corriente diferencial mínima de disparo. Un diferencial de 30 mA protege contra contactos indirectos y es el estándar para viviendas (REBT ITC-BT-24)."
+    },
+    {
+      "id": "p06q2",
+      "text": "¿Qué detecta internamente el interruptor diferencial para disparar?",
+      "options": ["Sobretensión en la línea", "La diferencia entre la corriente que entra por L y la que sale por N", "Temperatura del conductor", "Cortocircuito entre fases"],
+      "correct": 1,
+      "explanation": "El diferencial tiene un toroide magnético por el que pasan L y N. Si hay equilibrio no hay campo. Si hay fuga, la diferencia de corrientes genera un campo que activa el disparador."
+    },
+    {
+      "id": "p06q3",
+      "text": "Para una toma de tierra de Rt = 166 Ω y un diferencial de 30 mA, la tensión de contacto al disparar es:",
+      "options": ["30 V", "5 V", "166 V", "50 V"],
+      "correct": 1,
+      "explanation": "Vc = Id × Rt = 0,030 A × 166 Ω ≈ 5 V, muy por debajo del límite de 50 V CA que establece el REBT. Por eso el conjunto diferencial + tierra protege eficazmente."
+    },
+    {
+      "id": "p06q4",
+      "text": "¿Cuál es la diferencia principal entre un diferencial tipo AC y tipo A?",
+      "options": ["El tipo A es más sensible que el AC", "El tipo A detecta también corrientes de fuga con componente continua (CC pulsante); el tipo AC solo detecta CA senoidal", "El tipo AC se usa en trifásica y el A en monofásica", "No hay diferencia práctica"],
+      "correct": 1,
+      "explanation": "El tipo AC solo responde a corrientes de fuga senoidales. El tipo A también detecta corrientes con componente continua pulsante, necesario en instalaciones con inversores, variadores y cargadores de VE."
+    },
+    {
+      "id": "p06q5",
+      "text": "¿Por qué el diferencial NO protege si una persona está aislada del suelo (p.ej. sobre un taburete de madera)?",
+      "options": ["Porque el diferencial está en mal estado", "Porque la corriente de fuga no tiene camino de retorno por tierra, por lo que no hay diferencia entre L y N", "Porque la resistencia del cuerpo humano es demasiado alta", "Porque el magnetotérmico lo impide"],
+      "correct": 1,
+      "explanation": "El diferencial detecta el desequilibrio IL vs IN. Si la persona no tiene contacto con tierra, la corriente no puede volver por tierra y el desequilibrio es cero: el diferencial no actúa."
+    }
+  ]
+}

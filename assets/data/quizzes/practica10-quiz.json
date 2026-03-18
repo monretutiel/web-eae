@@ -1,0 +1,41 @@
+{
+  "title": "P10 Verificación — Arranque estrella-triángulo",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p10q1",
+      "text": "¿Por qué la corriente de arranque en conexión estrella (Y) es 1/3 de la que tendría en triángulo (Δ)?",
+      "options": ["Porque el motor tiene menos polos en Y", "Porque en Y cada bobina recibe tensión/√3, lo que reduce la corriente de línea en el factor 3", "Porque el temporizador limita la corriente", "Porque el relé térmico reduce la corriente"],
+      "correct": 1,
+      "explanation": "En Y, la tensión en cada bobina es VL/√3. La corriente de fase es proporcional a la tensión. La corriente de línea en Y es IΔ/3, ya que la potencia aparente aplicada a cada bobina es 3 veces menor."
+    },
+    {
+      "id": "p10q2",
+      "text": "Un motor trifásico de 400V tiene una corriente nominal de 10A en triángulo. ¿Cuál es la corriente de arranque esperada en conexión estrella?",
+      "options": ["3,33 A (≈10/3)", "10 A", "17,3 A (10×√3)", "30 A (10×3)"],
+      "correct": 0,
+      "explanation": "IY = IΔ/3 = 10/3 ≈ 3,33 A. La reducción es exactamente de 1/3. Este es el beneficio del arranque Y-Δ: reduce la corriente de arranque (normalmente 5-8×In) a solo 1,7-2,7×In."
+    },
+    {
+      "id": "p10q3",
+      "text": "¿Por qué es imprescindible el enclavamiento entre KM2 (estrella) y KM3 (triángulo)?",
+      "options": ["Para ahorrar energía", "Para que no se activen simultáneamente, ya que eso cortocircuitaría los terminales del motor", "Para sincronizar el temporizador", "Por el reglamento de instalaciones"],
+      "correct": 1,
+      "explanation": "Si KM2 y KM3 están activos a la vez, los terminales U2-V2-W2 estarían conectados tanto al neutro de estrella (KM2) como a la red (KM3) simultáneamente, provocando un cortocircuito interno del motor."
+    },
+    {
+      "id": "p10q4",
+      "text": "¿Cuándo se realiza la transición Y → Δ durante el arranque?",
+      "options": ["Al pulsar el botón de marcha", "Cuando el operador decide manualmente", "Cuando el temporizador ON-DELAY termina el tiempo ajustado (normalmente cuando el motor ha alcanzado ~80% de su velocidad nominal)", "Al pulsar el botón de paro"],
+      "correct": 2,
+      "explanation": "El temporizador ON-DELAY cuenta desde que arranca el motor. Al completar el tiempo ajustado (3-10 s), da la señal de conmutación: abre KM2 (quita la unión de neutro) y cierra KM3 (conecta en triángulo)."
+    },
+    {
+      "id": "p10q5",
+      "text": "¿Qué inconveniente tiene el arranque Y-Δ frente a un variador de frecuencia (VFD)?",
+      "options": ["El Y-Δ es más costoso", "El Y-Δ produce un escalón de corriente en la transición Y→Δ y no permite control de velocidad; el VFD da arranque suave y control completo", "El Y-Δ no funciona con motores de 400V", "El VFD siempre consume más energía"],
+      "correct": 1,
+      "explanation": "Durante la transición Y→Δ hay un pico de corriente al reconectar en Δ. Además, el Y-Δ solo tiene dos estados sin control de velocidad. El VFD es más flexible y eficiente pero mucho más caro."
+    }
+  ]
+}

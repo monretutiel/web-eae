@@ -1,0 +1,41 @@
+{
+  "title": "P07 Verificación — Cuadro de vivienda",
+  "passing": 60,
+  "questions": [
+    {
+      "id": "p07q1",
+      "text": "Según REBT ITC-BT-25, ¿qué sección mínima de cable requiere el circuito C1 de alumbrado?",
+      "options": ["1 mm²", "1,5 mm²", "2,5 mm²", "4 mm²"],
+      "correct": 1,
+      "explanation": "El circuito C1 (alumbrado general) requiere cable de 1,5 mm² y está protegido por un PIA de 10 A según la tabla 1 de ITC-BT-25."
+    },
+    {
+      "id": "p07q2",
+      "text": "¿Cuál es la función del IGA (Interruptor General Automático) en un cuadro de vivienda?",
+      "options": ["Proteger un único circuito de derivación", "Medir el consumo total de la vivienda", "Actuar como elemento de mando y protección general de toda la instalación", "Proteger contra contactos indirectos"],
+      "correct": 2,
+      "explanation": "El IGA es el primer elemento del cuadro. Permite desconectar toda la instalación y protege frente a sobrecargas y cortocircuitos globales. Su calibre lo fija la compañía suministradora."
+    },
+    {
+      "id": "p07q3",
+      "text": "En el cuadro de vivienda, ¿dónde se conectan los conductores de protección (PE, amarillo-verde)?",
+      "options": ["A la barra de neutros junto con los azules", "A la entrada del IGA", "A la barra de tierra (PE bus), separada de la barra de neutros", "A cualquier borne disponible"],
+      "correct": 2,
+      "explanation": "Los conductores de protección (PE) van a una barra exclusiva de tierra, independiente de la barra de neutros. Mezclarlos sería una falta grave de seguridad."
+    },
+    {
+      "id": "p07q4",
+      "text": "¿Por qué el diferencial se instala aguas abajo del IGA y aguas arriba de los PIAs?",
+      "options": ["Para ahorrar cable", "Para que los PIAs queden protegidos del diferencial", "Para que el diferencial proteja todos los circuitos y pueda ser desconectado con el IGA", "Por estética del cuadro"],
+      "correct": 2,
+      "explanation": "Esta posición garantiza que el diferencial cubra todos los circuitos (C1-C5). El IGA permite cortar la alimentación al cuadro completo para intervenir con seguridad."
+    },
+    {
+      "id": "p07q5",
+      "text": "¿Qué circuito del REBT protege la toma de la lavadora, lavavajillas y termo eléctrico?",
+      "options": ["C1", "C2", "C3", "C4"],
+      "correct": 3,
+      "explanation": "El circuito C4 (20A, 4mm²) es específico para lavadora, lavavajillas y acumulador eléctrico. Su mayor sección y calibre se justifica por la potencia de estos electrodomésticos."
+    }
+  ]
+}
